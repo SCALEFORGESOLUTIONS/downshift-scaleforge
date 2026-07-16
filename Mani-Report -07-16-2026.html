@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mani — Competitive Dossier: vs Holo &amp; Fastlane</title>
+<meta name="description" content="A fact-checked teardown of Holo and Fastlane, the two products that overlap mani's ICP head-on. Re-verified against live sources, 12 July 2026.">
+<meta name="author" content="mani">
+<meta name="theme-color" content="#FAFAF8">
+<!-- Keeps the page out of search results. Delete this line if you want it indexed. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mani — Competitive Dossier: vs Holo &amp; Fastlane">
+<meta property="og:description" content="Two rivals on the same URL, same buyer. A fact-checked teardown, re-verified 12 July 2026.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236E5CFF'/%3E%3Cstop offset='.5' stop-color='%23B05CD8'/%3E%3Cstop offset='.8' stop-color='%23FF6B5C'/%3E%3Cstop offset='1' stop-color='%23FF8E3C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══ mani theme — brand source of truth (verbatim tokens) ═══ */
+:root{
+  --g1:#6E5CFF; --g2:#B05CD8; --g3:#FF6B5C; --g4:#FF8E3C;
+  --gradient:linear-gradient(110deg,var(--g1),var(--g2) 50%,var(--g3));
+  --gradient-warm:linear-gradient(110deg,var(--g4),var(--g3) 50%,var(--g2));
+  --bg:#FAFAF8; --panel:#FFFFFF; --panel2:#F5F3EF; --inset:#EFEEE9;
+  --line:#E5E5E0; --line2:#D4D4CC;
+  --ink:#1A1A1A; --ink2:#4A4A4A; --ink3:#8A8A8A; --inv:#FFFFFF;
+  --violet:#6E5CFF; --pink:#B05CD8; --coral:#FF6B5C;
+  --mint:#34D399; --gold:#FBBF24; --rose:#E85D7A;
+  --fd:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --fs:'Inter',system-ui,-apple-system,sans-serif;
+  --fe:'Fraunces',Georgia,serif;
+  --fm:'JetBrains Mono',ui-monospace,monospace;
+  --r-md:10px; --r-lg:16px; --r-xl:24px; --r-pill:9999px;
+  --sh-sm:0 1px 2px rgba(0,0,0,.04);
+  --sh-md:0 4px 12px rgba(0,0,0,.06);
+  --sh-lg:0 12px 32px rgba(0,0,0,.08);
+  --sh-violet:0 8px 24px rgba(110,92,255,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:var(--fs);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.62;font-size:15.5px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(46% 40% at 50% -6%,rgba(110,92,255,.10),transparent 62%),
+             radial-gradient(38% 34% at 88% -4%,rgba(255,107,92,.07),transparent 60%)}
+.wrap{max-width:920px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+.wrap.narrow{max-width:760px}
+h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.it{font-family:var(--fe);font-style:italic;font-weight:400;color:var(--pink)}
+a{color:var(--violet);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:4px}
+
+/* lockup */
+.lockup{display:inline-flex;align-items:center;gap:10px;text-decoration:none;line-height:1}
+.lockup:hover{text-decoration:none}
+.lockup .orb{width:26px;height:26px;border-radius:var(--r-pill);flex-shrink:0;
+  background:conic-gradient(from 200deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));
+  box-shadow:var(--sh-violet)}
+.lockup .orb.lg{width:34px;height:34px}
+.lockup .wm{font-family:var(--fd);font-weight:800;font-size:24px;letter-spacing:-.05em;color:var(--ink);line-height:1}
+.lockup .orb.lg + .wm{font-size:30px}
+.lockup .wm .i{font-family:var(--fe);font-style:italic;font-weight:400;font-size:1.05em;letter-spacing:-.02em;margin-left:-1px;color:var(--g2)}
+
+/* header */
+header{padding:42px 0 12px;text-align:center}
+.hub-lockup{margin-bottom:22px}
+.eyebrow{font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:12px}
+header h1{font-size:clamp(31px,5vw,49px);max-width:760px;margin:0 auto;color:var(--ink)}
+header .tag{color:var(--ink2);font-size:16.5px;max-width:660px;margin:16px auto 0}
+
+/* toc */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:22px 0 6px}
+nav.toc a{font-family:var(--fm);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 13px;transition:border-color .15s,color .15s;background:var(--panel)}
+nav.toc a:hover{border-color:var(--violet);color:var(--violet);text-decoration:none}
+
+/* sections */
+section{padding:34px 0 8px;border-top:1px solid var(--line);margin-top:26px}
+section.first{border-top:none;margin-top:8px}
+.sh{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.sh::after{content:'';flex:1;height:1px;background:var(--line)}
+h2{font-size:clamp(24px,3.4vw,34px);color:var(--ink);margin-bottom:4px}
+h2 .it{font-weight:400}
+.slead{color:var(--ink2);font-size:15px;margin-bottom:18px;max-width:780px}
+p.body{color:var(--ink2);font-size:15.5px;margin-bottom:13px}
+p.body b{color:var(--ink);font-weight:600}
+
+/* cards */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:680px){.grid{grid-template-columns:1fr}}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:17px 19px;text-decoration:none;box-shadow:var(--sh-sm)}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px}
+.card h3{font-size:18px;color:var(--ink);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+.card p{font-size:13.8px;color:var(--ink2);margin:0;line-height:1.55}
+.tinychip{width:12px;height:12px;border-radius:4px;display:inline-block;flex-shrink:0}
+
+/* badges */
+.badges{display:flex;gap:5px;flex-shrink:0}
+.badge{font-family:var(--fm);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:var(--r-pill);white-space:nowrap;font-weight:500}
+.b-live{background:rgba(52,211,153,.14);color:#0f9b6c;border:1px solid rgba(52,211,153,.4)}
+.b-soon{background:rgba(251,191,36,.16);color:#a87800;border:1px solid rgba(251,191,36,.45)}
+.b-cust{background:rgba(110,92,255,.10);color:var(--violet);border:1px solid rgba(110,92,255,.3)}
+.b-team{background:rgba(232,93,122,.10);color:var(--rose);border:1px solid rgba(232,93,122,.3)}
+
+/* kv */
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:7px 18px;font-size:14.5px;margin:14px 0 6px}
+.kv .k{font-family:var(--fm);font-size:11px;color:var(--pink);letter-spacing:.05em;text-transform:uppercase;padding-top:3px;white-space:nowrap}
+.kv .v{color:var(--ink2)}.kv .v b{color:var(--ink);font-weight:600}
+@media(max-width:560px){.kv{grid-template-columns:1fr;gap:2px 0}.kv .k{padding-top:12px}}
+
+/* price */
+.price-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:8px}
+@media(max-width:720px){.price-wrap{grid-template-columns:1fr}}
+.price-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 22px;box-shadow:var(--sh-sm);position:relative}
+.price-card.feat{border-color:var(--violet);box-shadow:var(--sh-violet)}
+.price-card .ribbon{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#fff;font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--r-pill);font-weight:500}
+.price-card .plan{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.price-card .plan .tinychip{width:13px;height:13px}
+.tier{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink2);text-align:left}
+.tier:last-of-type{border-bottom:none}
+.tier .tp{font-family:var(--fm);font-size:13px;color:var(--ink);white-space:nowrap}
+.pnote{margin-top:13px;font-size:12.5px;color:var(--ink3);line-height:1.5;text-align:left}
+
+/* table */
+.repl{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.repl th{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--line);font-weight:500;vertical-align:bottom}
+.repl td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:middle}
+.repl td:first-child{color:var(--ink);font-weight:600;padding-right:18px}
+.repl tr:last-child td{border-bottom:none}
+.m{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:11.5px}
+.m::before{content:'';width:7px;height:7px;border-radius:var(--r-pill);flex-shrink:0}
+.m.yes{color:#0f9b6c}.m.yes::before{background:var(--mint)}
+.m.mid{color:#a87800}.m.mid::before{background:var(--gold)}
+.m.no{color:var(--rose)}.m.no::before{background:var(--rose);border-radius:2px}
+.m.na{color:var(--ink3)}.m.na::before{background:var(--ink3);border-radius:2px}
+.legend{margin-top:14px;font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tablescroll{overflow-x:auto}
+
+/* why (risks) */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+@media(max-width:680px){.why{grid-template-columns:1fr}}
+.why .w{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:var(--r-md);padding:15px 17px;box-shadow:var(--sh-sm)}
+.why .w h3{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.why .w p{font-size:13.8px;color:var(--ink2);line-height:1.55}
+
+/* note / callout */
+.note{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r-md);padding:16px 19px;font-size:14.5px;color:var(--ink2);margin-top:20px}
+.note b{color:var(--ink)}
+.note.violet{border-left-color:var(--violet)}
+.note.warn{border-left-color:var(--rose);background:linear-gradient(180deg,rgba(232,93,122,.05),var(--panel2))}
+.note .tag{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.note.warn .tag{color:var(--rose)}
+.note p{margin-bottom:10px}.note p:last-child{margin-bottom:0}
+
+/* foot */
+.foot{padding:40px 0 60px;text-align:center;color:var(--ink3);font-family:var(--fm);font-size:10.5px;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+.foot .lockup{margin-bottom:12px;opacity:.9}
+.foot .lockup .wm{font-size:18px}.foot .lockup .orb{width:18px;height:18px}
+
+/* ═══ report-specific — built on the theme tokens ═══ */
+.rbar{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.82);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--line)}
+.rbar-in{max-width:920px;margin:0 auto;padding:10px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.rbar .lockup .wm{font-size:17px}.rbar .lockup .orb{width:18px;height:18px}
+.rbar .rtag{font-family:var(--fm);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);border-left:1px solid var(--line2);padding-left:11px;margin-left:3px}
+.rnav{display:flex;gap:18px;font-family:var(--fm);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
+.rnav a{color:var(--ink2)}.rnav a:hover{color:var(--violet);text-decoration:none}
+@media(max-width:820px){.rnav,.rtag{display:none}}
+
+.flags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.flag{font-family:var(--fm);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink2);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 12px;display:inline-flex;align-items:center;gap:7px}
+.fdot{width:7px;height:7px;border-radius:var(--r-pill)}
+
+/* positioning strip */
+.map{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 22px 28px;box-shadow:var(--sh-sm)}
+.map-h{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:22px;text-align:center}
+.axis{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.axis .track{position:absolute;left:12%;right:12%;top:8px;height:2px;background:var(--gradient);opacity:.6}
+.pole{position:relative;text-align:center;padding:0 6px}
+.node{width:16px;height:16px;border-radius:var(--r-pill);margin:0 auto 14px;position:relative;z-index:2;border:3px solid var(--panel)}
+.node.h{background:var(--violet)}.node.f{background:var(--coral)}
+.pole .name{font-family:var(--fd);font-weight:800;font-size:18px;letter-spacing:-.02em}
+.pole .role{font-family:var(--fm);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-top:5px}
+.center{position:relative;z-index:2;text-align:center;padding:0 10px}
+.center .orb{width:30px;height:30px;border-radius:var(--r-pill);margin:0 auto 12px;display:block;background:conic-gradient(from 200deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));box-shadow:var(--sh-violet)}
+.center .name{font-family:var(--fd);font-weight:800;font-size:21px;letter-spacing:-.03em}
+.center .name .i{font-family:var(--fe);font-style:italic;font-weight:400;color:var(--pink)}
+.center .role{font-family:var(--fm);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--pink);margin-top:5px}
+@media(max-width:600px){
+  .axis{grid-template-columns:1fr;gap:22px}
+  .axis .track{left:9px;right:auto;top:8%;bottom:8%;width:2px;height:auto}
+  .pole,.center{text-align:left;display:flex;align-items:center;gap:14px}
+  .node,.center .orb{margin:0}
+}
+
+/* profile */
+.prof{border-top:2px solid var(--ink);padding-top:20px;margin-top:34px}
+.prof-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.prof-name{font-family:var(--fd);font-weight:800;font-size:27px;letter-spacing:-.03em;display:flex;align-items:center;gap:11px}
+.prof-role{font-family:var(--fm);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-top:5px}
+.factbar{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin:18px 0 20px;background:var(--panel);box-shadow:var(--sh-sm)}
+.fact{flex:1 1 150px;padding:13px 16px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:none}
+.fact .fl{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.fact .fv{font-family:var(--fd);font-weight:700;font-size:14.5px;margin-top:4px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+@media(max-width:600px){.fact{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line)}.fact:last-child{border-bottom:none}}
+.sub-h{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:22px 0 10px}
+ul.pts{list-style:none;padding:0;margin:0}
+ul.pts li{position:relative;padding-left:21px;margin-bottom:9px;font-size:14.5px;line-height:1.55;color:var(--ink2)}
+ul.pts li b{color:var(--ink);font-weight:600}
+ul.pts li::before{content:'';position:absolute;left:2px;top:.6em;width:7px;height:7px;border-radius:var(--r-pill)}
+ul.win li::before{background:var(--mint)}
+ul.loss li::before{background:var(--rose);border-radius:2px}
+
+/* recommendations */
+.reco{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+.reco:last-child{border-bottom:none}
+.reco .rn{font-family:var(--fe);font-style:italic;font-size:32px;font-weight:400;color:var(--pink);line-height:1;flex-shrink:0;width:40px}
+.reco h3{font-size:18px;margin-bottom:5px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ink);font-weight:700}
+.reco p{margin:0;font-size:14.8px;color:var(--ink2)}
+
+/* next actions */
+.actions{margin-top:8px;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--panel);box-shadow:var(--sh-sm)}
+.action{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--line)}
+.action:last-child{border-bottom:none}
+.action .chk{width:18px;height:18px;border-radius:5px;border:2px solid var(--line2);flex-shrink:0;margin-top:2px}
+.action .atext{flex:1}
+.action .atext b{color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.action .atext p{margin:3px 0 0;font-size:13.6px;color:var(--ink2);line-height:1.5}
+.action .ameta{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0}
+@media(max-width:640px){.action{flex-wrap:wrap}.action .ameta{flex-direction:row;width:100%;margin-left:32px;justify-content:flex-start}}
+
+.srcbox{font-size:14px;color:var(--ink2);line-height:1.65}
+.srcbox h4{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);font-weight:500;margin:18px 0 8px}
+.srcbox ul{margin:0;padding-left:18px}.srcbox li{margin-bottom:5px}
+</style>
+</head>
+<body>
+
+<!-- report bar -->
+<div class="rbar">
+  <div class="rbar-in">
+    <span class="lockup"><span class="orb"></span><span class="wm">man<span class="i">i</span></span><span class="rtag">Competitive Intel</span></span>
+    <nav class="rnav" aria-label="Sections">
+      <a href="#summary">Summary</a><a href="#field">Field</a><a href="#profiles">Profiles</a>
+      <a href="#compare">Compare</a><a href="#pricing">Pricing</a><a href="#risks">Risks</a><a href="#next">Next</a>
+    </nav>
+  </div>
+</div>
+
+<!-- header -->
+<header>
+  <div class="wrap">
+    <div class="lockup hub-lockup"><span class="orb lg"></span><span class="wm">man<span class="i">i</span></span></div>
+    <div class="eyebrow">Competitive Dossier — confidential — 12 Jul 2026</div>
+    <h1>Two rivals on the <span class="it">same URL, same buyer.</span></h1>
+    <p class="tag">A fact-checked teardown of the only two products that overlap mani's ICP head-on. Everything on mani comes from the internal dossier; everything on Holo and Fastlane was re-verified against their live sites and independent reviews on the date above — including three findings the current intel doesn't have yet.</p>
+
+    <nav class="toc" aria-label="Jump to section">
+      <a href="#summary">1 · Summary</a>
+      <a href="#field">2 · The Field</a>
+      <a href="#profiles">3 · Profiles</a>
+      <a href="#compare">4 · Compare</a>
+      <a href="#pricing">5 · Pricing</a>
+      <a href="#risks">6 · Risks</a>
+      <a href="#reco">7 · Recommendations</a>
+      <a href="#next">8 · Next Actions</a>
+    </nav>
+
+    <div class="flags">
+      <span class="flag"><span class="fdot" style="background:var(--violet)"></span>Scope: Holo + Fastlane</span>
+      <span class="flag"><span class="fdot" style="background:var(--mint)"></span>Re-verified 12 Jul 2026</span>
+      <span class="flag"><span class="fdot" style="background:var(--rose)"></span>2 corrections to prior intel</span>
+      <span class="flag"><span class="fdot" style="background:var(--gold)"></span>3 new rival surfaces</span>
+    </div>
+
+    <div class="map" role="img" aria-label="Positioning: Holo owns the brand-to-creative loop, Fastlane owns the create-to-distribution loop, mani sits in the seam between them.">
+      <div class="map-h">The seam — where each rival stops</div>
+      <div class="axis">
+        <div class="track" aria-hidden="true"></div>
+        <div class="pole">
+          <span class="node h"></span>
+          <div class="name" style="color:var(--violet)">Holo</div>
+          <div class="role">Brand → creative loop</div>
+        </div>
+        <div class="center">
+          <span class="orb" aria-hidden="true"></span>
+          <div class="name">man<span class="i">i</span></div>
+          <div class="role">The whole loop, one spine</div>
+        </div>
+        <div class="pole">
+          <span class="node f"></span>
+          <div class="name" style="color:var(--coral)">Fastlane</div>
+          <div class="role">Create → distribution loop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 summary -->
+<section class="first" id="summary">
+  <div class="wrap narrow">
+    <div class="sh">01 · Executive Summary</div>
+    <h2>The read in <span class="it">five lines.</span></h2>
+    <p class="body" style="margin-top:14px"><b>The category has two direct rivals, not one.</b> Holo proved a founder wants on-brand ads, social and email learned from their website. Fastlane proved the same founder will pay for the <em>distribution</em> end — create, schedule, and auto-post to TikTok, Instagram and YouTube. Neither covers the other's ground. That gap is mani's entire opportunity.</p>
+    <p class="body"><b>All three now price almost identically</b> — $29 / $49 / $149. Price is no longer a wedge for anyone. The battle is value-before-paywall, breadth, and per-piece output quality.</p>
+    <p class="body"><b>The one weakness independent reviewers pin on both rivals is the same one mani names as its own existential risk:</b> raw output still reads as AI-generated. Whoever genuinely nails brand-coherent quality wins. It is an open race, not a solved problem.</p>
+    <p class="body"><b>Fastlane has moved further down the funnel since your teardown</b> — it now sells real warmed TikTok/IG accounts, an AI-influencer studio, and a live API/MCP/Skill agent surface. The distribution gap widened, and "we're agentic" is no longer a mani-only claim.</p>
+    <p class="body"><b>Two facts in the current dossier need fixing before anything is published.</b> For this exact skeptical buyer, one checkable false claim is fatal — which is your own integrity rule.</p>
+
+    <div class="note warn">
+      <div class="tag">Correction — verify before publishing</div>
+      <p><b>Holo's founder is misattributed.</b> The internal blueprint credits Holo to <em>Francesc Navarro</em>. That is a different, unrelated company — a Barcelona health-tech startup also called "Holo." The AI-marketing Holo (tryholo.ai) is a <b>Vilnius, Lithuania</b> company, VC-backed (site claims $6M+ raised; investor: FIRSTPICK), built by a Lithuanian team whose co-founders and CTO are named on its About page. The shared detail — prior growth work on Sintra, Pulsetto, Burga and Moerie — is real and belongs to the Lithuanian team.</p>
+      <p><b>"No free trial, 4.4/5 Trustpilot" needs nuance.</b> Holo advertises 4.9/5 from ~4,268 customers on its own site; independent Trustpilot sits lower (~4.4/5 across ~950+ reviews), with recurring complaints about auto-billing and hard-to-cancel refunds. Both are true of different sources — cite them as such.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 field -->
+<section id="field">
+  <div class="wrap narrow">
+    <div class="sh">02 · The Field &amp; Positioning</div>
+    <h2>Two rivals bracket the <span class="it">same opportunity.</span></h2>
+    <p class="slead">They start from the identical gesture — paste a URL, get content personalised to your business — and serve the identical buyer: the DTC founder with no agency and no in-house creative. Then they split.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="top"><h3><span class="tinychip" style="background:var(--violet)"></span>Holo — the blueprint</h3></div>
+        <p>The tool mani is modeled on. Brand DNA from a site, a daily swipe queue, and ads + social + email in one place. Broad across formats, shallow on shipping: it hands you the pieces, it doesn't post them.</p>
+      </div>
+      <div class="card">
+        <div class="top"><h3><span class="tinychip" style="background:var(--coral)"></span>Fastlane — the race</h3></div>
+        <p>The tool mani is racing. A narrow, sharp bet — organic short-form for TikTok, IG and YouTube — run all the way to <em>posted</em>, with live trends, remix, the largest UGC catalog, and now the accounts to post from.</p>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top:18px">mani's position is the only spot that combines <b>brand coherence from the real site</b>, <b>the complete loop in one place</b> — broader than Fastlane's wedge, further down it than Holo — and a product <b>built for one operator</b>. The risk baked in: mani is broader than both, but today it is <em>behind Fastlane on the ship end</em>, and its edges are unproven because it is pre-traction.</p>
+  </div>
+</section>
+
+<!-- 03 profiles -->
+<section id="profiles">
+  <div class="wrap narrow">
+    <div class="sh">03 · Competitor Profiles</div>
+    <h2>The two teardowns, <span class="it">re-verified.</span></h2>
+
+    <!-- HOLO -->
+    <div class="prof">
+      <div class="prof-top">
+        <div>
+          <div class="prof-name"><span class="tinychip" style="background:var(--violet)"></span>Holo</div>
+          <div class="prof-role">tryholo.ai · Vilnius, Lithuania · direct rival — the blueprint</div>
+        </div>
+        <span class="badges"><span class="badge b-live">Shipping · established</span></span>
+      </div>
+      <div class="factbar">
+        <div class="fact"><div class="fl">Model</div><div class="fv">Ads + social + email from Brand DNA</div></div>
+        <div class="fact"><div class="fl">Funding</div><div class="fv">$6M+ (site) · FIRSTPICK</div></div>
+        <div class="fact"><div class="fl">Entry</div><div class="fv">~$19–$39/mo · no free trial</div></div>
+        <div class="fact"><div class="fl">Brands / acct</div><div class="fv">Up to 5</div></div>
+        <div class="fact"><div class="fl">Engine</div><div class="fv">OpenAI + Brand DNA</div></div>
+      </div>
+      <p class="body"><b>What it is.</b> Paste a URL, Holo learns your brand in ~10 minutes, then serves a daily "Creative Swipe" queue — Tinder-for-content — that you skip, save or generate, edit lightly, and download or publish. Static and video ads for Meta/IG/TikTok/LinkedIn, social posts, and email with subject-line optimization. Trained on a claimed 10M+ marketing assets and 19,000+ ads; 95–99+ languages; an explicit "we never train on your data" stance; Solidgate checkout.</p>
+      <p class="body"><b>How it sells.</b> A disciplined <em>pay-first</em> funnel — no free trial anywhere. Every CTA routes to a checkout carrying a persistent "70% OFF" countdown; the first in-brand output appears only <em>after</em> payment, covered by a conditional 14-day money-back guarantee.</p>
+
+      <div class="sub-h">Verified strengths</div>
+      <ul class="pts win">
+        <li><b>Brand DNA is the right primitive</b> — the brand itself is the unit of work; their first-mover framing the whole category now borrows.</li>
+        <li><b>Unlimited generation</b> on paid plans — no credit anxiety, which reviewers cite as why it feels usable daily.</li>
+        <li><b>Multi-brand compression</b> — up to 5 brands on one subscription (~$8/brand) is a genuine agency moat.</li>
+        <li><b>Output lands at "light edit," not "heavy rewrite"</b> for static ads, social and email — reviewers put usable output around 4 in 5.</li>
+      </ul>
+      <div class="sub-h">Verified weaknesses &amp; seams</div>
+      <ul class="pts loss">
+        <li><b>Video is consistently the weakest surface</b> — flagged across multiple 2026 reviews. It's the format the market most wants.</li>
+        <li><b>Desktop-only</b> — you can't review, approve or publish from a phone. Real friction for on-the-go founders in 2026.</li>
+        <li><b>Pay before you see anything</b> — a card before any output in your own brand. mani's "free output first" inverts exactly this.</li>
+        <li><b>~10-minute wait</b> from URL to first review — mani's ~90-second partial DNA is ~6–7× faster to first creative.</li>
+        <li><b>Billing reputation risk</b> — Trustpilot carries recurring auto-renewal and hard-to-cancel/refund complaints; email-only support with reported delays.</li>
+        <li><b>Caps out below ~$59</b> — the agency-at-scale band above it is left unserved.</li>
+      </ul>
+    </div>
+
+    <!-- FASTLANE -->
+    <div class="prof">
+      <div class="prof-top">
+        <div>
+          <div class="prof-name"><span class="tinychip" style="background:var(--coral)"></span>Fastlane</div>
+          <div class="prof-role">usefastlane.ai · operated as "Aftermark" · direct rival — the race</div>
+        </div>
+        <span class="badges"><span class="badge b-live">Shipping · fast-moving</span></span>
+      </div>
+      <div class="factbar">
+        <div class="fact"><div class="fl">Model</div><div class="fv">Organic short-form → auto-posted</div></div>
+        <div class="fact"><div class="fl">Reach</div><div class="fv">20,000+ builders (self-reported)</div></div>
+        <div class="fact"><div class="fl">Entry</div><div class="fv">$0 free → $49 conversion tier</div></div>
+        <div class="fact"><div class="fl">Platforms</div><div class="fv">TikTok · IG Reels · YT Shorts</div></div>
+        <div class="fact"><div class="fl">Affiliate</div><div class="fv">30% lifetime (Affonso)</div></div>
+      </div>
+      <p class="body"><b>What it is.</b> "Tinder for Marketing." Paste a URL → a growth profile (with competitor framing baked in) → a live trending library tagged by niche and analytics → Blitz swipe → one of four organic formats (slideshows, wall-of-text, hook+demo, green-screen memes) → schedule and <em>direct-post</em> to the three platforms → a first-party website pixel that ties a posted video to the traffic it drove → "generate similar." The whole product is staged to deliver one outcome: content posted to your accounts while you sleep.</p>
+
+      <div class="note violet">
+        <div class="tag">New since your teardown — 3 surfaces</div>
+        <p><b>1 · Warmed accounts.</b> Fastlane now creates real US &amp; EU TikTok/Instagram accounts from scratch, warms them in your niche, and manages them in-app — $80/mo per account (launch −20%) plus $1.50 per post, with a done-for-you agency option. It no longer just posts; it supplies the <em>distribution infrastructure</em>.</p>
+        <p><b>2 · AI Influencer Studio.</b> One-prompt photorealistic, iPhone-style AI influencers with a consistent face reusable across every video — a UGC/avatar depth play mani won't match on catalog soon.</p>
+        <p><b>3 · Live API, MCP &amp; Skill.</b> An agent can now create and post through Fastlane directly, plus a white-label Partner API for agencies. mani's "API + MCP is Live" is no longer a differentiator <em>against Fastlane specifically</em>.</p>
+      </div>
+
+      <div class="sub-h">Verified strengths</div>
+      <ul class="pts win">
+        <li><b>Direct posting + now the accounts to post from</b> — the furthest-down-the-loop distribution of any rival, freshly extended.</li>
+        <li><b>Live trending library + remix</b> — transforming proven structure beats showing static inspiration; the freshness is a real operational moat.</li>
+        <li><b>Largest UGC catalog</b> — 500–1,000+ AI UGC avatars plus 2,000+ human UGC videos.</li>
+        <li><b>Value-first funnel</b> — a genuine $0 tier reaches "posted" before any wall; strong, praised UX and one-click scheduling.</li>
+        <li><b>Closed-loop attribution</b> — the pixel turns "I posted a TikTok" into "that TikTok drove $X," moving the category from scheduler to growth tool.</li>
+      </ul>
+      <div class="sub-h">Verified weaknesses &amp; seams</div>
+      <ul class="pts loss">
+        <li><b>Raw output still reads as AI-generated</b> — the most consistent independent critique (~4.1–6.5/10 on <em>content quality</em>, despite praised UX). Better as an inspiration engine than a finished-content one.</li>
+        <li><b>Narrow by design</b> — three platforms, organic only. No paid ad creative, no email, no LinkedIn/X. One channel family, not the whole surface.</li>
+        <li><b>Off-brand risk scales with the new UGC/influencer depth</b> — one bad synthetic clip feels instantly wrong; more catalog ≠ more coherence.</li>
+        <li><b>Agentic surface is thin on governance</b> — technical reviewers want real docs, permissions, rate limits and audit logs before wiring it in deeply.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 compare -->
+<section id="compare">
+  <div class="wrap narrow">
+    <div class="sh">04 · Feature Comparison</div>
+    <h2>Scope, side by <span class="it">side.</span></h2>
+    <p class="slead">mani status reflects the internal dossier (Live / Rolling out). Holo and Fastlane reflect their live products on 12 Jul 2026.</p>
+
+    <div class="tablescroll">
+      <table class="repl">
+        <thead>
+          <tr><th>Capability</th><th style="color:var(--violet)">mani</th><th style="color:var(--violet)">Holo</th><th style="color:var(--coral)">Fastlane</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brand learning from a URL</td><td><span class="m yes">~90s partial</span></td><td><span class="m yes">~10 min</span></td><td><span class="m yes">Growth profile</span></td></tr>
+          <tr><td>Swipe-to-approve queue</td><td><span class="m yes">Live</span></td><td><span class="m yes">Creative Swipe</span></td><td><span class="m yes">Blitz mode</span></td></tr>
+          <tr><td>Paid ad creative (static)</td><td><span class="m yes">Live</span></td><td><span class="m yes">Yes</span></td><td><span class="m na">By design — no</span></td></tr>
+          <tr><td>Talking-head / avatar video</td><td><span class="m mid">Rolling out</span></td><td><span class="m mid">Weakest surface</span></td><td><span class="m yes">AI studio</span></td></tr>
+          <tr><td>Email campaigns</td><td><span class="m yes">Live</span></td><td><span class="m yes">Yes</span></td><td><span class="m no">None</span></td></tr>
+          <tr><td>Trending / discover library</td><td><span class="m yes">Live · feed soon</span></td><td><span class="m mid">Ideas queue</span></td><td><span class="m yes">Live, tagged</span></td></tr>
+          <tr><td>Remix proven structure</td><td><span class="m yes">Remix Studio</span></td><td><span class="m mid">Implicit</span></td><td><span class="m yes">Core mechanic</span></td></tr>
+          <tr><td>Direct posting to platforms</td><td><span class="m mid">Rolling out · Fair</span></td><td><span class="m mid">Download/publish</span></td><td><span class="m yes">TikTok/IG/YT</span></td></tr>
+          <tr><td>Supplies posting accounts</td><td><span class="m no">None</span></td><td><span class="m no">None</span></td><td><span class="m yes">Warmed US/EU</span></td></tr>
+          <tr><td>Attribution / analytics</td><td><span class="m mid">Rolling out</span></td><td><span class="m no">None</span></td><td><span class="m yes">Pixel + analytics</span></td></tr>
+          <tr><td>API + MCP agent surface</td><td><span class="m yes">Live</span></td><td><span class="m no">None</span></td><td><span class="m yes">API/MCP/Skill</span></td></tr>
+          <tr><td>White-label / agency</td><td><span class="m mid">Enterprise</span></td><td><span class="m no">None</span></td><td><span class="m yes">Partner API</span></td></tr>
+          <tr><td>Free output before paywall</td><td><span class="m yes">Free creations</span></td><td><span class="m no">Pay first</span></td><td><span class="m yes">Free tier</span></td></tr>
+          <tr><td>Mobile review &amp; publish</td><td><span class="m mid">Unstated</span></td><td><span class="m no">Desktop-only</span></td><td><span class="m yes">Yes</span></td></tr>
+          <tr><td>Multi-brand workspaces</td><td><span class="m yes">Unlimited</span></td><td><span class="m mid">Up to 5</span></td><td><span class="m yes">Up to 10</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="legend"><span style="color:var(--mint)">●</span> present &nbsp; <span style="color:var(--gold)">●</span> partial / rolling out &nbsp; <span style="color:var(--rose)">●</span> absent &nbsp; <span style="color:var(--ink3)">●</span> out of scope by design.</p>
+  </div>
+</section>
+
+<!-- 05 pricing -->
+<section id="pricing">
+  <div class="wrap narrow">
+    <div class="sh">05 · Pricing</div>
+    <h2>Three ladders that have <span class="it">converged.</span></h2>
+    <p class="slead">The headline numbers are now nearly identical. The real difference is what unlocks where — and whether you pay before you see value.</p>
+
+    <div class="price-wrap">
+      <div class="price-card feat">
+        <div class="ribbon">The seam</div>
+        <div class="plan"><span class="orb" style="width:14px;height:14px;border-radius:50%;background:conic-gradient(from 200deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1))"></span>mani</div>
+        <div class="tier"><span>Solo</span><span class="tp">$29/mo</span></div>
+        <div class="tier"><span>Growth · ≤5 brands</span><span class="tp">$49/mo</span></div>
+        <div class="tier"><span>Agency · ∞ brands</span><span class="tp">$149/mo</span></div>
+        <div class="tier"><span>Enterprise</span><span class="tp">custom</span></div>
+        <div class="pnote">Whole product at every tier — the wall is volume (100 / 750 / 5,000 gens), never capability. Free creations, no card. 2 months free annual · 14-day guarantee.</div>
+      </div>
+      <div class="price-card">
+        <div class="plan"><span class="tinychip" style="background:var(--violet)"></span>Holo</div>
+        <div class="tier"><span>Starter</span><span class="tp">~$19/mo</span></div>
+        <div class="tier"><span>Pro · ~5 brands</span><span class="tp">~$39/mo</span></div>
+        <div class="tier"><span>Site headline today</span><span class="tp">from $39/mo</span></div>
+        <div class="tier"><span>Free trial</span><span class="tp">none</span></div>
+        <div class="pnote">Unlimited generation on paid plans. Persistent "70% OFF" promo. 14-day money-back guarantee (conditional). Price tracks brand count, not features.</div>
+      </div>
+      <div class="price-card">
+        <div class="plan"><span class="tinychip" style="background:var(--coral)"></span>Fastlane</div>
+        <div class="tier"><span>Free</span><span class="tp">$0</span></div>
+        <div class="tier"><span>Starter · 1 workspace</span><span class="tp">$29/mo</span></div>
+        <div class="tier"><span>Growth · 3 workspaces</span><span class="tp">$49/mo</span></div>
+        <div class="tier"><span>Pro · 10 workspaces</span><span class="tp">$149/mo</span></div>
+        <div class="pnote">Posting + analytics gate at $49 (the real conversion tier). Warmed accounts +$80/mo each. Credits: 4/image, 10/sec video. Annual −20%.</div>
+      </div>
+    </div>
+
+    <div class="note violet">
+      <div class="tag">The takeaway for pricing</div>
+      <p>Everyone charges for volume, not features, and everyone lands at $29/$49/$149. So pricing can't differentiate mani. The two axes that still can: <b>value before the wall</b> (mani yes / Fastlane yes / Holo no) and <b>what "$49" buys</b> — for Fastlane it's posting + attribution; for mani it should visibly be the <em>whole loop across ads, social, video and email</em>, which neither rival matches at that price.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 risks -->
+<section id="risks">
+  <div class="wrap narrow">
+    <div class="sh">06 · Strengths · Weaknesses · Risks</div>
+    <h2>Where mani <span class="it">wins, lags, and could break.</span></h2>
+
+    <div class="sub-h" style="margin-top:20px">Where mani wins (structurally)</div>
+    <ul class="pts win">
+      <li><b>Breadth from one brand spine</b> — ads + social + video + email + research, where Holo skips attribution and Fastlane skips ads/email entirely.</li>
+      <li><b>Value before the wall</b> — real in-brand output free, answering the exact scar tissue (dark-pattern trials) this buyer carries — and Holo's exact weakness.</li>
+      <li><b>Fastest time-to-first-creative</b> — ~90s partial Brand DNA vs Holo's ~10 minutes.</li>
+      <li><b>An Agency tier for the book of brands</b> both rivals under-serve (Holo caps ~5; Fastlane's white-label is new and narrow).</li>
+    </ul>
+    <div class="sub-h">Where mani lags (today, verifiably)</div>
+    <ul class="pts loss">
+      <li><b>Shipping</b> — Fastlane posts directly <em>and now supplies warmed accounts</em>; mani's publishing rides on Fair's layer and is still rolling out. The widest gap.</li>
+      <li><b>Video</b> — talking-head is rolling out, not verified live; the format the market wants most, and Fastlane's new studio leans into it.</li>
+      <li><b>UGC catalog depth</b> — Fastlane's 500–2,000+ asset libraries are not a near-term match.</li>
+      <li><b>Proof</b> — pre-traction. Both rivals ship real posted-result case studies; mani has the Fair dogfood and testing program — real, but not yet customer proof.</li>
+    </ul>
+
+    <div class="sub-h" style="margin-top:24px">The risks worth naming</div>
+    <div class="why">
+      <div class="w"><h3>Output quality is the whole business</h3><p>The one thing reviewers ding both rivals for is the one thing mani is betting the company on. If generations aren't genuinely shippable, the free trial fails to convert. Quality is the moat and the existential risk at once.</p></div>
+      <div class="w"><h3>The distribution end is being enclosed</h3><p>Fastlane now owns create → account → post → attribute. Pippit/CapCut owns native TikTok distribution. A rival closer to where the user publishes can pull buyers before they reach mani.</p></div>
+      <div class="w"><h3>"Agentic" has commoditized</h3><p>With Fastlane live on API/MCP/Skill, the agent surface is table stakes, not a wedge. Leading with it invites a feature-parity fight mani can lose.</p></div>
+      <div class="w"><h3>Trust is fragile for this buyer</h3><p>Holo's billing complaints show how fast this segment turns on a tool. A single checkable false claim — or one dark pattern — costs the sale. The founder misattribution above is that risk in your own material.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 recommendations -->
+<section id="reco">
+  <div class="wrap narrow">
+    <div class="sh">07 · Recommendations</div>
+    <h2>What to do with <span class="it">this — in order.</span></h2>
+    <div style="margin-top:14px">
+      <div class="reco"><div class="rn">1</div><div>
+        <h3>Fix the dossier before any comparison page ships <span class="badge b-team">Do now</span></h3>
+        <p>Correct the Holo founder attribution and re-shoot the Fastlane teardown to add warmed accounts, the AI-influencer studio, and the API/MCP/Skill surface. Publishing a "vs Holo" page with a checkable false founder claim is the one mistake this buyer punishes hardest — and it violates your own integrity rule.</p>
+      </div></div>
+      <div class="reco"><div class="rn">2</div><div>
+        <h3>Make per-piece brand fidelity the demonstrable proof <span class="badge b-team">Do now</span></h3>
+        <p>The single axis both rivals verifiably miss is "still looks AI-generated." That is mani's wedge <em>and</em> its stated risk. Turn it into something a skeptic can check in 90 seconds of free output — side-by-side against the rival's actual result — not a claim on a page.</p>
+      </div></div>
+      <div class="reco"><div class="rn">3</div><div>
+        <h3>Close the shipping gap, or reframe it <span class="badge b-soon">Next</span></h3>
+        <p>Fastlane just widened the distribution lead. Either accelerate the Fair-backed publishing to genuinely live, or lean the pitch toward the buyer who wants ads + email + non-TikTok reach and isn't ready to hand a tool their accounts — the segment Fastlane's account-supply model doesn't serve.</p>
+      </div></div>
+      <div class="reco"><div class="rn">4</div><div>
+        <h3>Lead with breadth + coherence, not "agentic" <span class="badge b-soon">Next</span></h3>
+        <p>With Fastlane live on MCP, "we're an agent" is parity. The defensible line is one brand spine feeding ads, social, video and email — the thing neither rival does at $49. Sell the loop, not the buzzword.</p>
+      </div></div>
+      <div class="reco"><div class="rn">5</div><div>
+        <h3>Weaponize clean billing against Holo <span class="badge b-cust">Watch</span></h3>
+        <p>Holo's recurring refund/cancellation complaints are a live wedge for the "value before you pay, cancel anytime, no dark patterns" buyer. Be radically clean here and say so — free trust in a segment that assumes the opposite.</p>
+      </div></div>
+      <div class="reco"><div class="rn">6</div><div>
+        <h3>Track two moves as category threats <span class="badge b-cust">Watch</span></h3>
+        <p>Fastlane's white-label/Partner API overlaps your Agency tier; its warmed-accounts play could pull the "just make it grow" buyer entirely. Monitor both, and treat the agency segment as contested, not open.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 next actions -->
+<section id="next">
+  <div class="wrap narrow">
+    <div class="sh">08 · Next Actions</div>
+    <h2>The <span class="it">immediate</span> checklist.</h2>
+    <p class="slead">Concrete, assignable steps pulled from the analysis above — ordered by urgency, tagged by owner. Ship the top block this week.</p>
+
+    <div class="actions">
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Correct the Holo founder + funding facts</b><p>Replace "Francesc Navarro" with the Lithuanian team; add $6M / FIRSTPICK. Scrub every doc and any draft comparison page.</p></div>
+        <div class="ameta"><span class="badge b-cust">Founder</span><span class="badge b-team">This week</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Refresh the Fastlane teardown</b><p>Add warmed accounts, AI-influencer studio, and API/MCP/Skill. Re-rank Fastlane as a distribution-infrastructure threat, not just a poster.</p></div>
+        <div class="ameta"><span class="badge b-cust">Founder</span><span class="badge b-team">This week</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Build a "brand fidelity" proof moment</b><p>Free onboarding that shows mani output beside a rival's real result for the same URL — the one axis both rivals verifiably miss.</p></div>
+        <div class="ameta"><span class="badge b-live">Dev</span><span class="badge b-team">This week</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Prioritize the publishing + video roadmap</b><p>Get Fair-backed direct posting and talking-head video to genuinely-live status; they're the two widest gaps vs Fastlane.</p></div>
+        <div class="ameta"><span class="badge b-live">Dev</span><span class="badge b-soon">Next sprint</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Rewrite positioning around the loop</b><p>Drop "agentic" as the lead; make "ads + social + video + email from one brand spine, at $49" the headline claim.</p></div>
+        <div class="ameta"><span class="badge b-cust">Founder</span><span class="badge b-soon">Next sprint</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Ship the "vs Holo" &amp; "vs Fastlane" pages</b><p>Only after the corrections land. Lead on clean billing (vs Holo) and breadth + coherence (vs Fastlane).</p></div>
+        <div class="ameta"><span class="badge b-cust">Founder</span><span class="badge b-soon">Next sprint</span></div>
+      </div>
+      <div class="action">
+        <span class="chk" aria-hidden="true"></span>
+        <div class="atext"><b>Set a monthly rival watch</b><p>Re-scan both sites for pricing, warmed-accounts scale, and white-label moves — the agency segment is now contested.</p></div>
+        <div class="ameta"><span class="badge b-live">Dev</span><span class="badge b-cust">Ongoing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 sources -->
+<section>
+  <div class="wrap narrow srcbox">
+    <div class="sh">09 · Methodology &amp; Sources</div>
+    <p style="margin-top:12px">mani facts are drawn from the internal dossier supplied. All Holo and Fastlane facts were re-verified against primary and independent sources on <b>12 July 2026</b>. Self-reported figures (Holo's $6M raised, Fastlane's 20,000 builders, on-site star ratings) are labelled as such. Nothing here is invented; unverifiable prior claims — e.g. the misattributed founder — were removed and corrected.</p>
+    <h4>Primary — official</h4>
+    <ul>
+      <li>tryholo.ai — homepage, /pricing, /about-us (team, Brand DNA, 5-brand cap, no free trial, © 2026)</li>
+      <li>usefastlane.ai — homepage &amp; /#pricing (tiers, warmed accounts, AI Studio, API/MCP/Skill, UGC libraries, affiliate)</li>
+      <li>PitchBook — Holo (Vilnius) profile: HQ, investor FIRSTPICK</li>
+      <li>Product Hunt — Fastlane ("Tinder for Marketing"; co-founder Gaurav's launch notes)</li>
+    </ul>
+    <h4>Independent — reviews &amp; community</h4>
+    <ul>
+      <li>Trustpilot — tryholo.ai (~950+ reviews; billing / cancellation complaints)</li>
+      <li>2026 review teardowns of Holo (video weakness, desktop-only, ~4/5 usable output, $19–$39 unlimited)</li>
+      <li>2026 review teardowns of Fastlane (Tribe Chat 6.5/10, AI&amp;Realtors 4.1/5, Medium technical teardown — content-quality vs UX split)</li>
+    </ul>
+    <p style="margin-top:16px;color:var(--ink3);font-size:12.5px">Note: a separate, unrelated Barcelona health-tech company also trades as "Holo" (founder Francesc Navarro). It is not the AI-marketing tool profiled here, and was the source of the prior misattribution.</p>
+  </div>
+</section>
+
+<div class="foot">
+  <div class="wrap">
+    <div class="lockup"><span class="orb"></span><span class="wm">man<span class="i">i</span></span></div>
+    <div>Competitive Dossier · Confidential · Prepared 12 Jul 2026</div>
+  </div>
+</div>
+
+</body>
+</html>
