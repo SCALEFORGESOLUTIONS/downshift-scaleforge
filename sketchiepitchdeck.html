@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+===============================================================================
+  SKETCHIE — PRODUCT / SALES DECK
+  Built 2026-07-25 against the live site. Shares the landing page's token
+  system. Copy is not reused verbatim: the deck builds an argument in order.
+
+  WHY THIS IS NOT AN INVESTOR DECK
+  ---------------------------------------------------------------------------
+  An investor deck needs traction, revenue, team, funding or customer proof.
+  sketchie.ai publishes none of it: no user or customer counts, no revenue, no
+  named founders or headcount, no testimonials, no logos, no case studies, no
+  press (a targeted search found nothing), and the company states outright that
+  it has raised $0. Both public repos show 0 stars and 0 forks. Every slide of
+  an investor deck would therefore have to be invented, so this is a product
+  and sales deck instead — an argument about the product, presented by someone
+  who can demonstrate it.
+
+  It is also NOT a procurement deck. Sketchie publishes no compliance posture
+  whatsoever: no SOC 2, ISO 27001, GDPR, CCPA, FERPA, COPPA, HIPAA or
+  accessibility conformance statement, and no SLA. Institutional buyers will
+  ask for those in the first meeting. Do not take this deck into a security
+  review. Downshift LLC's separate "SOC 2, HIPAA and GDPR-ready" claim is
+  about its own client builds and is not a Sketchie fact.
+
+  BLOCKED NUMBERS — absent by design, see the landing page comment for detail:
+  language count (78 / 34 / 23 all live), voice count other than six (homepage
+  says 30, four pages say six), API plan gating, API metering multiplier,
+  "four plans" or a "Business" tier, "under a minute" as a specification,
+  unlimited seats, any icon count, voice cloning, audio/video/link ingestion,
+  the uncited $100-$900 agency benchmark, and the undefined "$0.00 marginal
+  cost" stat.
+
+  TYPEFACE
+  ---------------------------------------------------------------------------
+  Shantell Sans (Shantell Martin / ArrowType, OFL 1.1). Marker-drawn variable
+  family, wght 300-800 plus BNCE / INFM / SPAC. Real weights are requested here
+  (500-700); the live site is currently faux-bolding a Light instance —
+  PostScript name Shantell-Sans-Light-ExtraBold — which is a bug worth filing.
+  Axes sit at 0 in all deck chrome and are used only on the whiteboard scene
+  headings in slide 3, where irregular marker writing is what is depicted.
+  See the landing page comment block for the full note.
+
+  CONTROLS  → ← ↓ ↑ Space PgUp PgDn navigate · Home/End first/last · 1-9 jump
+            N notes · F fullscreen · ? shortcuts · swipe on touch
+===============================================================================
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketchie — product deck</title>
+<meta name="theme-color" content="#6C5CE7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:BNCE,INFM,wght@0..40,0..40,500..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --board:#F6F5FA; --board-deep:#EDEBF4; --ink:#15141B; --ink-soft:#56525F;
+  --violet:#6C5CE7; --wash:#E9E4FD; --marker:#2E9E6B;
+  --display:"Shantell Sans","Comic Sans MS","Trebuchet MS",sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --vf-plain:"BNCE" 0,"INFM" 0;
+  --spring:cubic-bezier(.18,.85,.24,1);
+  --notes-h:230px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--ink); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.55; overflow:hidden;
+}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--violet); outline-offset:2px}
+
+.app{height:100%; display:flex; flex-direction:column}
+
+/* ------------------------------------------------------------- stage */
+.stagewrap{position:relative; flex:1 1 auto; min-height:0; background:var(--board); overflow:hidden}
+.slide{
+  position:absolute; inset:0; padding:clamp(28px,4.4vw,72px) clamp(28px,5.6vw,96px) 60px;
+  display:none; flex-direction:column; justify-content:center;
+  overflow:auto;
+}
+.slide.live{display:flex}
+.slide.enter-r{animation:inR .42s var(--spring) both}
+.slide.enter-l{animation:inL .42s var(--spring) both}
+@keyframes inR{from{opacity:0; transform:translateX(46px)} to{opacity:1; transform:none}}
+@keyframes inL{from{opacity:0; transform:translateX(-46px)} to{opacity:1; transform:none}}
+
+.slide.dark{background:var(--ink); color:var(--board)}
+.slide.violet{background:var(--violet); color:#fff}
+
+.inner{width:min(1180px,100%); margin-inline:auto}
+.slide [data-c]{opacity:0; transform:translateY(18px)}
+.slide.live [data-c]{animation:cas .5s var(--spring) both}
+@keyframes cas{to{opacity:1; transform:none}}
+
+.eyebrow{
+  font-family:var(--mono); font-size:clamp(.62rem,.86vw,.74rem); font-weight:500;
+  letter-spacing:.17em; text-transform:uppercase; color:var(--violet); margin:0 0 14px
+}
+.slide.dark .eyebrow{color:#B9AEFF}
+.slide.violet .eyebrow{color:rgba(255,255,255,.78)}
+/* Retuned for Shantell Sans: tracking to ~0 (a monolinear marker face collides
+   under negative tracking), display sizes down ~10%, leading up, and 700 as the
+   ceiling weight instead of a faux 800. */
+h1{font-family:var(--display); font-weight:700; letter-spacing:-.004em; line-height:1.08;
+   font-size:clamp(2.05rem,5vw,3.95rem); margin:0; font-variation-settings:var(--vf-plain)}
+h2{font-family:var(--display); font-weight:700; letter-spacing:-.002em; line-height:1.13;
+   font-size:clamp(1.58rem,3.35vw,2.7rem); margin:0 0 22px; max-width:23ch;
+   font-variation-settings:var(--vf-plain)}
+h3{font-family:var(--display); font-weight:600; font-size:clamp(.96rem,1.32vw,1.1rem);
+   letter-spacing:0; margin:0 0 6px; font-variation-settings:var(--vf-plain)}
+p{margin:0 0 16px}
+.lede{font-size:clamp(1rem,1.35vw,1.2rem); color:var(--ink-soft); max-width:60ch}
+.slide.dark .lede{color:rgba(246,245,250,.7)}
+.slide.violet .lede{color:rgba(255,255,255,.9)}
+.two{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,3.4vw,56px); align-items:start}
+.three{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,1.8vw,26px)}
+.card{background:#fff; border:1.5px solid var(--ink); border-radius:3px; padding:20px}
+.slide.dark .card{background:#1D1B25; border-color:rgba(246,245,250,.28)}
+.card p{margin:0; font-size:.94rem; color:var(--ink-soft)}
+.slide.dark .card p{color:rgba(246,245,250,.66)}
+.chip{font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; border:1.5px solid currentColor;
+      border-radius:2px; padding:2px 8px; display:inline-block}
+pre{font-family:var(--mono); font-size:clamp(.72rem,.92vw,.84rem); line-height:1.62; margin:0;
+    background:var(--ink); color:#E9E7F2; padding:20px; border-radius:3px; overflow:auto}
+pre .k{color:#B9AEFF} pre .s{color:#8FD9B6} pre .c{color:#7D7889}
+.slide.dark pre{background:#0D0C12}
+table{width:100%; border-collapse:collapse; font-size:clamp(.82rem,1vw,.95rem)}
+th{text-align:left; font-family:var(--mono); font-weight:500; font-size:.66rem; letter-spacing:.14em;
+   text-transform:uppercase; color:var(--ink-soft); padding:0 0 9px; border-bottom:1.5px solid rgba(21,20,27,.2)}
+td{padding:10px 14px 10px 0; border-bottom:1.5px solid rgba(21,20,27,.1); vertical-align:top}
+.slide.dark th{color:rgba(246,245,250,.5); border-bottom-color:rgba(246,245,250,.22)}
+.slide.dark td{border-bottom-color:rgba(246,245,250,.13)}
+td:first-child{font-weight:600}
+.g-verified{color:#6C5CE7} .slide.dark .g-verified{color:#B9AEFF}
+.g-derived{color:var(--marker)} .slide.dark .g-derived{color:#8FD9B6}
+.g-heuristic{color:var(--ink-soft)} .slide.dark .g-heuristic{color:rgba(246,245,250,.55)}
+.g-product{color:#B07D18} .slide.dark .g-product{color:#F0C87A}
+.plan-row{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; margin-top:8px}
+.plan{border:1.5px solid var(--ink); border-radius:3px; padding:14px; background:#fff}
+.plan .n{font-family:var(--display); font-weight:700; font-size:.98rem; font-variation-settings:var(--vf-plain)}
+.plan .p{font-family:var(--mono); font-size:1.05rem; margin:4px 0 0}
+.plan .m{font-size:.8rem; color:var(--ink-soft)}
+.datestamp{font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); margin-top:18px}
+.slide.dark .datestamp{color:rgba(246,245,250,.5)}
+
+/* --------------------------------------------------- embedded demo */
+.board{background:#fff; border:2px solid var(--ink); border-radius:3px; overflow:hidden}
+.board-top{display:flex; gap:12px; align-items:center; padding:8px 12px; font-family:var(--mono);
+  font-size:.7rem; color:var(--ink-soft); border-bottom:1.5px solid rgba(21,20,27,.14)}
+.board-body{display:grid; grid-template-columns:150px minmax(0,1fr)}
+.scenelist{border-right:1.5px solid rgba(21,20,27,.14); padding:8px; display:flex; flex-direction:column; gap:5px}
+.scenebtn{text-align:left; font-size:.78rem; line-height:1.25; background:transparent;
+  border:1.5px solid transparent; border-radius:2px; padding:6px 7px; cursor:pointer; color:var(--ink-soft)}
+.scenebtn .n{font-family:var(--mono); font-size:.64rem; color:var(--violet); display:block}
+.scenebtn[aria-current="true"]{background:var(--wash); border-color:var(--ink); color:var(--ink); font-weight:600}
+#dstage{display:block; width:100%; height:auto; background:#fff}
+.dnarr{border-top:1.5px solid rgba(21,20,27,.14); padding:9px 12px; font-size:.84rem;
+  color:var(--ink-soft); min-height:52px}
+.dnarr b{color:var(--ink); background:var(--wash); font-weight:600; padding:0 2px}
+.dfoot{border-top:1.5px solid rgba(21,20,27,.14); padding:9px 12px; display:flex; gap:9px;
+  align-items:center; flex-wrap:wrap; background:var(--board)}
+.dstatus{font-family:var(--mono); font-size:.7rem; color:var(--ink-soft); padding:0 12px 9px; background:var(--board)}
+.dstatus b{color:var(--marker)}
+.btn{display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-weight:600;
+  font-size:.88rem; background:var(--violet); color:#fff; border:1.5px solid var(--ink);
+  padding:7px 14px; border-radius:2px; cursor:pointer; box-shadow:2px 2px 0 var(--ink);
+  transition:transform .2s var(--spring), box-shadow .2s var(--spring)}
+.btn:hover{transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--ink)}
+.btn.ghost{background:transparent; color:var(--ink)}
+.btn[disabled]{opacity:.4; cursor:default; transform:none; box-shadow:2px 2px 0 var(--ink)}
+.instr{flex:1 1 200px; min-width:0; font-family:var(--mono); font-size:.76rem;
+  border:1.5px solid var(--ink); border-radius:2px; padding:7px 9px; background:#fff}
+.figcap{font-size:.78rem; color:var(--ink-soft); margin-top:10px}
+.slide.dark .figcap{color:rgba(246,245,250,.55)}
+
+/* -------------------------------------------------------------- chrome */
+.progress{position:absolute; left:0; top:0; height:3px; background:var(--violet); width:0;
+  transition:width .3s var(--spring); z-index:20}
+.hud{position:absolute; right:18px; bottom:14px; display:flex; gap:8px; align-items:center;
+  font-family:var(--mono); font-size:.74rem; color:var(--ink-soft); z-index:20}
+.slide.dark ~ .hud, .hud.on-dark{color:rgba(246,245,250,.6)}
+.hud button{background:transparent; border:1.5px solid currentColor; color:inherit; cursor:pointer;
+  border-radius:2px; width:26px; height:26px; line-height:1; font-size:.8rem}
+.counter{min-width:52px; text-align:right}
+
+/* --------------------------------------------------------------- notes */
+.notes{
+  flex:0 0 auto; height:var(--notes-h); background:var(--ink); color:rgba(246,245,250,.82);
+  border-top:2px solid #000; padding:18px clamp(20px,4vw,44px); overflow:auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,48px);
+}
+.notes.hidden{display:none}
+.notes h4{font-family:var(--mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:#B9AEFF; margin:0 0 8px; font-weight:500}
+.notes h4.verify{color:#8FD9B6}
+.notes p{font-size:.86rem; line-height:1.55; margin:0 0 9px; color:rgba(246,245,250,.8)}
+.notes ul{margin:0; padding-left:18px}
+.notes li{font-size:.86rem; line-height:1.5; margin-bottom:6px; color:rgba(246,245,250,.8)}
+.notes code{font-family:var(--mono); font-size:.8rem; color:#B9AEFF}
+.notes .warn{color:#F0C87A}
+
+/* ------------------------------------------------------------ overlay */
+.help{position:fixed; inset:0; background:rgba(21,20,27,.93); color:var(--board); z-index:90;
+  display:none; align-items:center; justify-content:center}
+.help.open{display:flex}
+.help .panel{width:min(560px,90vw); font-family:var(--mono); font-size:.9rem}
+.help dl{display:grid; grid-template-columns:auto 1fr; gap:10px 22px; margin:20px 0 0}
+.help dt{color:#B9AEFF}
+.help dd{margin:0; color:rgba(246,245,250,.8)}
+
+@media (max-width:860px){
+  .two,.three{grid-template-columns:1fr}
+  .board-body{grid-template-columns:1fr}
+  .scenelist{flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1.5px solid rgba(21,20,27,.14)}
+  .scenebtn{flex:0 0 auto}
+  .plan-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .notes{grid-template-columns:1fr; --notes-h:260px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important}
+  .slide [data-c]{opacity:1!important; transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stagewrap" id="stagewrap">
+    <div class="progress" id="progress"></div>
+
+    <!-- ============================================================ 1 -->
+    <section class="slide violet" data-notes="n1">
+      <div class="inner">
+        <p class="eyebrow" data-c style="animation-delay:.05s">Sketchie · product walkthrough · July 2026</p>
+        <h1 data-c style="animation-delay:.14s">The first render<br>is a draft.<br>So it ships as one.</h1>
+        <p class="lede" data-c style="animation-delay:.26s; margin-top:26px; max-width:52ch">
+          A narrated whiteboard explainer, generated from a prompt or a
+          document, handed back as an editable scene graph.
+        </p>
+        <p data-c style="animation-delay:.36s; margin-top:30px">
+          <span class="chip">sketchie.ai</span>
+          <span class="chip">operated by Downshift LLC</span>
+          <span class="chip">self-serve, live</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 2 -->
+    <section class="slide" data-notes="n2">
+      <div class="inner">
+        <p class="eyebrow" data-c>The moment</p>
+        <h2 data-c style="animation-delay:.08s">You publish it. Then someone says the second sentence is wrong.</h2>
+        <div class="two" style="margin-top:10px">
+          <p class="lede" data-c style="animation-delay:.18s">
+            On a tool that renders in one shot, that sentence costs a whole new
+            generation. The rest of the video comes back different too: new
+            drawings, new timing, everything to re-check. So the correction gets
+            skipped, the video goes quietly out of date, or the video never gets
+            made.
+          </p>
+          <p class="lede" data-c style="animation-delay:.26s">
+            The metric that decides whether an explainer is worth making is not
+            how fast the first render lands. It is how long the whole loop takes
+            — draft, watch, notice, fix, ship. Almost nobody prices that loop.
+            Sketchie is built around it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 3 -->
+    <section class="slide" data-notes="n3">
+      <div class="inner">
+        <p class="eyebrow" data-c>The architecture, live</p>
+        <h2 data-c style="animation-delay:.06s; margin-bottom:16px">A video compiled from a document you can write back to.</h2>
+        <div class="two" style="align-items:start">
+          <div data-c style="animation-delay:.14s">
+            <div class="board">
+              <div class="board-top">
+                <span class="chip" id="dver">version 1</span>
+                <span>dns-resolution · 4 scenes</span>
+                <span style="margin-left:auto" id="dhead">scene 1 of 4</span>
+              </div>
+              <div class="board-body">
+                <div class="scenelist" id="dlist"></div>
+                <div>
+                  <svg id="dstage" viewBox="0 0 640 320" role="img" aria-label="A whiteboard scene drawing itself on"></svg>
+                  <p class="dnarr" id="dnarr"></p>
+                </div>
+              </div>
+              <div class="dfoot">
+                <input class="instr" id="dinstr" value="Make scene 2 shorter and warmer" aria-label="Edit instruction">
+                <button class="btn" id="dedit" type="button">Re-render scene</button>
+                <button class="btn ghost" id="drevert" type="button" disabled>Revert</button>
+              </div>
+              <p class="dstatus" id="dstatus">Click a scene to watch it draw.</p>
+            </div>
+            <p class="figcap">
+              An illustration of the model, drawn in SVG for this deck. Not a
+              screenshot and not Sketchie output; timing is compressed. Real
+              renders: sketchie.ai/examples.
+            </p>
+          </div>
+          <div data-c style="animation-delay:.24s">
+            <p class="lede">
+              Every generation returns two artifacts: the MP4, and the scene
+              graph it was compiled from. Scenes carry a heading, their
+              narration, and elements bound by <code style="font-family:var(--mono)">revealWord</code>
+              to the exact spoken word that reveals them.
+            </p>
+            <p class="lede">
+              Because the graph exists before anything is spent on voice or
+              rendering, quality can be checked first — and because scenes are
+              addressable, a correction touches one of them.
+            </p>
+            <p style="margin-top:22px"><span class="chip">schema published under MIT</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 4 -->
+    <section class="slide dark" data-notes="n4">
+      <div class="inner">
+        <p class="eyebrow" data-c>The wedge</p>
+        <h2 data-c style="animation-delay:.06s">Fix one scene. Nothing else moves.</h2>
+        <div class="three" style="margin-top:34px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <h3>Two ways to edit</h3>
+            <p>Change the heading, narration, labels or icon styling directly.
+               Or describe the change in plain language, in the app or as a
+               single instruction to the edit endpoint.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.26s">
+            <h3>Versions, not overwrites</h3>
+            <p>A re-render appends a version to the same explainer. A revert
+               endpoint points the head back at an earlier ready version.
+               History stays intact.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.36s">
+            <h3>The first edit is free</h3>
+            <p>Editing never consumes one of the two free videos, and each
+               video's first re-render costs nothing. Later ones draw seconds
+               of minutes rather than a whole new video.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.46s; margin-top:34px; max-width:66ch">
+          This is the architecture, not a feature bolted on afterwards. A
+          competitor can render faster; making a finished one-shot file
+          retroactively addressable is a different product.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 5 -->
+    <section class="slide" data-notes="n5">
+      <div class="inner">
+        <p class="eyebrow" data-c>Quality, stated as numbers</p>
+        <h2 data-c style="animation-delay:.06s">The generator obeys a published spec — and grades its own evidence.</h2>
+        <table data-c style="animation-delay:.16s">
+          <thead><tr><th>Parameter</th><th>Target</th><th>Grade</th></tr></thead>
+          <tbody>
+            <tr><td>Total video length</td><td>6:00 hard ceiling; 1:00–3:00 sweet spot per concept</td><td><span class="chip g-verified">Verified</span></td></tr>
+            <tr><td>Reveal style</td><td>Outline draw-on 0.3–0.5s, then a staggered fill wash</td><td><span class="chip g-verified">Verified</span></td></tr>
+            <tr><td>Post-scene gap</td><td>≥0.7s of narration silence before the cut</td><td><span class="chip g-verified">Verified</span></td></tr>
+            <tr><td>Ending</td><td>Retrieval question, ≥1.5s pause, one-line recap</td><td><span class="chip g-verified">Verified</span></td></tr>
+            <tr><td>Reveal-to-word sync</td><td>Element appears within ±500ms of its trigger word</td><td><span class="chip g-derived">Derived</span></td></tr>
+            <tr><td>Elements per scene</td><td>3–7 visible at scene end</td><td><span class="chip g-heuristic">Heuristic</span></td></tr>
+            <tr><td>Length granularity</td><td>30-second increments</td><td><span class="chip g-product">Product</span></td></tr>
+          </tbody>
+        </table>
+        <p class="lede" data-c style="animation-delay:.3s; margin-top:24px">
+          Eleven design laws, each with an effect size and a link to its primary
+          source. The grades are the point: a working assumption is labelled as
+          one rather than dressed as a finding.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 6 -->
+    <section class="slide dark" data-notes="n6">
+      <div class="inner">
+        <div class="two">
+          <div>
+            <p class="eyebrow" data-c>Not a manifesto, a gate</p>
+            <h2 data-c style="animation-delay:.06s">A graph that breaks the spec never becomes a video.</h2>
+            <p class="lede" data-c style="animation-delay:.16s">
+              Layer A runs mechanical assertions on the scene graph at
+              generation time, before a cent goes on voice or rendering:
+              duration ceiling, per-scene band, element count, reveal words that
+              resolve, the post-scene silence, the question-and-recap ending. A
+              failing graph is regenerated with its own failures fed back into
+              the prompt.
+            </p>
+            <p class="lede" data-c style="animation-delay:.24s">
+              That layer is open source under MIT, with a runnable checker and a
+              worked passing example. Layers B (model-as-judge) and C (checks on
+              the rendered file) are described but not published.
+            </p>
+          </div>
+          <div data-c style="animation-delay:.3s">
+<pre><span class="c">// composite score, from the public repo</span>
+score = <span class="k">0.50</span> * layerA
+      + <span class="k">0.35</span> * layerB
+      + <span class="k">0.15</span> * layerC
+
+ship gate: score &gt;= <span class="k">85</span>
+
+<span class="c">// same code runs in the worker's
+// regeneration gate and in CI, so a
+// generator change that regresses
+// quality blocks itself</span></pre>
+            <p class="figcap">github.com/Downshift/explainer-evals</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 7 -->
+    <section class="slide" data-notes="n7">
+      <div class="inner">
+        <p class="eyebrow" data-c>What is actually watchable today</p>
+        <h2 data-c style="animation-delay:.06s">Nineteen finished renders, 0:33 to 5:56.</h2>
+        <div class="three" style="margin-top:30px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <h3>Range, not a highlight reel</h3>
+            <p>Concepts from compound interest to neural networks, at eleven
+               lengths climbing to the six-minute ceiling. The same explainer is
+               also published in two alternate layouts.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <h3>Document mode</h3>
+            <p>Raw meeting notes rendered as a 5:02 walkthrough, and a long
+               written explanation turned into a 4:36 lesson. It follows the
+               source instead of writing over it.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <h3>One prompt, several languages</h3>
+            <p>The same sky-blue explainer generated natively in Spanish,
+               Brazilian Portuguese and German — script, on-screen labels and
+               narration, in one voice.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:30px; max-width:64ch">
+          Six narrators — Nora, Miles, Dean, Clara, Piper, Wren — previewable
+          before you generate, each able to speak every supported language, so a
+          course keeps one consistent voice.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 8 -->
+    <section class="slide dark" data-notes="n8">
+      <div class="inner">
+        <div class="two">
+          <div>
+            <p class="eyebrow" data-c>The developer surface</p>
+            <h2 data-c style="animation-delay:.06s">One POST in. MP4 and scene graph out.</h2>
+            <p class="lede" data-c style="animation-delay:.16s">
+              Creation is asynchronous — 202 and a queued record, then poll or
+              hold a Server-Sent Events stream and catch each status transition.
+              The edit endpoint turns one plain-language instruction into a
+              targeted re-render; revert points the head back.
+            </p>
+            <p class="lede" data-c style="animation-delay:.24s">
+              Generation endpoints allow 20 requests a minute, everything else
+              shares 200. There is an MCP server with five tools, running as a
+              local stdio process for Claude Code and Claude Desktop. A hosted
+              connector for Claude web and mobile is on the roadmap.
+            </p>
+          </div>
+          <div data-c style="animation-delay:.3s">
+<pre>POST /v1/explainer          <span class="c">→ 202, queued</span>
+GET  /v1/explainer/:id      <span class="c">→ status, videoUrl,
+                               sceneGraph, versions</span>
+GET  /v1/explainer/events   <span class="c">→ SSE status frames</span>
+POST /v1/explainer/:id/edit <span class="c">→ 202, new version</span>
+POST /v1/explainer/:id/revert
+GET  /v1/voices  /v1/languages
+GET  /v1/billing/status</pre>
+            <p class="figcap">Base URL https://sketchie.ai/api · Bearer sk_… , shown once at creation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 9 -->
+    <section class="slide" data-notes="n9">
+      <div class="inner">
+        <p class="eyebrow" data-c>Commercials</p>
+        <h2 data-c style="animation-delay:.06s">One meter: rendered minutes.</h2>
+        <div class="plan-row" data-c style="animation-delay:.16s">
+          <div class="plan"><div class="n">Solo</div><div class="p">$9.99</div><div class="m">40 min</div></div>
+          <div class="plan"><div class="n">Plus</div><div class="p">$19.99</div><div class="m">100 min</div></div>
+          <div class="plan"><div class="n">Pro</div><div class="p">$49.99</div><div class="m">300 min</div></div>
+          <div class="plan"><div class="n">Max</div><div class="p">$99.99</div><div class="m">750 min</div></div>
+          <div class="plan"><div class="n">Team</div><div class="p">$499.99</div><div class="m">5,000 min</div></div>
+          <div class="plan"><div class="n">Enterprise</div><div class="p">Talk</div><div class="m">custom volume</div></div>
+        </div>
+        <div class="two" style="margin-top:28px">
+          <p class="lede" data-c style="animation-delay:.26s">
+            Not seats, not API calls, not credits, no minimum purchase. Minutes
+            reset each cycle and do not roll over. Overage is twice your own
+            plan's per-minute rate, opt-in and off by default — with it off you
+            stop at the ceiling and get an upgrade prompt. Annual takes 40% off.
+          </p>
+          <p class="lede" data-c style="animation-delay:.34s">
+            Free tier: two videos, up to a minute each, watermarked, no card,
+            full product including the scene editor. Editing does not consume a
+            free video and the first edit of each video is free. Custom branding
+            starts at Pro.
+          </p>
+        </div>
+        <p class="datestamp" data-c style="animation-delay:.42s">USD, read from sketchie.ai/pricing on 2026-07-25. Re-verify before quoting.</p>
+      </div>
+    </section>
+
+    <!-- =========================================================== 10 -->
+    <section class="slide dark" data-notes="n10">
+      <div class="inner">
+        <p class="eyebrow" data-c>Say this before they find it</p>
+        <h2 data-c style="animation-delay:.06s">Where we are behind, today.</h2>
+        <div class="three" style="margin-top:30px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <h3>Raw speed</h3>
+            <p>Sketchie's own comparison page concedes that Simi is faster at
+               first generation. The counter-argument is the whole loop, not the
+               first render — and it has to be demonstrated, not asserted.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <h3>Single-user</h3>
+            <p>There is no shared workspace today. Shared workspaces are on the
+               roadmap. Do not sell team collaboration.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <h3>No proof but the output</h3>
+            <p>No customers, counts, testimonials or press are published, and
+               the company states it launched in July 2026 with no venture
+               funding. The nineteen renders and the open eval repo are the
+               evidence that exists.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:30px; max-width:66ch">
+          Conceding the metric you lose on is the most efficient way to be
+          believed on the one you win.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================== 11 -->
+    <section class="slide violet" data-notes="n11">
+      <div class="inner">
+        <p class="eyebrow" data-c>The ask</p>
+        <h2 data-c style="animation-delay:.08s; font-size:clamp(1.85rem,4.2vw,3.25rem)">Make two videos. Break one on purpose. Fix it.</h2>
+        <p class="lede" data-c style="animation-delay:.2s; max-width:54ch">
+          Two videos free, up to a minute each, watermarked, no card, full
+          product including the scene editor. The loop is the thing to judge, so
+          judge the loop.
+        </p>
+        <p data-c style="animation-delay:.3s; margin-top:30px">
+          <span class="chip">sketchie.ai/app/signup</span>
+          <span class="chip">hello@sketchie.ai</span>
+        </p>
+      </div>
+    </section>
+
+    <div class="hud" id="hud">
+      <button id="prev" type="button" aria-label="Previous slide">‹</button>
+      <button id="next" type="button" aria-label="Next slide">›</button>
+      <span class="counter" id="counter">1 / 11</span>
+      <button id="notesBtn" type="button" aria-label="Toggle presenter notes">N</button>
+      <button id="fsBtn" type="button" aria-label="Toggle fullscreen">⤢</button>
+      <button id="helpBtn" type="button" aria-label="Keyboard shortcuts">?</button>
+    </div>
+  </div>
+
+  <!-- ============================================================ NOTES -->
+  <aside class="notes" id="notes" aria-label="Presenter notes">
+    <div id="notesIntent"></div>
+    <div id="notesVerify"></div>
+  </aside>
+</div>
+
+<div class="help" id="help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+  <div class="panel">
+    <strong style="font-family:var(--display); font-size:1.4rem">Shortcuts</strong>
+    <dl>
+      <dt>→ ↓ Space PgDn</dt><dd>Next slide</dd>
+      <dt>← ↑ PgUp</dt><dd>Previous slide</dd>
+      <dt>Home / End</dt><dd>First / last slide</dd>
+      <dt>1 – 9</dt><dd>Jump to slide</dd>
+      <dt>N</dt><dd>Presenter notes</dd>
+      <dt>F</dt><dd>Fullscreen (F11 also works)</dd>
+      <dt>?  or  Esc</dt><dd>Close this</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================================================== PRESENTER NOTES ==
+     Two columns per slide. Left: how to deliver it. Right: which live page
+     confirms each claim, and what is NOT confirmed and must be resolved
+     before this deck is presented.
+     ==================================================================== */
+  var NOTES = {
+    n1: {
+      intent: "<p>Do not read the slide. Say the headline once and stop. The whole deck is one idea and this is it.</p><p>Name yourself and ask one question before slide 2: <em>&ldquo;when did you last have to redo a video because of one sentence?&rdquo;</em> If they have an answer, the rest of the deck is confirmation. If they don't, slow down on slide 2 and build the problem properly.</p>",
+      verify: "<p><strong>Confirmed:</strong> product definition and the editable scene graph &mdash; sketchie.ai homepage and Terms &sect;1. Operator Downshift LLC &mdash; Terms &sect;16. Self-serve signup is live &mdash; /app/signup.</p><p class='warn'><strong>Do not say:</strong> any generation time. The homepage says &ldquo;under a minute&rdquo;, /docs/ says rendering &ldquo;takes a few minutes&rdquo;, /vs-simi/ says &ldquo;about a minute&rdquo;. Three live values.</p>"
+    },
+    n2: {
+      intent: "<p>This slide is theirs, not yours. Ask for the example and let them tell it. Stay quiet through the pause.</p><p>The line that lands is &ldquo;the correction gets skipped.&rdquo; Most people recognise that immediately &mdash; the video did not get fixed, it just got quietly stale.</p><p>Do not name a competitor here. Naming one turns a shared problem into a vendor fight.</p>",
+      verify: "<p><strong>Confirmed:</strong> the problem framing is Sketchie's own (homepage: the doc nobody reads, the recording nobody watches). The one-shot contrast is stated on /vs-simi/, sourced July 2026.</p><p class='warn'><strong>Not confirmed:</strong> anything about how often this happens to buyers. There is no research and no customer data behind this slide. Keep it anecdotal and let them supply the anecdote.</p>"
+    },
+    n3: {
+      intent: "<p>Demonstrate, don't describe. Click scene 2, let it draw, then press <em>Re-render scene</em> and stop talking until the status line appears. The sentence to say afterwards is: <em>&ldquo;scenes one, three and four never moved.&rdquo;</em></p><p>Then press <em>Revert</em>. Version history is what makes an editable video safe to hand to someone else.</p><p>Say plainly that this is a diagram, not the app. Being caught passing an illustration off as a screenshot costs more than the demo is worth.</p>",
+      verify: "<p><strong>Confirmed:</strong> scene graph returned with the video (/api/, /docs/api/, Terms &sect;1). <code>revealWord</code> semantics and the JSON Schema &mdash; Downshift/explainer-evals. Edit and revert endpoints, versions array, 409 on non-ready &mdash; /docs/api/.</p><p class='warn'><strong>Not confirmed:</strong> the in-app editing UI. Sketchie publishes no product screenshots at all, so nobody outside has seen the editor. This widget is an illustration of the documented model.</p>"
+    },
+    n4: {
+      intent: "<p>Land the third card hardest: <em>the first edit of each video is free</em>. It removes the fear that trying the loop costs money, which is the objection that actually blocks the trial.</p><p>The closing line about architecture is the competitive answer. Deliver it flatly &mdash; it is stronger as a statement of fact than as a boast.</p>",
+      verify: "<p><strong>Confirmed on four sources:</strong> editing does not consume a free video and the first edit of each video is free &mdash; Terms &sect;3, /docs/api/, homepage FAQ, /pricing/.</p><p class='warn'><strong>Not published:</strong> the exact per-edit minute formula. &ldquo;A few seconds of minutes&rdquo; is the only guidance. Also unpublished: how many versions are retained and whether they expire. Do not answer either from memory.</p>"
+    },
+    n5: {
+      intent: "<p>Sceptics arrive here. Point at the <em>Heuristic</em> row on purpose &mdash; the credibility comes from the graded row, not the verified ones. &ldquo;This one is a working assumption and they label it as one.&rdquo;</p><p>If asked whether it makes videos better: it makes them <em>consistent with the published research on the format</em>. That is a different sentence and you must use it.</p>",
+      verify: "<p><strong>Confirmed:</strong> every parameter and grade on this slide is published verbatim at sketchie.ai/science, with primary-source links per law.</p><p class='warn'><strong>Never claim</strong> Sketchie improves retention, transfer, test scores or completion by any amount. The cited research is about learning from video in general; no Sketchie-specific study exists. Sketchie draws this line itself on /education/ &mdash; do not cross it on their behalf.</p>"
+    },
+    n6: {
+      intent: "<p>For a technical audience, offer the repo link and move on &mdash; the offer does the work, not the walkthrough.</p><p>The strongest fact here is the ordering: the gate runs on the graph <em>before</em> spend. Say it that way round.</p>",
+      verify: "<p><strong>Confirmed and independently inspectable:</strong> Downshift/explainer-evals, MIT, runnable Layer-A checker, worked passing example, composite 50/35/15 with ship gate &ge;85.</p><p class='warn'><strong>Do not call it an industry standard.</strong> The page calls itself &ldquo;the open standard&rdquo;, which is positioning. The repo shows 0 stars, 0 forks and 2 commits. If someone checks mid-meeting, you want to have said this first. Layers B and C are described but not published, and &ldquo;deterministic rendering&rdquo; is asserted with no published measurement.</p>"
+    },
+    n7: {
+      intent: "<p>Have the examples page open in a second tab and play the 0:58 compound-interest render if the room is quiet. Watchable output beats any slide here.</p><p>If they are multilingual, play the Spanish and German versions of the same explainer back to back &mdash; same voice, different language, is the moment that sells.</p>",
+      verify: "<p><strong>Confirmed:</strong> 19 published renders, 0:33 to 5:56, including ES / PT-BR / DE &mdash; /examples/. Six named narrators with previews &mdash; /docs/voices/, /api/, /education/, /vs-simi/.</p><p class='warn'><strong>Never state a language count.</strong> Three live values: 78 (homepage FAQ, /docs/languages/ table), 34 (/docs/ index), 23 (/vs-simi/ honesty section, which says the rest is &ldquo;rolling out&rdquo;). Say &ldquo;every catalog voice speaks every supported language&rdquo; and point at the languages page. Also never say 30 voices &mdash; the homepage FAQ is stale against four other pages.</p>"
+    },
+    n8: {
+      intent: "<p>Developers will ask price before features. Have /pricing open. Answer &ldquo;API access needs a paid plan&rdquo; and let them read the tier off the live page rather than quoting one.</p><p>Be straight about the MCP server being a local process today. Someone expecting to click a connector in the Claude web app will be annoyed later, and that is worse than being told now.</p>",
+      verify: "<p><strong>Confirmed:</strong> endpoints, async 202, SSE, edit and revert, rate limits 20/min and 200/min, Bearer <code>sk_</code> shown once &mdash; /docs/api/ and /docs/. Five MCP tools, local stdio &mdash; /docs/mcp/. Hosted connector explicitly on the roadmap.</p><p class='warn'><strong>Two blocked numbers.</strong> API gating: /docs/, /docs/mcp/ and Terms &sect;3/&sect;8 say every paid plan; /api/, /pricing/ and /vs-simi/ say Plus and up. Metering: /docs/ and the homepage FAQ say 1x; /api/, /pricing/ and /vs-simi/ say 2x. Resolve with the team before any developer conversation. Also: no webhooks are documented, and the SDK/CLI distribution is unresolved &mdash; Sketchie's own docs concede the npm package may not resolve.</p>"
+    },
+    n9: {
+      intent: "<p>Lead with the unit, not the ladder. &ldquo;One meter&rdquo; is the argument; the six boxes are just where they land on it.</p><p>Overage being off by default is the thing to say out loud. It answers the surprise-bill fear before it is raised.</p><p>If they are a team, go straight to slide 10 &mdash; do not let them assume multi-user.</p>",
+      verify: "<p><strong>Confirmed 2026-07-25 on /pricing/:</strong> five paid tiers plus Enterprise, the minute allowances, 40% annual discount, no rollover, overage at 2x the plan's own per-minute rate, opt-in and off by default, custom branding from Pro. The overage rates are arithmetically consistent with that rule.</p><p class='warn'><strong>Never say &ldquo;four plans&rdquo; or &ldquo;Business&rdquo;</strong> &mdash; the homepage block is stale and names a tier that does not exist. Do not quote annual dollar amounts; only the percentage is published. Do not repeat the &ldquo;$100 to $900 agency&rdquo; benchmark &mdash; it carries no source. Enterprise SSO / SCORM / LMS / SLA are conversation topics on the pricing page, not shipped features.</p>"
+    },
+    n10: {
+      intent: "<p>Deliver this slide without apology and without hedging. It is the most persuasive slide in the deck precisely because it costs something.</p><p>Then hand the argument back: &ldquo;run the same prompt on both and time the whole loop, including the fix.&rdquo; That is a test they can actually run, and it is the test Sketchie wins.</p>",
+      verify: "<p><strong>Confirmed:</strong> Sketchie concedes first-generation speed to Simi and states &ldquo;we launched this week&rdquo; and &ldquo;we raised $0&rdquo; &mdash; /vs-simi/, sourced July 2026. Single-user today with shared workspaces on the way &mdash; /pricing/ FAQ. No testimonials, logos, counts or press exist.</p><p class='warn'><strong>Simi figures go stale fast.</strong> Rows on that page are stamped 2026-07-07 and the page itself warns they can ship anything in that column. Re-verify before repeating any Simi claim, and never compare against a competitor Sketchie has not named.</p>"
+    },
+    n11: {
+      intent: "<p>One ask, not three. &ldquo;Make two videos this week and break one on purpose.&rdquo; Then stop.</p><p>If they want a school or district quote, the path is email &mdash; a person answers and quotes in the first reply, with no sales-call gate. Say that; it is unusual enough to be worth saying.</p>",
+      verify: "<p><strong>Confirmed:</strong> free tier terms across four sources including Terms &sect;3. Contact hello@sketchie.ai (Terms &sect;16, Privacy &sect;14). Education quoting path &mdash; /education/.</p><p class='warn'><strong>Before any institutional follow-up:</strong> Sketchie publishes no compliance certifications, no student-data statement, no accessibility conformance and no SLA, while actively marketing to education. Users must be 13+. Shared videos are served publicly to anyone with the link. Do not answer a procurement question from this deck.</p>"
+    }
+  };
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total = slides.length;
+  var i = 0;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var counter = document.getElementById("counter");
+  var progress = document.getElementById("progress");
+  var notes = document.getElementById("notes");
+  var nIntent = document.getElementById("notesIntent");
+  var nVerify = document.getElementById("notesVerify");
+  var help = document.getElementById("help");
+  var hud = document.getElementById("hud");
+
+  function show(next, dir) {
+    if (next < 0) next = 0;
+    if (next > total - 1) next = total - 1;
+    slides.forEach(function (s) { s.classList.remove("live", "enter-r", "enter-l"); });
+    var s = slides[next];
+    s.classList.add("live");
+    if (!reduce && dir) s.classList.add(dir > 0 ? "enter-r" : "enter-l");
+    i = next;
+    counter.textContent = (i + 1) + " / " + total;
+    progress.style.width = ((i + 1) / total * 100) + "%";
+    hud.classList.toggle("on-dark", s.classList.contains("dark") || s.classList.contains("violet"));
+    var key = s.getAttribute("data-notes");
+    var n = NOTES[key] || { intent: "", verify: "" };
+    nIntent.innerHTML = "<h4>Presenter intent</h4>" + n.intent;
+    nVerify.innerHTML = "<h4 class='verify'>Source verification</h4>" + n.verify;
+    if (next === 2) startDemo();
+  }
+  function go(d) { show(i + d, d); }
+
+  document.getElementById("next").addEventListener("click", function () { go(1); });
+  document.getElementById("prev").addEventListener("click", function () { go(-1); });
+  document.getElementById("notesBtn").addEventListener("click", function () { notes.classList.toggle("hidden"); });
+  document.getElementById("helpBtn").addEventListener("click", function () { help.classList.toggle("open"); });
+  document.getElementById("fsBtn").addEventListener("click", toggleFs);
+
+  function toggleFs() {
+    if (!document.fullscreenElement) {
+      if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target && e.target.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA") {
+      if (e.key === "Escape") e.target.blur();
+      return;
+    }
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case " ": case "PageDown":
+        e.preventDefault(); go(1); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp":
+        e.preventDefault(); go(-1); break;
+      case "Home": e.preventDefault(); show(0, -1); break;
+      case "End": e.preventDefault(); show(total - 1, 1); break;
+      case "n": case "N": notes.classList.toggle("hidden"); break;
+      case "f": case "F": toggleFs(); break;
+      case "?": help.classList.toggle("open"); break;
+      case "Escape": help.classList.remove("open"); break;
+      default:
+        if (/^[1-9]$/.test(e.key)) {
+          var t = parseInt(e.key, 10) - 1;
+          if (t < total) show(t, t > i ? 1 : -1);
+        }
+    }
+  });
+  help.addEventListener("click", function () { help.classList.remove("open"); });
+
+  var tx = 0, ty = 0;
+  document.getElementById("stagewrap").addEventListener("touchstart", function (e) {
+    tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+  }, { passive: true });
+  document.getElementById("stagewrap").addEventListener("touchend", function (e) {
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ============================================ EMBEDDED SCENE DEMO == */
+  function rect(x, y, w, h, r) {
+    r = r || 0;
+    return "M" + (x + r) + " " + y + " H" + (x + w - r) + " Q" + (x + w) + " " + y + " " + (x + w) + " " + (y + r) +
+           " V" + (y + h - r) + " Q" + (x + w) + " " + (y + h) + " " + (x + w - r) + " " + (y + h) +
+           " H" + (x + r) + " Q" + x + " " + (y + h) + " " + x + " " + (y + h - r) +
+           " V" + (y + r) + " Q" + x + " " + y + " " + (x + r) + " " + y + " Z";
+  }
+  function circ(cx, cy, r) {
+    return "M" + (cx - r) + " " + cy + " a" + r + " " + r + " 0 1 1 " + (2 * r) + " 0 a" + r + " " + r + " 0 1 1 " + (-2 * r) + " 0 Z";
+  }
+  function arw(x1, y1, x2, y2) {
+    var a = Math.atan2(y2 - y1, x2 - x1), h = 10;
+    return "M" + x1 + " " + y1 + " L" + x2 + " " + y2 +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a - .42)) + " " + (y2 - h * Math.sin(a - .42)) +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a + .42)) + " " + (y2 - h * Math.sin(a + .42));
+  }
+
+  var SCENES = [
+    { heading: "You type an address",
+      narration: [{ t: "You type a name into the " }, { t: "browser", w: 1 },
+        { t: " and hit enter. The network routes to a " }, { t: "number", w: 1 }, { t: ", not a name." }],
+      els: [
+        { d: rect(50, 88, 200, 112, 4), fill: 1, label: { x: 150, y: 138, t: "example.com", size: 18 }, sub: { x: 150, y: 164, t: "BROWSER" } },
+        { d: arw(264, 144, 386, 144), cue: 1, label: { x: 326, y: 128, t: "?", size: 19, cue: 1 } }
+      ] },
+    { heading: "The resolver asks around",
+      narration: [{ t: "Your " }, { t: "resolver", w: 1 }, { t: " walks a chain: root, then dot-com " },
+        { t: "servers", w: 1 }, { t: ", then the one holding the record." }],
+      els: [
+        { d: rect(34, 118, 140, 78, 4), fill: 1, label: { x: 104, y: 162, t: "RESOLVER", size: 13 } },
+        { d: circ(304, 68, 37), fill: 1, label: { x: 304, y: 74, t: "ROOT", size: 12 } },
+        { d: circ(304, 218, 37), fill: 1, label: { x: 304, y: 224, t: ".COM", size: 12 } },
+        { d: arw(180, 146, 260, 90), cue: 1 },
+        { d: arw(180, 164, 260, 204), cue: 1 },
+        { d: rect(430, 118, 150, 78, 4), fill: 1, label: { x: 505, y: 152, t: "NAME", size: 12 }, sub: { x: 505, y: 172, t: "SERVER" } }
+      ] },
+    { heading: "The answer comes back",
+      narration: [{ t: "The name server returns an " }, { t: "address", w: 1 },
+        { t: ", the resolver caches it, and the browser can finally " }, { t: "connect", w: 1 }, { t: "." }],
+      els: [
+        { d: rect(184, 96, 240, 72, 4), fill: 1, label: { x: 304, y: 141, t: "93.184.216.34", size: 20 } },
+        { d: arw(410, 200, 198, 200), cue: 1 },
+        { d: rect(48, 172, 124, 56, 4), fill: 1, label: { x: 110, y: 206, t: "BROWSER", size: 12 } },
+        { d: "M452 192 l15 17 l32 -40", cue: 1 }
+      ] },
+    { heading: "Your turn",
+      narration: [{ t: "So &mdash; where does the browser look " }, { t: "first", w: 1 },
+        { t: "? Its own cache. Every video ends with a " }, { t: "question", w: 1 }, { t: ", a pause, then one line of recap." }],
+      els: [
+        { d: rect(64, 64, 480, 86, 4), fill: 1, label: { x: 304, y: 115, t: "Where does it look first?", size: 20 } },
+        { d: circ(304, 192, 19), cue: 1, label: { x: 304, y: 198, t: "II", size: 13, cue: 1 } },
+        { d: rect(112, 234, 384, 46, 4), label: { x: 304, y: 263, t: "A name becomes a number.", size: 14 } }
+      ] }
+  ];
+  var S2V2 = {
+    heading: "The resolver walks the chain",
+    narration: [{ t: "Your " }, { t: "resolver", w: 1 }, { t: " asks up the chain until someone " }, { t: "knows", w: 1 }, { t: "." }],
+    els: SCENES[1].els
+  };
+
+  var NS = "http://www.w3.org/2000/svg";
+  var dstage = document.getElementById("dstage");
+  var dlist = document.getElementById("dlist");
+  var dnarr = document.getElementById("dnarr");
+  var dstatus = document.getElementById("dstatus");
+  var dver = document.getElementById("dver");
+  var dhead = document.getElementById("dhead");
+  var dedit = document.getElementById("dedit");
+  var drevert = document.getElementById("drevert");
+  var dinstr = document.getElementById("dinstr");
+
+  var cur = 0, edited = false, timers = [], graph = SCENES.slice(), started = false;
+
+  function ce(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) { if (Object.prototype.hasOwnProperty.call(attrs, k)) n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function narr(parts, upto) {
+    var html = "", seen = 0;
+    parts.forEach(function (p) {
+      if (p.w) { seen++; html += seen <= upto ? "<b>" + p.t + "</b>" : p.t; } else { html += p.t; }
+    });
+    dnarr.innerHTML = html;
+  }
+  function buildList() {
+    dlist.innerHTML = "";
+    graph.forEach(function (sc, k) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "scenebtn";
+      b.setAttribute("aria-current", k === cur ? "true" : "false");
+      b.innerHTML = '<span class="n">scene ' + (k + 1) + (edited && k === 1 ? " · v2" : "") + "</span>" + sc.heading;
+      b.addEventListener("click", function () { playScene(k); });
+      dlist.appendChild(b);
+    });
+  }
+  function playScene(k) {
+    timers.forEach(clearTimeout); timers = [];
+    cur = k;
+    var sc = graph[k];
+    dstage.innerHTML = "";
+    dhead.textContent = "scene " + (k + 1) + " of " + graph.length;
+    buildList();
+    narr(sc.narration, 0);
+
+    var h = ce("text", { x: 28, y: 36, "font-family": "Shantell Sans, Comic Sans MS, sans-serif",
+      "font-size": 21, "font-weight": 700, fill: "#15141B", opacity: 0 });
+    h.style.fontVariationSettings = '"BNCE" 22, "INFM" 34';
+    h.textContent = sc.heading;
+    dstage.appendChild(h);
+    later(function () { h.style.transition = "opacity .3s"; h.setAttribute("opacity", 1); }, 50);
+
+    var words = 0;
+    sc.els.forEach(function (e, idx) {
+      var delay = 300 + idx * 560;
+      var fill = null;
+      if (e.fill) { fill = ce("path", { d: e.d, fill: "#E9E4FD", stroke: "none", "fill-opacity": 0 }); dstage.appendChild(fill); }
+      var p = ce("path", { d: e.d, fill: "none", stroke: e.cue ? "#2E9E6B" : "#15141B",
+        "stroke-width": 2.3, "stroke-linecap": "round", "stroke-linejoin": "round" });
+      dstage.appendChild(p);
+      var len = 600;
+      try { len = p.getTotalLength() || 600; } catch (err) { len = 600; }
+      p.style.strokeDasharray = len;
+      p.style.strokeDashoffset = reduce ? 0 : len;
+      later(function () {
+        p.style.transition = "stroke-dashoffset .4s cubic-bezier(.4,.05,.2,1)";
+        p.style.strokeDashoffset = 0;
+        if (fill) later(function () { fill.style.transition = "fill-opacity .3s"; fill.setAttribute("fill-opacity", 1); }, 280);
+      }, delay);
+
+      function txt(spec, weight, size) {
+        var t = ce("text", { x: spec.x, y: spec.y, "text-anchor": "middle",
+          "font-family": /[0-9]|\./.test(spec.t) ? "IBM Plex Mono, monospace" : "Shantell Sans, Comic Sans MS, sans-serif",
+          "font-size": size || spec.size || 14, "font-weight": weight,
+          "letter-spacing": (spec.size && spec.size < 16) ? "0.09em" : "-0.01em",
+          fill: spec.cue ? "#2E9E6B" : "#15141B", opacity: 0 });
+        t.style.fontVariationSettings = '"BNCE" 10, "INFM" 18';
+        t.textContent = spec.t;
+        dstage.appendChild(t);
+        later(function () { t.style.transition = "opacity .28s"; t.setAttribute("opacity", 1); }, delay + 240);
+      }
+      if (e.label) txt(e.label, 600);
+      if (e.sub) txt(e.sub, 500, 11);
+      later(function () { words++; narr(sc.narration, words); }, delay + 110);
+    });
+    dstatus.innerHTML = "playing scene " + (k + 1) + " · outline strokes on, then the fill washes in";
+  }
+  function startDemo() {
+    if (started) return;
+    started = true;
+    buildList();
+    playScene(0);
+  }
+  dedit.addEventListener("click", function () {
+    if (edited) return;
+    edited = true;
+    graph = SCENES.slice();
+    graph[1] = S2V2;
+    dver.textContent = "version 2";
+    drevert.disabled = false;
+    playScene(1);
+    dstatus.innerHTML = "<b>scene 2 re-rendered</b> · scenes 1, 3 and 4 untouched · appended as version 2";
+  });
+  drevert.addEventListener("click", function () {
+    if (!edited) return;
+    edited = false;
+    graph = SCENES.slice();
+    dver.textContent = "version 1";
+    drevert.disabled = true;
+    playScene(1);
+    dstatus.innerHTML = "<b>reverted</b> · head points back at version 1";
+  });
+  dinstr.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); dedit.click(); } });
+
+  buildList();
+  show(0, 0);
+})();
+</script>
+</body>
+</html>
