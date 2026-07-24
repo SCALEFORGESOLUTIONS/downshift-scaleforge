@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JamWise — The song teaches it. The games make it stick.</title>
+<meta name="description" content="250+ standards-aligned jams for K-8, plus ten ways to practice — five of them played inside the music itself. Free for your classroom. Join the waitlist.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="canonical" href="https://jamwise.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JamWise">
+<meta property="og:title" content="JamWise — The song teaches it. The games make it stick.">
+<meta property="og:description" content="250+ standards-aligned jams for K-8, plus ten ways to practice. Free for your classroom.">
+<meta property="og:url" content="https://jamwise.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@jamwiseapp">
+
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  JAMWISE — LANDING PAGE
+  Static. No build step. No dependencies beyond Google Fonts.
+  Drop into any repo and serve; GitHub Pages / Netlify / Vercel ready.
+
+  ── BEFORE YOU PUBLISH ──────────────────────────────────────────────
+  1. WAITLIST ENDPOINT. Search for "FORM_ENDPOINT" below. The form is
+     wired to a no-op that shows the success state. Replace the action
+     with your Formspree / Buttondown / ConvertKit / Resend URL.
+     Resend is already your transactional provider — easiest path.
+
+  2. FOUR NUMBERS THE LIVE SITE ANSWERS TWO WAYS. Resolved here as:
+       • Game modes ....... 10  (homepage is the newest copy)
+       • Premium price .... $7.99  (pricing page + every meta tag)
+       • Google Classroom . Premium  (pricing table is more specific)
+       • Subject label .... "Social Studies", not "History" (C3-correct)
+     If any of these is wrong, they appear in ONE place each. Search
+     for the value and change it.
+
+  3. NOT USED, DELIBERATELY. Testimonials (pre-launch product, FTC
+     exposure), the 74% / 0 / 3hrs statistics (uncited, and the "0
+     options" claim is false), "Built by teachers, for teachers"
+     (unsupportable), and "Remix styles" (undescribed anywhere).
+     Do not add them back.
+
+  4. THE LYRIC DEMO uses sample lyrics written for this page. Swap in
+     four real lines from the Water Cycle jam before launch —
+     see LYRICS array near the bottom.
+  ═══════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────── */
+:root{
+  --ink:#17102B;
+  --ink-2:#241A3F;
+  --violet:#7C3AED;
+  --violet-lo:#9C6BF5;
+  --violet-deep:#4C1D95;
+  --paper:#FBFAFC;
+  --chalk:#EDE7FE;
+  --signal:#FFC53D;
+  --mute:#6B6382;
+  --line:rgba(23,16,43,.12);
+  --line-dk:rgba(255,255,255,.14);
+
+  --display:'Fredoka',system-ui,sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+
+  --pad:clamp(20px,5vw,72px);
+  --maxw:1240px;
+  --r:14px;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.08;letter-spacing:-.012em;font-weight:600}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--violet);
+}
+.skip{position:absolute;left:-9999px;top:0;background:var(--violet);color:#fff;padding:12px 18px;z-index:200;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+
+/* ── BUTTONS ────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:16px;
+  padding:15px 26px;border-radius:999px;text-decoration:none;
+  transition:transform .16s cubic-bezier(.2,.9,.3,1),box-shadow .16s,background .16s;
+  white-space:nowrap;
+}
+.btn--go{background:var(--violet);color:#fff;box-shadow:0 6px 0 0 var(--violet-deep)}
+.btn--go:hover{transform:translateY(-2px);box-shadow:0 8px 0 0 var(--violet-deep)}
+.btn--go:active{transform:translateY(3px);box-shadow:0 2px 0 0 var(--violet-deep)}
+.btn--ghost{border:1.5px solid var(--line);color:var(--ink)}
+.btn--ghost:hover{background:var(--chalk);border-color:transparent}
+.btn--lite{background:var(--signal);color:var(--ink);box-shadow:0 6px 0 0 #C99512}
+.btn--lite:hover{transform:translateY(-2px);box-shadow:0 8px 0 0 #C99512}
+.btn--lite:active{transform:translateY(3px);box-shadow:0 2px 0 0 #C99512}
+.btn--sm{padding:11px 20px;font-size:15px}
+
+/* ── NAV ────────────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(251,250,252,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s;
+}
+.nav.stuck{border-bottom-color:var(--line);box-shadow:0 6px 24px -18px rgba(23,16,43,.5)}
+.nav__in{display:flex;align-items:center;gap:28px;height:70px;max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.mark{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.015em;text-decoration:none;display:flex;align-items:center;gap:7px}
+.mark span{color:var(--violet)}
+.nav__links{display:flex;gap:26px;margin-left:auto}
+.nav__links a{font-size:15px;font-weight:500;text-decoration:none;color:var(--mute);transition:color .15s}
+.nav__links a:hover{color:var(--ink)}
+@media(max-width:860px){.nav__links{display:none}.nav__in{gap:14px}.nav .btn{margin-left:auto}}
+
+/* ── HERO ───────────────────────────────────────────────────────── */
+.hero{padding:clamp(44px,7vw,88px) 0 clamp(40px,6vw,72px)}
+.hero__grid{display:grid;grid-template-columns:1.03fr .97fr;gap:clamp(32px,5vw,68px);align-items:center}
+.hero h1{font-size:clamp(38px,5.7vw,72px);margin:16px 0 0}
+.hero h1 em{font-style:normal;color:var(--violet);position:relative;white-space:nowrap}
+.hero h1 em::after{
+  content:"";position:absolute;left:-1%;right:-1%;bottom:.08em;height:.16em;
+  background:var(--signal);z-index:-1;border-radius:2px;
+  transform:scaleX(0);transform-origin:left;animation:swipe .7s .5s cubic-bezier(.2,.8,.3,1) forwards;
+}
+@keyframes swipe{to{transform:scaleX(1)}}
+.hero__sub{font-size:clamp(17px,1.5vw,20px);color:var(--mute);max-width:31em;margin-top:20px}
+.hero__sub b{color:var(--ink);font-weight:600}
+
+.signup{display:flex;gap:10px;margin-top:28px;max-width:470px;flex-wrap:wrap}
+.signup input{
+  flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:15px 18px;
+  border:1.5px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);
+}
+.signup input::placeholder{color:#9992AB}
+.signup input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(124,58,237,.14)}
+.signup__note{font-size:14px;color:var(--mute);margin-top:12px}
+.signup__note strong{color:var(--ink);font-weight:600}
+.thanks{
+  display:none;margin-top:26px;padding:18px 22px;border-radius:var(--r);
+  background:var(--chalk);border:1.5px solid var(--violet);max-width:470px;
+}
+.thanks strong{display:block;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.004em}
+.thanks p{font-size:15px;color:var(--mute);margin-top:4px}
+form.sent .signup,form.sent .signup__note{display:none}
+form.sent .thanks{display:block}
+
+.hero__proof{
+  display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:34px;padding-top:22px;
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;
+  letter-spacing:.05em;color:var(--mute);text-transform:uppercase;
+}
+.hero__proof span{display:flex;align-items:center;gap:8px}
+.hero__proof span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--violet)}
+@media(max-width:900px){.hero__grid{grid-template-columns:1fr;gap:40px}}
+
+/* ── SIGNATURE: LYRIC LOCKDOWN DEMO ─────────────────────────────── */
+.demo{
+  background:linear-gradient(158deg,var(--ink) 0%,#2A1A52 58%,var(--violet-deep) 100%);
+  border-radius:22px;padding:clamp(20px,2.6vw,30px);color:#fff;
+  box-shadow:0 30px 70px -34px rgba(76,29,149,.85);position:relative;overflow:hidden;
+}
+.demo::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:22px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+}
+.demo__top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.demo__tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--signal);display:flex;align-items:center;gap:8px;font-weight:700;
+}
+.demo__tag i{width:6px;height:6px;border-radius:50%;background:var(--signal);animation:blip 1.6s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+.demo__meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.5);text-align:right;line-height:1.5}
+
+/* waveform */
+.wave{display:flex;align-items:flex-end;gap:2.5px;height:52px;margin-bottom:22px}
+.wave b{flex:1;background:linear-gradient(180deg,var(--violet-lo),rgba(156,107,245,.35));border-radius:2px;height:22%;transform-origin:bottom;animation:bounce 1s ease-in-out infinite}
+.wave.stall b{animation-play-state:paused;background:linear-gradient(180deg,#FF6B6B,rgba(255,107,107,.3))}
+.wave.stall{animation:shake .34s}
+.wave.hit b{background:linear-gradient(180deg,var(--signal),rgba(255,197,61,.35))}
+@keyframes bounce{0%,100%{height:16%}50%{height:100%}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}}
+
+.lyric{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.5vw,29px);line-height:1.38;letter-spacing:-.004em;min-height:2.7em}
+.blank{
+  display:inline-block;min-width:5.2em;text-align:center;padding:0 .32em;
+  border-bottom:3px solid var(--signal);color:var(--signal);
+}
+.blank.filled{border-bottom-color:transparent;color:#fff;background:rgba(255,197,61,.2);border-radius:6px}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chip{
+  font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;
+  padding:10px 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,.26);
+  color:#fff;transition:all .14s;
+}
+.chip:hover:not(:disabled){background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
+.chip:disabled{opacity:.32;cursor:default}
+.chip.right{background:var(--signal);border-color:var(--signal);color:var(--ink);font-weight:700;opacity:1}
+.chip.wrong{background:rgba(255,107,107,.22);border-color:#FF6B6B;color:#FFC9C9;opacity:1}
+
+.demo__foot{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin-top:22px;padding-top:16px;border-top:1px solid var(--line-dk);
+  font-size:13.5px;color:rgba(255,255,255,.62);
+}
+.demo__foot button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;
+}
+.demo__foot button:hover{color:var(--signal);border-color:var(--signal)}
+
+/* ── SECTIONS ───────────────────────────────────────────────────── */
+.sec{padding:clamp(64px,8.5vw,120px) 0}
+.sec--chalk{background:var(--chalk)}
+.sec--ink{background:var(--ink);color:#fff}
+.sec--ink .eyebrow{color:var(--signal)}
+.sec__head{max-width:23ch}
+.sec h2{font-size:clamp(29px,4vw,50px);margin:14px 0 0}
+.sec__lede{color:var(--mute);font-size:clamp(16px,1.4vw,19px);margin-top:18px;max-width:46ch}
+.sec--ink .sec__lede{color:rgba(255,255,255,.66)}
+
+/* problem */
+.problem{text-align:center}
+.problem .sec__head{max-width:19ch;margin:0 auto}
+.problem .sec__lede{margin:22px auto 0;max-width:53ch}
+
+/* steps — numbered because this genuinely is a sequence */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,32px);margin-top:clamp(38px,5vw,58px)}
+.step{border-top:2px solid var(--ink);padding-top:20px}
+.step__n{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--violet)}
+.step h3{font-size:clamp(21px,2.1vw,27px);margin:12px 0 10px}
+.step p{color:var(--mute);font-size:15.5px}
+@media(max-width:800px){.steps{grid-template-columns:1fr;gap:26px}}
+
+/* games */
+.games{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(38px,5vw,56px)}
+.game{
+  border:1px solid var(--line-dk);border-radius:var(--r);padding:clamp(22px,2.6vw,32px);
+  background:rgba(255,255,255,.035);transition:background .2s,border-color .2s,transform .2s;
+}
+.game:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+.game--big{grid-column:span 1}
+.game__cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--signal);font-weight:700}
+.game h3{font-size:clamp(23px,2.3vw,31px);margin:12px 0 12px}
+.game p{color:rgba(255,255,255,.68);font-size:15.5px}
+.games--small{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.games--small .game{padding:20px}
+.games--small h3{font-size:18px;margin:9px 0 7px}
+.games--small p{font-size:13.5px;line-height:1.5}
+@media(max-width:860px){.games{grid-template-columns:1fr}.games--small{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.games--small{grid-template-columns:1fr}}
+
+/* library — reads as a track listing, because jams are songs */
+.tracks{margin-top:clamp(34px,4.5vw,50px);border-top:1.5px solid var(--ink)}
+.track{
+  display:grid;grid-template-columns:2.1fr 1.1fr .7fr 1fr auto;gap:18px;align-items:center;
+  padding:17px 4px;border-bottom:1px solid var(--line);transition:background .15s,padding-left .15s;
+}
+.track:hover{background:rgba(124,58,237,.055);padding-left:12px}
+.track__name{font-family:var(--display);font-weight:500;font-size:clamp(17px,1.7vw,21px);letter-spacing:-.004em;display:flex;align-items:center;gap:11px}
+.track__sub,.track__grade,.track__std,.track__len{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--mute)}
+.track__std{color:var(--violet);font-weight:500}
+.track__len{text-align:right}
+@media(max-width:820px){
+  .track{grid-template-columns:1fr auto;gap:6px 14px}
+  .track__name{grid-column:1/-1}
+  .track__grade,.track__len{display:none}
+}
+.tracks__foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:26px}
+.tracks__foot p{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+/* standards */
+.stds{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.std{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+  padding:9px 15px;border-radius:8px;background:#fff;border:1.5px solid var(--line);
+}
+.sec--chalk .std{background:#fff}
+
+/* diffs */
+.diffs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,44px);margin-top:clamp(38px,5vw,58px)}
+.diff h3{font-size:clamp(20px,2vw,26px);margin:0 0 12px}
+.diff p{color:var(--mute);font-size:15.5px}
+.diff__ico{font-size:26px;margin-bottom:14px;display:block;line-height:1}
+@media(max-width:800px){.diffs{grid-template-columns:1fr;gap:28px}}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px);margin-top:clamp(38px,5vw,54px);align-items:start}
+.plan{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:clamp(24px,3vw,38px)}
+.plan--hero{border-color:var(--violet);border-width:2px;box-shadow:0 22px 50px -30px rgba(124,58,237,.6);position:relative}
+.plan__flag{
+  position:absolute;top:-13px;left:clamp(24px,3vw,38px);background:var(--violet);color:#fff;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.plan h3{font-size:26px}
+.plan__for{color:var(--mute);font-size:14.5px;margin-top:5px}
+.plan__price{font-family:var(--display);font-weight:600;font-size:clamp(40px,4.6vw,56px);letter-spacing:-.018em;margin:20px 0 2px;line-height:1}
+.plan__price small{font-family:var(--body);font-size:16px;font-weight:500;color:var(--mute);letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:24px 0 28px;display:grid;gap:11px}
+.plan li{display:flex;gap:11px;font-size:15.5px;align-items:flex-start}
+.plan li::before{content:"♪";color:var(--violet);font-size:15px;line-height:1.5;flex:none}
+.plan .btn{width:100%}
+.plan__note{font-size:13.5px;color:var(--mute);margin-top:14px;text-align:center}
+@media(max-width:800px){.plans{grid-template-columns:1fr}}
+
+/* pathways */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px);margin-top:36px}
+.path{border:1.5px solid var(--line);border-radius:var(--r);padding:clamp(22px,2.6vw,32px);background:#fff}
+.path h3{font-size:22px;margin-bottom:10px}
+.path p{color:var(--mute);font-size:15px;margin-bottom:16px}
+.path a{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);text-decoration:none;border-bottom:1.5px solid var(--violet);padding-bottom:3px}
+.path a:hover{color:var(--ink);border-color:var(--ink)}
+@media(max-width:800px){.paths{grid-template-columns:1fr}}
+
+/* faq */
+.faq{margin-top:clamp(34px,4.5vw,50px);max-width:820px;border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  font-family:var(--display);font-weight:500;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.004em;
+  padding:22px 44px 22px 0;cursor:pointer;list-style:none;position:relative;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:24px;color:var(--violet);font-weight:400;transition:transform .2s;
+}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq summary:hover{color:var(--violet)}
+.faq p{color:var(--mute);font-size:16px;padding:0 44px 24px 0;max-width:66ch}
+
+/* final cta */
+.close{background:var(--violet);color:#fff;text-align:center;padding:clamp(64px,9vw,120px) 0;position:relative;overflow:hidden}
+.close::before{
+  content:"🎵 🎶 🎸 🥁 🎹 🎵 🎶 🎸 🥁 🎹 🎵 🎶 🎸 🥁 🎹 🎵 🎶 🎸 🥁 🎹";
+  position:absolute;top:26px;left:0;white-space:nowrap;font-size:34px;opacity:.16;
+  animation:drift 34s linear infinite;
+}
+@keyframes drift{to{transform:translateX(-50%)}}
+.close h2{font-size:clamp(34px,5.4vw,66px);position:relative}
+.close p{margin:20px auto 0;max-width:44ch;font-size:clamp(16px,1.5vw,19px);color:rgba(255,255,255,.8);position:relative}
+.close form{max-width:470px;margin:32px auto 0;position:relative}
+.close .signup input{border-color:transparent}
+.close .signup__note{color:rgba(255,255,255,.75)}
+.close .signup__note strong{color:#fff}
+.close .thanks{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5);margin-inline:auto;text-align:left}
+.close .thanks p{color:rgba(255,255,255,.8);margin-top:4px}
+
+/* footer */
+.foot{background:var(--ink);color:rgba(255,255,255,.62);padding:56px 0 40px;font-size:14.5px}
+.foot__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+.foot h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.42);font-weight:700;margin-bottom:14px}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.foot a{color:rgba(255,255,255,.75);text-decoration:none}
+.foot a:hover{color:var(--signal)}
+.foot .mark{color:#fff;font-size:25px}
+.foot__tag{margin-top:12px;max-width:26ch;font-size:14px}
+.foot__base{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  margin-top:44px;padding-top:24px;border-top:1px solid var(--line-dk);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.42);
+}
+@media(max-width:800px){.foot__grid{grid-template-columns:1fr 1fr;gap:30px}}
+
+/* reveal */
+.rise{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.rise.in{opacity:1;transform:none}
+
+/* ── MOTION ─────────────────────────────────────────────────────
+   Three moments only: the page-load sequence, the cascade on list
+   content, and hover physics. Nothing decorative.               */
+
+/* 1 — orchestrated hero entrance */
+@keyframes lift{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero .eyebrow,.hero h1,.hero__sub,.hero form,.hero__proof,.hero .demo{
+  opacity:0;animation:lift .72s cubic-bezier(.2,.8,.3,1) forwards;
+}
+.hero .eyebrow{animation-delay:.06s}
+.hero h1{animation-delay:.15s}
+.hero .demo{animation-delay:.28s;animation-duration:.9s}
+.hero__sub{animation-delay:.30s}
+.hero form{animation-delay:.40s}
+.hero__proof{animation-delay:.50s}
+
+/* 2 — cascade: children arrive in sequence, not all at once */
+.stagger > *{
+  opacity:0;transform:translateY(16px);
+  transition:opacity .58s cubic-bezier(.2,.8,.3,1),transform .58s cubic-bezier(.2,.8,.3,1);
+}
+.stagger.in > *{opacity:1;transform:none}
+.stagger.in > *:nth-child(1){transition-delay:.02s}
+.stagger.in > *:nth-child(2){transition-delay:.09s}
+.stagger.in > *:nth-child(3){transition-delay:.16s}
+.stagger.in > *:nth-child(4){transition-delay:.23s}
+.stagger.in > *:nth-child(5){transition-delay:.30s}
+.stagger.in > *:nth-child(6){transition-delay:.37s}
+.stagger.in > *:nth-child(7){transition-delay:.44s}
+.stagger.in > *:nth-child(8){transition-delay:.51s}
+
+/* 3 — hover physics */
+.step,.diff{transition:transform .22s cubic-bezier(.2,.8,.3,1)}
+.step:hover,.diff:hover{transform:translateY(-4px)}
+.plan{transition:transform .24s cubic-bezier(.2,.8,.3,1),box-shadow .24s}
+.plan:hover{transform:translateY(-5px)}
+.plan--hero:hover{box-shadow:0 30px 60px -28px rgba(124,58,237,.72)}
+.path{transition:transform .22s cubic-bezier(.2,.8,.3,1),border-color .22s}
+.path:hover{transform:translateY(-4px);border-color:var(--violet)}
+.std{transition:transform .18s,background .18s,border-color .18s}
+.std:hover{transform:translateY(-3px);background:var(--violet);border-color:var(--violet);color:#fff}
+.mark{transition:transform .2s cubic-bezier(.2,.8,.3,1)}
+.mark:hover{transform:rotate(-1.6deg) scale(1.02)}
+
+/* the track list plays a small equalizer on hover — injected by JS */
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:15px;width:15px;flex:none;opacity:0;transition:opacity .2s}
+.track:hover .eq{opacity:1}
+.eq i{width:3px;background:var(--violet);border-radius:1.5px;height:28%;animation:eqb .62s ease-in-out infinite}
+@keyframes eqb{0%,100%{height:24%}50%{height:100%}}
+
+/* FAQ answers ease open instead of snapping */
+.faq details[open] p{animation:lift .36s cubic-bezier(.2,.8,.3,1)}
+
+/* correct answer pulses once in the demo */
+@keyframes pop{0%{transform:scale(1)}42%{transform:scale(1.055)}100%{transform:scale(1)}}
+.chip.right{animation:pop .34s cubic-bezier(.2,.9,.3,1)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rise{opacity:1;transform:none}
+  .stagger > *{opacity:1;transform:none}
+  .hero .eyebrow,.hero h1,.hero__sub,.hero form,.hero__proof,.hero .demo{opacity:1;animation:none}
+  .hero h1 em::after{transform:scaleX(1)}
+  .step:hover,.diff:hover,.plan:hover,.path:hover,.std:hover,.mark:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ── NAV ─────────────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a class="mark" href="#top">JamWise<span>.</span></a>
+    <div class="nav__links">
+      <a href="#how">How it works</a>
+      <a href="#games">Games</a>
+      <a href="#library">Library</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a class="btn btn--go btn--sm" href="#join">Join the waitlist</a>
+  </div>
+</nav>
+
+<main id="main">
+<div id="top"></div>
+
+<!-- ── HERO ────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="eyebrow">For K&#8288;–&#8288;8 teachers</p>
+      <h1>The song teaches it.<br>The games make it <em>stick</em>.</h1>
+      <p class="hero__sub">250+ standards-aligned jams for K&#8288;–&#8288;8 — plus <b>ten ways to practice</b>, five of them played inside the music itself. Free for your classroom.</p>
+
+      <!-- FORM_ENDPOINT — replace action with your provider -->
+      <form class="js-join" action="#" method="post" novalidate>
+        <div class="signup">
+          <label class="visually-hidden" for="e1" style="position:absolute;left:-9999px">Your email address</label>
+          <input id="e1" name="email" type="email" required placeholder="you@yourschool.edu" autocomplete="email">
+          <button class="btn btn--go" type="submit">Join the waitlist</button>
+        </div>
+        <p class="signup__note"><strong>Free forever for classroom use.</strong> No credit card. We'll email when it's your turn.</p>
+        <div class="thanks" role="status">
+          <strong>You're on the list. 🎵</strong>
+          <p>We're opening access in batches — watch your inbox.</p>
+        </div>
+      </form>
+
+      <div class="hero__proof">
+        <span>250+ jams</span>
+        <span>5 subjects</span>
+        <span>Grades K–8</span>
+        <span>CCSS · NGSS · C3 · CASEL</span>
+      </div>
+    </div>
+
+    <!-- SIGNATURE ELEMENT -->
+    <div class="demo" id="demo">
+      <div class="demo__top">
+        <p class="demo__tag"><i></i> Lyric Lockdown · live</p>
+        <p class="demo__meta">THE WATER CYCLE<br>SCIENCE · GRADE 3</p>
+      </div>
+      <div class="wave" id="wave" aria-hidden="true"></div>
+      <p class="lyric" id="lyric"></p>
+      <div class="chips" id="chips" role="group" aria-label="Choose the missing word"></div>
+      <div class="demo__foot">
+        <span id="hint">Miss a word and the music skips. Try it.</span>
+        <button type="button" id="again">Reset ↺</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ─────────────────────────────────────────────────── -->
+<section class="sec sec--chalk problem">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">The gap</p>
+      <h2>The lesson landed. The concept didn't.</h2>
+    </div>
+    <p class="sec__lede">The room was with you. They laughed, they answered, they were engaged. Then Friday's quiz comes back and half of them have lost it.</p>
+    <p class="sec__lede">Engagement isn't the problem. Watching something is not the same as practicing it — and by the time a quiz tells you what's missing, the unit has moved on.</p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ────────────────────────────────────────────── -->
+<section class="sec" id="how">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">How it works</p>
+      <h2>Find it. Play it. See what stuck.</h2>
+    </div>
+    <div class="steps stagger">
+      <div class="step">
+        <p class="step__n">01 / FIND</p>
+        <h3>Search by topic or standard</h3>
+        <p>250+ jams across five subjects, K–8, tagged to the frameworks you already plan against.</p>
+      </div>
+      <div class="step">
+        <p class="step__n">02 / PLAY</p>
+        <h3>Put it on the projector</h3>
+        <p>Full-screen lyrics, sixty seconds. Works as a warm-up, a brain break, or a review.</p>
+      </div>
+      <div class="step">
+        <p class="step__n">03 / CHECK</p>
+        <h3>Assign games, watch scores</h3>
+        <p>Results land per student and per standard — while there's still time to reteach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GAMES ───────────────────────────────────────────────────── -->
+<section class="sec sec--ink" id="games">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">The difference</p>
+      <h2>Most educational music stops when the song ends.</h2>
+    </div>
+    <p class="sec__lede">Ours is where the practice starts. Ten game modes turn one jam into ten different reps — and five of them use the jam's actual audio as the game.</p>
+
+    <div class="games stagger">
+      <div class="game game--big">
+        <p class="game__cat">Music</p>
+        <h3>Lyric Lockdown</h3>
+        <p>Real-time karaoke fill-in-the-blank. Miss a word and the music skips. Students aren't pulling vocabulary off a worksheet — they're recalling it against a beat that won't wait.</p>
+      </div>
+      <div class="game game--big">
+        <p class="game__cat">Rhythm</p>
+        <h3>Rhythm Recall</h3>
+        <p>Guitar Hero meets vocab. Tap the rhythm of the lyric line. The rhythm becomes the retrieval cue — which is exactly why the phrase comes back on the test.</p>
+      </div>
+    </div>
+
+    <div class="games--small stagger">
+      <div class="game">
+        <p class="game__cat">Assessment</p>
+        <h3>Quiz Show</h3>
+        <p>Jeopardy-style board, five question types, buzzer scoring.</p>
+      </div>
+      <div class="game">
+        <p class="game__cat">Speed</p>
+        <h3>Streak Sprint</h3>
+        <p>Speed quiz. Miss one and the streak resets.</p>
+      </div>
+      <div class="game">
+        <p class="game__cat">Strategy</p>
+        <h3>Gold Rush</h3>
+        <p>Treasure-chest strategy with AI opponents and steal mechanics.</p>
+      </div>
+      <div class="game">
+        <p class="game__cat">Speed &amp; skill</p>
+        <h3>Crossword Craze</h3>
+        <p>Crossword with vocabulary definitions as clues.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:34px"><a class="btn btn--lite" href="#join">Join the waitlist</a></p>
+  </div>
+</section>
+
+<!-- ── LIBRARY ─────────────────────────────────────────────────── -->
+<section class="sec" id="library">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">The library</p>
+      <h2>Tomorrow's lesson is probably already in here.</h2>
+    </div>
+    <p class="sec__lede">250+ jams across five subjects, Kindergarten through Grade 8. Search by topic when you know what you're teaching. Search by standard when you need to show coverage.</p>
+
+    <div class="tracks stagger">
+      <div class="track">
+        <p class="track__name">🎵 Photosynthesis</p>
+        <p class="track__sub">Science</p><p class="track__grade">Grade 4</p><p class="track__std">NGSS</p><p class="track__len">0:58</p>
+      </div>
+      <div class="track">
+        <p class="track__name">🎶 Fractions</p>
+        <p class="track__sub">Math</p><p class="track__grade">Grade 3</p><p class="track__std">CCSS</p><p class="track__len">1:04</p>
+      </div>
+      <div class="track">
+        <p class="track__name">🥁 The Civil War</p>
+        <p class="track__sub">Social Studies</p><p class="track__grade">Grade 5</p><p class="track__std">C3</p><p class="track__len">1:12</p>
+      </div>
+      <div class="track">
+        <p class="track__name">🎸 Punctuation</p>
+        <p class="track__sub">ELA</p><p class="track__grade">Grade 2</p><p class="track__std">CCSS</p><p class="track__len">0:52</p>
+      </div>
+      <div class="track">
+        <p class="track__name">🎹 The Water Cycle</p>
+        <p class="track__sub">Science</p><p class="track__grade">Grade 3</p><p class="track__std">NGSS</p><p class="track__len">1:01</p>
+      </div>
+      <div class="track">
+        <p class="track__name">🎵 Kindness</p>
+        <p class="track__sub">SEL</p><p class="track__grade">Grades K–2</p><p class="track__std">CASEL</p><p class="track__len">0:49</p>
+      </div>
+    </div>
+
+    <div class="tracks__foot">
+      <p>+ 244 more · filter by standard</p>
+      <a class="btn btn--ghost btn--sm" href="#join">Get access →</a>
+    </div>
+
+    <div style="margin-top:clamp(48px,6vw,76px)">
+      <p class="eyebrow">Standards</p>
+      <h2 style="font-size:clamp(24px,2.8vw,36px);margin-top:12px">Tagged to the frameworks you already plan against.</h2>
+      <div class="stds stagger">
+        <span class="std">CCSS</span><span class="std">NGSS</span><span class="std">C3</span><span class="std">CASEL</span>
+      </div>
+      <p class="sec__lede" style="margin-top:20px">JamWise is a supplement, not a curriculum. The tags help you find content that supports what you're already teaching.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIFFERENTIATION ─────────────────────────────────────────── -->
+<section class="sec sec--chalk">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">Why it's different</p>
+      <h2>Three things we do differently.</h2>
+    </div>
+    <div class="diffs stagger">
+      <div class="diff">
+        <span class="diff__ico">🎸</span>
+        <h3>Genre follows the subject</h3>
+        <p>A song about the water cycle shouldn't sound like a song about long division. Ten genres matched to the content — not one style stretched over the whole catalogue.</p>
+      </div>
+      <div class="diff">
+        <span class="diff__ico">🎫</span>
+        <h3>Free means free for your classroom</h3>
+        <p>Full library, projector mode, assign to classes, up to 35 students, $0. No purchase order, no IT ticket, no budget meeting.</p>
+      </div>
+      <div class="diff">
+        <span class="diff__ico">🥁</span>
+        <h3>The music is the mechanic</h3>
+        <p>Five game modes run on the jam's own audio. Students don't watch and move on — they listen, recall, and respond inside the track.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ─────────────────────────────────────────────────── -->
+<section class="sec" id="pricing">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">Pricing</p>
+      <h2>Free for your classroom. Premium when you outgrow it.</h2>
+    </div>
+    <div class="plans stagger">
+      <div class="plan plan--hero">
+        <span class="plan__flag">Start here</span>
+        <h3>Free</h3>
+        <p class="plan__for">One teacher, one classroom.</p>
+        <p class="plan__price">$0<small> /month</small></p>
+        <ul>
+          <li>Full library of 250+ jams</li>
+          <li>Projector mode</li>
+          <li>Assign to classes</li>
+          <li>3 custom jams per month</li>
+          <li>4 game modes, 3 sessions a day</li>
+          <li>Basic progress analytics</li>
+          <li>Standards alignment tags</li>
+          <li>Up to 35 students</li>
+        </ul>
+        <a class="btn btn--go" href="#join">Join the waitlist</a>
+        <p class="plan__note">No credit card. Ever, on this plan.</p>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <p class="plan__for">Multiple sections, or every mode.</p>
+        <p class="plan__price">$7.99<small> /month</small></p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>All 10 game modes, unlimited sessions</li>
+          <li>Unlimited custom jams</li>
+          <li>Unlimited students</li>
+          <li>Advanced analytics &amp; reports</li>
+          <li>Google Classroom integration</li>
+          <li>Offline downloads</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn btn--ghost" href="#join">Join the waitlist</a>
+        <p class="plan__note">Annual saves 12%. 14-day trial when we open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PATHWAYS ────────────────────────────────────────────────── -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap rise">
+    <div class="sec__head"><h2 style="font-size:clamp(24px,2.8vw,34px)">Not a teacher?</h2></div>
+    <div class="paths stagger">
+      <div class="path">
+        <h3>Parents</h3>
+        <p>Ad-free, COPPA-compliant educational music for ages 5–14. Child profiles by grade, curated playlists, progress you can see, and offline downloads for the car. No ads, no tracking, no social features, no in-app purchases.</p>
+        <a href="/for-parents">For parents →</a>
+      </div>
+      <div class="path">
+        <h3>Schools &amp; districts</h3>
+        <p>Volume pricing, centralised billing, rostering integration, and dedicated support. Tell us your size and we'll put together a quote.</p>
+        <a href="mailto:schools@jamwise.app">schools@jamwise.app →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────────────────── -->
+<section class="sec sec--chalk">
+  <div class="wrap rise">
+    <div class="sec__head">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you sign up.</h2>
+    </div>
+    <div class="faq stagger">
+      <details open>
+        <summary>Is JamWise available yet?</summary>
+        <p>Not quite. We're opening access in batches from the waitlist. Join and we'll email you when it's your turn.</p>
+      </details>
+      <details>
+        <summary>Is it really free?</summary>
+        <p>Yes. The free plan includes the full 250+ jam library, projector mode, assigning to classes, four game modes, and up to 35 students. No credit card, no trial clock.</p>
+      </details>
+      <details>
+        <summary>Which grades and subjects?</summary>
+        <p>Kindergarten through Grade 8, across five subjects — math, science, ELA, social studies, and social-emotional learning.</p>
+      </details>
+      <details>
+        <summary>How are the jams aligned to standards?</summary>
+        <p>Each jam is tagged to CCSS, NGSS, C3 or CASEL, and you can filter the library by standard. JamWise is a supplement to your instruction, not a replacement for it.</p>
+      </details>
+      <details>
+        <summary>Can I see what students understood?</summary>
+        <p>Yes. Game results come back per student and per standard, so gaps show up before the unit test does.</p>
+      </details>
+      <details>
+        <summary>Is it safe for kids?</summary>
+        <p>Students never sign up themselves — they join through your class. No ads, no tracking, no data sold, no social features. COPPA compliant.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING CTA ─────────────────────────────────────────────── -->
+<section class="close" id="join">
+  <div class="wrap">
+    <h2>Every topic has a song.</h2>
+    <p>Join the waitlist for 250+ standards-aligned jams, ten ways to practice, and progress you can actually see.</p>
+
+    <!-- FORM_ENDPOINT — replace action with your provider -->
+    <form class="js-join" action="#" method="post" novalidate>
+      <div class="signup">
+        <label for="e2" style="position:absolute;left:-9999px">Your email address</label>
+        <input id="e2" name="email" type="email" required placeholder="you@yourschool.edu" autocomplete="email">
+        <button class="btn btn--lite" type="submit">Join the waitlist</button>
+      </div>
+      <p class="signup__note"><strong>Free forever for classroom use.</strong> No credit card.</p>
+      <div class="thanks" role="status">
+        <strong>You're on the list. 🎵</strong>
+        <p>We're opening access in batches — watch your inbox.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────── -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="mark" href="#top">JamWise<span style="color:var(--signal)">.</span></a>
+        <p class="foot__tag">Standards-aligned music and practice for K–8 classrooms.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/for-teachers">For teachers</a></li>
+          <li><a href="/for-parents">For parents</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="/library">Library</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="mailto:hello@jamwise.app">Contact</a></li>
+          <li><a href="mailto:schools@jamwise.app">Schools &amp; districts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="mailto:privacy@jamwise.app">COPPA requests</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>© 2026 JamWise</span>
+      <span>EVERY TOPIC HAS A SONG</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── nav shadow ─────────────────────────────────────────────── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('stuck', window.scrollY > 8);
+  }, {passive:true});
+
+  /* ── scroll reveal + cascade ────────────────────────────────── */
+  var reveals = document.querySelectorAll('.rise, .stagger');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:0.06, rootMargin:'0px 0px -50px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ── equalizers on the track list ───────────────────────────── */
+  document.querySelectorAll('.track__name').forEach(function(name){
+    var eq = document.createElement('span');
+    eq.className = 'eq'; eq.setAttribute('aria-hidden','true');
+    for (var k = 0; k < 4; k++){
+      var bar = document.createElement('i');
+      bar.style.animationDelay = (k * 0.11).toFixed(2) + 's';
+      eq.appendChild(bar);
+    }
+    name.appendChild(eq);
+  });
+
+  /* ── waitlist forms ─────────────────────────────────────────── */
+  /* Replace the form's action= with a real endpoint and delete the
+     preventDefault below to POST for real.                        */
+  document.querySelectorAll('.js-join').forEach(function(f){
+    f.addEventListener('submit', function(ev){
+      var input = f.querySelector('input[type=email]');
+      if (!input.value || !input.checkValidity()){ input.reportValidity(); ev.preventDefault(); return; }
+      ev.preventDefault();          // ← remove once FORM_ENDPOINT is live
+      f.classList.add('sent');
+    });
+  });
+
+  /* ── SIGNATURE: Lyric Lockdown ──────────────────────────────── */
+  /* LYRICS — swap for four real lines from the Water Cycle jam.   */
+  var LYRICS = [
+    { before:'Sun hits the ocean, water starts to ', after:'',
+      answer:'EVAPORATE', options:['CONDENSE','EVAPORATE','PRECIPITATE'] },
+    { before:'Rises to the clouds and then it ', after:'',
+      answer:'CONDENSES', options:['CONDENSES','COLLECTS','EVAPORATES'] },
+    { before:'Falls back down — we call that ', after:'',
+      answer:'PRECIPITATION', options:['TRANSPIRATION','COLLECTION','PRECIPITATION'] },
+    { before:'Runs to the river, that\u2019s ', after:' — and we go again.',
+      answer:'COLLECTION', options:['COLLECTION','CONDENSATION','EVAPORATION'] }
+  ];
+
+  var wave  = document.getElementById('wave'),
+      lyric = document.getElementById('lyric'),
+      chips = document.getElementById('chips'),
+      hint  = document.getElementById('hint'),
+      again = document.getElementById('again'),
+      idx   = 0, locked = false;
+
+  /* build the bars */
+  for (var i=0;i<44;i++){
+    var b = document.createElement('b');
+    b.style.animationDelay = (i*0.055).toFixed(3)+'s';
+    b.style.animationDuration = (0.75 + (i%5)*0.09).toFixed(2)+'s';
+    wave.appendChild(b);
+  }
+
+  function render(){
+    var L = LYRICS[idx];
+    lyric.innerHTML = '';
+    lyric.append(document.createTextNode(L.before));
+    var blank = document.createElement('span');
+    blank.className = 'blank'; blank.id = 'blank'; blank.textContent = '\u00A0\u00A0\u00A0\u00A0';
+    lyric.append(blank);
+    lyric.append(document.createTextNode(L.after));
+
+    chips.innerHTML = '';
+    L.options.forEach(function(opt){
+      var c = document.createElement('button');
+      c.type='button'; c.className='chip'; c.textContent = opt;
+      c.addEventListener('click', function(){ pick(c, opt, L); });
+      chips.appendChild(c);
+    });
+    locked = false;
+  }
+
+  function pick(el, opt, L){
+    if (locked) return;
+    locked = true;
+    var blank = document.getElementById('blank');
+
+    if (opt === L.answer){
+      el.classList.add('right');
+      blank.textContent = L.answer;
+      blank.classList.add('filled');
+      wave.classList.add('hit');
+      hint.textContent = idx < LYRICS.length-1 ? 'Nice. Next line…' : 'That\u2019s the whole water cycle. Sixty seconds.';
+      chips.querySelectorAll('.chip').forEach(function(c){ if(c!==el) c.disabled = true; });
+      setTimeout(function(){
+        wave.classList.remove('hit');
+        idx++;
+        if (idx < LYRICS.length){ render(); hint.textContent = 'Miss a word and the music skips. Try it.'; }
+        else { finish(); }
+      }, 1250);
+    } else {
+      el.classList.add('wrong');
+      wave.classList.add('stall');
+      hint.textContent = 'Music skipped. That\u2019s the mechanic — try again.';
+      setTimeout(function(){
+        wave.classList.remove('stall');
+        el.classList.remove('wrong');
+        locked = false;
+        hint.textContent = 'Miss a word and the music skips. Try it.';
+      }, 900);
+    }
+  }
+
+  function finish(){
+    lyric.innerHTML = '<span style="color:var(--signal)">4 / 4 correct.</span><br>That\u2019s one jam, one game mode. There are nine more.';
+    chips.innerHTML = '<a class="btn btn--lite btn--sm" href="#join">Join the waitlist</a>';
+    hint.textContent = 'Sample lyric from the Water Cycle jam.';
+  }
+
+  again.addEventListener('click', function(){
+    idx = 0; render(); hint.textContent = 'Miss a word and the music skips. Try it.';
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
