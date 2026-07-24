@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+===============================================================================
+  SKETCHIE — LANDING PAGE
+  Brand: Sketchie (og:site_name, sketchie.ai). Operated by Downshift LLC.
+  Built: 2026-07-25. All product facts verified against the live site same day.
+  Self-contained: no build step, no framework, no dependency but Google Fonts.
+===============================================================================
+
+  1. WHERE TO WIRE THE FORM ENDPOINT
+  ---------------------------------------------------------------------------
+  The closing capture form (id="startForm") currently does NOT post anywhere.
+  On submit it sends the visitor to https://sketchie.ai/app/signup, which is
+  the real, live, self-serve signup route. That is deliberate: a fake success
+  toast for an unwired form is worse than an honest handoff.
+
+  To capture the address instead, replace the submit handler near the bottom
+  of the <script> block, marked  // >>> FORM ENDPOINT <<<  , with a fetch to
+  your endpoint, then keep the redirect as the success action. The same edit
+  point controls the button label, which must stay the same verb as the other
+  three CTAs ("Start free") — see section 4 below.
+
+  2. CONTRADICTIONS FOUND ON THE LIVE SITE, AND HOW EACH WAS RESOLVED
+  ---------------------------------------------------------------------------
+  The site disagrees with itself on several load-bearing numbers. Nothing was
+  silently picked. Each was either resolved with a stated reason, or omitted.
+  Search this file for the marker in brackets to find the affected copy.
+
+  C1  LANGUAGES. Homepage FAQ and the /vs-simi/ table say 78; /docs/ index
+      says "the 34 supported narration languages"; /vs-simi/'s own honesty
+      section says "we cover 23 on our own stack". Three live values.
+      RESOLVED BY OMISSION. No language count appears on this page. Copy says
+      "every catalog voice speaks every supported language", which all three
+      pages agree on. [LANG]
+
+  C2  VOICES. Homepage FAQ says "30 curated voices". /docs/voices/, /api/,
+      /education/ and /vs-simi/ all say six, and name them.
+      RESOLVED TO SIX (4 sources to 1; the six are named, the 30 are not).
+      To change: search [VOICE]. Do not restore 30 without a live recount.
+
+  C3  API PLAN GATING. /docs/, /docs/mcp/ and Terms §3/§8 say API access is on
+      "every paid plan". /api/, /pricing/ and /vs-simi/ say "Plus and up", and
+      the pricing page's own Solo card omits API+MCP.
+      RESOLVED BY OMISSION. The developer section says API access requires a
+      paid plan (all sources agree on that much) and links to pricing for the
+      tier. No entry tier is named here. [APIGATE]
+
+  C4  API METERING. /docs/ and the homepage FAQ say API generations meter at
+      1x, "the same rate as the app, no separate API price". /api/, /pricing/
+      and /vs-simi/ say 2x plan minutes.
+      RESOLVED BY OMISSION. No API multiplier appears on this page. The
+      general overage rule (2x your plan's own per-minute rate, opt-in, off by
+      default) is stated because every source agrees on it. [APIMETER]
+
+  C5  PLAN LINEUP. The homepage pricing block says "Four plans", shows three,
+      and refers to a "Business" tier that adds custom branding. /pricing/
+      publishes FIVE paid plans — Solo, Plus, Pro, Max, Team — plus
+      Enterprise, and custom branding starts at Pro.
+      RESOLVED TO /pricing/. The homepage block is stale. "Business" is not a
+      plan and does not appear here. [PLANS]
+
+  C6  GENERATION TIME. Homepage says "under a minute" five times; /docs/ says
+      rendering "takes a few minutes"; /vs-simi/ says "about a minute".
+      RESOLVED BY OMISSION OF ANY NUMBER. This page describes the experience
+      and never states a duration. "Under a minute" is marketing copy, not a
+      specification, and it is contradicted by the vendor's own docs. [TIME]
+
+  C8  SEATS. /pricing/ says "Seats and shared workspaces are unlimited and
+      never metered" and, on the same page, "Shared workspaces are on the way;
+      today Sketchie is single-user."
+      RESOLVED TO SINGLE-USER. The page states the product is single-user
+      today and that shared workspaces are on the roadmap. The unlimited-seats
+      claim is not used: it is currently vacuous. [SEATS]
+
+  C9  VOICE CLONING. /pricing/ and /api/ both publish billing rules for "your
+      own cloned voice", but no plan lists it and /docs/voices/ documents only
+      the six-voice catalog. RESOLVED BY OMISSION — a billing rule is not a
+      shipped feature.
+
+  C10 INPUTS. The homepage hero offers "document, audio, video, or a link…
+      MP3, MP4, or any article link". The homepage FAQ on the same page lists
+      only prompt, PDF, Word, PowerPoint, TXT, Markdown — and /docs/api/
+      documents no file-upload or URL parameter at all.
+      RESOLVED TO THE FAQ + API. Audio, video and link ingestion are not
+      claimed here. [INPUTS]
+
+  C11 KID VOICE. /education/ describes a "kid-explains-to-kids voice" and, in
+      the next paragraph, "six curated narrators, including bright, playful
+      Piper for younger learners". RESOLVED BY OMISSION.
+
+  C12 ICON COUNT. /icons/ says "10,071 shipped so far, on the way to 10,000"
+      against "a 10,049-concept taxonomy"; the GitHub repo description says
+      "10,000 … (in progress)". Internally incoherent.
+      RESOLVED BY OMISSION. The library is described without a quantity.
+
+  C13 LOCATION. Homepage says "a small team building from Lima, Peru"; Terms
+      and Privacy name Downshift LLC of Santa Monica, California.
+      RESOLVED BY STATING BOTH, in the footer. They are not incompatible.
+
+  3. DELIBERATELY LEFT OUT
+  ---------------------------------------------------------------------------
+  - The "$100 to $900" agency/animator benchmark (homepage, twice). It carries
+    no source. Uncited statistics are not repeated here, so this page makes no
+    cost-versus-agency comparison at all.
+  - The "$0.00 our marginal cost" stat card on /vs-simi/. No definition, no
+    methodology.
+  - Every form of social proof. The live site publishes no testimonials, no
+    customer logos, no user counts, no case studies, and a targeted search
+    found no press. None were invented. Under the FTC's endorsement guides an
+    invented or placeholder endorsement is a compliance problem, not a style
+    choice.
+  - Any compliance or security claim. Sketchie publishes none — no SOC 2, ISO
+    27001, GDPR, CCPA, FERPA, COPPA, HIPAA, VPAT or accessibility conformance
+    statement anywhere. Downshift LLC's separate claim that ITS CLIENT BUILDS
+    are "SOC 2, HIPAA and GDPR-ready" is about a different company's services
+    and must never be transferred to Sketchie.
+  - Any uptime, latency, SLA or support-response figure. None published, and
+    Terms §11 disclaims uninterrupted service.
+  - Any learning-outcome claim. The research Sketchie cites is about learning
+    from video in general, not about Sketchie's videos. There is no
+    Sketchie-specific study. The science section on this page is therefore
+    written strictly as a DESIGN claim: rules the generator obeys.
+  - Comparison with any competitor other than Simi, the only one Sketchie
+    names. Simi figures are stamped July 2026 on the source page and go stale
+    fast, so none are quoted here.
+  - The npm install line for @sketchie/sdk. Sketchie's own CLI docs concede
+    the package may not resolve in a registry.
+
+  4. CONVERSION PATH
+  ---------------------------------------------------------------------------
+  Four points, one verb, one destination: sticky nav → hero → mid-page (after
+  the scene-graph section, the strongest argument) → closing form. The verb is
+  "Start free" everywhere, and it is accurate: signup is live and self-serve,
+  2 videos, no card. If availability changes, change all four.
+
+  5. THE HERO WIDGET IS AN ILLUSTRATION
+  ---------------------------------------------------------------------------
+  The whiteboard in the hero is a hand-authored SVG demonstration of the
+  scene-graph editing MODEL. It is not a screenshot of the app and not live
+  Sketchie output. Its caption says so. Timing is compressed relative to the
+  published spec (which asks for a new element every 2-5 seconds). Real
+  renders live at https://sketchie.ai/examples/ — nineteen of them.
+
+  6. TYPEFACE — AND A BUG ON THE LIVE SITE
+  ---------------------------------------------------------------------------
+  The brand face is SHANTELL SANS (Shantell Martin / ArrowType, OFL 1.1, on
+  Google Fonts). A marker-drawn variable family: wght 300-800, plus BNCE
+  (bounce), INFM (informality) and SPAC (spacing). For a whiteboard-explainer
+  product it is close to inevitable, and it is the right call.
+
+  >>> The live site is faux-bolding it. <<<
+  Computed style on sketchie.ai reports:
+      Family name:     Shantell Sans Light
+      PostScript name: Shantell-Sans-Light-ExtraBold
+      Font origin:     Network resource (38 glyphs)
+  A PostScript name of the form Light-ExtraBold means the browser has been
+  handed the LIGHT instance and asked for ExtraBold, so it is synthesising the
+  weight. Shantell Sans defaults to wght 300, which is exactly how a site ends
+  up in this state: load the family without requesting a weight range, then set
+  font-weight: 800 in CSS. Faux bold smears the stroke terminals and closes the
+  counters, and on a monolinear marker face that is visible at any size above
+  about 24px. Real weights 400-800 all exist. This is worth filing.
+
+  These files load REAL weights and never request one that is not in the
+  request URL. Shantell Sans sits in its own <link> so that a malformed axis
+  tuple cannot take the other two families down with it.
+
+  Axis policy: BNCE 0, INFM 0 everywhere in the page chrome. The letterforms
+  already carry the hand-drawn quality; running the informality axis up turns
+  a plainspoken brand into a novelty, and Sketchie's own voice is anti-hype and
+  numerically exact. The axes are used in exactly ONE place — the scene
+  headings inside the whiteboard widget (BNCE 22, INFM 34), where irregular
+  marker writing is literally what is being depicted. Structure encoding
+  something true, rather than decoration.
+
+  Body copy stays Instrument Sans. The computed-style sample reported only 38
+  glyphs from the network, which is far too small a subset for body text across
+  a full page and points at heading-only usage. If it turns out Sketchie sets
+  Shantell Sans on body copy too, change --body — but test it at 17px over a
+  60ch measure first, because it is a display face.
+===============================================================================
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketchie — the first render is a draft. It ships as one.</title>
+<meta name="description" content="Sketchie turns a prompt or a document into a narrated whiteboard explainer video, and hands back an editable scene graph. Fix one scene and only that scene re-renders.">
+<meta name="theme-color" content="#6C5CE7">
+<meta property="og:site_name" content="Sketchie">
+<meta property="og:title" content="Sketchie — the first render is a draft. It ships as one.">
+<meta property="og:description" content="A narrated whiteboard explainer from a prompt or a document, returned as an editable scene graph. Fix one scene, not the whole video.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:BNCE,INFM,wght@0..40,0..40,500..700&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  /* Palette. #6C5CE7 is the one confirmed brand token (theme-color, every
+     page). The rest is derived from the product's own world — a whiteboard,
+     marker ink, a violet stroke, a green cue marker — because the compiled
+     stylesheet was not retrievable and no brand guide is published. */
+  --board:      #F6F5FA;   /* cool board white, not cream */
+  --board-deep: #EDEBF4;   /* board in shadow */
+  --ink:        #15141B;   /* marker black */
+  --ink-soft:   #56525F;   /* grey marker */
+  --violet:     #6C5CE7;   /* CONFIRMED brand token */
+  --wash:       #E9E4FD;   /* the fill layer of a two-layer icon */
+  --marker:     #2E9E6B;   /* second marker colour, used only for cues */
+
+  /* Shantell Sans is the brand face. Comic Sans MS is the honest metric
+     fallback — Shantell Martin cites it as the direct inspiration, and it is
+     the only widely installed face with comparable proportions. */
+  --display: "Shantell Sans", "Comic Sans MS", "Trebuchet MS", sans-serif;
+  --body:    "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Axis policy: disciplined everywhere, loose only on the board. */
+  --vf-plain: "BNCE" 0, "INFM" 0;
+  --vf-board: "BNCE" 22, "INFM" 34;
+
+  --s1: 6px;  --s2: 12px; --s3: 20px; --s4: 32px;
+  --s5: 52px; --s6: 84px; --s7: 132px;
+
+  --edge: 1.5px solid var(--ink);
+  --spring: cubic-bezier(.18,.85,.24,1);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--board); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.62;
+  font-weight:400; letter-spacing:0;
+  -webkit-font-smoothing:antialiased;
+}
+/* faint board sheen — a whiteboard is not textured, only unevenly lit */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:radial-gradient(120% 90% at 15% -10%, #fff 0%, transparent 60%);
+}
+.wrap{width:min(1180px,92vw); margin-inline:auto; position:relative; z-index:1}
+
+/* RETUNED FOR SHANTELL SANS. It is monolinear, wide, and carries a large
+   x-height, so against a tight grotesque it needs: no negative tracking (the
+   marker strokes collide), ~10% smaller display sizes (it reads optically
+   larger at the same px), more leading (handwriting ascenders and descenders
+   need the room), and 700 rather than 800 as the display weight — 800 exists,
+   but on a monolinear face it closes the counters at headline size. */
+h1,h2,h3{font-family:var(--display); font-weight:700; margin:0;
+  font-variation-settings:var(--vf-plain)}
+h1{font-size:clamp(2.2rem,4.9vw,3.7rem); line-height:1.09; letter-spacing:-.004em}
+h2{font-size:clamp(1.62rem,3vw,2.4rem); line-height:1.14; letter-spacing:-.002em}
+h3{font-size:1.1rem; line-height:1.36; letter-spacing:0; font-weight:600}
+p{margin:0 0 var(--s3)}
+a{color:inherit}
+.lede{font-size:clamp(1.05rem,1.5vw,1.24rem); color:var(--ink-soft); max-width:56ch}
+
+.eyebrow{
+  font-family:var(--mono); font-size:.72rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--violet);
+  margin:0 0 var(--s2)
+}
+.rule{height:1.5px; background:var(--ink); opacity:.14; border:0; margin:0}
+
+:focus-visible{outline:3px solid var(--violet); outline-offset:3px; border-radius:2px}
+
+/* ------------------------------------------------------------------- nav */
+.nav{
+  position:sticky; top:0; z-index:60; background:rgba(246,245,250,.88);
+  backdrop-filter:blur(10px); border-bottom:1.5px solid rgba(21,20,27,.12);
+}
+.nav .wrap{display:flex; align-items:center; gap:var(--s4); height:66px}
+.brand{
+  font-family:var(--display); font-weight:600; font-size:1.22rem;
+  letter-spacing:0; font-variation-settings:var(--vf-plain);
+  text-decoration:none; display:flex; align-items:center; gap:9px
+}
+.brand svg{width:22px;height:22px;flex:none}
+.navlinks{display:flex; gap:var(--s4); margin-left:auto; font-size:.95rem}
+.navlinks a{text-decoration:none; color:var(--ink-soft)}
+.navlinks a:hover{color:var(--ink)}
+
+/* ------------------------------------------------------------------- cta */
+.btn{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+  font-family:var(--body); font-weight:600; font-size:1rem;
+  background:var(--violet); color:#fff; border:var(--edge); border-color:var(--ink);
+  padding:12px 22px; border-radius:2px; cursor:pointer;
+  /* Softened from 3px/5px: with a marker typeface doing the hand-made work,
+     heavy offset shadows made three hand-made signals competing at once. */
+  box-shadow:2px 2px 0 var(--ink);
+  transition:transform .22s var(--spring), box-shadow .22s var(--spring);
+}
+.btn:hover{transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(1px,1px); box-shadow:1px 1px 0 var(--ink)}
+.btn.small{padding:8px 16px; font-size:.92rem; box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:transparent; color:var(--ink)}
+.undercta{font-size:.9rem; color:var(--ink-soft); margin:var(--s2) 0 0}
+
+/* ----------------------------------------------------------------- hero */
+.hero{padding:var(--s6) 0 var(--s5)}
+.hero .wrap{display:grid; grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr); gap:var(--s5); align-items:start}
+.hero h1 .l2{color:var(--violet)}
+.hero .lede{margin-top:var(--s3)}
+
+/* ------------------------------------------------------------ the board */
+.board{
+  background:#fff; border:2px solid var(--ink); border-radius:3px;
+  box-shadow:4px 4px 0 rgba(21,20,27,.10); overflow:hidden;
+}
+.board-top{
+  display:flex; align-items:center; gap:var(--s2); padding:10px 14px;
+  border-bottom:1.5px solid rgba(21,20,27,.14); font-family:var(--mono); font-size:.74rem;
+  color:var(--ink-soft); flex-wrap:wrap;
+}
+.chip{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.04em;
+  border:1.5px solid var(--ink); border-radius:2px; padding:2px 7px; background:var(--wash);
+}
+.board-body{display:grid; grid-template-columns:170px minmax(0,1fr)}
+.scenelist{border-right:1.5px solid rgba(21,20,27,.14); padding:10px; display:flex; flex-direction:column; gap:6px}
+.scenebtn{
+  text-align:left; font-family:var(--body); font-size:.86rem; line-height:1.3;
+  background:transparent; border:1.5px solid transparent; border-radius:2px;
+  padding:8px 9px; cursor:pointer; color:var(--ink-soft);
+  transition:background .18s var(--spring), color .18s var(--spring), border-color .18s;
+}
+.scenebtn .n{font-family:var(--mono); font-size:.7rem; color:var(--violet); display:block}
+.scenebtn:hover{background:var(--board-deep); color:var(--ink)}
+.scenebtn[aria-current="true"]{background:var(--wash); border-color:var(--ink); color:var(--ink); font-weight:600}
+.scenebtn.edited .n::after{content:" · v2"; color:var(--marker)}
+.stage{position:relative; background:#fff}
+.stage svg{display:block; width:100%; height:auto}
+.narration{
+  border-top:1.5px solid rgba(21,20,27,.14); padding:11px 14px; min-height:64px;
+  font-size:.93rem; color:var(--ink-soft); line-height:1.5;
+}
+.narration b{color:var(--ink); background:var(--wash); font-weight:600; padding:0 2px; border-radius:2px}
+.board-foot{
+  border-top:1.5px solid rgba(21,20,27,.14); padding:11px 14px;
+  display:flex; gap:10px; align-items:center; flex-wrap:wrap; background:var(--board);
+}
+.instr{
+  flex:1 1 260px; min-width:0; font-family:var(--mono); font-size:.8rem;
+  border:1.5px solid var(--ink); border-radius:2px; padding:9px 11px; background:#fff; color:var(--ink);
+}
+.status{
+  font-family:var(--mono); font-size:.74rem; color:var(--ink-soft);
+  padding:0 14px 12px; background:var(--board); min-height:20px
+}
+.status b{color:var(--marker); font-weight:600}
+.caption{font-size:.82rem; color:var(--ink-soft); margin:var(--s2) 0 0; max-width:62ch}
+.caption a{color:var(--violet)}
+
+/* --------------------------------------------------------------- layout */
+.band{padding:var(--s6) 0}
+.band.tight{padding:var(--s5) 0}
+.band.dark{background:var(--ink); color:var(--board)}
+.band.dark .lede,.band.dark .caption{color:rgba(246,245,250,.66)}
+.band.dark .eyebrow{color:#B9AEFF}
+.head{max-width:58ch}
+.head h2{margin-bottom:var(--s3)}
+
+.two{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s5); align-items:start}
+.cards{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s3); margin-top:var(--s5)}
+.card{
+  background:#fff; border:1.5px solid var(--ink); border-radius:3px; padding:var(--s3);
+  transition:transform .3s var(--spring), box-shadow .3s var(--spring);
+}
+.card:hover{transform:translateY(-5px); box-shadow:0 12px 0 -6px rgba(21,20,27,.16)}
+.card h3{margin-bottom:8px}
+.card p{margin:0; font-size:.95rem; color:var(--ink-soft)}
+
+pre{
+  font-family:var(--mono); font-size:.82rem; line-height:1.65; margin:0;
+  background:var(--ink); color:#E9E7F2; padding:var(--s3); border-radius:3px;
+  overflow-x:auto; border:1.5px solid var(--ink);
+}
+pre .k{color:#B9AEFF}
+pre .s{color:#8FD9B6}
+pre .c{color:#7D7889}
+.band.dark pre{background:#0D0C12}
+
+/* -------------------------------------------------------- spec table */
+.spec{width:100%; border-collapse:collapse; margin-top:var(--s4); font-size:.93rem}
+.spec th{
+  text-align:left; font-family:var(--mono); font-weight:500; font-size:.7rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);
+  padding:0 0 10px; border-bottom:1.5px solid rgba(21,20,27,.2)
+}
+.band.dark .spec th{color:rgba(246,245,250,.5); border-bottom-color:rgba(246,245,250,.22)}
+.spec td{padding:13px 0; border-bottom:1.5px solid rgba(21,20,27,.1); vertical-align:top}
+.band.dark .spec td{border-bottom-color:rgba(246,245,250,.12)}
+.spec td:first-child{font-weight:600; padding-right:var(--s3); width:32%}
+.spec td:last-child{width:110px; text-align:right}
+.grade{
+  font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  border:1.5px solid currentColor; border-radius:2px; padding:2px 7px; white-space:nowrap
+}
+.g-verified{color:#B9AEFF}
+.g-derived{color:#8FD9B6}
+.g-heuristic{color:rgba(246,245,250,.55)}
+.g-product{color:#F0C87A}
+
+/* ------------------------------------------------------------- lengths */
+.lengths{display:flex; flex-wrap:wrap; gap:8px; margin-top:var(--s4)}
+.len{
+  font-family:var(--mono); font-size:.82rem; border:1.5px solid var(--ink);
+  border-radius:2px; padding:6px 11px; background:#fff; text-decoration:none;
+  transition:transform .22s var(--spring), background .22s
+}
+.len:hover{transform:translateY(-3px); background:var(--wash)}
+
+/* -------------------------------------------------------------- plans */
+.plans{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s3); margin-top:var(--s5)}
+.plan{background:#fff; border:1.5px solid var(--ink); border-radius:3px; padding:var(--s3);
+  transition:transform .3s var(--spring), box-shadow .3s var(--spring)}
+.plan:hover{transform:translateY(-5px); box-shadow:0 12px 0 -6px rgba(21,20,27,.16)}
+.plan .name{font-family:var(--display); font-weight:700; font-size:1.14rem; letter-spacing:0;
+  font-variation-settings:var(--vf-plain)}
+.plan .price{font-family:var(--mono); font-size:1.5rem; margin:6px 0 2px}
+.plan .mins{font-size:.92rem; color:var(--ink-soft)}
+.plan .over{font-family:var(--mono); font-size:.76rem; color:var(--ink-soft); margin-top:10px;
+  padding-top:10px; border-top:1.5px solid rgba(21,20,27,.12)}
+.plan.wide{grid-column:span 3; display:flex; gap:var(--s3); align-items:baseline; flex-wrap:wrap}
+
+/* --------------------------------------------------------------- close */
+.close{background:var(--violet); color:#fff; padding:var(--s7) 0; border-top:2px solid var(--ink)}
+.close h2{max-width:20ch}
+.close p{color:rgba(255,255,255,.86)}
+.form{display:flex; gap:10px; flex-wrap:wrap; margin-top:var(--s4); max-width:520px}
+.form input{
+  flex:1 1 240px; min-width:0; font-family:var(--body); font-size:1rem;
+  padding:12px 14px; border:var(--edge); border-color:var(--ink); border-radius:2px; background:#fff; color:var(--ink)
+}
+.close .btn{background:var(--ink); color:#fff}
+
+footer{background:var(--ink); color:rgba(246,245,250,.7); padding:var(--s5) 0; font-size:.9rem}
+footer a{color:#B9AEFF}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:var(--s4)}
+.foot-links{display:flex; flex-direction:column; gap:8px}
+.foot-links a{text-decoration:none}
+.foot-links a:hover{text-decoration:underline}
+.honesty{margin-top:var(--s4); padding-top:var(--s3); border-top:1.5px solid rgba(246,245,250,.16);
+  font-size:.8rem; color:rgba(246,245,250,.5); max-width:78ch}
+
+/* -------------------------------------------------------------- motion */
+.rise{opacity:0; transform:translateY(16px)}
+.rise.in{opacity:1; transform:none; transition:opacity .6s var(--spring), transform .6s var(--spring)}
+[data-cascade] > *{opacity:0; transform:translateY(18px)}
+[data-cascade].in > *{opacity:1; transform:none; transition:opacity .55s var(--spring), transform .55s var(--spring)}
+.load{opacity:0; transform:translateY(14px); animation:enter .62s var(--spring) forwards}
+@keyframes enter{to{opacity:1; transform:none}}
+
+@media (max-width:940px){
+  .hero .wrap,.two,.foot-grid{grid-template-columns:1fr}
+  .cards,.plans{grid-template-columns:1fr}
+  .plan.wide{grid-column:span 1}
+  .navlinks{display:none}
+  .board-body{grid-template-columns:1fr}
+  .scenelist{flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1.5px solid rgba(21,20,27,.14)}
+  .scenebtn{flex:0 0 auto}
+  .spec td:first-child{width:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important; animation-iteration-count:1!important;
+    transition-duration:.001ms!important; scroll-behavior:auto!important}
+  .rise,[data-cascade] > *,.load{opacity:1!important; transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 18c3-9 6-13 9-13s4 4 2 7-5 3-6 5 2 3 6 1" stroke="#6C5CE7" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Sketchie
+    </a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#scenegraph">Scene graph</a>
+      <a href="#spec">The spec</a>
+      <a href="#developers">Developers</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="btn small" href="https://sketchie.ai/app/signup">Start free</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================================================================ HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow load" style="animation-delay:.05s">Prompt or document in. Scenes out.</p>
+      <h1 class="load" style="animation-delay:.14s">
+        The first render is a draft.<br><span class="l2">So it ships as one.</span>
+      </h1>
+      <!-- [TIME] No duration claim anywhere on this page: the site's own docs
+           contradict its marketing on generation time. -->
+      <p class="lede load" style="animation-delay:.24s">
+        Sketchie draws a narrated whiteboard explainer from a prompt or a
+        document, then hands you back the scene graph it was compiled from.
+        When one sentence is wrong, you fix that scene. Only that scene
+        re-renders.
+      </p>
+      <div class="load" style="animation-delay:.34s">
+        <a class="btn" href="https://sketchie.ai/app/signup">Start free</a>
+        <p class="undercta">Two videos free, up to a minute each, watermarked. No card. Full editor.</p>
+      </div>
+    </div>
+
+    <div class="load" style="animation-delay:.44s">
+      <div class="board" id="board">
+        <div class="board-top">
+          <span class="chip" id="verChip">version 1</span>
+          <span>dns-resolution · 4 scenes</span>
+          <span style="margin-left:auto" id="playhead">scene 1 of 4</span>
+        </div>
+        <div class="board-body">
+          <div class="scenelist" id="sceneList" role="tablist" aria-label="Scenes"></div>
+          <div>
+            <div class="stage">
+              <svg id="stage" viewBox="0 0 640 340" role="img" aria-labelledby="stageTitle">
+                <title id="stageTitle">A whiteboard scene drawing itself on, stroke by stroke</title>
+              </svg>
+            </div>
+            <p class="narration" id="narration"></p>
+          </div>
+        </div>
+        <div class="board-foot">
+          <label class="visually-hidden" for="instr" style="position:absolute;left:-9999px">Edit instruction</label>
+          <input class="instr" id="instr" value="Make scene 2 shorter and warmer" aria-label="Edit instruction">
+          <button class="btn small" id="editBtn" type="button">Re-render scene</button>
+          <button class="btn small ghost" id="revertBtn" type="button" disabled>Revert</button>
+        </div>
+        <p class="status" id="status">Click a scene to watch it draw.</p>
+      </div>
+      <p class="caption">
+        An illustration of the editing model, hand-drawn in SVG for this page —
+        not a screenshot, and not Sketchie output. Timing is compressed.
+        <a href="https://sketchie.ai/examples/">Nineteen real renders are on the site</a>,
+        from 0:33 to 5:56.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ========================================================= THE PROBLEM -->
+<section class="band tight">
+  <div class="wrap two">
+    <div class="rise">
+      <p class="eyebrow">The moment this is for</p>
+      <h2>Someone watches it and says the second sentence is wrong.</h2>
+    </div>
+    <div class="rise">
+      <p class="lede">
+        On a one-shot tool that sentence costs a whole new generation, and the
+        rest of the video comes back different too — new drawings, new timing,
+        new things to check. So the fix gets skipped, or the video quietly
+        goes out of date, or nobody makes the video at all.
+      </p>
+      <p class="lede">
+        Sketchie treats the video as the thing it actually is: a document that
+        was compiled. Scenes are addressable. Correcting one is a small edit
+        to one part, not a re-roll of the whole artifact.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== SCENE GRAPH -->
+<section class="band" id="scenegraph">
+  <div class="wrap">
+    <div class="head rise">
+      <p class="eyebrow">What comes back</p>
+      <h2>An MP4, and the document it was drawn from.</h2>
+      <p class="lede">
+        Every generation returns two things. The rendered video, and the scene
+        graph: an ordered list of scenes, each with a heading, its narration,
+        and elements bound to the exact narration word that reveals them.
+        That binding is why a correction can be surgical.
+      </p>
+    </div>
+
+    <div class="two" style="margin-top:var(--s5)">
+      <div class="rise">
+<pre><span class="c">// the shape, from Sketchie's open eval schema</span>
+{
+  <span class="k">"scenes"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="s">"s2"</span>,
+      <span class="k">"heading"</span>: <span class="s">"The resolver asks around"</span>,
+      <span class="k">"narration"</span>: <span class="s">"Your resolver walks the chain…"</span>,
+      <span class="k">"elements"</span>: [
+        { <span class="k">"id"</span>: <span class="s">"e1"</span>, <span class="k">"type"</span>: <span class="s">"icon"</span>,
+          <span class="k">"x"</span>: 120, <span class="k">"y"</span>: 180,
+          <span class="k">"revealWord"</span>: <span class="s">"resolver"</span> },
+        { <span class="k">"id"</span>: <span class="s">"e2"</span>, <span class="k">"type"</span>: <span class="s">"arrow"</span>,
+          <span class="k">"revealWord"</span>: <span class="s">"chain"</span> }
+      ]
+    }
+  ]
+}</pre>
+        <p class="caption">
+          The schema, <code>revealWord</code> semantics and the mechanical
+          checks are published under MIT at
+          <a href="https://github.com/Downshift/explainer-evals">Downshift/explainer-evals</a>.
+        </p>
+      </div>
+      <div data-cascade>
+        <div class="card" style="margin-bottom:var(--s3)">
+          <h3>Edit a field, or just say what is wrong</h3>
+          <p>Open the scene list, change the heading, narration, labels or icon
+             styling. When fields are not enough, describe the change in plain
+             language — in the app, or as one instruction to the API.</p>
+        </div>
+        <div class="card" style="margin-bottom:var(--s3)">
+          <h3>Every edit is a version</h3>
+          <p>A re-render appends a new version to the same explainer rather
+             than replacing it, and you can point the head back at an earlier
+             ready version. Nothing is overwritten in place.</p>
+        </div>
+        <div class="card">
+          <h3>The first edit of each video is free</h3>
+          <p>Editing never consumes one of your two free videos, and the first
+             re-render of each video costs nothing. Later ones draw a few
+             seconds of minutes rather than a whole new video.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rise" style="margin-top:var(--s5); text-align:center">
+      <a class="btn" href="https://sketchie.ai/app/signup">Start free</a>
+      <p class="undercta">Two videos, no card, scene editor included.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== SPEC -->
+<section class="band dark" id="spec">
+  <div class="wrap">
+    <div class="head rise">
+      <p class="eyebrow">Not a manifesto, a gate</p>
+      <h2>The generator obeys a spec you can read.</h2>
+      <p class="lede">
+        Sketchie publishes eleven design laws drawn from the published research
+        on learning from video, each with its effect size and a link to the
+        primary source, and turns them into numeric targets the pipeline is
+        checked against. Every claim carries its own evidence grade, including
+        the ones marked as unverified working assumptions. A sample:
+      </p>
+    </div>
+
+    <table class="spec" data-cascade-rows>
+      <thead>
+        <tr><th scope="col">Parameter</th><th scope="col">Target</th><th scope="col">Grade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Total video length</td><td>6:00 hard ceiling; 1:00–3:00 sweet spot per concept</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Reveal style</td><td>Outline draw-on 0.3–0.5s, then a staggered fill wash; arrows tip to tail</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Visible hand</td><td>None</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Post-scene gap</td><td>At least 0.7s of narration silence after the final reveal, before the cut</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Ending</td><td>Retrieval question, a pause of at least 1.5s, then a one-line recap</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Extraneous visuals</td><td>Zero elements unreferenced by narration</td><td><span class="grade g-verified">Verified</span></td></tr>
+        <tr><td>Reveal-to-word sync</td><td>Element appears within ±500ms of its trigger word</td><td><span class="grade g-derived">Derived</span></td></tr>
+        <tr><td>Elements per scene</td><td>3–7 visible at scene end, heading included</td><td><span class="grade g-heuristic">Heuristic</span></td></tr>
+        <tr><td>Length granularity</td><td>30-second increments</td><td><span class="grade g-product">Product</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="two rise" style="margin-top:var(--s6)">
+      <div>
+        <h3 style="margin-bottom:var(--s2)">Why six minutes is a ceiling and not a limit</h3>
+        <p class="lede">
+          Sketchie's spec cites Guo et al. (2014, Learning@Scale), an analysis
+          of 6.9 million edX sessions, which reports engagement near 1.0 under
+          six minutes, around 0.55 at nine to twelve, and roughly 0.2 past
+          twelve. Longer material becomes a chaptered series instead of one
+          long video.
+        </p>
+        <p class="caption">
+          That finding is about learning from video in general. It is not a
+          measurement of Sketchie's own videos, and no such measurement exists.
+          <a href="https://learningatscale.acm.org/las2014/talks/paper_philip_guo2.pdf">Read the paper</a>.
+        </p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:var(--s2)">The mechanical gate is open source</h3>
+        <p class="lede">
+          Layer A runs on the scene graph before any money is spent on voice or
+          rendering: duration ceiling, per-scene band, element count, reveal
+          words that resolve, the post-scene silence, the question-and-recap
+          ending. A graph that fails is sent back with its failures fed into
+          the prompt. That layer is MIT licensed and runnable.
+        </p>
+        <p class="caption">
+          <a href="https://github.com/Downshift/explainer-evals">Downshift/explainer-evals</a>
+          — schema, Layer-A checks and a worked passing example. Layers B and C
+          are described on the site but not published.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= PROOF -->
+<section class="band">
+  <div class="wrap">
+    <div class="head rise">
+      <p class="eyebrow">Output, not renderings of output</p>
+      <h2>Nineteen finished videos are on the site.</h2>
+      <p class="lede">
+        Concepts, document mode, team training, and the same explainer
+        generated natively in Spanish, Brazilian Portuguese and German — same
+        voice, in-language script, labels and narration. Lengths run from 0:33
+        to 5:56 against the six-minute ceiling.
+        <!-- [LANG] No language count: 78 / 34 / 23 are all live on the site. -->
+      </p>
+    </div>
+    <div class="lengths" data-cascade>
+      <a class="len" href="https://sketchie.ai/examples/">0:33 &nbsp;Español</a>
+      <a class="len" href="https://sketchie.ai/examples/">0:58 &nbsp;Compound interest</a>
+      <a class="len" href="https://sketchie.ai/examples/">1:31 &nbsp;Supply &amp; demand</a>
+      <a class="len" href="https://sketchie.ai/examples/">2:00 &nbsp;Water cycle</a>
+      <a class="len" href="https://sketchie.ai/examples/">2:55 &nbsp;Deleting a file</a>
+      <a class="len" href="https://sketchie.ai/examples/">3:00 &nbsp;DNS</a>
+      <a class="len" href="https://sketchie.ai/examples/">4:36 &nbsp;Document mode</a>
+      <a class="len" href="https://sketchie.ai/examples/">5:02 &nbsp;Meeting notes</a>
+      <a class="len" href="https://sketchie.ai/examples/">5:56 &nbsp;Neural networks</a>
+    </div>
+
+    <div class="cards" data-cascade>
+      <div class="card">
+        <h3>Feed it what you already wrote</h3>
+        <!-- [INPUTS] FAQ + API list only; hero's audio/video/link claim is
+             documented nowhere else and is not repeated. -->
+        <p>A plain prompt, or a PDF, Word file, PowerPoint, TXT or Markdown.
+           Document mode follows your source instead of writing a generic
+           script over the top of it.</p>
+      </div>
+      <div class="card">
+        <h3>Six narrators, previewable</h3>
+        <!-- [VOICE] Six, named on four separate pages. -->
+        <p>Nora, Miles, Dean, Clara, Piper and Wren. Nora narrates by default.
+           Every catalog voice speaks every supported language, so a course
+           keeps one consistent narrator. Preview each before you generate.</p>
+      </div>
+      <div class="card">
+        <h3>Three shapes, thirty-second steps</h3>
+        <p>16:9, 9:16 and 1:1. Set length in 30-second steps up to six minutes,
+           or leave it on automatic and let the material decide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== DEVELOPERS -->
+<section class="band dark" id="developers">
+  <div class="wrap two">
+    <div class="rise">
+      <p class="eyebrow">For people wiring it into something</p>
+      <h2>One POST in. Video and scene graph out.</h2>
+      <p class="lede">
+        Creation is asynchronous: the API returns 202 with a queued record, and
+        you either poll it or hold open a Server-Sent Events stream and catch
+        every status transition as it happens. When the record is ready it
+        carries the MP4 URL and the graph.
+      </p>
+      <p class="lede">
+        The edit endpoint takes a plain-language instruction and re-renders
+        only the scenes it touches, appending a version. There is a revert
+        endpoint for pointing the head back. Generation endpoints are limited
+        to 20 requests a minute; everything else shares 200.
+      </p>
+      <p class="caption">
+        <!-- [APIGATE][APIMETER] Entry tier and metering multiplier are both
+             contradicted across live pages. Neither is stated here. -->
+        API access requires a paid plan. Check
+        <a href="https://sketchie.ai/pricing/">the pricing page</a> for the
+        current tier and how API generations are metered — the site states
+        these differently in different places, so confirm before you budget.
+        There is also an MCP server, five tools, running as a local stdio
+        process for Claude Code and Claude Desktop; a hosted connector for
+        Claude web and mobile is on the roadmap, not shipped. A TypeScript SDK
+        and a CLI are documented.
+      </p>
+    </div>
+    <div class="rise">
+<pre>curl -X POST https://sketchie.ai/api/v1/explainer \
+  -H <span class="s">"Authorization: Bearer sk_..."</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d '{ <span class="k">"input"</span>: <span class="s">"Explain how DNS resolves a domain name"</span>,
+        <span class="k">"length"</span>: <span class="s">"0:30"</span> }'
+
+<span class="c">→ 202 Accepted  { "status": "queued", … }</span>
+
+curl -X POST .../v1/explainer/{id}/edit \
+  -d '{ <span class="k">"instruction"</span>: <span class="s">"Make scene 2 shorter and warmer"</span> }'
+
+<span class="c">→ 202 Accepted  new version, scene 2 only</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== PRICING -->
+<section class="band" id="pricing">
+  <div class="wrap">
+    <div class="head rise">
+      <p class="eyebrow">One meter</p>
+      <h2>Rendered minutes. That is the whole unit.</h2>
+      <p class="lede">
+        Not seats, not API calls, not credits, no minimum purchase. Minutes do
+        not roll over. Going past your plan is opt-in and off by default — with
+        it off you stop at the ceiling and get an upgrade prompt rather than a
+        charge you did not choose.
+      </p>
+    </div>
+
+    <!-- [PLANS] Five paid tiers plus Enterprise, per /pricing/. The homepage
+         "four plans / Business" block is stale and is not reproduced. -->
+    <div class="plans" data-cascade>
+      <div class="plan"><div class="name">Solo</div><div class="price">$9.99</div><div class="mins">40 minutes / month</div><div class="over">overage $0.50/min · opt-in</div></div>
+      <div class="plan"><div class="name">Plus</div><div class="price">$19.99</div><div class="mins">100 minutes / month</div><div class="over">overage $0.40/min · opt-in</div></div>
+      <div class="plan"><div class="name">Pro</div><div class="price">$49.99</div><div class="mins">300 minutes / month</div><div class="over">overage $0.33/min · custom branding from here up</div></div>
+      <div class="plan"><div class="name">Max</div><div class="price">$99.99</div><div class="mins">750 minutes / month</div><div class="over">overage $0.27/min · opt-in</div></div>
+      <div class="plan"><div class="name">Team</div><div class="price">$499.99</div><div class="mins">5,000 minutes / month</div><div class="over">overage $0.20/min · priority support</div></div>
+      <div class="plan"><div class="name">Enterprise</div><div class="price">Talk to us</div><div class="mins">Custom volume, dedicated support</div><div class="over">SSO, SCORM, LMS or an SLA are a conversation, not shipped features</div></div>
+    </div>
+
+    <div class="two rise" style="margin-top:var(--s5)">
+      <p class="caption">
+        Prices in USD, read from the live pricing page on 25 July 2026 —
+        re-check before you publish this anywhere. Annual billing takes 40% off
+        every plan with the same minutes and features; Sketchie does not
+        publish the resulting dollar amounts, so neither does this page.
+        Overage bills at twice your own plan's per-minute rate.
+      </p>
+      <p class="caption">
+        <!-- [SEATS] Do not restore the "unlimited seats" line: the same page
+             says the product is single-user today. -->
+        Sketchie is single-user today. Shared workspaces are on the roadmap,
+        and the pricing page's statement that seats are unlimited and never
+        metered describes that future state rather than the product you would
+        sign up for now. Cancel any time from billing settings; exported
+        videos stay yours. Consumed usage is not refundable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= CLOSE -->
+<section class="close">
+  <div class="wrap">
+    <div class="rise">
+      <p class="eyebrow" style="color:rgba(255,255,255,.75)">Your plan starts when you have seen it work</p>
+      <h2>Make two. Break one on purpose. Fix it.</h2>
+      <p class="lede" style="color:rgba(255,255,255,.86)">
+        The free tier is the whole product, scene editor included. Generate an
+        explainer, find the sentence you would want to change, and change it.
+        That loop is the thing worth judging.
+      </p>
+      <form class="form" id="startForm" novalidate>
+        <input type="email" id="email" name="email" placeholder="you@work.com" autocomplete="email" aria-label="Email address">
+        <button class="btn" type="submit">Start free</button>
+      </form>
+      <p class="undercta" style="color:rgba(255,255,255,.8)">
+        Two videos, up to a minute each, watermarked. No card required. You keep
+        what you generate.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="color:#fff; text-decoration:none">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 18c3-9 6-13 9-13s4 4 2 7-5 3-6 5 2 3 6 1" stroke="#B9AEFF" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          Sketchie
+        </a>
+        <p style="margin-top:var(--s2)">
+          Narrated whiteboard explainers with an editable scene graph.
+        </p>
+      </div>
+      <div class="foot-links">
+        <a href="https://sketchie.ai/examples/">Examples</a>
+        <a href="https://sketchie.ai/pricing/">Pricing</a>
+        <a href="https://sketchie.ai/docs/">Docs</a>
+        <a href="https://sketchie.ai/science/">The spec</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://sketchie.ai/vs-simi/">Compared with Simi</a>
+        <a href="https://sketchie.ai/icons/">The Sketchy Icon Library</a>
+        <a href="https://sketchie.ai/terms/">Terms</a>
+        <a href="https://sketchie.ai/privacy/">Privacy</a>
+      </div>
+    </div>
+    <p class="honesty">
+      <!-- [C13] Both locations stated; neither is picked. -->
+      Sketchie is operated by Downshift LLC, 520 Broadway #200, Santa Monica,
+      California, under California law; the homepage describes a small team
+      building from Lima, Peru, and no venture funding. You own your prompts
+      and documents and the videos and scene graphs generated for you, and
+      Sketchie states it does not use inputs or outputs to train its own
+      models. Shared videos are served publicly — anyone with the link can
+      watch. Payments run through Stripe. Sketchie publishes no compliance
+      certifications and no service-level commitment. Everything on this page
+      was read from sketchie.ai on 25 July 2026 and should be re-checked before
+      reuse.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ------------------------------------------------------------------
+     THE SCENE-GRAPH DEMONSTRATION
+     Four scenes of a DNS explainer, hand-authored. Each element carries a
+     revealWord, exactly as the published schema does, and is drawn as a
+     path so its outline can stroke on before its fill washes in.
+     ------------------------------------------------------------------ */
+  function rect(x, y, w, h, r) {
+    r = r || 0;
+    return "M" + (x + r) + " " + y + " H" + (x + w - r) + " Q" + (x + w) + " " + y + " " + (x + w) + " " + (y + r) +
+           " V" + (y + h - r) + " Q" + (x + w) + " " + (y + h) + " " + (x + w - r) + " " + (y + h) +
+           " H" + (x + r) + " Q" + x + " " + (y + h) + " " + x + " " + (y + h - r) +
+           " V" + (y + r) + " Q" + x + " " + y + " " + (x + r) + " " + y + " Z";
+  }
+  function circle(cx, cy, r) {
+    return "M" + (cx - r) + " " + cy + " a" + r + " " + r + " 0 1 1 " + (2 * r) + " 0 a" + r + " " + r + " 0 1 1 " + (-2 * r) + " 0 Z";
+  }
+  function arrow(x1, y1, x2, y2) {
+    var a = Math.atan2(y2 - y1, x2 - x1), h = 11;
+    return "M" + x1 + " " + y1 + " L" + x2 + " " + y2 +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a - 0.42)) + " " + (y2 - h * Math.sin(a - 0.42)) +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a + 0.42)) + " " + (y2 - h * Math.sin(a + 0.42));
+  }
+
+  var SCENES = [
+    {
+      heading: "You type an address",
+      narration: [
+        { t: "You type a name into the " }, { t: "browser", w: 1 },
+        { t: " and hit enter. But the network only routes to a " },
+        { t: "number", w: 1 }, { t: ", so the name has to be resolved into one." }
+      ],
+      els: [
+        { d: rect(56, 96, 210, 118, 4), fill: true, label: { x: 161, y: 148, t: "example.com", size: 19 }, sub: { x: 161, y: 174, t: "BROWSER" } },
+        { d: arrow(280, 155, 396, 155), cue: true, label: { x: 338, y: 138, t: "?", size: 20, cue: true } }
+      ]
+    },
+    {
+      heading: "The resolver asks around",
+      narration: [
+        { t: "Your " }, { t: "resolver", w: 1 }, { t: " walks a chain: the root, then the dot-com " },
+        { t: "servers", w: 1 }, { t: ", then the one that actually holds the record." }
+      ],
+      els: [
+        { d: rect(40, 128, 150, 84, 4), fill: true, label: { x: 115, y: 176, t: "RESOLVER", size: 14 } },
+        { d: circle(320, 74, 40), fill: true, label: { x: 320, y: 80, t: "ROOT", size: 13 } },
+        { d: circle(320, 232, 40), fill: true, label: { x: 320, y: 238, t: ".COM", size: 13 } },
+        { d: arrow(196, 158, 274, 96), cue: true },
+        { d: arrow(196, 176, 274, 216), cue: true },
+        { d: rect(452, 128, 150, 84, 4), fill: true, label: { x: 527, y: 168, t: "NAME", size: 13 }, sub: { x: 527, y: 188, t: "SERVER" } }
+      ]
+    },
+    {
+      heading: "The answer comes back",
+      narration: [
+        { t: "The name server returns an " }, { t: "address", w: 1 },
+        { t: ", the resolver caches it, and your browser finally has somewhere to " },
+        { t: "connect", w: 1 }, { t: "." }
+      ],
+      els: [
+        { d: rect(196, 108, 250, 76, 4), fill: true, label: { x: 321, y: 155, t: "93.184.216.34", size: 21 } },
+        { d: arrow(430, 214, 210, 214), cue: true },
+        { d: rect(56, 186, 130, 58, 4), fill: true, label: { x: 121, y: 222, t: "BROWSER", size: 13 } },
+        { d: "M470 206 l16 18 l34 -42", cue: true, nofill: true }
+      ]
+    },
+    {
+      heading: "Your turn",
+      narration: [
+        { t: "So — where does your browser look " }, { t: "first", w: 1 },
+        { t: "? …Its own cache. Every Sketchie video ends this way: a " },
+        { t: "question", w: 1 }, { t: ", a pause, then one line of recap." }
+      ],
+      els: [
+        { d: rect(70, 74, 500, 92, 4), fill: true, label: { x: 320, y: 128, t: "Where does it look first?", size: 21 } },
+        { d: circle(320, 208, 20), cue: true, label: { x: 320, y: 214, t: "II", size: 14, cue: true } },
+        { d: rect(120, 252, 400, 50, 4), label: { x: 320, y: 283, t: "A name becomes a number.", size: 15 } }
+      ]
+    }
+  ];
+
+  /* The alternate version of scene 2, produced by the edit instruction. */
+  var SCENE2_V2 = {
+    heading: "The resolver walks the chain",
+    narration: [
+      { t: "Your " }, { t: "resolver", w: 1 }, { t: " asks up the chain until someone " },
+      { t: "knows", w: 1 }, { t: "." }
+    ],
+    els: SCENES[1].els
+  };
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var stage = document.getElementById("stage");
+  var list = document.getElementById("sceneList");
+  var narration = document.getElementById("narration");
+  var status = document.getElementById("status");
+  var verChip = document.getElementById("verChip");
+  var playhead = document.getElementById("playhead");
+  var editBtn = document.getElementById("editBtn");
+  var revertBtn = document.getElementById("revertBtn");
+  var instr = document.getElementById("instr");
+
+  var current = 0, version = 1, edited = false, timers = [], graph = SCENES.slice();
+
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+
+  function buildList() {
+    list.innerHTML = "";
+    graph.forEach(function (sc, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "scenebtn" + (edited && i === 1 ? " edited" : "");
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-current", i === current ? "true" : "false");
+      b.innerHTML = '<span class="n">scene ' + (i + 1) + "</span>" + sc.heading;
+      b.addEventListener("click", function () { play(i); });
+      list.appendChild(b);
+    });
+  }
+
+  function el(name, attrs) {
+    var n = document.createElementNS(SVGNS, name);
+    for (var k in attrs) { if (Object.prototype.hasOwnProperty.call(attrs, k)) n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+
+  function renderNarration(parts, upto) {
+    var html = "", seen = 0;
+    parts.forEach(function (p) {
+      if (p.w) { seen++; html += seen <= upto ? "<b>" + p.t + "</b>" : p.t; }
+      else { html += p.t; }
+    });
+    narration.innerHTML = html;
+  }
+
+  function play(index) {
+    clearTimers();
+    current = index;
+    var sc = graph[index];
+    stage.innerHTML = '<title id="stageTitle">Scene ' + (index + 1) + ": " + sc.heading + "</title>";
+    playhead.textContent = "scene " + (index + 1) + " of " + graph.length;
+    buildList();
+    renderNarration(sc.narration, 0);
+
+    // The one place the informality and bounce axes are used: a scene heading
+    // on the board is marker writing, so irregular baselines are true here.
+    var heading = el("text", { x: 32, y: 40, "font-family": "Shantell Sans, Comic Sans MS, sans-serif",
+      "font-size": 22, "font-weight": 700, fill: "#15141B", opacity: 0 });
+    heading.style.fontVariationSettings = '"BNCE" 22, "INFM" 34';
+    heading.textContent = sc.heading;
+    stage.appendChild(heading);
+    later(function () { heading.setAttribute("opacity", 1); heading.style.transition = "opacity .3s"; }, 60);
+
+    var words = 0;
+    sc.els.forEach(function (e, i) {
+      var delay = 340 + i * 620;
+
+      var fill = null;
+      if (e.fill) {
+        fill = el("path", { d: e.d, fill: "#E9E4FD", stroke: "none", "fill-opacity": 0 });
+        stage.appendChild(fill);
+      }
+      var p = el("path", {
+        d: e.d, fill: "none",
+        stroke: e.cue ? "#2E9E6B" : "#15141B",
+        "stroke-width": e.cue ? 2.6 : 2.4,
+        "stroke-linecap": "round", "stroke-linejoin": "round"
+      });
+      stage.appendChild(p);
+
+      var len = 0;
+      try { len = p.getTotalLength(); } catch (err) { len = 600; }
+      if (!len || !isFinite(len)) len = 600;
+      p.style.strokeDasharray = len;
+      p.style.strokeDashoffset = reduce ? 0 : len;
+
+      later(function () {
+        p.style.transition = "stroke-dashoffset .42s cubic-bezier(.4,.05,.2,1)";
+        p.style.strokeDashoffset = 0;
+        if (fill) {
+          later(function () {
+            fill.style.transition = "fill-opacity .34s ease";
+            fill.setAttribute("fill-opacity", 1);
+          }, 300);
+        }
+      }, delay);
+
+      function addText(spec, weight, size) {
+        var t = el("text", {
+          x: spec.x, y: spec.y, "text-anchor": "middle",
+          "font-family": spec.t.indexOf(".") > -1 || /^[0-9]/.test(spec.t) ? "IBM Plex Mono, monospace" : "Shantell Sans, Comic Sans MS, sans-serif",
+          "font-size": size || spec.size || 15, "font-weight": weight,
+          "letter-spacing": spec.size && spec.size < 16 ? "0.09em" : "-0.01em",
+          fill: spec.cue ? "#2E9E6B" : "#15141B", opacity: 0
+        });
+        t.style.fontVariationSettings = '"BNCE" 10, "INFM" 18';
+        t.textContent = spec.t;
+        stage.appendChild(t);
+        later(function () { t.style.transition = "opacity .3s"; t.setAttribute("opacity", 1); }, delay + 260);
+      }
+      if (e.label) addText(e.label, 600);
+      if (e.sub) addText(e.sub, 500, 12);
+
+      later(function () {
+        words++;
+        renderNarration(sc.narration, words);
+      }, delay + 120);
+    });
+
+    status.innerHTML = "playing scene " + (index + 1) + " · outline strokes on, then the fill washes in";
+  }
+
+  function applyEdit() {
+    if (edited) return;
+    edited = true; version = 2;
+    graph = SCENES.slice();
+    graph[1] = SCENE2_V2;
+    verChip.textContent = "version 2";
+    revertBtn.disabled = false;
+    play(1);
+    status.innerHTML = "<b>scene 2 re-rendered</b> · scenes 1, 3 and 4 untouched · appended as version 2";
+  }
+
+  function revert() {
+    if (!edited) return;
+    edited = false; version = 1;
+    graph = SCENES.slice();
+    verChip.textContent = "version 1";
+    revertBtn.disabled = true;
+    play(1);
+    status.innerHTML = "<b>reverted</b> · head points back at version 1";
+  }
+
+  editBtn.addEventListener("click", applyEdit);
+  revertBtn.addEventListener("click", revert);
+  instr.addEventListener("keydown", function (ev) { if (ev.key === "Enter") { ev.preventDefault(); applyEdit(); } });
+
+  buildList();
+  if (reduce) { play(0); }
+  else { setTimeout(function () { play(0); }, 900); }
+
+  /* --------------------------------------------- scroll cascade + reveal */
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+    document.querySelectorAll(".rise, [data-cascade]").forEach(function (n) {
+      if (n.hasAttribute("data-cascade")) {
+        Array.prototype.forEach.call(n.children, function (c, i) {
+          c.style.transitionDelay = (i * 85) + "ms";
+        });
+      }
+      io.observe(n);
+    });
+
+    var rows = document.querySelectorAll("[data-cascade-rows] tbody tr");
+    Array.prototype.forEach.call(rows, function (r, i) {
+      r.style.opacity = 0;
+      r.style.transform = "translateY(14px)";
+      r.style.transition = "opacity .5s cubic-bezier(.18,.85,.24,1) " + (i * 70) + "ms, transform .5s cubic-bezier(.18,.85,.24,1) " + (i * 70) + "ms";
+    });
+    var tbl = document.querySelector("[data-cascade-rows]");
+    if (tbl) {
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          Array.prototype.forEach.call(rows, function (r) { r.style.opacity = 1; r.style.transform = "none"; });
+          io2.unobserve(en.target);
+        });
+      }, { threshold: 0.1 });
+      io2.observe(tbl);
+    }
+  } else {
+    document.querySelectorAll(".rise, [data-cascade]").forEach(function (n) { n.classList.add("in"); });
+  }
+
+  /* ----------------------------------------------------------- the form */
+  // >>> FORM ENDPOINT <<<
+  // No backend is wired. Submitting hands the visitor to the real, live,
+  // self-serve signup route rather than faking a confirmation. To capture the
+  // address, POST it to your endpoint here, then keep the redirect as the
+  // success action so the CTA verb still describes what happens.
+  document.getElementById("startForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    window.location.href = "https://sketchie.ai/app/signup";
+  });
+})();
+</script>
+</body>
+</html>
