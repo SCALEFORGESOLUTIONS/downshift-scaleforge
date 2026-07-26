@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+===============================================================================
+  SKETCHIE — PRODUCT / SALES DECK  (rev 3)
+  Built 2026-07-25 against the live site. Shares the landing page's tokens,
+  which are now Sketchie's REAL tokens, lifted from the brand files.
+===============================================================================
+
+  REV 3 — WHAT CHANGED
+  ---------------------------------------------------------------------------
+  1. CONTRAST BUG ON SLIDE 3, FIXED. The plan cards are white cards sitting in
+     a dark slide. `.plan` set a white background but inherited the slide's
+     near-white text colour, so the plan NAME and PRICE rendered white on white
+     and were invisible. Fixed by making every light surface restate its own
+     colour (`.plan`, `.on-light`) instead of inheriting from the band. Same
+     bug existed on the landing page's pricing cards and is fixed there too.
+     If you add any light card to a dark slide, give it `.on-light`.
+
+  2. "TIME" LABEL ON SLIDE 5, FIXED. The bars label was positioned by a fixed
+     normalised y (.70) while the bar heights are computed from the geometry,
+     so at 16:9 the label landed at y=252 inside bars that spanned 142-265 —
+     it sat on top of the artwork. The label is now anchored to the MEASURED
+     bar baseline (`barBottom + 22`), so it cannot collide whatever the aspect
+     ratio does to the layout. Same fix on the landing page.
+
+  3. VISUAL SYSTEM NOW TAKEN FROM SKETCHIE'S OWN FILES, not interpreted:
+       --warm #FBF8F3  --paper #FFFFFF  --warm2 #F4EFE7
+       --ink #1E1E28   --muted #5F646B  --tertiary #8A8F98
+       --border #E8E6E0  --border-strong #D8D5CD
+       --violet #6C5CE7  --violet-hover #5A4BD4  --violet-tint #F3F0FF
+       --sky #1971C2  --leaf #2B8A3E  --tangerine #D9480F
+       --coral #FF6B5B  --sunny #FFC933  --pink #E8538F
+       --radius 12/18px, buttons and chips 999px, SOFT drop shadows
+       Shantell Sans (marker) / Inter (body) / IBM Plex Mono (utility)
+     Devices taken from the brand markup rather than invented: the masked dot
+     grid, .ink line icons that draw themselves on (90x60, stroke 2.4, round,
+     dasharray 260), the sunny highlighter swipe, pill chips, the hairline .io
+     band, mono micro-labels in --violet-hover, the .metric number treatment,
+     and the real mascot mark copied verbatim.
+
+  4. THE MASCOT IS NOW THE ACTUAL SKETCHIE MARK. The previous squiggle was a
+     placeholder and was wrong.
+
+  TYPEFACE BUG STILL LIVE ON THE SITE
+  ---------------------------------------------------------------------------
+  The brand stylesheet loads Shantell Sans at 400 / 600 / 700 and 500 italic —
+  it tops out at 700. Computed style on sketchie.ai nevertheless reports
+  PostScript name "Shantell-Sans-Light-ExtraBold", so CSS is requesting a
+  weight that is not in the loaded set and the browser is synthesising it.
+  Faux bold smears the terminals and closes the counters on a monolinear marker
+  face. Fix is one line: stop requesting 800. These files use nothing above 700.
+
+  THE ARGUMENT
+  ---------------------------------------------------------------------------
+  1 title → 2 what the category charges → 3 what Sketchie charges → 4 speed of
+  the loop → 5 one source, many versions (LIVE DEMO) → 6 the editor is on every
+  plan → 7 why cheap and fast is not slop → 8 nineteen real renders → 9 API and
+  MCP → 10 where we are behind → 11 the ask.
+  Slide 7 is load-bearing: a deck that leads on cheap and fast invites exactly
+  one objection. If short on time cut slide 9, never slide 7.
+
+  TWO CLAIMS NOT WRITTEN AS SUPERLATIVES
+  ---------------------------------------------------------------------------
+  "Fastest by far" — /vs-simi/, in the footer of every page of the site,
+  concedes twice that a competitor is faster at first generation. Speed leads
+  on the LOOP instead, which is Sketchie's own argument.
+  "Most affordable by far" — true and enormous against commissioned production,
+  where it is now sourced; NOT true against other AI tools, where Sketchie's
+  own page calls a competitor's tiers "comparable". Both are flagged in the
+  slide 3 and 10 presenter notes.
+
+  COST BENCHMARK: Wyzowl industry survey — average paid $10,983, median $5,400
+  with outliers removed; 2026 studio guides converge on $2,000-$10,000 for a
+  professional 60-second animated explainer, cross-referenced with Clutch data.
+  Used instead of the site's uncited "$100 to $900", which market data puts an
+  order of magnitude too low.
+
+  NOT AN INVESTOR DECK (no revenue, traction, team, funding or customers are
+  published; the company states it raised $0). NOT A PROCUREMENT DECK (no
+  SOC 2, ISO 27001, GDPR, CCPA, FERPA, COPPA, HIPAA, accessibility conformance
+  or SLA is published anywhere).
+
+  BLOCKED, absent by design: any language count (78/34/23 all live), any voice
+  count but six, API plan gating, API metering multiplier, "four plans" or a
+  "Business" tier, "under a minute" as a specification, unlimited seats, any
+  icon count, voice cloning, audio/video/link ingestion, PIXEL RESOLUTIONS (the
+  site documents aspect RATIOS only), and any claim that variants are free.
+
+  CONTROLS  → ← ↓ ↑ Space PgUp PgDn navigate · Home/End first/last · 1-9 jump
+            N notes · F fullscreen · ? shortcuts · swipe on touch
+===============================================================================
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketchie — product deck</title>
+<meta name="theme-color" content="#6C5CE7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Shantell+Sans:ital,wght@0,400;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --warm:#FBF8F3; --paper:#FFFFFF; --warm2:#F4EFE7;
+  --ink:#1E1E28; --muted:#5F646B; --tertiary:#8A8F98;
+  --border:#E8E6E0; --border-strong:#D8D5CD;
+  --violet:#6C5CE7; --violet-hover:#5A4BD4; --violet-tint:#F3F0FF;
+  --sky:#1971C2; --leaf:#2B8A3E; --tangerine:#D9480F;
+  --coral:#FF6B5B; --sunny:#FFC933; --pink:#E8538F;
+  --radius:12px; --radius-lg:18px;
+  --shadow-sm:0 1px 3px rgba(30,30,40,.05);
+  --shadow-md:0 8px 30px rgba(30,30,40,.09);
+  --marker:'Shantell Sans','Comic Sans MS','Inter',sans-serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --spring:cubic-bezier(.18,.85,.24,1);
+  --notes-h:236px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; background:var(--ink); color:var(--ink); font-family:var(--sans);
+  font-size:16px; line-height:1.58; overflow:hidden}
+button{font-family:inherit}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--violet); outline-offset:2px}
+.app{height:100%; display:flex; flex-direction:column}
+
+.stagewrap{position:relative; flex:1 1 auto; min-height:0; background:var(--warm); overflow:hidden}
+.slide{position:absolute; inset:0; padding:clamp(26px,4vw,60px) clamp(26px,5vw,80px) 56px;
+  display:none; flex-direction:column; justify-content:center; overflow:auto}
+.slide.live{display:flex}
+.slide.enter-r{animation:inR .42s var(--spring) both}
+.slide.enter-l{animation:inL .42s var(--spring) both}
+@keyframes inR{from{opacity:0; transform:translateX(44px)} to{opacity:1; transform:none}}
+@keyframes inL{from{opacity:0; transform:translateX(-44px)} to{opacity:1; transform:none}}
+.slide.dark{background:var(--ink); color:var(--warm)}
+.slide.violet{background:var(--violet); color:#fff}
+.slide.tint{background:var(--violet-tint)}
+
+/* the brand's masked dot grid — scoped inside the slide, never fixed */
+.slide.dots::before{content:''; position:absolute; inset:0; pointer-events:none; opacity:.55;
+  background-image:radial-gradient(var(--border-strong) 1.1px,transparent 1.1px);
+  background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 18% 0%,#000 30%,transparent 74%);
+  mask-image:radial-gradient(ellipse 90% 80% at 18% 0%,#000 30%,transparent 74%)}
+.slide.violet.dots::before{opacity:.45;
+  background-image:radial-gradient(rgba(255,255,255,.4) 1.1px,transparent 1.1px)}
+.slide.dark.dots::before{opacity:.3;
+  background-image:radial-gradient(rgba(251,248,243,.35) 1.1px,transparent 1.1px)}
+
+.inner{width:min(1160px,100%); margin-inline:auto; position:relative; z-index:1}
+.slide [data-c]{opacity:0; transform:translateY(16px)}
+.slide.live [data-c]{animation:cas .5s var(--spring) both}
+@keyframes cas{to{opacity:1; transform:none}}
+
+.eyebrow{font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:2.2px;
+  text-transform:uppercase; color:var(--violet-hover); display:block; margin:0 0 12px}
+.slide.dark .eyebrow{color:#BFB4FF}
+.slide.violet .eyebrow{color:rgba(255,255,255,.8)}
+.tag{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:9.5px;
+  letter-spacing:1px; text-transform:uppercase; color:var(--leaf); margin-bottom:10px}
+.tag::before{content:''; width:7px; height:7px; border-radius:50%; background:currentColor}
+h1{font-family:var(--marker); font-weight:700; letter-spacing:-.005em; line-height:1.07;
+  font-size:clamp(33px,5vw,58px); margin:0; max-width:16ch}
+h2{font-family:var(--marker); font-weight:700; letter-spacing:-.004em; line-height:1.13;
+  font-size:clamp(27px,3.9vw,40px); margin:0 0 20px; max-width:21ch}
+h3{font-family:var(--marker); font-weight:600; font-size:17px; margin:0 0 6px}
+p{margin:0 0 15px}
+.lede{font-size:16.5px; color:var(--muted); max-width:60ch}
+.slide.dark .lede{color:rgba(251,248,243,.68)}
+.slide.violet .lede{color:rgba(255,255,255,.9)}
+.hl{background-image:linear-gradient(transparent 64%,rgba(255,201,51,.5) 64%,
+  rgba(255,201,51,.5) 94%,transparent 94%)}
+
+.two{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,3vw,50px); align-items:start}
+.three{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+.card{background:var(--paper); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px; color:var(--ink)}
+.card p{margin:0; font-size:14px; color:var(--muted)}
+.slide.dark .card{background:#262633; border-color:rgba(251,248,243,.14); color:var(--warm)}
+.slide.dark .card p{color:rgba(251,248,243,.62)}
+
+/* .ink icons, brand spec */
+.ink{width:62px; height:41px; color:var(--violet); display:block; margin-bottom:11px}
+.ink path,.ink circle,.ink rect,.ink line,.ink polyline{
+  stroke:currentColor; fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.ink>*{stroke-dasharray:260; stroke-dashoffset:260}
+.slide.live .ink>*{animation:draw 1.15s ease .25s forwards}
+.slide.live .ink>*:nth-child(2){animation-delay:.37s}
+.slide.live .ink>*:nth-child(3){animation-delay:.49s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.slide.dark .ink{color:#BFB4FF}
+
+.chip{font-family:var(--mono); font-size:11.5px; padding:4px 11px; border:1px solid var(--border-strong);
+  border-radius:999px; background:var(--paper); color:var(--ink); display:inline-block}
+.slide.dark .chip{background:transparent; border-color:rgba(251,248,243,.3); color:var(--warm)}
+.slide.violet .chip{background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); color:#fff}
+.pill{font-family:var(--mono); font-size:8.5px; letter-spacing:.7px; text-transform:uppercase;
+  color:#fff; background:var(--violet); padding:3px 8px; border-radius:5px}
+
+pre{font-family:var(--mono); font-size:clamp(11.5px,.92vw,13px); line-height:1.66; margin:0;
+  background:var(--ink); color:#EDEAE3; padding:20px; border-radius:var(--radius); overflow:auto}
+pre .k{color:#C7BDFF} pre .s{color:#9BE59B} pre .c{color:#9BA3AE}
+.slide.dark pre{background:#12121A}
+
+/* ------ ANY LIGHT SURFACE INSIDE A DARK SLIDE MUST RESTATE ITS COLOUR ----- */
+.on-light{color:var(--ink)}
+
+.costrow{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:12px}
+.costcell{border:1px solid var(--border); border-radius:var(--radius); padding:22px;
+  background:var(--paper); color:var(--ink)}
+.costcell .v{font-family:var(--marker); font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.05}
+.costcell .who{font-size:14px; color:var(--muted); margin-top:8px}
+.costcell .src{font-family:var(--mono); font-size:10px; letter-spacing:.6px; color:var(--tertiary);
+  margin-top:14px; padding-top:11px; border-top:1px solid var(--border)}
+.costcell.a1 .v{color:var(--tangerine)} .costcell.a2 .v{color:var(--sky)} .costcell.a3 .v{color:var(--coral)}
+
+.plan-row{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:11px; margin-top:8px}
+.plan{border:1px solid var(--border); border-radius:var(--radius); padding:14px;
+  background:var(--paper); color:var(--ink)}
+.plan .n{font-family:var(--marker); font-weight:700; font-size:16px; color:var(--ink)}
+.plan .p{font-family:var(--mono); font-size:17px; margin:4px 0 0; color:var(--ink)}
+.plan .m{font-size:12.5px; color:var(--muted)}
+.plan .per{font-family:var(--mono); font-size:11px; color:var(--violet-hover); margin-top:3px}
+.datestamp{font-family:var(--mono); font-size:10.5px; letter-spacing:.6px; color:var(--tertiary); margin-top:16px}
+
+table{width:100%; border-collapse:collapse; font-size:clamp(13px,1vw,14.5px)}
+th{text-align:left; font-family:var(--mono); font-weight:500; font-size:10px; letter-spacing:1.4px;
+  text-transform:uppercase; color:rgba(251,248,243,.5); padding:0 0 9px;
+  border-bottom:1px solid rgba(251,248,243,.2)}
+td{padding:10px 14px 10px 0; border-bottom:1px solid rgba(251,248,243,.12); vertical-align:top;
+  color:rgba(251,248,243,.86)}
+td:first-child{font-weight:600; color:var(--warm)}
+.grade{font-family:var(--mono); font-size:9.5px; letter-spacing:.9px; text-transform:uppercase;
+  border:1px solid currentColor; border-radius:999px; padding:3px 9px; white-space:nowrap}
+.g-v{color:#BFB4FF} .g-d{color:#9BE59B} .g-h{color:var(--tertiary)} .g-p{color:var(--sunny)}
+
+.metrics{display:flex; gap:34px; flex-wrap:wrap; margin-top:26px}
+.metric .v{font-family:var(--marker); font-size:28px; font-weight:700; line-height:1.1}
+.metric .l{font-family:var(--mono); font-size:10.5px; letter-spacing:1.1px; text-transform:uppercase;
+  color:rgba(255,255,255,.7); margin-top:4px; max-width:17ch}
+
+/* --------------------------------------------------- embedded demo ------- */
+.machine{background:var(--paper); border:1px solid var(--border); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md); overflow:hidden; color:var(--ink)}
+.m-top{display:flex; gap:10px; align-items:center; padding:9px 13px; font-family:var(--mono);
+  font-size:10.5px; color:var(--muted); border-bottom:1px solid var(--border); flex-wrap:wrap}
+.m-stage{display:flex; align-items:center; justify-content:center; padding:14px;
+  background:var(--warm2); min-height:238px; transition:background .35s var(--spring)}
+#dstage{display:block; max-width:100%; max-height:264px; border-radius:8px; box-shadow:var(--shadow-sm)}
+.knobs{border-top:1px solid var(--border); padding:11px 13px;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 16px}
+.knob .lbl{font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:1.4px;
+  text-transform:uppercase; color:var(--violet-hover); display:block; margin-bottom:5px}
+.opts{display:flex; flex-wrap:wrap; gap:5px}
+.opt{font-family:var(--mono); font-size:10.5px; padding:3px 10px; border:1px solid var(--border-strong);
+  border-radius:999px; background:var(--paper); color:var(--muted); cursor:pointer;
+  transition:background .16s, border-color .16s, color .16s}
+.opt:hover{border-color:var(--violet); color:var(--violet-hover)}
+.opt[aria-pressed="true"]{background:var(--violet); border-color:var(--violet); color:#fff}
+.m-status{font-family:var(--mono); font-size:10.5px; color:var(--muted); padding:10px 13px;
+  background:var(--warm); border-top:1px solid var(--border)}
+.m-status b{color:var(--leaf); font-weight:500}
+.figcap{font-size:12.5px; color:var(--muted); margin-top:9px}
+.slide.dark .figcap{color:rgba(251,248,243,.55)}
+
+/* ---------------------------------------------------------- chrome ------- */
+.progress{position:absolute; left:0; top:0; height:3px; background:var(--violet); width:0;
+  transition:width .3s var(--spring); z-index:20}
+.hud{position:absolute; right:18px; bottom:14px; display:flex; gap:8px; align-items:center;
+  font-family:var(--mono); font-size:11px; color:var(--muted); z-index:20}
+.hud.on-dark{color:rgba(251,248,243,.62)}
+.hud button{background:transparent; border:1px solid currentColor; color:inherit; cursor:pointer;
+  border-radius:999px; width:26px; height:26px; line-height:1; font-size:12px}
+.counter{min-width:52px; text-align:right}
+/* The mark's outline, eyes and smile are currentColor and are DESIGNED to be
+   dark ink on the violet face — that is how the brand always draws it. So the
+   mark's colour is pinned and never inverted; inverting it turned the eyes
+   into cream blobs and swallowed their white highlights. On dark slides the
+   dark outline would also vanish into the background, and on the violet
+   slides the violet face would vanish into the slide entirely. The lockup
+   therefore rides a light pill on those slides, which is the brand's own
+   999px pill language, and the mark keeps its intended light ground. */
+.deckmark{position:absolute; left:clamp(26px,5vw,80px); bottom:16px; z-index:20;
+  display:flex; align-items:center; gap:7px; opacity:.5; color:#1E1E28;
+  padding:4px 13px 4px 5px; border-radius:999px; background:transparent;
+  transition:background .3s var(--spring), opacity .3s var(--spring), box-shadow .3s}
+.deckmark .mark{width:20px; height:20px}
+.deckmark span{font-family:var(--marker); font-weight:700; font-size:13px; color:#1E1E28}
+.deckmark.on-dark{background:var(--warm); opacity:.9; box-shadow:0 2px 12px rgba(0,0,0,.22)}
+
+.notes{flex:0 0 auto; height:var(--notes-h); background:var(--ink); color:rgba(251,248,243,.82);
+  border-top:1px solid #000; padding:17px clamp(20px,4vw,44px); overflow:auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,48px)}
+.notes.hidden{display:none}
+.notes h4{font-family:var(--mono); font-size:10px; letter-spacing:1.6px; text-transform:uppercase;
+  color:#BFB4FF; margin:0 0 8px; font-weight:500}
+.notes h4.verify{color:#9BE59B}
+.notes p{font-size:13.5px; line-height:1.55; margin:0 0 9px; color:rgba(251,248,243,.8)}
+.notes code{font-family:var(--mono); font-size:12.5px; color:#C7BDFF}
+.notes .warn{color:var(--sunny)}
+
+.help{position:fixed; inset:0; background:rgba(30,30,40,.95); color:var(--warm); z-index:90;
+  display:none; align-items:center; justify-content:center}
+.help.open{display:flex}
+.help .panel{width:min(560px,90vw); font-family:var(--mono); font-size:13.5px}
+.help dl{display:grid; grid-template-columns:auto 1fr; gap:10px 22px; margin:20px 0 0}
+.help dt{color:#BFB4FF}
+.help dd{margin:0; color:rgba(251,248,243,.8)}
+
+@media (max-width:900px){
+  .two,.three,.costrow{grid-template-columns:1fr}
+  .plan-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .knobs{grid-template-columns:1fr}
+  .notes{grid-template-columns:1fr; --notes-h:264px}
+  .deckmark{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important}
+  .slide [data-c]{opacity:1!important; transform:none!important}
+  .ink>*{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stagewrap" id="stagewrap">
+    <div class="progress" id="progress"></div>
+
+    <!-- 1 ------------------------------------------------------------- -->
+    <section class="slide violet dots" data-notes="n1">
+      <div class="inner">
+        <span class="eyebrow" data-c style="animation-delay:.05s">Sketchie · product walkthrough · July 2026</span>
+        <h1 data-c style="animation-delay:.14s">An explainer in about a minute. Every version of it for cents.</h1>
+        <p class="lede" data-c style="animation-delay:.26s; margin-top:22px; max-width:54ch">
+          A narrated whiteboard explainer from a prompt or a document — and then
+          as many cuts, shapes and languages of it as you need, from the same
+          source.
+        </p>
+        <div class="metrics" data-c style="animation-delay:.36s">
+          <div class="metric"><div class="v">$9.99</div><div class="l">a month, entry plan</div></div>
+          <div class="metric"><div class="v">40 min</div><div class="l">rendered video included</div></div>
+          <div class="metric"><div class="v">2 free</div><div class="l">videos, no card required</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 ------------------------------------------------------------- -->
+    <section class="slide dots" data-notes="n2">
+      <div class="inner">
+        <span class="eyebrow" data-c>What the category charges</span>
+        <h2 data-c style="animation-delay:.06s">One explainer video, one invoice, <span class="hl">several thousand dollars.</span></h2>
+        <div class="costrow" data-c style="animation-delay:.16s">
+          <div class="costcell a1">
+            <div class="v">$5,400</div>
+            <div class="who">Median price brands report paying for an animated explainer. The average is $10,983, pulled up by premium work.</div>
+            <div class="src">Wyzowl industry survey</div>
+          </div>
+          <div class="costcell a2">
+            <div class="v">$2k–10k</div>
+            <div class="who">Where 2026 studio pricing guides converge for a professionally produced 60-second animated explainer.</div>
+            <div class="src">Studio rate cards · Clutch agency survey data</div>
+          </div>
+          <div class="costcell a3">
+            <div class="v">weeks</div>
+            <div class="who">And revision rounds are line items. Beyond the standard two, studios commonly charge per round.</div>
+            <div class="src">Published 2026 studio rate cards</div>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.3s; margin-top:22px; max-width:72ch">
+          Which is why most explanations never become a video at all. The decision
+          is not "which tool" — it is whether this particular thing is worth four
+          thousand dollars and a month.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 ------------------------------------------------------------- -->
+    <section class="slide dark" data-notes="n3">
+      <div class="inner">
+        <span class="eyebrow" data-c>What Sketchie charges</span>
+        <h2 data-c style="animation-delay:.06s">Ten dollars a month. Forty rendered minutes.</h2>
+        <!-- FIXED: .plan is a light card in a dark slide, so it sets its own
+             colour. Previously the name and price inherited the slide's
+             near-white text and were invisible on the white card. -->
+        <div class="plan-row" data-c style="animation-delay:.16s">
+          <div class="plan on-light"><div class="n">Solo</div><div class="p">$9.99</div><div class="m">40 min</div><div class="per">≈25¢/min</div></div>
+          <div class="plan on-light"><div class="n">Plus</div><div class="p">$19.99</div><div class="m">100 min</div><div class="per">≈20¢/min</div></div>
+          <div class="plan on-light"><div class="n">Pro</div><div class="p">$49.99</div><div class="m">300 min</div><div class="per">≈17¢/min</div></div>
+          <div class="plan on-light"><div class="n">Max</div><div class="p">$99.99</div><div class="m">750 min</div><div class="per">≈13¢/min</div></div>
+          <div class="plan on-light"><div class="n">Team</div><div class="p">$499.99</div><div class="m">5,000 min</div><div class="per">10¢/min</div></div>
+          <div class="plan on-light"><div class="n">Enterprise</div><div class="p">Talk</div><div class="m">custom</div><div class="per">custom</div></div>
+        </div>
+        <div class="two" style="margin-top:24px">
+          <p class="lede" data-c style="animation-delay:.26s">
+            One meter: rendered minutes. Not seats, not API calls, not credits, no
+            minimum purchase. Minutes reset each cycle. Going over is opt-in and
+            off by default, so you stop at the ceiling with an upgrade prompt
+            rather than a charge you did not choose.
+          </p>
+          <p class="lede" data-c style="animation-delay:.34s">
+            The first two videos are free, up to a minute each, no card, with the
+            full product including the scene editor. Annual billing takes 40% off
+            every plan. Overage, if you switch it on, is twice your own plan's
+            per-minute rate.
+          </p>
+        </div>
+        <p class="datestamp" data-c style="animation-delay:.42s">USD, read from sketchie.ai/pricing on 2026-07-25. Per-minute figures are arithmetic on those numbers, not a rate Sketchie quotes.</p>
+      </div>
+    </section>
+
+    <!-- 4 ------------------------------------------------------------- -->
+    <section class="slide" data-notes="n4">
+      <div class="inner">
+        <span class="eyebrow" data-c>Speed</span>
+        <h2 data-c style="animation-delay:.06s">From a sentence to something you can publish, in about a minute.</h2>
+        <div class="three" style="margin-top:26px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <rect x="14" y="10" width="62" height="12" rx="3"/><rect x="22" y="26" width="46" height="12" rx="3"/><rect x="30" y="42" width="30" height="12" rx="3"/>
+            </svg>
+            <h3>What happens in that minute</h3>
+            <p>Sketchie writes the script on story structure, breaks it into
+               scenes, picks the analogy, draws every element, narrates it, and
+               binds each reveal to the word that triggers it.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <circle cx="45" cy="30" r="17"/><path d="M45 18v12l8 6"/><path d="M12 30h8M70 30h8"/>
+            </svg>
+            <h3>And then in seconds</h3>
+            <p>A change re-renders only the scenes it touches. Not a queue, not a
+               revision round, not an email to an animator who is on holiday.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <path d="M10 40h16l8-20 10 20h36"/><circle cx="10" cy="40" r="4"/><circle cx="80" cy="40" r="4"/>
+            </svg>
+            <h3>The number that matters</h3>
+            <p>Not the first render — the whole loop. Draft, watch, notice, fix,
+               ship. That is the only clock a buyer actually pays for.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:26px; max-width:68ch">
+          Length is set in 30-second steps, or left automatic. Six minutes is the
+          ceiling, on purpose — slide 7 explains why that is a decision rather
+          than a limit.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 ------------------------------------------------------------- -->
+    <section class="slide tint" data-notes="n5">
+      <div class="inner">
+        <span class="eyebrow" data-c>One source, many outputs — live</span>
+        <h2 data-c style="animation-delay:.06s; margin-bottom:14px">The second version is where video normally gets expensive.</h2>
+        <div class="two" style="align-items:start">
+          <div data-c style="animation-delay:.14s">
+            <div class="machine">
+              <div class="m-top">
+                <span class="pill" id="dver">variant 1</span>
+                <span>compound-interest · one source graph</span>
+                <span style="margin-left:auto" id="dspec">16:9 · marker · en · 1:00</span>
+              </div>
+              <div class="m-stage" id="dpad">
+                <svg id="dstage" viewBox="0 0 640 360" role="img" aria-label="A whiteboard explainer re-rendered in the selected variant"></svg>
+              </div>
+              <div class="knobs">
+                <div class="knob"><span class="lbl" id="dl-a">Shape</span><div class="opts" role="group" aria-labelledby="dl-a" data-knob="aspect"></div></div>
+                <div class="knob"><span class="lbl" id="dl-p">Style</span><div class="opts" role="group" aria-labelledby="dl-p" data-knob="preset"></div></div>
+                <div class="knob"><span class="lbl" id="dl-l">Language</span><div class="opts" role="group" aria-labelledby="dl-l" data-knob="lang"></div></div>
+                <div class="knob"><span class="lbl" id="dl-n">Length</span><div class="opts" role="group" aria-labelledby="dl-n" data-knob="len"></div></div>
+              </div>
+              <p class="m-status" id="dstatus">Turn a knob. Same source graph, new output.</p>
+            </div>
+            <p class="figcap">
+              Illustration of the documented model, drawn in SVG for this deck —
+              not a screenshot and not Sketchie output. Preset colourways
+              interpret the six documented preset names.
+            </p>
+          </div>
+          <div data-c style="animation-delay:.24s">
+            <p class="lede">
+              Three shapes. Any length in 30-second steps. In-language renders,
+              not subtitles over an English cut. Six drawing styles and four fill
+              techniques. Six narrators, each speaking every supported language so
+              the voice stays consistent across a set.
+            </p>
+            <p class="lede">
+              None of it is a new project, because none of it starts over. The
+              scene graph is the source; each of these is a render of it.
+            </p>
+            <p style="margin-top:18px">
+              <span class="chip">aspect</span> <span class="chip">length</span>
+              <span class="chip">language</span> <span class="chip">voice</span>
+              <span class="chip">preset</span> <span class="chip">fillMode</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ------------------------------------------------------------- -->
+    <section class="slide dark" data-notes="n6">
+      <div class="inner">
+        <span class="eyebrow" data-c>The editor is not an upsell</span>
+        <h2 data-c style="animation-delay:.06s">Full scene editor. Every plan. Including the free one.</h2>
+        <div class="three" style="margin-top:28px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <path d="M20 44L52 12l10 10-32 32H20v-10Z"/><path d="M46 18l10 10"/><path d="M64 46h14"/>
+            </svg>
+            <h3>Change anything in a scene</h3>
+            <p>Heading, narration, labels, icon styling. Move through with Previous
+               and Next. When the fields are not enough, describe the change in
+               plain language instead.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <rect x="16" y="10" width="46" height="30" rx="3"/><rect x="24" y="18" width="46" height="30" rx="3"/><path d="M74 24v22"/>
+            </svg>
+            <h3>Versions, not overwrites</h3>
+            <p>Every edit appends a version to the same explainer, and you can
+               point the head back at an earlier ready one. Useful the second time
+               a stakeholder changes their mind.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <circle cx="45" cy="30" r="18"/><path d="M38 30l5 6 10-12"/><path d="M45 6v4M45 50v4"/>
+            </svg>
+            <h3>The first edit of each video is free</h3>
+            <p>And editing never consumes one of the two free videos. After that a
+               targeted fix draws a few seconds of minutes rather than a whole new
+               video.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:28px; max-width:70ch">
+          This is architecture rather than a feature. The video is compiled from an
+          addressable document, which is why a correction can touch one scene — and
+          why a variant is a re-render rather than a re-commission.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7 ------------------------------------------------------------- -->
+    <section class="slide dark" data-notes="n7">
+      <div class="inner">
+        <span class="eyebrow" data-c>The obvious objection</span>
+        <h2 data-c style="animation-delay:.06s">Fast and cheap only count if the video is good.</h2>
+        <table data-c style="animation-delay:.16s">
+          <thead><tr><th>Parameter</th><th>Target</th><th>Grade</th></tr></thead>
+          <tbody>
+            <tr><td>Total video length</td><td>6:00 hard ceiling; 1:00–3:00 sweet spot per concept</td><td><span class="grade g-v">Verified</span></td></tr>
+            <tr><td>Reveal style</td><td>Outline draw-on 0.3–0.5s, then a staggered fill wash</td><td><span class="grade g-v">Verified</span></td></tr>
+            <tr><td>Post-scene gap</td><td>≥0.7s of narration silence before the cut</td><td><span class="grade g-v">Verified</span></td></tr>
+            <tr><td>Ending</td><td>Retrieval question, ≥1.5s pause, one-line recap</td><td><span class="grade g-v">Verified</span></td></tr>
+            <tr><td>Extraneous visuals</td><td>Zero elements unreferenced by the narration</td><td><span class="grade g-v">Verified</span></td></tr>
+            <tr><td>Reveal-to-word sync</td><td>Element appears within ±500ms of its trigger word</td><td><span class="grade g-d">Derived</span></td></tr>
+            <tr><td>Elements per scene</td><td>3–7 visible at scene end</td><td><span class="grade g-h">Heuristic</span></td></tr>
+          </tbody>
+        </table>
+        <p class="lede" data-c style="animation-delay:.3s; margin-top:20px; max-width:76ch">
+          Eleven design laws from the published research on learning from video,
+          each with its effect size and a link to its primary source, turned into
+          numeric targets checked on every render — with a confidence grade printed
+          next to each. The mechanical layer runs before a cent goes on voice or
+          rendering, and it is open source under MIT.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8 ------------------------------------------------------------- -->
+    <section class="slide" data-notes="n8">
+      <div class="inner">
+        <span class="tag" data-c>Published output</span>
+        <h2 data-c style="animation-delay:.06s">Nineteen finished renders, 0:33 to 5:56.</h2>
+        <div class="three" style="margin-top:26px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <rect x="10" y="14" width="70" height="34" rx="4"/><path d="M38 24l16 7-16 7v-14Z"/><path d="M10 8h70"/>
+            </svg>
+            <h3>Range, not a highlight reel</h3>
+            <p>Compound interest to neural networks, at eleven lengths climbing to
+               the ceiling, plus the same explainer published in two alternate
+               layouts.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <path d="M22 8h30l16 16v28a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z"/><path d="M52 8v16h16"/><path d="M28 38h30"/>
+            </svg>
+            <h3>Document mode</h3>
+            <p>Raw meeting notes as a 5:02 walkthrough; a long written explanation
+               as a 4:36 lesson. It follows your source rather than writing over
+               it.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <svg class="ink" viewBox="0 0 90 60" aria-hidden="true">
+              <circle cx="45" cy="30" r="20"/><path d="M25 30h40"/><path d="M45 10c7 6 7 34 0 40c-7-6-7-34 0-40Z"/>
+            </svg>
+            <h3>The same lesson, three languages</h3>
+            <p>One sky-blue explainer generated natively in Spanish, Brazilian
+               Portuguese and German — script, on-screen labels and narration, one
+               voice.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:26px; max-width:66ch">
+          Every one was generated from a prompt or a document and embedded straight
+          off the pipeline. No human animator, no retouching.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9 ------------------------------------------------------------- -->
+    <section class="slide dark" data-notes="n9">
+      <div class="inner">
+        <div class="two">
+          <div>
+            <span class="eyebrow" data-c>If you want to automate it</span>
+            <h2 data-c style="animation-delay:.06s">One POST in. MP4 and scene graph out.</h2>
+            <p class="lede" data-c style="animation-delay:.16s">
+              Creation is asynchronous — 202 and a queued record, then poll or hold
+              a Server-Sent Events stream. The edit endpoint turns one
+              plain-language instruction into a targeted re-render; revert points
+              the head back. Post a scene graph you already have with a new aspect
+              or language and you get that variant.
+            </p>
+            <p class="lede" data-c style="animation-delay:.24s">
+              Generation endpoints allow 20 requests a minute, everything else
+              shares 200. An MCP server with five tools runs as a local stdio
+              process for Claude Code and Claude Desktop; a hosted connector is on
+              the roadmap.
+            </p>
+          </div>
+          <div data-c style="animation-delay:.3s">
+<pre>POST /v1/explainer          <span class="c">→ 202, queued</span>
+GET  /v1/explainer/:id      <span class="c">→ videoUrl, sceneGraph,
+                               versions</span>
+GET  /v1/explainer/events   <span class="c">→ SSE status frames</span>
+POST /v1/explainer/:id/edit <span class="c">→ 202, new version</span>
+POST /v1/explainer/:id/revert
+GET  /v1/voices  /v1/languages
+GET  /v1/billing/status</pre>
+            <p class="figcap">Base URL https://sketchie.ai/api · Bearer sk_… , shown once at creation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ------------------------------------------------------------ -->
+    <section class="slide dots" data-notes="n10">
+      <div class="inner">
+        <span class="eyebrow" data-c>Say this before they find it</span>
+        <h2 data-c style="animation-delay:.06s">Where we are behind, today.</h2>
+        <div class="three" style="margin-top:26px">
+          <div class="card" data-c style="animation-delay:.16s">
+            <h3>Raw first-generation speed</h3>
+            <p>Sketchie's own comparison page concedes a competitor is faster at
+               the first render. The argument is the whole loop, including the fix
+               — and it has to be demonstrated, not asserted.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.24s">
+            <h3>Single-user</h3>
+            <p>No shared workspace today; shared workspaces are on the roadmap. Do
+               not sell team collaboration.</p>
+          </div>
+          <div class="card" data-c style="animation-delay:.32s">
+            <h3>No proof but the output</h3>
+            <p>No customers, counts, testimonials or press are published, and the
+               company states it launched in July 2026 with no venture funding. The
+               nineteen renders and the open eval repo are the evidence that
+               exists.</p>
+          </div>
+        </div>
+        <p class="lede" data-c style="animation-delay:.42s; margin-top:26px; max-width:70ch">
+          Conceding the metric you lose on is the most efficient way to be believed
+          on the two you win.
+        </p>
+      </div>
+    </section>
+
+    <!-- 11 ------------------------------------------------------------ -->
+    <section class="slide violet dots" data-notes="n11">
+      <div class="inner">
+        <span class="eyebrow" data-c>The ask</span>
+        <h2 data-c style="animation-delay:.08s; font-size:clamp(27px,4.2vw,44px); max-width:24ch">Make one. Then make the vertical, the Spanish and the thirty-second cut.</h2>
+        <p class="lede" data-c style="animation-delay:.2s; max-width:56ch">
+          Two videos free, up to a minute each, watermarked, no card, full product
+          including the scene editor. Time the whole loop — the first render, the
+          fix, and the versions.
+        </p>
+        <p data-c style="animation-delay:.3s; margin-top:24px">
+          <span class="chip">sketchie.ai/app/signup</span>
+          <span class="chip">hello@sketchie.ai</span>
+        </p>
+      </div>
+    </section>
+
+    <div class="deckmark" id="deckmark">
+      <svg class="mark" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <circle cx="60" cy="58" r="42" fill="#6C5CE7"/>
+        <path d="M88 27C99 37 104 52 99 68c-4 13-15 24-29 28 20-12 27-30 23-46-3-11-7-18-14-24 3-.5 6-.4 9 1Z" fill="#E8538F"/>
+        <path d="M97 62c0 12-9 27-23 33 12-11 18-23 18-35 2-1 4 0 5 2Z" fill="#FF6B5B"/>
+        <path d="M60 16c24 0 42 18 42 42s-18 42-42 42S18 82 18 58 37 16 60 16Z" stroke="currentColor" stroke-width="5" stroke-linejoin="round" fill="none"/>
+        <circle cx="47" cy="55" r="5.5" fill="currentColor"/><circle cx="73" cy="55" r="5.5" fill="currentColor"/>
+        <circle cx="48.8" cy="53" r="1.8" fill="#fff"/><circle cx="74.8" cy="53" r="1.8" fill="#fff"/>
+        <path d="M50 70c5 5.5 15 5.5 20 0" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>Sketchie</span>
+    </div>
+
+    <div class="hud" id="hud">
+      <button id="prev" type="button" aria-label="Previous slide">‹</button>
+      <button id="next" type="button" aria-label="Next slide">›</button>
+      <span class="counter" id="counter">1 / 11</span>
+      <button id="notesBtn" type="button" aria-label="Toggle presenter notes">N</button>
+      <button id="fsBtn" type="button" aria-label="Toggle fullscreen">⤢</button>
+      <button id="helpBtn" type="button" aria-label="Keyboard shortcuts">?</button>
+    </div>
+  </div>
+
+  <aside class="notes" id="notes" aria-label="Presenter notes">
+    <div id="notesIntent"></div>
+    <div id="notesVerify"></div>
+  </aside>
+</div>
+
+<div class="help" id="help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+  <div class="panel">
+    <strong style="font-family:var(--marker); font-size:22px">Shortcuts</strong>
+    <dl>
+      <dt>→ ↓ Space PgDn</dt><dd>Next slide</dd>
+      <dt>← ↑ PgUp</dt><dd>Previous slide</dd>
+      <dt>Home / End</dt><dd>First / last slide</dd>
+      <dt>1 – 9</dt><dd>Jump to slide</dd>
+      <dt>N</dt><dd>Presenter notes</dd>
+      <dt>F</dt><dd>Fullscreen (F11 also works)</dd>
+      <dt>? or Esc</dt><dd>Close this</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var NOTES = {
+    n1: {
+      intent: "<p>Say the headline once and stop. Two numbers do the work on this deck &mdash; about a minute, and about ten dollars a month &mdash; and the third idea, that you get every version, is what makes them matter.</p><p>Ask before slide 2: <em>&ldquo;what did the last explainer video you commissioned cost, and how long did it take?&rdquo;</em> Their number is better than yours.</p>",
+      verify: "<p><strong>Confirmed:</strong> $9.99 / 40 rendered minutes and the free tier &mdash; /pricing/, homepage, /education/, Terms &sect;3. Product definition and editable scene graph &mdash; homepage, Terms &sect;1.</p><p class='warn'><strong>Do not say &ldquo;fastest&rdquo;.</strong> /vs-simi/, linked in the footer of every page, concedes a competitor is faster at first generation, twice. Speed here means the loop, not the first render.</p>"
+    },
+    n2: {
+      intent: "<p>Let the middle number sit. Most people in the room have signed off something in that band and remember the revision-round line item.</p><p>The last sentence is the real point: the problem is not that video is expensive, it is that the expense means most explanations never get made at all. That reframes Sketchie from &lsquo;cheaper tool&rsquo; to &lsquo;more videos exist now&rsquo;.</p>",
+      verify: "<p><strong>Sourced third-party, not vendor claims:</strong> Wyzowl industry survey &mdash; average paid $10,983, median $5,400 with outliers stripped. 2026 studio pricing guides converge on $2,000&ndash;$10,000 for a professional 60-second animated explainer, cross-referenced with Clutch agency survey data. Revision rounds beyond the standard two are commonly charged per round.</p><p class='warn'><strong>Do NOT use Sketchie's own &ldquo;$100 to $900&rdquo; figure</strong> from the homepage. It carries no source and market data puts it an order of magnitude too low &mdash; it understates the advantage and will not survive a buyer who has actually commissioned one. These are category benchmarks for commissioned custom animation, a different product; say &ldquo;order of magnitude&rdquo;, not &ldquo;like for like&rdquo;.</p>"
+    },
+    n3: {
+      intent: "<p>Lead with the unit, not the ladder: one meter, rendered minutes. The six boxes are just where they land on it.</p><p>Say &ldquo;overage is off by default&rdquo; out loud. It answers the surprise-bill fear before it is raised, and it is unusual enough to be worth the sentence.</p><p>If they are a team, jump to slide 10 now. Do not let them assume multi-user.</p>",
+      verify: "<p><strong>Confirmed on /pricing/ 2026-07-25:</strong> five paid tiers plus Enterprise, the allowances, 40% annual discount, no rollover, overage at 2x the plan's own per-minute rate, opt-in and off by default, custom branding from Pro. Overage rates are arithmetically consistent with that rule. Per-minute figures on this slide are OUR arithmetic, not a Sketchie rate &mdash; say so if asked.</p><p class='warn'><strong>Never say &ldquo;four plans&rdquo; or &ldquo;Business&rdquo;</strong> &mdash; the homepage block is stale and names a tier that does not exist. Do not quote annual dollar amounts; only the percentage is published. <strong>Do not claim &ldquo;most affordable by far&rdquo;:</strong> Sketchie's own /vs-simi/ calls a competitor's tiers &ldquo;comparable&rdquo; &mdash; 40 minutes for $12/mo against 40 for $9.99, both ladders topping at $499.99. The cost argument holds against commissioned production, which is where slide 2 puts it.</p>"
+    },
+    n4: {
+      intent: "<p>Do not put a stopwatch number in the room you cannot defend. &ldquo;About a minute&rdquo; is the figure Sketchie uses when comparing itself honestly; use that one and nothing tighter.</p><p>The third card is the pivot into slide 5. Time the loop, not the render &mdash; then show them the loop.</p>",
+      verify: "<p><strong>Confirmed:</strong> script &rarr; scenes &rarr; narration &rarr; word-level timing; targeted re-render of affected scenes only; 30-second steps; 6:00 ceiling with chaptered series beyond &mdash; homepage, /docs/api/, /science/.</p><p class='warn'><strong>Three live values for generation time:</strong> the homepage says &ldquo;under a minute&rdquo; five times, /docs/ says rendering &ldquo;takes a few minutes&rdquo;, /vs-simi/ says &ldquo;about a minute&rdquo;. Use &ldquo;about a minute&rdquo;, never as a specification or an SLA, and get this resolved before launch &mdash; it is the headline claim and the docs contradict it.</p>"
+    },
+    n5: {
+      intent: "<p>Demonstrate, do not describe. Turn Shape to 9:16 first, then Language to <code>es</code>, then Length to 0:30. Say nothing while each redraws. The sentence afterwards is: <em>&ldquo;same source graph, three deliverables, no new project.&rdquo;</em></p><p>Then ask what versions THEY normally need. Vertical for social, one for the sales team, one in a second language &mdash; whatever they name, that is the slide working.</p><p>Say plainly it is a diagram, not the app. Being caught passing an illustration off as a screenshot costs more than the demo is worth.</p>",
+      verify: "<p><strong>Confirmed as API fields on /docs/api/:</strong> <code>aspect</code> 16:9 / 9:16 / 1:1; <code>length</code> in 30s steps to 360; <code>language</code>; <code>voice</code>; <code>preset</code> marker / chalkboard / pencil / blueprint / crayon / clean; <code>fillMode</code> A&ndash;D; <code>sceneGraph</code> as input. In-language renders published on /examples/ (ES, PT-BR, DE). <code>duplicateExplainer</code> in the SDK.</p><p class='warn'><strong>Do not say &ldquo;resolutions&rdquo;.</strong> The site documents aspect RATIOS only &mdash; no pixel dimension, no 1080p/4K, no resolution parameter anywhere. <strong>Do not imply variants are free.</strong> The first edit of each video is free and a targeted fix is cheap, but a full alternate cut is a render against plan minutes, and no per-variant figure is published. <strong>Do not describe the in-app editor's controls beyond heading, narration, labels and icon styling</strong> &mdash; <code>preset</code>, <code>fillMode</code> and layout are documented as API fields only, and Sketchie publishes no product screenshots.</p>"
+    },
+    n6: {
+      intent: "<p>&ldquo;Included on the free plan&rdquo; is the line that removes the trial objection. Most tools put the editor behind a tier; this one does not.</p><p>Land the third card hardest. Fear of paying to fix a mistake is what stops people experimenting.</p>",
+      verify: "<p><strong>Confirmed four ways</strong> (Terms &sect;3, /docs/api/, homepage FAQ, /pricing/): editing does not consume a free video; the first edit of each video is free; later edits draw a few seconds of minutes; versions append and revert is supported; the free tier includes the full scene editor.</p><p class='warn'><strong>Not published:</strong> the exact per-edit minute formula, how many versions are retained, and whether they expire. Do not answer any of those from memory &mdash; take the question away.</p>"
+    },
+    n7: {
+      intent: "<p>This slide is why the deck is credible. If you are short on time, cut slide 9, not this one.</p><p>Point at the <em>Heuristic</em> row deliberately: &ldquo;this one is a working assumption and they label it as one.&rdquo; The graded row is what earns the ungraded ones.</p><p>If asked whether it makes videos better, the sentence is: it makes them consistent with the published research on the format. That is a different claim and you must use it.</p>",
+      verify: "<p><strong>Confirmed:</strong> every parameter and grade is published verbatim at sketchie.ai/science with primary-source links per law. The Layer-A checker is MIT-licensed and runnable at Downshift/explainer-evals, with a worked passing example.</p><p class='warn'><strong>Never claim</strong> Sketchie improves retention, transfer, test scores or completion by any amount &mdash; the research is about the format, not about Sketchie's videos, and no Sketchie-specific study exists. Sketchie draws this line itself on /education/. Do not call the spec an &ldquo;industry standard&rdquo;: the repo shows 0 stars, 0 forks, 2 commits. Layers B and C are described but not published, and &ldquo;deterministic rendering&rdquo; is asserted with no published measurement.</p>"
+    },
+    n8: {
+      intent: "<p>Have sketchie.ai/examples open in a second tab. If the room goes quiet, play the 0:58 compound-interest render &mdash; same subject as the demo on slide 5, so it closes the loop.</p><p>For a multilingual buyer, play the Spanish and German cuts of the sky-blue explainer back to back. Same voice, different language, is the moment that sells.</p>",
+      verify: "<p><strong>Confirmed:</strong> 19 published renders, 0:33 to 5:56, including ES / PT-BR / DE, document mode, and two alternate layouts &mdash; /examples/. Six named narrators with previews &mdash; /docs/voices/, /api/, /education/, /vs-simi/.</p><p class='warn'><strong>Never state a language count.</strong> Three live values: 78, 34, and 23 with the rest &ldquo;rolling out&rdquo;. Say &ldquo;every catalog voice speaks every supported language&rdquo; and point at the languages page. Never say 30 voices &mdash; the homepage FAQ is stale against four other pages.</p>"
+    },
+    n9: {
+      intent: "<p>Skip this slide entirely for a non-technical room; it buys nothing and costs momentum.</p><p>For developers, the interesting line is posting a scene graph you already have with a new aspect or language. That is the variations story expressed as code.</p><p>Have /pricing open. Answer &ldquo;API access needs a paid plan&rdquo; and let them read the tier off the live page.</p>",
+      verify: "<p><strong>Confirmed on /docs/api/ and /docs/:</strong> endpoints, async 202, SSE, edit and revert, rate limits 20/min and 200/min, Bearer <code>sk_</code> shown once, <code>sceneGraph</code> accepted as input. Five MCP tools, local stdio &mdash; /docs/mcp/; hosted connector explicitly roadmap.</p><p class='warn'><strong>Two blocked numbers.</strong> API gating: /docs/, /docs/mcp/ and Terms &sect;3/&sect;8 say every paid plan; /api/, /pricing/ and /vs-simi/ say Plus and up. Metering: /docs/ and the homepage FAQ say 1x; /api/, /pricing/ and /vs-simi/ say 2x. Resolve both before any developer conversation. No webhooks are documented, and SDK/CLI distribution is unresolved &mdash; Sketchie's own docs concede the npm package may not resolve. A posted scene graph still consumes normal quota.</p>"
+    },
+    n10: {
+      intent: "<p>Deliver this without hedging. A deck that has just led on cheap and fast needs this slide or it reads as a pitch; with it, it reads as a briefing.</p><p>Then hand them the test: run the same prompt on whatever they are comparing against, and time the whole loop including the fix and the second version. That is the test Sketchie wins, and offering it is more persuasive than claiming the win.</p>",
+      verify: "<p><strong>Confirmed:</strong> Sketchie concedes first-generation speed on /vs-simi/ and states &ldquo;we launched this week&rdquo; and &ldquo;we raised $0&rdquo;. Single-user today with shared workspaces on the way &mdash; /pricing/ FAQ. No testimonials, logos, counts or press exist anywhere.</p><p class='warn'><strong>Competitor figures go stale fast.</strong> Rows on /vs-simi/ are stamped 2026-07-07 and the page warns they can ship anything in that column. Re-verify before repeating any of them, and never compare against a competitor Sketchie has not publicly named.</p>"
+    },
+    n11: {
+      intent: "<p>One ask. &ldquo;Make one this week, then make three versions of it.&rdquo; Then stop talking.</p><p>For a school or district, the path is email &mdash; a person answers and quotes in the first reply, no sales-call gate. Say that; it is unusual enough to be worth saying.</p>",
+      verify: "<p><strong>Confirmed:</strong> free tier terms across four sources including Terms &sect;3. Contact hello@sketchie.ai (Terms &sect;16, Privacy &sect;14). Education quoting path &mdash; /education/.</p><p class='warn'><strong>Before any institutional follow-up:</strong> Sketchie publishes no compliance certifications, no student-data statement, no accessibility conformance and no SLA, while actively marketing to education. Users must be 13+. Shared videos are public to anyone with the link. Do not answer a procurement question from this deck.</p>"
+    }
+  };
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total = slides.length, i = 0;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var counter = document.getElementById("counter");
+  var progress = document.getElementById("progress");
+  var notes = document.getElementById("notes");
+  var nIntent = document.getElementById("notesIntent");
+  var nVerify = document.getElementById("notesVerify");
+  var help = document.getElementById("help");
+  var hud = document.getElementById("hud");
+  var deckmark = document.getElementById("deckmark");
+
+  function show(next, dir) {
+    if (next < 0) next = 0;
+    if (next > total - 1) next = total - 1;
+    slides.forEach(function (s) { s.classList.remove("live", "enter-r", "enter-l"); });
+    var s = slides[next];
+    s.classList.add("live");
+    if (!reduce && dir) s.classList.add(dir > 0 ? "enter-r" : "enter-l");
+    i = next;
+    counter.textContent = (i + 1) + " / " + total;
+    progress.style.width = ((i + 1) / total * 100) + "%";
+    var onDark = s.classList.contains("dark") || s.classList.contains("violet");
+    hud.classList.toggle("on-dark", onDark);
+    // Only toggles the light pill. The mark's own colour stays fixed — see
+    // the .deckmark rules for why inverting it breaks the mascot.
+    deckmark.classList.toggle("on-dark", onDark);
+    var n = NOTES[s.getAttribute("data-notes")] || { intent: "", verify: "" };
+    nIntent.innerHTML = "<h4>Presenter intent</h4>" + n.intent;
+    nVerify.innerHTML = "<h4 class='verify'>Source verification</h4>" + n.verify;
+    if (next === 4) startDemo();
+  }
+  function go(d) { show(i + d, d); }
+
+  document.getElementById("next").addEventListener("click", function () { go(1); });
+  document.getElementById("prev").addEventListener("click", function () { go(-1); });
+  document.getElementById("notesBtn").addEventListener("click", function () { notes.classList.toggle("hidden"); });
+  document.getElementById("helpBtn").addEventListener("click", function () { help.classList.toggle("open"); });
+  document.getElementById("fsBtn").addEventListener("click", toggleFs);
+
+  function toggleFs() {
+    if (!document.fullscreenElement) {
+      if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) { document.exitFullscreen(); }
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target && e.target.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA") { if (e.key === "Escape") e.target.blur(); return; }
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case " ": case "PageDown": e.preventDefault(); go(1); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": e.preventDefault(); go(-1); break;
+      case "Home": e.preventDefault(); show(0, -1); break;
+      case "End": e.preventDefault(); show(total - 1, 1); break;
+      case "n": case "N": notes.classList.toggle("hidden"); break;
+      case "f": case "F": toggleFs(); break;
+      case "?": help.classList.toggle("open"); break;
+      case "Escape": help.classList.remove("open"); break;
+      default:
+        if (/^[1-9]$/.test(e.key)) { var t = parseInt(e.key, 10) - 1; if (t < total) show(t, t > i ? 1 : -1); }
+    }
+  });
+  help.addEventListener("click", function () { help.classList.remove("open"); });
+
+  var tx = 0, ty = 0, sw = document.getElementById("stagewrap");
+  sw.addEventListener("touchstart", function (e) { tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; }, { passive: true });
+  sw.addEventListener("touchend", function (e) {
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ================================== EMBEDDED VARIATION MACHINE ====== */
+  var ASPECTS = { "16:9": { w: 640, h: 360 }, "9:16": { w: 300, h: 533 }, "1:1": { w: 420, h: 420 } };
+  var PRESETS = {
+    marker:     { board: "#FFFFFF", ink: "#1E1E28", fill: "#F3F0FF", cue: "#2B8A3E", w: 2.6, pad: "#F4EFE7" },
+    chalkboard: { board: "#1D2B26", ink: "#FBF8F3", fill: "rgba(251,248,243,.16)", cue: "#9BE59B", w: 2.4, pad: "#111C18" },
+    pencil:     { board: "#FBF8F3", ink: "#5F646B", fill: "#E8E6E0", cue: "#8A8F98", w: 1.7, pad: "#EDEAE3" },
+    blueprint:  { board: "#123A6B", ink: "#DCEBFF", fill: "rgba(220,235,255,.18)", cue: "#8CC5FF", w: 2.0, pad: "#0C2949" },
+    crayon:     { board: "#FFFDF5", ink: "#D9480F", fill: "#FFE9D6", cue: "#FFC933", w: 3.6, pad: "#F6EFE0" },
+    clean:      { board: "#FFFFFF", ink: "#6C5CE7", fill: "#F3F0FF", cue: "#2B8A3E", w: 1.6, pad: "#F0EDFA" }
+  };
+  var COPY = {
+    en:      { heading: "How compound interest works", coin: "£1", grow: "GROWS", time: "TIME", q: "What is added next year?", recap: "Interest earns interest." },
+    es:      { heading: "Cómo funciona el interés compuesto", coin: "1 €", grow: "CRECE", time: "TIEMPO", q: "¿Qué se suma el año que viene?", recap: "El interés genera interés." },
+    "pt-BR": { heading: "Como funcionam os juros compostos", coin: "R$1", grow: "CRESCE", time: "TEMPO", q: "O que será somado no próximo ano?", recap: "Os juros rendem juros." },
+    de:      { heading: "Wie Zinseszins funktioniert", coin: "1 €", grow: "WÄCHST", time: "ZEIT", q: "Was kommt nächstes Jahr dazu?", recap: "Zinsen verdienen Zinsen." }
+  };
+  var LENGTHS = { "0:30": 2, "1:00": 3, "3:00": 5 };
+  var st = { aspect: "16:9", preset: "marker", lang: "en", len: "1:00" };
+  var variant = 1, timers = [], started = false;
+
+  var NS = "http://www.w3.org/2000/svg";
+  var dstage = document.getElementById("dstage");
+  var dpad = document.getElementById("dpad");
+  var dstatus = document.getElementById("dstatus");
+  var dver = document.getElementById("dver");
+  var dspec = document.getElementById("dspec");
+
+  function ce(n, a) {
+    var el = document.createElementNS(NS, n);
+    for (var k in a) { if (Object.prototype.hasOwnProperty.call(a, k)) el.setAttribute(k, a[k]); }
+    return el;
+  }
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function rectPath(x, y, w, h, r) {
+    r = r || 4;
+    return "M" + (x + r) + " " + y + " H" + (x + w - r) + " Q" + (x + w) + " " + y + " " + (x + w) + " " + (y + r) +
+           " V" + (y + h - r) + " Q" + (x + w) + " " + (y + h) + " " + (x + w - r) + " " + (y + h) +
+           " H" + (x + r) + " Q" + x + " " + (y + h) + " " + x + " " + (y + h - r) +
+           " V" + (y + r) + " Q" + x + " " + y + " " + (x + r) + " " + y + " Z";
+  }
+  function circlePath(cx, cy, r) {
+    return "M" + (cx - r) + " " + cy + " a" + r + " " + r + " 0 1 1 " + (2 * r) + " 0 a" + r + " " + r + " 0 1 1 " + (-2 * r) + " 0 Z";
+  }
+  function arrowPath(x1, y1, x2, y2) {
+    var a = Math.atan2(y2 - y1, x2 - x1), h = 9;
+    return "M" + x1 + " " + y1 + " L" + x2 + " " + y2 +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a - .42)) + " " + (y2 - h * Math.sin(a - .42)) +
+           " M" + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a + .42)) + " " + (y2 - h * Math.sin(a + .42));
+  }
+  function graph(c) {
+    return [
+      { kind: "circle", nx: .19, ny: .42, nr: .085, fill: 1, label: c.coin, lsize: 19 },
+      { kind: "arrow", ax: .31, ay: .42, bx: .56, by: .27, cue: 1, label: c.grow, lx: .44, ly: .20, lsize: 11 },
+      { kind: "bars", nx: .62, ny: .58, nw: .30, nh: .32, fill: 1, label: c.time, lx: .755, lsize: 11 },
+      { kind: "rect", nx: .07, ny: .68, nw: .44, nh: .13, fill: 1, label: c.q, lsize: 12 },
+      { kind: "rect", nx: .07, ny: .87, nw: .86, nh: .09, label: c.recap, lsize: 11 }
+    ];
+  }
+  function tall(g) {
+    var pos = [
+      { nx: .50, ny: .17, nr: .125 },
+      { ax: .50, ay: .28, bx: .50, by: .40 },
+      { nx: .18, ny: .50, nw: .64, nh: .20, lx: .46 },
+      { nx: .09, ny: .70, nw: .82, nh: .10 },
+      { nx: .09, ny: .855, nw: .82, nh: .085 }
+    ];
+    return g.map(function (e, i2) {
+      var o = {}, k;
+      for (k in e) { if (Object.prototype.hasOwnProperty.call(e, k)) o[k] = e[k]; }
+      for (k in pos[i2]) { if (Object.prototype.hasOwnProperty.call(pos[i2], k)) o[k] = pos[i2][k]; }
+      return o;
+    });
+  }
+
+  function render() {
+    timers.forEach(clearTimeout); timers = [];
+    var box = ASPECTS[st.aspect], p = PRESETS[st.preset], c = COPY[st.lang];
+    var isTall = st.aspect === "9:16";
+    var g = graph(c);
+    if (isTall) g = tall(g);
+    g = g.slice(0, LENGTHS[st.len]);
+
+    dstage.setAttribute("viewBox", "0 0 " + box.w + " " + box.h);
+    dstage.setAttribute("width", box.w);
+    dstage.setAttribute("height", box.h);
+    dstage.style.background = p.board;
+    dpad.style.background = p.pad;
+    dspec.textContent = st.aspect + " · " + st.preset + " · " + st.lang + " · " + st.len;
+    dstage.innerHTML = "";
+
+    var X = function (n) { return n * box.w; }, Y = function (n) { return n * box.h; };
+    var R = function (n) { return n * Math.min(box.w, box.h); };
+
+    var head = ce("text", {
+      x: isTall ? box.w / 2 : 22, y: isTall ? 34 : 33,
+      "text-anchor": isTall ? "middle" : "start",
+      "font-family": "Shantell Sans, Comic Sans MS, sans-serif",
+      "font-size": isTall ? 15 : 18, "font-weight": 700, fill: p.ink, opacity: 0
+    });
+    head.textContent = c.heading;
+    dstage.appendChild(head);
+    later(function () { head.style.transition = "opacity .3s"; head.setAttribute("opacity", 1); }, 40);
+
+    g.forEach(function (e, idx) {
+      var delay = 230 + idx * 480, d, fillD = null, barBottom = null;
+      if (e.kind === "circle") { d = circlePath(X(e.nx), Y(e.ny), R(e.nr)); fillD = d; }
+      else if (e.kind === "arrow") { d = arrowPath(X(e.ax), Y(e.ay), X(e.bx), Y(e.by)); }
+      else if (e.kind === "bars") {
+        d = "";
+        var span = e.nh * box.h, base = Y(e.ny) + span * 0.4;
+        barBottom = base;
+        for (var b = 0; b < 3; b++) {
+          var bw = (e.nw * box.w) / 4.2, bx = X(e.nx) + b * bw * 1.35;
+          var bh = span * (0.34 + b * 0.33);
+          d += rectPath(bx, base - bh, bw, bh, 2) + " ";
+        }
+        fillD = d;
+      } else {
+        d = rectPath(X(e.nx), Y(e.ny), e.nw * box.w, e.nh * box.h, 4);
+        if (e.fill) fillD = d;
+      }
+
+      if (fillD) {
+        var f = ce("path", { d: fillD, fill: p.fill, stroke: "none", "fill-opacity": 0 });
+        dstage.appendChild(f);
+        later(function () { f.style.transition = "fill-opacity .3s"; f.setAttribute("fill-opacity", 1); }, delay + 260);
+      }
+      var path = ce("path", {
+        d: d, fill: "none", stroke: e.cue ? p.cue : p.ink, "stroke-width": p.w,
+        "stroke-linecap": "round", "stroke-linejoin": "round"
+      });
+      dstage.appendChild(path);
+      var len = 700;
+      try { len = path.getTotalLength() || 700; } catch (err) { len = 700; }
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = reduce ? 0 : len;
+      later(function () {
+        path.style.transition = "stroke-dashoffset .4s cubic-bezier(.4,.05,.2,1)";
+        path.style.strokeDashoffset = 0;
+      }, delay);
+
+      if (e.label) {
+        var lx, ly;
+        if (e.kind === "bars") {
+          /* FIXED: anchored to the MEASURED bar baseline so the label can never
+             sit on top of the bars, whatever the aspect ratio does. */
+          lx = e.lx !== undefined ? X(e.lx) : X(e.nx) + (e.nw * box.w) / 2;
+          ly = barBottom + (isTall ? 19 : 21);
+        } else if (e.kind === "circle") {
+          lx = X(e.nx); ly = Y(e.ny) + 6;
+        } else {
+          lx = e.lx !== undefined ? X(e.lx) : X(e.nx) + (e.nw || 0) * box.w / 2;
+          ly = e.ly !== undefined ? Y(e.ly) : Y(e.ny) + (e.nh || 0) * box.h / 2 + 4;
+        }
+        var t = ce("text", {
+          x: lx, y: ly, "text-anchor": "middle",
+          "font-family": "Shantell Sans, Comic Sans MS, sans-serif",
+          "font-size": (e.lsize || 12) * (isTall ? .9 : 1), "font-weight": 600,
+          fill: e.cue ? p.cue : p.ink, opacity: 0
+        });
+        t.textContent = e.label;
+        dstage.appendChild(t);
+        later(function () { t.style.transition = "opacity .28s"; t.setAttribute("opacity", 1); }, delay + 240);
+      }
+    });
+  }
+
+  var KNOBS = {
+    aspect: { opts: ["16:9", "9:16", "1:1"], msg: function (v) { return "<b>re-rendered as " + v + "</b> · same source graph"; } },
+    preset: { opts: ["marker", "chalkboard", "pencil", "blueprint", "crayon", "clean"], msg: function (v) { return "<b>drawing style: " + v + "</b> · same source graph"; } },
+    lang:   { opts: ["en", "es", "pt-BR", "de"], msg: function (v) { return "<b>regenerated in " + v + "</b> · script, labels and narration in-language"; } },
+    len:    { opts: ["0:30", "1:00", "3:00"], msg: function (v) { return "<b>cut to " + v + "</b> · 30-second steps, up to 6:00"; } }
+  };
+  Object.keys(KNOBS).forEach(function (key) {
+    var host = document.querySelector('[data-knob="' + key + '"]');
+    KNOBS[key].opts.forEach(function (v) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "opt"; b.textContent = v;
+      b.setAttribute("aria-pressed", st[key] === v ? "true" : "false");
+      b.addEventListener("click", function () {
+        if (st[key] === v) return;
+        st[key] = v;
+        Array.prototype.forEach.call(host.children, function (ch) {
+          ch.setAttribute("aria-pressed", ch.textContent === v ? "true" : "false");
+        });
+        variant++;
+        dver.textContent = "variant " + variant;
+        dstatus.innerHTML = KNOBS[key].msg(v);
+        render();
+      });
+      host.appendChild(b);
+    });
+  });
+
+  function startDemo() { if (started) return; started = true; render(); }
+
+  show(0, 0);
+})();
+</script>
+</body>
+</html>
