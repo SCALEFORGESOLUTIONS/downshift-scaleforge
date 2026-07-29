@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivalize — Product Deck</title>
+<!--
+  ============================================================================
+  RIVALIZE — PRODUCT / SALES DECK
+  ============================================================================
+  Built: 2026-07-29 · self-contained · no build step · no dependencies
+  beyond one Google Fonts link.
+
+  DECK TYPE — WHY THIS IS NOT AN INVESTOR DECK
+  rivalize.ai publishes no revenue, no funding, no team page content, no
+  customer logos and no traction figures. /about is client-rendered and
+  returns no body copy. An investor deck would therefore have to invent
+  every proof slide. This is a PRODUCT / SALES deck. The only quantitative
+  claims used are ones the live site publishes with its own verify links.
+
+  BRAND SOURCE OF TRUTH - REVISED 2026-07-29 AGAINST FIRST-PARTY ASSETS
+  This revision is built from the live rivalize.ai page export plus its own
+  stylesheet (index-CvlI2R4L.css) and font request (css2). Where those
+  disagreed with RIVALIZE_MASTER.md, the live site won.
+
+    · TYPEFACE. The live stylesheet sets body{font-family:Geist,system-ui,
+      sans-serif} and exposes Geist Mono only through a .font-mono utility.
+      The site is SANS-forward; master §1.3 describes a mono-forward
+      interface. Corrected: Geist sans is now the base, Geist Mono carries
+      eyebrows, source lines, chips, verdict labels, code and tabular data.
+    · WEIGHTS. The live css2 loads Geist 400/500/600/700 and Geist Mono
+      400/500 - mono 600/700 are NOT loaded. The font link now matches
+      exactly and no mono element asks for a weight above 500, so nothing
+      is faux-bolded. Retuned with it: base size 13.5 -> 14px, line-height
+      1.6 -> 1.55, because Geist sans sets narrower than Geist Mono at the
+      same size.
+    · COLOUR. The live :root carries the tokens in HSL. They round-trip to
+      the same hex as master §1.1 (--signal 43 100% 62%, and the literal
+      --signal-soft:#ffc53d1a confirms #FFC53D; --background 180 4% 5%
+      is #0C0D0D). Tokens unchanged. The retired #121110/#E09400 palette
+      appears nowhere here - though it IS still visible in the report
+      screenshot, which is a separate open defect.
+
+  LOGO MARK AND WORDMARK - CORRECTED
+  Both were wrong in the previous revision. The live nav renders:
+    <div class="h-8 w-8 rounded-lg bg-primary">
+      <svg width=18 height=18 viewBox="0 0 18 18">
+        circle r=7 stroke 1.5 · circle r=4 stroke 1.5 · circle r=1.5 fill
+    <span class="font-bold text-lg tracking-tight">Rivalize</span>
+  So: a CLOSED three-ring reticle, not an open ring with a gap. And the
+  wordmark is "Rivalize" - title case, Geist sans 700, tracking -.025em.
+  It is NOT set uppercase, NOT letter-spaced at .18em, and the Z is NOT
+  amber. Master §1.8 describes an uppercase amber-Z wordmark; the live
+  product does not use it.
+
+  CONTRADICTIONS RESOLVED — see the reply summary for the full list.
+  Search for [CONTRA-n] in this file to find each resolution point.
+
+  TO CHANGE THE LIVE COUNTS
+  Slide 9 "honest proof" figures are live counts and will drift. They are in
+  one place: search for id="proof-figures".
+  ============================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS · RIVALIZE_MASTER.md §1.1 · verbatim ───────────────────────── */
+:root{
+  --bg:#0C0D0D; --surface:#131414; --surface-2:#101111; --elevated:#191A1A;
+  --border:#242626; --border-strong:#333636; --hair:#1B1D1D;
+  --grid:rgba(255,255,255,.026);
+  --hi:#EAEDEC; --txt:#98A0A0; --mu:#636B6B; --dim:#454C4C;
+  --signal:#FFC53D;
+  --signal-soft:rgba(255,197,61,.10);
+  --signal-line:rgba(255,197,61,.28);
+  --signal-ink:#161100;
+  --win:#3ACE88; --lose:#FF6660; --parity:#FFC53D; --unknown:#7B8888;
+  --win-bg:rgba(58,206,136,.10); --lose-bg:rgba(255,102,96,.10);
+  --parity-bg:rgba(255,197,61,.10); --unknown-bg:rgba(123,136,136,.12);
+  --s1:#4E92E0; --s2:#22A87C; --s3:#C2932F; --s4:#3FA85E;
+  --s5:#8676D6; --s6:#E8645F; --s7:#D77BA0; --s8:#E27C40;
+  --shadow:0 1px 0 rgba(255,255,255,.02), 0 24px 54px -34px rgba(0,0,0,.88);
+  /* spacing scale */
+  --sp1:6px; --sp2:12px; --sp3:20px; --sp4:32px; --sp5:52px; --sp6:70px;
+  --notes-h:0px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--bg); color:var(--txt);
+  /* LIVE SITE, index-CvlI2R4L.css: body{font-family:Geist,system-ui,sans-serif}
+     Geist Mono is the .font-mono utility only. The deck now matches. */
+  font-family:'Geist',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  font-size:14px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+/* Geist ships NO italics (single wght axis). Never set italic.
+   Geist Mono is loaded at 400/500 ONLY - same as the live site. Never ask
+   for mono 600/700 or the browser will synthesise it. */
+.sans{font-family:'Geist',system-ui,-apple-system,'Segoe UI',Arial,sans-serif}
+.mono{font-family:'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace}
+.num{font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{color:var(--hi);font-weight:600;letter-spacing:-.005em;line-height:1.1}
+.sans h1,.sans h2{letter-spacing:-.03em}
+a{color:inherit}
+
+/* ── the masked grid · §1.4 · ghosts near the top edge, never a cage ──── */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(1200px 620px at 76% -6%,#000 0%,transparent 62%);
+  mask-image:radial-gradient(1200px 620px at 76% -6%,#000 0%,transparent 62%);
+}
+
+/* ── the ONE signature · corner-tick · primary console only · §1.4 ─────── */
+.tick{position:relative}
+.tick::before,.tick::after{
+  content:""; position:absolute; width:10px; height:10px;
+  border-color:var(--signal-line); pointer-events:none;
+}
+.tick::before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
+.tick::after{bottom:-1px;right:-1px;border-bottom:1px solid;border-right:1px solid}
+
+/* ── shell ─────────────────────────────────────────────────────────────── */
+#deck{position:fixed;inset:0;display:flex;flex-direction:column;z-index:1}
+#stage{position:relative;flex:1;min-height:0;overflow:hidden}
+
+.slide{
+  position:absolute; inset:0; display:none;
+  padding:clamp(28px,4.4vh,58px) clamp(28px,5vw,86px) clamp(18px,3vh,34px);
+  flex-direction:column; overflow:hidden;
+}
+.slide.active{display:flex}
+.slide-inner{width:100%;max-width:1160px;margin:0 auto;flex:1;min-height:0;display:flex;flex-direction:column}
+
+/* direction-aware entry */
+@keyframes inFromRight{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+@keyframes inFromLeft {from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:none}}
+.slide.active.from-right{animation:inFromRight .42s cubic-bezier(.22,.61,.36,1) both}
+.slide.active.from-left {animation:inFromLeft  .42s cubic-bezier(.22,.61,.36,1) both}
+
+/* content cascade within a slide */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.slide.active .casc>*{animation:rise .5s cubic-bezier(.22,.61,.36,1) both}
+.slide.active .casc>*:nth-child(1){animation-delay:.10s}
+.slide.active .casc>*:nth-child(2){animation-delay:.19s}
+.slide.active .casc>*:nth-child(3){animation-delay:.28s}
+.slide.active .casc>*:nth-child(4){animation-delay:.37s}
+.slide.active .casc>*:nth-child(5){animation-delay:.46s}
+.slide.active .casc>*:nth-child(6){animation-delay:.55s}
+.slide.active .casc>*:nth-child(7){animation-delay:.64s}
+.slide.active .casc>*:nth-child(8){animation-delay:.73s}
+
+/* ── type roles · §1.3 ─────────────────────────────────────────────────── */
+.eyebrow{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--mu); margin-bottom:var(--sp3);
+}
+.eyebrow b{color:var(--signal);font-weight:400}
+.display{
+  font-family:'Geist',system-ui,sans-serif; font-weight:600;
+  font-size:clamp(30px,4.0vw,54px); letter-spacing:-.035em; line-height:1.04;
+  color:var(--hi); max-width:22ch;
+}
+.display .amber{color:var(--signal)}
+.sub{margin-top:var(--sp3);max-width:72ch;color:var(--txt);font-size:14px}
+h2.mono{font-family:'Geist Mono',monospace;font-size:21px;font-weight:500;letter-spacing:.005em}
+.data{font-size:15px;font-variant-numeric:tabular-nums;color:var(--hi)}
+.mu{color:var(--mu)} .dim{color:var(--dim)} .hi{color:var(--hi)}
+.rule{height:1px;background:var(--hair);margin:var(--sp3) 0}
+
+/* ── components ────────────────────────────────────────────────────────── */
+.card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:7px; padding:var(--sp3); box-shadow:var(--shadow);
+  transition:transform .34s cubic-bezier(.34,1.56,.64,1),
+             border-color .34s ease, background .34s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--border-strong);background:var(--elevated)}
+.card h3{font-size:14px;margin-bottom:var(--sp1)}
+.card p{font-size:12.5px;color:var(--txt);line-height:1.55}
+.glyph{color:var(--signal);font-size:17px;line-height:1;display:block;margin-bottom:var(--sp2)}
+.console{
+  background:var(--surface-2); border:1px solid var(--border-strong);
+  border-radius:9px; padding:var(--sp4);
+}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp2)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp2)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp2)}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--border);border-radius:5px;
+  padding:4px 9px;font-size:10.5px;letter-spacing:.06em;
+  font-family:'Geist Mono',ui-monospace,monospace;
+  text-transform:uppercase;color:var(--mu);background:var(--surface);
+}
+.chip.on{border-color:var(--signal-line);color:var(--signal);background:var(--signal-soft)}
+.src{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;color:var(--dim);letter-spacing:.04em}
+.src b{color:var(--mu);font-weight:400}
+
+/* verdict semantics · §1.5 · icon + label, NEVER colour alone */
+.v{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;
+   font-family:'Geist Mono',ui-monospace,monospace;
+   padding:3px 8px;border-radius:4px;text-transform:uppercase}
+.v-win{color:var(--win);background:var(--win-bg)}
+.v-lose{color:var(--lose);background:var(--lose-bg)}
+.v-parity{color:var(--parity);background:var(--parity-bg)}
+.v-abstain{color:var(--unknown);background:var(--unknown-bg)}
+
+/* ── slide 1 · title ───────────────────────────────────────────────────── */
+.wordmark{display:flex;align-items:center;gap:10px}          /* live: gap-2.5 = 10px */
+.mark-tile{
+  width:32px;height:32px;border-radius:8px;background:var(--signal);  /* live: h-8 w-8 rounded-lg bg-primary */
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+}
+.mark-tile svg{color:var(--signal-ink)}                        /* live: primary-foreground */
+/* LIVE MARKUP: <span class="font-bold text-foreground text-lg tracking-tight">Rivalize</span>
+   font-bold = 700 · text-lg = 18px · tracking-tight = -.025em · Geist sans.
+   NOT uppercase, NOT letter-spaced, and the Z is NOT amber anywhere on the
+   live site or in the favicon. Earlier revision had all three wrong. */
+.wm-text{
+  font-family:'Geist',system-ui,sans-serif;
+  font-size:18px;line-height:1;letter-spacing:-.025em;font-weight:700;color:var(--hi);
+}
+
+/* ── the instrument · live demo ────────────────────────────────────────── */
+.instrument{display:grid;grid-template-columns:200px 1fr;gap:var(--sp4);align-items:center}
+.gauge-wrap{text-align:center}
+.gauge{width:150px;height:150px;display:block;margin:0 auto}
+.gauge .track{fill:none;stroke:var(--hair);stroke-width:9}
+.gauge .val{fill:none;stroke:var(--signal);stroke-width:9;stroke-linecap:butt;
+  transition:stroke-dashoffset .8s cubic-bezier(.22,.61,.36,1),stroke .3s}
+.gauge .val.abstain{stroke:var(--unknown);stroke-dasharray:4 6}
+.gauge-num{font-size:29px;font-weight:600;fill:var(--hi);font-variant-numeric:tabular-nums;
+  font-family:'Geist',sans-serif;letter-spacing:-.03em}
+.gauge-cap{font-size:9px;fill:var(--mu);letter-spacing:.16em;font-family:'Geist Mono',monospace}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 78px;align-items:center;gap:var(--sp2);font-size:12px}
+.bar-track{height:5px;background:var(--hair);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .75s cubic-bezier(.22,.61,.36,1),background .3s}
+.bar-val{font-family:'Geist Mono',ui-monospace,monospace;text-align:right;font-variant-numeric:tabular-nums;color:var(--hi);font-size:11.5px}
+.toggle-row{display:flex;gap:var(--sp2);margin-top:var(--sp3);flex-wrap:wrap}
+.tgl{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--surface);color:var(--mu);border:1px solid var(--border);
+  border-radius:5px;padding:7px 13px;cursor:pointer;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .3s,color .3s,background .3s;
+}
+.tgl:hover{transform:translateY(-2px);border-color:var(--border-strong);color:var(--txt)}
+.tgl[aria-pressed="true"]{border-color:var(--signal-line);color:var(--signal);background:var(--signal-soft)}
+.tgl:focus-visible,.navbtn:focus-visible,.tgl:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.verdict-line{
+  margin-top:var(--sp3);padding-top:var(--sp3);border-top:1px solid var(--hair);
+  font-size:12.5px;color:var(--txt);min-height:42px;
+}
+.verdict-line b{color:var(--hi);font-weight:400}
+
+/* ── pricing ladder ────────────────────────────────────────────────────── */
+table.ladder{width:100%;border-collapse:collapse;font-size:12.5px}
+table.ladder th{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  text-align:left;font-weight:400;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mu);padding:0 var(--sp2) var(--sp2) 0;
+  border-bottom:1px solid var(--border);
+}
+table.ladder td{padding:11px var(--sp2) 11px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+table.ladder tr:last-child td{border-bottom:none}
+table.ladder .price{color:var(--hi);font-variant-numeric:tabular-nums}
+table.ladder tr.feature .price{color:var(--signal)}
+
+/* ── chrome ────────────────────────────────────────────────────────────── */
+#progress{height:2px;background:var(--hair);flex:0 0 auto;position:relative;z-index:3}
+#progress i{display:block;height:100%;background:var(--signal);width:0;
+  transition:width .42s cubic-bezier(.22,.61,.36,1)}
+#hud{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--sp3);padding:9px clamp(18px,5vw,86px);
+  border-top:1px solid var(--hair);background:var(--bg);z-index:3;
+}
+#hud .left{display:flex;align-items:center;gap:12px;min-width:0}
+#hud .wm-mini{display:flex;align-items:center;gap:8px}
+#hud .wm-mini .mark-tile{width:21px;height:21px;border-radius:6px}
+#hud .wm-mini span{font-family:'Geist',system-ui,sans-serif;font-size:12px;
+  letter-spacing:-.025em;font-weight:700;color:var(--txt)}
+#counter{font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;color:var(--mu);font-variant-numeric:tabular-nums;letter-spacing:.08em}
+#counter b{color:var(--hi);font-weight:400}
+.navbtn{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  background:transparent;border:1px solid var(--border);
+  color:var(--mu);border-radius:4px;width:28px;height:26px;cursor:pointer;font-size:12px;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .3s,color .3s;
+}
+.navbtn:hover{transform:translateY(-2px);border-color:var(--signal-line);color:var(--signal)}
+.navbtn.wide{width:auto;padding:0 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ── presenter notes · BELOW the slide · two columns ───────────────────── */
+#notes{
+  flex:0 0 auto;height:0;overflow:hidden;background:var(--surface-2);
+  border-top:1px solid var(--border);transition:height .3s ease;z-index:3;
+}
+#notes.open{height:min(31vh,268px);overflow-y:auto}
+.notes-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--sp4);
+  padding:var(--sp3) clamp(18px,5vw,86px);max-width:1400px;margin:0 auto;
+}
+.notes-col h4{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--signal);margin-bottom:10px;font-weight:400;
+}
+.notes-col h4.plain{color:var(--mu)}
+.notes-col p,.notes-col li{font-size:11.5px;line-height:1.62;color:var(--txt)}
+.notes-col ul{list-style:none}
+.notes-col li{padding-left:14px;position:relative;margin-bottom:5px}
+.notes-col li::before{content:"·";position:absolute;left:2px;color:var(--dim)}
+.notes-col li.ok::before{content:"✓";color:var(--win);font-size:10px}
+.notes-col li.no::before{content:"✕";color:var(--lose);font-size:10px}
+
+/* ── help overlay ──────────────────────────────────────────────────────── */
+#help{
+  position:fixed;inset:0;background:rgba(12,13,13,.94);z-index:60;
+  display:none;align-items:center;justify-content:center;padding:var(--sp4);
+}
+#help.open{display:flex}
+#help .console{max-width:560px;width:100%}
+#help dl{display:grid;grid-template-columns:auto 1fr;gap:9px var(--sp3);font-size:12px;margin-top:var(--sp3)}
+#help dt{font-family:'Geist Mono',ui-monospace,monospace;color:var(--signal);letter-spacing:.06em;white-space:nowrap}
+#help dd{color:var(--txt)}
+
+@media (max-width:820px){
+  .instrument{grid-template-columns:1fr;gap:var(--sp3)}
+  .grid4,.grid3{grid-template-columns:repeat(2,1fr)}
+  .notes-grid{grid-template-columns:1fr;gap:var(--sp3)}
+  .bar-row{grid-template-columns:92px 1fr 30px}
+  .display{max-width:none}
+}
+@media (max-width:560px){
+  .grid4,.grid3,.grid2{grid-template-columns:1fr}
+}
+
+/* ── prefers-reduced-motion · resolve instantly to static layout ───────── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-delay:0ms!important;
+    transition-duration:.001ms!important;
+  }
+  .slide.active.from-right,.slide.active.from-left{animation:none}
+  .slide.active .casc>*{animation:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="deck">
+  <div id="stage">
+
+  <!-- ═══ 01 · TITLE ═══════════════════════════════════════════════════ -->
+  <section class="slide" data-notes="1">
+    <div class="slide-inner casc" style="justify-content:center">
+      <div class="wordmark">
+        <span class="mark-tile">
+          <!-- Geometry copied verbatim from the live nav mark (rivalize.ai,
+               index-CYLXt58R.js): 18x18, three concentric circles, r=7 and
+               r=4 stroked at 1.5, r=1.5 filled. It is a closed reticle - the
+               earlier open ring with a gap at 12 o'clock was wrong. -->
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" role="img">
+            <title>Rivalize logo</title>
+            <circle cx="9" cy="9" r="7"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="4"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="1.5" fill="currentColor"></circle>
+          </svg>
+        </span>
+        <span class="wm-text">Rivalize</span>
+      </div>
+      <h1 class="display" style="margin-top:var(--sp5)">
+        Every claim cited.<br>Everything <span class="amber">verifiable.</span>
+      </h1>
+      <p class="sub" style="max-width:60ch">
+        The agentic competitive-intelligence platform. Deep, cited teardowns of every rival —
+        pricing, product, ads, positioning — kept current on a clear monitoring schedule.
+      </p>
+      <div class="rule"></div>
+      <p class="src">
+        <b>PRODUCT DECK</b> · rivalize.ai · Lima · July 2026 &nbsp;//&nbsp;
+        every figure sourced to the live site · estimates labelled · nothing invented
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · THE PROBLEM ════════════════════════════════════════════ -->
+  <section class="slide" data-notes="2">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE PROBLEM</b> · the buyer we built for</p>
+      <h2 class="display">You can name three rivals.<br>You watch <span class="amber">none</span> of them.</h2>
+      <p class="sub">
+        The founder or PMM who owns positioning can list their competitors off the top of their
+        head. Their actual system for watching any of them is a bookmark folder and a hope.
+      </p>
+      <div class="grid4" style="margin-top:var(--sp4)">
+        <div class="card"><span class="glyph">◱</span><h3>Bookmarks</h3><p>Plus a Google Alert that mostly returns press-release spam.</p></div>
+        <div class="card"><span class="glyph">◲</span><h3>A spreadsheet</h3><p>Updated by hand, the week before a board deck.</p></div>
+        <div class="card"><span class="glyph">◳</span><h3>One page watcher</h3><p>Firing on cookie-banner noise. A page moved. So what.</p></div>
+        <div class="card"><span class="glyph">◎</span><h3>An LLM prompt</h3><p>Free, instant, already open in the other tab. Cites nothing.</p></div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)">
+        The buying moment is not a calendar reminder. It is a lost deal, a churn note, or a board
+        member asking about the landscape. Episodic, and it stings.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · THE REFRAME ════════════════════════════════════════════ -->
+  <section class="slide" data-notes="3">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE REFRAME</b> · why not just use ChatGPT</p>
+      <h2 class="display">Prompts guess.<br>Rivalize <span class="amber">knows.</span></h2>
+      <div class="grid3" style="margin-top:var(--sp4)">
+        <div class="card">
+          <span class="glyph">◈</span>
+          <h3>Real scraping, not recall</h3>
+          <p>40+ data points per rival across 8 source categories, fetched. A prompt answers from training data that may be months old.</p>
+        </div>
+        <div class="card">
+          <span class="glyph">⌗</span>
+          <h3>A source on every claim</h3>
+          <p>Every data point links to where we found it. A prompt cannot cite what it never fetched.</p>
+        </div>
+        <div class="card">
+          <span class="glyph">◎</span>
+          <h3>Monitoring, not one-shots</h3>
+          <p>Changes tracked over time and scored for momentum. A prompt hands you a snapshot that is already stale.</p>
+        </div>
+      </div>
+      <div class="rule"></div>
+      <p class="sub" style="margin-top:0">
+        The enterprise tools are priced out of reach and drown their users in noise. The cheap
+        tools tell you a page changed, not whether it mattered. The gap in the middle is synthesis
+        you can trust at a price a founder pays without asking anyone.
+      </p>
+      <p class="src" style="margin-top:var(--sp2)"><b>SOURCE</b> · rivalize.ai/industry/competitive-intelligence · live site copy</p>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · WHAT IT IS ═════════════════════════════════════════════ -->
+  <section class="slide" data-notes="4">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE PRODUCT</b> · the dossier</p>
+      <h2 class="display">One rival.<br>The whole <span class="amber">picture.</span></h2>
+      <p class="sub">
+        Every competitor becomes a living file — pricing, product, ads, hiring and positioning —
+        with the moves that matter surfaced and the counter spelled out. Not a spreadsheet you
+        maintain. A page that maintains itself.
+      </p>
+      <div class="grid3" style="margin-top:var(--sp4)">
+        <div class="card">
+          <span class="glyph">◱</span><h3>Discovery from a URL</h3>
+          <p>Hand it one address. It resolves the real competitor set, ranked by confidence — including the rivals you did not think to watch.</p>
+        </div>
+        <div class="card">
+          <span class="glyph">◈</span><h3>Synthesis, then a call</h3>
+          <p>Momentum scored, where you lead and trail named, and the ranked move spelled out. A read, not a raw feed.</p>
+        </div>
+        <div class="card">
+          <span class="glyph">◳</span><h3>It keeps itself current</h3>
+          <p>Every surface a rival gives away, re-checked on a clear monitoring schedule. You hear it from Rivalize before you hear it from a churned customer.</p>
+        </div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)"><b>SOURCE</b> · rivalize.ai/product</p>
+    </div>
+  </section>
+
+  <!-- ═══ 05 · SIX SIGNALS ════════════════════════════════════════════ -->
+  <section class="slide" data-notes="5">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>COVERAGE</b> · 8 source categories · 40+ data points per rival</p>
+      <h2 class="display">We watch everything <span class="amber">that matters.</span></h2>
+      <p class="sub">Every source a competitor gives away, turned into signal rather than noise.</p>
+      <div class="grid3" style="margin-top:var(--sp4)">
+        <!-- [CONTRA-4] The live site's change-detection line reads: pricing,
+             product, positioning, hiring and content. Ads are evidenced
+             separately, across Google and Meta only - not LinkedIn. -->
+        <div class="card"><span class="glyph">◱</span><h3>Pricing</h3><p>Plan changes, new tiers, discounts and packaging shifts.</p></div>
+        <div class="card"><span class="glyph">◈</span><h3>Product</h3><p>Changelogs, ships and the roadmap they are telegraphing.</p></div>
+        <div class="card"><span class="glyph">◳</span><h3>Positioning</h3><p>How the story on the page moves, and who it is now aimed at.</p></div>
+        <div class="card"><span class="glyph">◲</span><h3>Ads</h3><p>Live creatives observed across Google and Meta, by network.</p></div>
+        <div class="card"><span class="glyph">◧</span><h3>Hiring</h3><p>Open roles that reveal where they are investing next.</p></div>
+        <div class="card"><span class="glyph">◎</span><h3>Content</h3><p>Publishing velocity, and the bets underneath it.</p></div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)">
+        <b>SOURCE</b> · rivalize.ai · momentum signals published as: employees · funding ·
+        social followers · reviews · app store · open positions · content velocity · changelog · customer proof
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 06 · THE INSTRUMENT · LIVE DEMO ═════════════════════════════ -->
+  <section class="slide" data-notes="6">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE VERDICT</b> · live · click the states</p>
+      <div class="console tick">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;
+                    gap:var(--sp3);flex-wrap:wrap;margin-bottom:var(--sp4)">
+          <div>
+            <h3 class="sans" style="font-size:20px;letter-spacing:-.03em" id="subject">dossier / linear.app</h3>
+            <p class="src" style="margin-top:5px" id="meta-line">Worked example published on rivalize.ai</p>
+          </div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <span class="chip" id="chip-a">Pricing <b class="v v-lose" style="padding:0;background:none">▼ BEHIND</b></span>
+            <span class="chip" id="chip-b">Velocity <b class="v v-win" style="padding:0;background:none">▲ AHEAD</b></span>
+          </div>
+        </div>
+
+        <div class="instrument">
+          <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 140 140" role="img" aria-label="Momentum gauge">
+              <g transform="rotate(135 70 70)">
+                <circle class="track" cx="70" cy="70" r="54"
+                        stroke-dasharray="254.47 339.29"></circle>
+                <circle class="val" id="gauge-val" cx="70" cy="70" r="54"
+                        stroke-dasharray="254.47 339.29" stroke-dashoffset="45.80"></circle>
+              </g>
+              <text class="gauge-num" id="gauge-num" x="70" y="72" text-anchor="middle">82</text>
+              <text class="gauge-cap" id="gauge-cap" x="70" y="90" text-anchor="middle">VS YOU · 64</text>
+            </svg>
+          </div>
+
+          <!-- [CONTRA-5] The six bar values in the previous revision (88/76/
+               64/71/59/45) were invented. They are replaced by the four
+               counters the live dossier example actually publishes. -->
+          <div class="bars" id="bars">
+            <div class="bar-row"><span class="mu">Pricing moves</span><span class="bar-track"><i class="bar-fill" style="width:25%;background:var(--signal)"></i></span><span class="bar-val">3 · 7d</span></div>
+            <div class="bar-row"><span class="mu">New ad creative</span><span class="bar-track"><i class="bar-fill" style="width:100%;background:var(--signal)"></i></span><span class="bar-val">12 · 2n</span></div>
+            <div class="bar-row"><span class="mu">Product ships</span><span class="bar-track"><i class="bar-fill" style="width:42%;background:var(--signal)"></i></span><span class="bar-val">5 · mo</span></div>
+            <div class="bar-row"><span class="mu">Hiring signal</span><span class="bar-track"><i class="bar-fill" style="width:66%;background:var(--signal)"></i></span><span class="bar-val">↑ ent</span></div>
+          </div>
+        </div>
+
+        <div class="verdict-line" id="verdict">
+          <span class="v v-parity">◈ RECOMMENDED MOVE</span>
+          <span style="margin-left:8px">They're accelerating upmarket.
+          <b>Defend mid-market with a stronger onboarding story before their enterprise push lands.</b></span>
+        </div>
+
+        <div class="toggle-row">
+          <button class="tgl" data-state="strong" aria-pressed="true">Strong signal</button>
+          <button class="tgl" data-state="thin" aria-pressed="false">Thin signal → abstain</button>
+          <button class="tgl" data-state="self" aria-pressed="false">Our own score</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · PROVENANCE ═════════════════════════════════════════════ -->
+  <section class="slide" data-notes="7">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>PROVENANCE</b> · the spine</p>
+      <h2 class="display">The tool that <span class="amber">abstains</span><br>is the one you can quote.</h2>
+      <p class="sub">
+        In a category whose top complaint is signal-to-noise, and a moment when every model will
+        confidently invent a competitor fact, refusing to make things up is the sharpest wedge we
+        have. Every claim in a report is either sourced or withheld.
+      </p>
+      <div class="grid2" style="margin-top:var(--sp4)">
+        <div class="card">
+          <h3 style="margin-bottom:var(--sp2)">What a claim carries</h3>
+          <p style="margin-bottom:9px">A source, a date, and a link to the live surface that proves it — the pricing page, the changelog, the ad library, the job post. Click through and check anything.</p>
+          <p class="src"><b>LIVE</b> · rivalize.ai/product · "every move links back to where we found it"</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:var(--sp2)">What happens when it cannot</h3>
+          <p style="margin-bottom:9px">The cell abstains. It does not guess, and it does not render a fake zero. A number below threshold reads <span class="v v-abstain">? ABSTAIN</span> with the console line that explains why.</p>
+          <p class="src"><b>PRECEDENT</b> · sources below threshold → verdict withheld</p>
+        </div>
+      </div>
+      <div class="rule"></div>
+      <p class="sub" style="margin-top:0;font-size:13px">
+        We hold ourselves to it too. Rivalize's own momentum renders <span class="hi num">1 / 100</span> with an
+        early-signal caption and a banner saying it reflects pre-launch stage, not product quality.
+        We did not round it up.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · THE AGENT LAYER ════════════════════════════════════════ -->
+  <section class="slide" data-notes="8">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE AGENT LAYER</b> · developers</p>
+      <h2 class="display">Intelligence for you.<br><span class="amber">Ammunition</span> for your AI.</h2>
+      <p class="sub">
+        A clean REST API and an agent-ready endpoint on every report. Plug live competitor intel
+        straight into Claude, Cursor, and any agent, dashboard, or workflow.
+      </p>
+      <div class="console" style="margin-top:var(--sp4);padding:var(--sp3) var(--sp4)">
+        <p class="src" style="margin-bottom:var(--sp2)"><b>your agent &middot; rivalize API</b></p>
+        <pre style="font-size:12px;line-height:1.75;color:var(--txt);overflow-x:auto"><span class="dim"># hand any report to your agent — live today</span>
+$ curl rivalize.ai/api/reports/{id}/ai
+  <span class="mu">← full teardown · agent-ready markdown · every claim cited</span>
+
+<span class="dim"># or trigger one from your stack (API v1)</span>
+$ curl -X POST api.rivalize.ai/v1/reports \
+    -H <span style="color:var(--signal)">"Authorization: Bearer $RIVALIZE_API_KEY"</span> \
+    -d '{"product_url":"you.com","competitors":["linear.app"]}'</pre>
+      </div>
+      <div class="grid3" style="margin-top:var(--sp3)">
+        <!-- [CONTRA-2] The live head tags carry a standing engineering
+             directive: never market an "API/MCP data layer" claim, because
+             the MCP package is unpublished (FR-539). The previous revision
+             named "nine agent-callable tools" - that number is on no public
+             page. Card 2 now uses the site's own wording. -->
+        <div class="card"><h3><span class="v v-win">✓ LIVE</span></h3><p style="margin-top:9px">REST API and an agent-ready endpoint on every report. Webhooks too. API is listed on the Pro plan.</p></div>
+        <div class="card"><h3><span class="v v-parity">◈ SOON</span></h3><p style="margin-top:9px">Native MCP server — the site says coming soon and nothing more. The package is unpublished, so it is never sold as shipped.</p></div>
+        <div class="card"><h3><span class="v v-abstain">? UNVERIFIED</span></h3><p style="margin-top:9px">We do not claim to be alone here. At least one rival at a comparable price reportedly ships an MCP integration.</p></div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)"><b>SOURCE</b> · rivalize.ai "For builders" · curl blocks are the live examples, verbatim</p>
+    </div>
+  </section>
+
+  <!-- ═══ 09 · HONEST PROOF ═══════════════════════════════════════════ -->
+  <section class="slide" data-notes="9">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>HONEST PROOF</b> · check every one</p>
+      <h2 class="display">No borrowed logos.<br>No invented <span class="amber">case studies.</span></h2>
+      <p class="sub">
+        Three numbers, each with a verify link on the live site. This is the whole proof section and
+        it is deliberately short — better three things you can check than twenty you cannot.
+      </p>
+      <div class="grid3" id="proof-figures" style="margin-top:var(--sp4)">
+        <div class="card">
+          <p class="sans num" style="font-size:36px;font-weight:600;letter-spacing:-.035em;color:var(--signal)">2,247</p>
+          <h3 style="margin-top:9px">companies sourced</h3>
+          <p class="src" style="margin-top:7px">Live count · browse the universe</p>
+        </div>
+        <div class="card">
+          <p class="sans num" style="font-size:36px;font-weight:600;letter-spacing:-.035em;color:var(--signal)">30</p>
+          <h3 style="margin-top:9px">sections per report</h3>
+          <p class="src" style="margin-top:7px">Read every one · Figma vs Adobe XD &amp; Sketch</p>
+        </div>
+        <div class="card">
+          <p class="sans num" style="font-size:36px;font-weight:600;letter-spacing:-.035em;color:var(--signal)">0</p>
+          <h3 style="margin-top:9px">claims guessed</h3>
+          <p class="src" style="margin-top:7px">First-party signals only · see the sources</p>
+        </div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)">
+        <b>SOURCE</b> · rivalize.ai "Honest proof", each figure carrying its own verify link ·
+        captured 2026-07-29 · counts are live and will drift · edit at id="proof-figures"
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 10 · WHO IT'S FOR ═══════════════════════════════════════════ -->
+  <section class="slide" data-notes="10">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE BUYER</b> · qualify in one call</p>
+      <h2 class="display">Seed to Series B.<br>Owns positioning. <span class="amber">Buys on a card.</span></h2>
+      <div class="grid2" style="margin-top:var(--sp4)">
+        <div class="card">
+          <h3 style="margin-bottom:var(--sp2)"><span class="v v-win">✓ QUALIFY IN</span></h3>
+          <p style="margin-bottom:6px">Three or more rivals watched by hand</p>
+          <p style="margin-bottom:6px">A spreadsheet or an alert doing the job today</p>
+          <p style="margin-bottom:6px">Founder, head of product, or PMM accountable for a competitive update</p>
+          <p style="margin-bottom:6px">A launch or a pricing call pending</p>
+          <p>No approval loop. A personal or company card.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:var(--sp2)"><span class="v v-lose">✕ QUALIFY OUT</span></h3>
+          <p style="margin-bottom:6px">Enterprise CI team with a battlecard workflow and a $20K+ contract — they buy the CRM integration, not the data</p>
+          <p style="margin-bottom:6px">Investors doing point-in-time diligence on one company</p>
+          <p style="margin-bottom:6px">SEO agencies wanting backlinks and keywords</p>
+          <p>Anyone who wants one report and has no reason to keep watching</p>
+        </div>
+      </div>
+      <p class="src" style="margin-top:var(--sp3)">
+        Highest competitive-intelligence need does not equal best fit. The trigger is a decision or
+        a humiliation with a date on it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 11 · THE LADDER ═════════════════════════════════════════════ -->
+  <section class="slide" data-notes="11">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>PRICING</b> · one free proof, three paid rungs</p>
+      <h2 class="display" style="max-width:26ch">Free is the proof.<br>Monitoring is the <span class="amber">reason to stay.</span></h2>
+      <!-- [CONTRA-1] Every row below is the live pricing block, verbatim.
+           An Agency $599 rung and an Enterprise "Custom" rung were in the
+           previous revision. Neither exists on rivalize.ai. Both removed. -->
+      <table class="ladder" id="pricing-table" style="margin-top:var(--sp4)">
+        <thead><tr><th style="width:15%">Plan</th><th style="width:13%">Price</th><th style="width:16%">Tracked</th><th style="width:24%">For</th><th>Also includes</th></tr></thead>
+        <tbody>
+          <tr><td class="hi">Free report</td><td class="price">$0</td><td class="mu">1 competitor</td><td class="mu">Curious visitor</td><td class="mu">Verified email. No credit card.</td></tr>
+          <tr><td class="hi">Starter</td><td class="price">$19<span class="dim">/mo</span></td><td class="mu">3 companies</td><td class="mu">Solo builders</td><td class="mu">Unlimited workspaces · Monday briefing</td></tr>
+          <tr class="feature"><td class="hi">Growth</td><td class="price">$79<span class="dim">/mo</span></td><td class="mu">10 companies</td><td class="mu">Growing startups</td><td class="mu">Daily news coverage · recommended actions</td></tr>
+          <tr><td class="hi">Pro</td><td class="price">$199<span class="dim">/mo</span></td><td class="mu">25 companies</td><td class="mu">Product and GTM teams</td><td class="mu">All signal families · battlecards + API</td></tr>
+        </tbody>
+      </table>
+      <div class="rule"></div>
+      <p class="sub" style="margin-top:0;font-size:13px">
+        Month-to-month, cancel anytime, 14-day money-back guarantee. Free creates the jolt.
+        Monitoring is the only reason the file is still worth opening a month later.
+      </p>
+      <p class="src" style="margin-top:var(--sp2)">
+        <b>SOURCE</b> · rivalize.ai/pricing, first-party page export 2026-07-29 · edit at id="pricing-table"
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ 12 · CLOSE ══════════════════════════════════════════════════ -->
+  <section class="slide" data-notes="12">
+    <div class="slide-inner casc" style="justify-content:center">
+      <p class="eyebrow">// <b>THE CALL</b></p>
+      <!-- [CONTRA-3] "It takes five minutes" and "you have lost five minutes"
+           were both speed claims. The live head tags say: No speed claims,
+           ever. Rewritten around the ask instead of the clock. -->
+      <h2 class="display">Run it on your <span class="amber">own company.</span></h2>
+      <p class="sub" style="max-width:62ch">
+        You can probably name your top three competitors right now. Can you say what any of them
+        changed this month? Most founders find out late, from a customer's exit email or a prospect
+        on a call. Point Rivalize at one URL and see what comes back. If it does not show you
+        something you did not already know, nothing is owed.
+      </p>
+      <div class="console tick" style="margin-top:var(--sp4);display:flex;
+                  align-items:center;justify-content:space-between;gap:var(--sp3);flex-wrap:wrap">
+        <div>
+          <p class="sans hi" style="font-size:19px;letter-spacing:-.03em">Get your free report</p>
+          <p class="src" style="margin-top:6px">1 free report · 1 competitor · verified email — no credit card</p>
+        </div>
+        <span class="chip on">rivalize.ai</span>
+      </div>
+      <div class="rule"></div>
+      <div class="wordmark">
+        <span class="mark-tile">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" role="img">
+            <title>Rivalize logo</title>
+            <circle cx="9" cy="9" r="7"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="4"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="1.5" fill="currentColor"></circle>
+          </svg>
+        </span>
+        <span class="wm-text" style="font-size:15px">Rivalize</span>
+        <span class="src" style="margin-left:8px">Never miss a competitor's move. &nbsp;//&nbsp; Made with love in Lima.</span>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /stage -->
+
+  <div id="progress"><i id="progress-bar"></i></div>
+
+  <div id="hud">
+    <div class="left">
+      <span class="wm-mini">
+        <span class="mark-tile">
+          <svg width="12" height="12" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="7"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="4"   stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <circle cx="9" cy="9" r="1.5" fill="currentColor"></circle>
+          </svg>
+        </span>
+        <span>Rivalize</span>
+      </span>
+      <span id="counter"><b class="num">01</b> / <span class="num" id="total">12</span></span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="navbtn" id="prev" title="Previous (←)" aria-label="Previous slide">‹</button>
+      <button class="navbtn" id="next" title="Next (→)" aria-label="Next slide">›</button>
+      <button class="navbtn wide" id="notesbtn" title="Presenter notes (N)" aria-pressed="false">Notes</button>
+      <button class="navbtn wide" id="fsbtn" title="Fullscreen (F)">Full</button>
+      <button class="navbtn" id="helpbtn" title="Shortcuts (?)" aria-label="Keyboard shortcuts">?</button>
+    </div>
+  </div>
+
+  <div id="notes" aria-live="polite">
+    <div class="notes-grid">
+      <div class="notes-col"><h4>Presenter intent</h4><div id="note-intent"></div></div>
+      <div class="notes-col"><h4 class="plain">Source verification</h4><div id="note-source"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="help" role="dialog" aria-label="Keyboard shortcuts">
+  <div class="console tick">
+    <p class="eyebrow">// <b>SHORTCUTS</b></p>
+    <dl>
+      <dt>→ ↓ Space PgDn</dt><dd>Next slide</dd>
+      <dt>← ↑ PgUp</dt><dd>Previous slide</dd>
+      <dt>Home / End</dt><dd>First / last slide</dd>
+      <dt>1 – 9, 0</dt><dd>Jump to slide (0 = 10)</dd>
+      <dt>N</dt><dd>Toggle presenter notes</dd>
+      <dt>F</dt><dd>Fullscreen (F11 also works)</dd>
+      <dt>? or Esc</dt><dd>Close this panel</dd>
+      <dt>Swipe</dt><dd>Left / right on touch</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total   = slides.length;
+  var idx     = 0;
+  var counter = document.getElementById('counter').querySelector('b');
+  var bar     = document.getElementById('progress-bar');
+  var notes   = document.getElementById('notes');
+  var help    = document.getElementById('help');
+
+  document.getElementById('total').textContent = String(total);
+
+  /* ── presenter notes ──────────────────────────────────────────────────
+     Column 1 = how to deliver. Column 2 = what confirms each claim, and
+     explicitly what is NOT confirmed and must be resolved before presenting. */
+  var NOTES = {
+    1:{intent:"<p>Do not read the slide. Let the wordmark sit for a beat, then say the line out loud: every claim cited, everything verifiable. That is the whole deck in five words and you will return to it three more times.</p><p>Set expectations early: this is a product deck, not a fundraise. If someone asks about revenue or headcount, say plainly that we do not publish it and move on.</p>",
+       source:"<ul><li class='ok'>Wordmark, mark, typeface and palette: the live rivalize.ai page export, its stylesheet and its font request. Master §1.8 describes an uppercase amber-Z wordmark - the live product does not use it, and this deck follows the live product.</li><li class='ok'>\"Every claim cited. Everything verifiable.\" is the live Honest proof headline, and \"the agentic competitive-intelligence platform\" is the locked hero.</li><li class='ok'>Lima: site footer.</li><li class='no'>NOT CONFIRMED: no revenue, funding, team or customer figure is published anywhere on rivalize.ai. If asked, say we do not publish it and move on.</li></ul>"},
+    2:{intent:"<p>This is the emotional slide and the only one where you should slow all the way down. Ask the room directly: can you name three competitors? Almost everyone says yes. Then ask what any of them changed this month. The silence does the work.</p><p>Do not rush to the four cards. Let someone in the room volunteer their own version of the spreadsheet first.</p>",
+       source:"<ul><li class='ok'>Buyer profile and trigger framing: the offering + ICP internal artifact, July 2026.</li><li class='no'>NOT CONFIRMED: the 88.6% \"do CI manually or not at all\" figure traces only to an internal doc. It is deliberately excluded from this deck. Do not quote it.</li></ul>"},
+    3:{intent:"<p>Name the LLM directly. Everyone in the room has already tried it, and pretending otherwise costs you credibility. Concede the speed, then take the ground that matters: it cannot cite, and it cannot watch.</p><p>If a technical buyer pushes on retrieval-augmented models, agree that the gap narrows, and pivot to monitoring. A prompt is a one-shot. That does not narrow.</p>",
+       source:"<ul><li class='ok'>40+ data points per rival across 8 source categories: published on the live homepage, in the hero proof strip.</li><li class='no'>CORRECTED: the previous revision said \"40+ pages read per competitor.\" The site says data points, not pages. Do not upgrade it back.</li><li class='no'>NOT CONFIRMED: any claim that a model cannot cite at all. Retrieval-augmented models can. The durable half of this argument is monitoring, not citation.</li></ul>"},
+    4:{intent:"<p>The phrase to land is \"a page that maintains itself.\" Every buyer in this segment has abandoned a competitive spreadsheet. Say that out loud and watch for the nod.</p><p>Keep this slide short. It is a bridge to the instrument on slide 6, which is where the demo actually lives.</p>",
+       source:"<ul><li class='ok'>\"Every competitor becomes a living intelligence file\" and the dossier framing: live homepage, The product section.</li><li class='no'>CORRECTED: \"re-checked twice each weekday\" was not on the site. The live wording is a clear monitoring schedule, with cadence set per plan. Do not name a frequency you cannot point at.</li><li class='no'>NOT CONFIRMED: report depth is 30 sections per the live proof strip. The old \"42 sections\" claim is wrong. Never say 42.</li></ul>"},
+    5:{intent:"<p>Do not narrate all six. Pick the two that match the room: pricing and product for a founder, ads and hiring for a PMM. Ask which one they check by hand today and build the rest of the conversation on that answer.</p>",
+       source:"<ul><li class='ok'>Pricing, product, positioning, hiring and content: the live change-detection card, verbatim.</li><li class='ok'>Ads across Google and Meta: the live ad-lookup section. The previous revision said Meta, Google and LinkedIn - LinkedIn is not claimed anywhere. Corrected.</li><li class='ok'>The nine momentum signals in the source line: the live momentum panel.</li></ul>"},
+    6:{intent:"<p>This is the demo. Click the three states in order and let each one sit.</p><p>Strong signal is the happy path. Thin signal is the slide that wins the deal: point at the dashed gauge and say we would rather show you nothing than show you a number we cannot defend. Our own score is the credibility close: we render ourselves at 1 out of 100 and we did not round it up.</p><p>If the room only remembers one slide, make it this one.</p>",
+       source:"<ul><li class='ok'>Momentum 82 against 64, the four counters, and the recommended-move wording: the linear.app dossier worked example on the live homepage.</li><li class='no'>CORRECTED: the previous revision showed six bars at 88/76/64/71/59/45 and a \"+6\" delta. Those numbers were invented. The delta is 82 vs 64. Never re-add invented signal values.</li><li class='ok'>Abstain rendering and the below-threshold console line: brand precedent §1.5 and §1.7. The thin and self states carry no numbers at all, by design.</li><li class='no'>NOT CONFIRMED: Linear is the site's own illustration, not a customer. Say \"worked example\" if asked.</li></ul>"},
+    7:{intent:"<p>Slow down on the abstain card. The instinct is to apologise for a product that sometimes says nothing. Do the opposite: a tool that abstains is one a founder can quote in a room where being wrong is expensive.</p><p>The 1/100 line is the strongest thing in the deck. Deliver it flatly, without a joke.</p>",
+       source:"<ul><li class='ok'>\"Every move links back to where we found it\": rivalize.ai/product, Provenance section.</li><li class='ok'>Abstain semantics and the fake-zero prohibition: §1.5, §1.7, and the shipped-report precedent list.</li></ul>"},
+    8:{intent:"<p>Read the three status cards in order and do not soften the third one. Conceding that we are not alone here costs nothing with a technical buyer and buys back everything if they already know the field.</p><p>The genuinely strong fact is the public endpoint: the agent-ready payload needs no key. Lead with that, not with MCP.</p>",
+       source:"<ul><li class='ok'>Both curl blocks are the live For builders examples, verbatim. So are the four capability chips: REST API, agent-ready reports, webhooks, MCP server soon.</li><li class='no'>STANDING DIRECTIVE, from the live head tags: never market an API/MCP data layer claim. The MCP package is unpublished (FR-539). Say coming soon or say nothing. The previous revision claimed \"nine agent-callable tools\" - that number is on no public page and has been removed.</li><li class='no'>CORRECTED: API is listed on the Pro plan, not on every paid plan. And do not say the agent payload needs no key - that is unverified.</li><li class='no'>NOT CONFIRMED: do NOT say no rival has an agent layer. At least one competitor at a comparable price reportedly ships an MCP integration. Unverified both ways.</li></ul>"},
+    9:{intent:"<p>Say out loud that this is the entire proof section and that its shortness is the point. In a room that has sat through decks full of borrowed logos, four verifiable numbers beat twenty unverifiable ones.</p><p>Offer to open the sample report live. If someone takes you up on it, that is the best possible outcome for this slide.</p>",
+       source:"<ul><li class='ok'>2,247 companies, 30 sections, 0 claims guessed: the live Honest proof section, each figure carrying its own verify link. The 30-section link resolves to the Figma vs Adobe XD and Sketch report.</li><li class='no'>DRIFT RISK: the company count is live and will have moved. Re-check on the morning of the presentation. Edit at id=\"proof-figures\".</li><li class='no'>SEPARATE DEFECT, do not demo: the shipped report screenshots still render the retired #E09400 amber, not #FFC53D. If you open a live report in the room it will not match this deck.</li></ul>"},
+    10:{intent:"<p>Read the qualify-out column with as much conviction as the qualify-in column. Saying no to enterprise CI teams out loud is what makes the yes credible, and it pre-empts the \"but can it do battlecards\" question.</p><p>If you are presenting to an agency, note that the economics are better there: one seat covers several clients and the cost gets rebilled.</p>",
+       source:"<ul><li class='ok'>Both columns: the offering + ICP internal artifact, July 2026, signals 01-04 and the anti-ICP list.</li><li class='no'>NOT CONFIRMED: the $20K+ enterprise contract figure is an ESTIMATE and is unreconciled across our own documents. Use it as a band, never as a precise number.</li></ul>"},
+    11:{intent:"<p>Do not walk the table row by row. Name the free rung and the rung that fits the person in front of you, then stop talking.</p><p>The line that matters is underneath: free creates the jolt, monitoring is the only reason the product is still worth opening a month later. If they push on price, that is the answer.</p>",
+       source:"<ul><li class='ok'>All four rows, the tracked-company counts, the per-tier features and the 14-day money-back guarantee: the live pricing block, captured 2026-07-29.</li><li class='no'>CORRECTED: the previous revision carried an Agency $599 rung and an Enterprise Custom rung. Neither exists on rivalize.ai. Both removed.</li><li class='no'>UNRESOLVED, RAISE IT BEFORE A PRICING QUESTION LANDS: the live pricing page opens at $19 Starter, but the report product still shows a banner reading \"Track changes weekly for $29/mo.\" Two live prices for the entry rung. Say $19 and flag the banner as stale, or defer.</li><li class='no'>SUPERSEDED: internal docs still carry a $29/$79/$199 credit-metered ladder, and a separate internal artifact carries $19/79/199/599. The live site is authoritative. Present neither internal version.</li></ul>"},
+    12:{intent:"<p>Deliver the paragraph almost verbatim. It has been written to be said out loud, and the ask is deliberately small: run one report on your own company.</p><p>Then stop. Do not add a summary slide. The correct next action is that they run it before the meeting ends.</p>",
+       source:"<ul><li class='ok'>CTA wording and the free-tier terms - one report, one competitor, verified email, no credit card: the live footer CTA, verbatim.</li><li class='ok'>\"Never miss a competitor's move\" and Lima: the live footer.</li><li class='no'>CORRECTED: this slide used to close on \"you have lost five minutes.\" The live head tags carry a standing rule - no speed claims, ever. Every clock reference has been stripped from the deck. Do not improvise one back in on stage.</li><li class='no'>CORRECTED: internal copy says \"no signup wall, no demo.\" The live site requires a verified email and offers Book demo in the nav.</li></ul>"}
+  };
+
+  function renderNotes(){
+    var n = NOTES[idx+1] || {intent:"",source:""};
+    document.getElementById('note-intent').innerHTML = n.intent;
+    document.getElementById('note-source').innerHTML = n.source;
+  }
+
+  function show(n, dir){
+    n = Math.max(0, Math.min(total-1, n));
+    if (n === idx && slides[idx].classList.contains('active')) return;
+    slides.forEach(function(s){ s.classList.remove('active','from-left','from-right'); });
+    idx = n;
+    var s = slides[idx];
+    s.classList.add('active', dir < 0 ? 'from-left' : 'from-right');
+    counter.textContent = String(idx+1).padStart(2,'0');
+    bar.style.width = (((idx+1)/total)*100) + '%';
+    renderNotes();
+  }
+  function next(){ if (idx < total-1) show(idx+1, 1); }
+  function prev(){ if (idx > 0) show(idx-1, -1); }
+
+  /* ── keyboard ─────────────────────────────────────────────────────── */
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if (k === 'Escape'){ help.classList.remove('open'); return; }
+    if (k === '?' || (k === '/' && e.shiftKey)){ e.preventDefault(); help.classList.toggle('open'); return; }
+    if (help.classList.contains('open')) return;
+
+    if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'PageDown'){ e.preventDefault(); next(); }
+    else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp'){ e.preventDefault(); prev(); }
+    else if (k === 'Home'){ e.preventDefault(); show(0, -1); }
+    else if (k === 'End'){ e.preventDefault(); show(total-1, 1); }
+    else if (k === 'n' || k === 'N'){ toggleNotes(); }
+    else if (k === 'f' || k === 'F'){ toggleFS(); }
+    else if (/^[0-9]$/.test(k)){
+      var t = (k === '0') ? 9 : (parseInt(k,10) - 1);
+      if (t < total) show(t, t > idx ? 1 : -1);
+    }
+  });
+
+  /* ── notes / fullscreen / help ────────────────────────────────────── */
+  var notesbtn = document.getElementById('notesbtn');
+  function toggleNotes(){
+    var open = notes.classList.toggle('open');
+    notesbtn.setAttribute('aria-pressed', open ? 'true' : 'false');
+  }
+  function toggleFS(){
+    if (!document.fullscreenElement){
+      if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen){
+      document.exitFullscreen();
+    }
+  }
+  notesbtn.addEventListener('click', toggleNotes);
+  document.getElementById('fsbtn').addEventListener('click', toggleFS);
+  document.getElementById('helpbtn').addEventListener('click', function(){ help.classList.toggle('open'); });
+  help.addEventListener('click', function(){ help.classList.remove('open'); });
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  /* ── touch swipe ──────────────────────────────────────────────────── */
+  var tx = 0, ty = 0;
+  document.addEventListener('touchstart', function(e){
+    tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 52 && Math.abs(dx) > Math.abs(dy)){ dx < 0 ? next() : prev(); }
+  }, {passive:true});
+
+  /* ── the instrument · live demo · slide 6 ─────────────────────────────
+     Gauge maths: r=54 → C = 2πr = 339.29. The console renders a 3/4 arc,
+     so visible = C × 0.75 = 254.47 and offset = visible × (1 − score/100). */
+  var C = 2 * Math.PI * 54;
+  var VIS = C * 0.75;
+
+  var STATES = {
+    /* Strong-signal values are the worked example published on rivalize.ai.
+       The thin and self states deliberately carry NO fabricated counters -
+       they render "not cited", which is the point of the slide. */
+    strong:{
+      subject:"dossier / linear.app", meta:"Worked example published on rivalize.ai",
+      score:82, cap:"VS YOU · 64", abstain:false,
+      bars:[["Pricing moves",25,"3 · 7d"],["New ad creative",100,"12 · 2n"],["Product ships",42,"5 · mo"],["Hiring signal",66,"↑ ent"]],
+      verdict:'<span class="v v-parity">◈ RECOMMENDED MOVE</span><span style="margin-left:8px">They\'re accelerating upmarket. <b>Defend mid-market with a stronger onboarding story before their enterprise push lands.</b></span>'
+    },
+    thin:{
+      subject:"dossier / stealth co.", meta:"2 sources · below threshold",
+      score:0, cap:"BELOW SIGNAL", abstain:true,
+      bars:[["Pricing moves",0,"not cited"],["New ad creative",0,"not cited"],["Product ships",0,"not cited"],["Hiring signal",0,"not cited"]],
+      verdict:'<span class="v v-abstain">? ABSTAIN</span><span style="margin-left:8px">2 sources &lt; threshold(3) → verdict withheld. <b>Rivalize will not render a number it cannot cite. The cell abstains — it does not guess, and it does not report a zero it has not earned.</b></span>'
+    },
+    self:{
+      subject:"dossier / rivalize.ai", meta:"our own file · pre-launch stage",
+      score:1, cap:"EARLY SIGNAL", abstain:true,
+      bars:[["Pricing moves",0,"not cited"],["New ad creative",0,"not cited"],["Product ships",0,"not cited"],["Hiring signal",0,"not cited"]],
+      verdict:'<span class="v v-abstain">? EARLY SIGNAL</span><span style="margin-left:8px">Momentum 1/100. <b>This reflects pre-launch stage, not product quality. We render our own score on the same scale as everyone else\'s, and we did not round it up.</b></span>'
+    }
+  };
+
+  var gv = document.getElementById('gauge-val');
+  var gn = document.getElementById('gauge-num');
+  var gc = document.getElementById('gauge-cap');
+
+  function applyState(key){
+    var st = STATES[key]; if (!st) return;
+    document.getElementById('subject').textContent   = st.subject;
+    document.getElementById('meta-line').textContent = st.meta;
+    gv.setAttribute('stroke-dashoffset', (VIS * (1 - st.score/100)).toFixed(2));
+    gv.classList.toggle('abstain', st.abstain);
+    gn.textContent = st.abstain && st.score === 0 ? '?' : String(st.score);
+    gc.textContent = st.cap;
+    document.getElementById('bars').innerHTML = st.bars.map(function(b){
+      var col = st.abstain ? 'var(--unknown)' : 'var(--signal)';
+      return '<div class="bar-row"><span class="mu">'+b[0]+'</span>'+
+             '<span class="bar-track"><i class="bar-fill" style="width:'+b[1]+'%;background:'+col+'"></i></span>'+
+             '<span class="bar-val">'+b[2]+'</span></div>';
+    }).join('');
+    document.getElementById('verdict').innerHTML = st.verdict;
+
+    var chipA = document.getElementById('chip-a'), chipB = document.getElementById('chip-b');
+    if (key === 'strong'){
+      chipA.innerHTML = 'Pricing <b class="v v-lose" style="padding:0;background:none">▼ BEHIND</b>';
+      chipB.innerHTML = 'Velocity <b class="v v-win" style="padding:0;background:none">▲ AHEAD</b>';
+    } else {
+      chipA.innerHTML = 'Pricing <b class="v v-abstain" style="padding:0;background:none">? ABSTAIN</b>';
+      chipB.innerHTML = 'Velocity <b class="v v-abstain" style="padding:0;background:none">? ABSTAIN</b>';
+    }
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.tgl'), function(btn){
+    btn.addEventListener('click', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.tgl'), function(b){
+        b.setAttribute('aria-pressed','false');
+      });
+      btn.setAttribute('aria-pressed','true');
+      applyState(btn.getAttribute('data-state'));
+    });
+  });
+
+  /* ── boot ─────────────────────────────────────────────────────────── */
+  show(0, 1);
+})();
+</script>
+</body>
+</html>
