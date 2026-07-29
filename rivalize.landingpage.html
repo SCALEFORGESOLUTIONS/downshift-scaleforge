@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivalize — agentic competitive intelligence, every claim cited</title>
+<meta name="description" content="Paste one URL and get a structured competitive intelligence report — SWOT, pricing intelligence, and a full competitor map. Free, no credit card.">
+<!--
+  ============================================================================
+  RIVALIZE — LANDING PAGE
+  ============================================================================
+  Self-contained. No build step, no framework, no dependencies beyond one
+  Google Fonts link.
+
+  ── WIRING THE FORMS ──────────────────────────────────────────────────────
+  Two capture points, same payload.
+
+    1. Hero  · <form id="scan-form">   field: url    (a competitor domain)
+    2. Close · <form id="close-form">  field: email  (work email)
+
+  Each reads its destination from data-endpoint on the form element.
+  Search for  data-endpoint="REPLACE_ME"  — two hits, set both.
+
+  The submit handler at the bottom of the script (search: FORM WIRING) does
+  validation, disabled state, success and error states. It stops short of the
+  network call: replace the marked block with your fetch. Until then the
+  close form hands the visitor off to rivalize.ai rather than failing.
+
+  ── THE HERO CONSOLE ──────────────────────────────────────────────────────
+  Four subjects have data here and resolve to it. Anything else abstains,
+  which is how the product behaves below source threshold. Subject table:
+  search  KNOWN_SUBJECTS. Add one only if every value on it is real.
+
+  ── COMPANION FILES ───────────────────────────────────────────────────────
+  OUT-Rivalize-DECK.html   the twelve-slide deck, client-facing
+
+  ── CONTENT NOTES ─────────────────────────────────────────────────────────
+  Pricing lives at id="pricing" and is priced by tracked companies (3/10/25).
+  MCP is described as coming soon and nothing further. There are no customer
+  logos, testimonials, case studies or outcome claims anywhere on this page.
+  ============================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   TOKENS
+   Six named colours. The accent is held under 5% of surface area.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0C0D0D;        /* the field                                  */
+  --surface:#131414;   /* raised panels                              */
+  --line:#242626;      /* hairline structure                         */
+  --ink:#EAEDEC;       /* high-contrast text                         */
+  --mute:#98A0A0;      /* body text                                  */
+  --signal:#FFC53D;    /* the one accent                             */
+
+  /* derived */
+  --surface-2:#101111; --elevated:#191A1A; --hair:#1B1D1D;
+  --line-strong:#333636; --dim:#636B6B; --faint:#454C4C;
+  --signal-soft:rgba(255,197,61,.10);
+  --signal-line:rgba(255,197,61,.28);
+  --signal-ink:#161100;
+  --grid:rgba(255,255,255,.026);
+
+  /* verdict semantics — always paired with an icon and a label, never colour
+     alone. Accessibility requirement, not a preference. */
+  --win:#3ACE88; --lose:#FF6660; --unknown:#7B8888;
+  --win-bg:rgba(58,206,136,.10);
+  --lose-bg:rgba(255,102,96,.10);
+  --unknown-bg:rgba(123,136,136,.12);
+
+  /* spacing scale */
+  --s1:6px; --s2:12px; --s3:20px; --s4:32px; --s5:52px; --s6:70px; --s7:104px;
+
+  --wrap:1160px;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  background:var(--bg); color:var(--mute);
+  font-family:'Geist',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* the grid ghosts near the top edge only — a structural whisper, never a cage */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(1200px 620px at 76% -6%,#000 0%,transparent 62%);
+  mask-image:radial-gradient(1200px 620px at 76% -6%,#000 0%,transparent 62%);
+}
+
+/* ── TYPE · three roles ────────────────────────────────────────────────────
+   display  Geist 600, tight            · statements only
+   body     Geist 400                   · everything else
+   utility  Geist Mono 400/500          · eyebrows, data, code, labels      */
+.u{font-family:'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace}
+.num{font-variant-numeric:tabular-nums}
+
+.eyebrow{
+  font-family:'Geist Mono',ui-monospace,monospace;
+  font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--dim); display:block; margin-bottom:var(--s3);
+}
+.eyebrow b{color:var(--signal);font-weight:400}
+
+h1,h2,h3{color:var(--ink);font-weight:600;line-height:1.06;letter-spacing:-.035em}
+h1{font-size:clamp(34px,5.1vw,58px)}
+h2{font-size:clamp(27px,3.5vw,40px)}
+h3{font-size:16px;letter-spacing:-.01em;line-height:1.3}
+.lede{max-width:62ch;color:var(--mute);font-size:16px}
+.amber{color:var(--signal)}
+a{color:inherit;text-decoration:none}
+
+::selection{background:var(--signal);color:var(--signal-ink)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:3px}
+
+/* ── LAYOUT ────────────────────────────────────────────────────────────── */
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.sec{padding:var(--s6) 0;border-top:1px solid var(--hair)}
+.sec:first-of-type{border-top:none}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2)}
+.head{max-width:56ch;margin-bottom:var(--s5)}
+.head .lede{margin-top:var(--s3)}
+
+/* ── NAV ───────────────────────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  border-bottom:1px solid transparent;background:transparent;
+  transition:background .4s var(--ease),border-color .4s var(--ease);
+}
+#nav.stuck{background:rgba(12,13,13,.86);backdrop-filter:blur(14px);border-bottom-color:var(--hair)}
+.nav-in{max-width:var(--wrap);margin:0 auto;padding:0 28px;height:66px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s3)}
+.nav-links{display:flex;align-items:center;gap:var(--s4)}
+.nav-links a{
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  transition:color .25s ease;
+}
+.nav-links a:hover{color:var(--ink)}
+
+/* wordmark */
+.wordmark{display:flex;align-items:center;gap:10px}
+.mark{
+  width:32px;height:32px;border-radius:8px;background:var(--signal);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  color:var(--signal-ink);
+  transition:transform .45s var(--spring);
+}
+.wordmark:hover .mark{transform:rotate(12deg) scale(1.08)}
+.wm-text{font-size:18px;font-weight:700;letter-spacing:-.025em;color:var(--ink);line-height:1}
+
+/* ── BUTTONS · one verb everywhere: "Get" ──────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:'Geist',system-ui,sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:-.01em;border-radius:5px;padding:12px 20px;cursor:pointer;
+  border:1px solid var(--signal);background:var(--signal);color:var(--signal-ink);
+  transition:transform .34s var(--spring),box-shadow .34s var(--ease),background .2s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px -14px rgba(255,197,61,.7)}
+.btn:active{transform:translateY(0)}
+.btn.sm{padding:9px 15px;font-size:12.5px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn.ghost:hover{border-color:var(--signal-line);color:var(--signal);box-shadow:none}
+.btn[disabled]{opacity:.55;cursor:default;transform:none;box-shadow:none}
+
+/* ── CARDS ─────────────────────────────────────────────────────────────── */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:7px;
+  padding:var(--s3);
+  transition:transform .38s var(--spring),border-color .3s ease,background .3s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:var(--elevated)}
+.card p{font-size:13.5px;line-height:1.6;margin-top:var(--s1)}
+.glyph{color:var(--signal);font-size:17px;line-height:1;display:block;margin-bottom:var(--s2)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+  border:1px solid var(--line);border-radius:5px;padding:5px 10px;
+  background:var(--surface);
+}
+.chip.on{border-color:var(--signal-line);color:var(--signal);background:var(--signal-soft)}
+.note{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.04em;color:var(--faint)}
+.note b{color:var(--dim);font-weight:400}
+
+/* verdict pill — icon + label + colour, never colour on its own */
+.v{display:inline-flex;align-items:center;gap:6px;
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
+.v-win{color:var(--win);background:var(--win-bg)}
+.v-lose{color:var(--lose);background:var(--lose-bg)}
+.v-abstain{color:var(--unknown);background:var(--unknown-bg)}
+.v-move{color:var(--signal);background:var(--signal-soft)}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+#hero{padding:calc(66px + var(--s7)) 0 var(--s6)}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:var(--s5);align-items:start}
+.hero-proof{list-style:none;margin-top:var(--s4);display:flex;flex-direction:column;gap:10px}
+.hero-proof li{
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+  color:var(--dim);display:flex;align-items:center;gap:10px;
+}
+.hero-proof li::before{content:"●";color:var(--signal);font-size:7px}
+
+/* ── THE SIGNATURE · the scan console ──────────────────────────────────────
+   The corner-tick is the one and only bracket on this page. Nothing else
+   brackets — that is what makes it read as the instrument. */
+.console{
+  position:relative;background:var(--surface-2);
+  border:1px solid var(--line-strong);border-radius:9px;
+  padding:var(--s3);min-height:452px;display:flex;flex-direction:column;
+}
+.console::before,.console::after{
+  content:"";position:absolute;width:11px;height:11px;
+  border-color:var(--signal-line);pointer-events:none;
+}
+.console::before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
+.console::after{bottom:-1px;right:-1px;border-bottom:1px solid;border-right:1px solid}
+
+.con-bar{display:flex;align-items:center;gap:8px;
+  padding-bottom:var(--s2);border-bottom:1px solid var(--hair);margin-bottom:var(--s3)}
+.con-bar .dot{width:6px;height:6px;border-radius:50%;background:var(--faint)}
+.con-bar .dot.live{background:var(--signal)}
+.con-bar span{font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+.scan-form{display:flex;gap:8px}
+.field{
+  flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);
+  border-radius:5px;padding:11px 13px;color:var(--ink);
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:12.5px;
+  transition:border-color .25s ease;
+}
+.field::placeholder{color:var(--faint)}
+.field:focus{outline:none;border-color:var(--signal-line)}
+.field:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+
+.try{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2);align-items:center}
+.try span{font-family:'Geist Mono',ui-monospace,monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+.try button{
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:10.5px;
+  background:transparent;border:1px solid var(--line);border-radius:4px;
+  padding:4px 8px;color:var(--dim);cursor:pointer;
+  transition:border-color .25s ease,color .25s ease,transform .3s var(--spring);
+}
+.try button:hover{border-color:var(--signal-line);color:var(--signal);transform:translateY(-1px)}
+
+/* the feed — a real typed sequence, so it is timestamped. Order carries
+   information here; nowhere else on this page gets numbered markers. */
+.feed{
+  flex:1;margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--hair);
+  font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.9;
+  color:var(--dim);overflow:hidden;
+}
+.feed .ln{opacity:0;transform:translateY(4px);animation:lineIn .3s var(--ease) forwards}
+@keyframes lineIn{to{opacity:1;transform:none}}
+.feed .ok{color:var(--win)} .feed .warn{color:var(--signal)} .feed .no{color:var(--unknown)}
+.feed .t{color:var(--faint)}
+.cursor{display:inline-block;width:7px;height:13px;background:var(--signal);
+  vertical-align:-2px;animation:blink 1.05s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.resolve{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--hair);
+  animation:lineIn .4s var(--ease) both}
+.gauge-row{display:flex;align-items:center;gap:var(--s3)}
+.gauge{width:104px;height:104px;flex:0 0 auto}
+.gauge .track{fill:none;stroke:var(--hair);stroke-width:8}
+.gauge .val{fill:none;stroke:var(--signal);stroke-width:8;
+  transition:stroke-dashoffset .9s var(--ease)}
+.gauge .val.abstain{stroke:var(--unknown);stroke-dasharray:4 6}
+.gauge-num{font-size:24px;font-weight:600;fill:var(--ink);
+  font-family:'Geist',sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.gauge-cap{font-size:7.5px;fill:var(--dim);letter-spacing:.14em;
+  font-family:'Geist Mono',monospace}
+.counters{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;flex:1;min-width:0}
+.counters div{font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;
+  display:flex;justify-content:space-between;gap:8px;
+  border-bottom:1px solid var(--hair);padding-bottom:5px}
+.counters b{color:var(--ink);font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap}
+.resolve p{font-size:12.5px;line-height:1.6;margin-top:var(--s2)}
+.resolve p b{color:var(--ink);font-weight:500}
+.con-cta{margin-top:var(--s3);display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════════════════════════════════════ */
+/* report anatomy */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:var(--s4)}
+.sig-list{font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;
+  color:var(--dim);line-height:2;margin-top:var(--s3)}
+
+/* the feed section */
+.moves{border:1px solid var(--line);border-radius:7px;background:var(--surface);overflow:hidden}
+.move{display:grid;grid-template-columns:132px 1fr auto;gap:var(--s3);
+  align-items:center;padding:15px var(--s3);border-bottom:1px solid var(--hair)}
+.move:last-child{border-bottom:none}
+.move .who{color:var(--ink);font-size:14px;font-weight:500}
+.move .who small{display:block;font-family:'Geist Mono',monospace;font-size:10px;
+  color:var(--faint);letter-spacing:.06em;font-weight:400;margin-top:2px}
+.move .what{font-size:13.5px}
+.move .when{font-family:'Geist Mono',monospace;font-size:10.5px;
+  color:var(--faint);letter-spacing:.06em;white-space:nowrap}
+.summary{border:1px solid var(--signal-line);background:var(--signal-soft);
+  border-radius:7px;padding:var(--s3);margin-top:var(--s3)}
+.summary p{font-size:13.5px;line-height:1.65;margin-top:var(--s2);color:var(--mute)}
+
+/* proof strip */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.proof .big{font-size:44px;font-weight:600;letter-spacing:-.04em;color:var(--signal);
+  font-variant-numeric:tabular-nums;line-height:1}
+.proof h3{margin-top:10px}
+
+/* builders */
+.code{background:var(--surface-2);border:1px solid var(--line);border-radius:7px;
+  padding:var(--s3);font-family:'Geist Mono',ui-monospace,monospace;
+  font-size:12px;line-height:1.85;color:var(--mute);overflow-x:auto}
+.code .c{color:var(--faint)} .code .p{color:var(--signal)} .code .r{color:var(--dim)}
+
+/* pricing */
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:7px;
+  padding:var(--s4) var(--s3);display:flex;flex-direction:column;
+  transition:transform .38s var(--spring),border-color .3s ease}
+.tier:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+.tier.pick{border-color:var(--signal-line);background:var(--elevated)}
+.tier .amt{font-size:38px;font-weight:600;color:var(--ink);letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;margin:var(--s2) 0 2px}
+.tier .amt s{text-decoration:none;font-size:14px;color:var(--faint);font-weight:400}
+.tier ul{list-style:none;margin:var(--s3) 0 var(--s4);display:flex;
+  flex-direction:column;gap:9px;flex:1}
+.tier li{font-size:13px;display:flex;gap:9px;align-items:flex-start}
+.tier li::before{content:"✓";color:var(--signal);font-size:11px;line-height:1.5}
+
+/* the close — full bleed */
+#close{border-top:1px solid var(--line);background:var(--surface-2);padding:var(--s7) 0}
+.close-in{display:flex;align-items:flex-end;justify-content:space-between;
+  gap:var(--s5);flex-wrap:wrap}
+.close-form{display:flex;gap:8px;flex-wrap:wrap}
+.close-form .field{min-width:264px}
+.formnote{margin-top:12px}
+.formnote.err{color:var(--lose)}
+.formnote.ok{color:var(--win)}
+
+footer{border-top:1px solid var(--hair);padding:var(--s5) 0 var(--s6)}
+.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--s4)}
+.foot h4{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);font-weight:400;margin-bottom:14px}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot li a{font-size:13px;color:var(--mute);transition:color .25s ease}
+.foot li a:hover{color:var(--signal)}
+.foot-base{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;
+  margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--hair)}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOTION · three moments only
+   1 · orchestrated hero load, 90ms apart
+   2 · scroll cascade, children staggered
+   3 · hover physics on a spring curve (declared inline on .card/.btn/.tier)
+   ══════════════════════════════════════════════════════════════════════════ */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.load>*{animation:rise .62s var(--ease) both}
+.load>*:nth-child(1){animation-delay:.05s}
+.load>*:nth-child(2){animation-delay:.14s}
+.load>*:nth-child(3){animation-delay:.23s}
+.load>*:nth-child(4){animation-delay:.32s}
+.load>*:nth-child(5){animation-delay:.41s}
+#hero .console{animation:rise .7s var(--ease) .30s both}
+
+.rev>*{opacity:0;transform:translateY(18px)}
+.rev.in>*{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rev.in>*:nth-child(1){transition-delay:.00s}
+.rev.in>*:nth-child(2){transition-delay:.07s}
+.rev.in>*:nth-child(3){transition-delay:.14s}
+.rev.in>*:nth-child(4){transition-delay:.21s}
+.rev.in>*:nth-child(5){transition-delay:.28s}
+.rev.in>*:nth-child(6){transition-delay:.35s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-delay:0ms!important;
+    transition-duration:.001ms!important;transition-delay:0ms!important;
+  }
+  .rev>*{opacity:1;transform:none}
+  .cursor{animation:none}
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────────────────── */
+@media (max-width:940px){
+  .hero-grid{grid-template-columns:1fr;gap:var(--s4)}
+  #hero{padding-top:calc(66px + var(--s5))}
+  .g3,.proof,.foot{grid-template-columns:repeat(2,1fr)}
+  .foot{gap:var(--s4) var(--s3)}
+  .nav-links{display:none}
+}
+@media (max-width:620px){
+  .g2,.g3,.g4,.proof,.foot{grid-template-columns:1fr}
+  .move{grid-template-columns:1fr;gap:6px}
+  .move .when{order:-1}
+  .gauge-row{flex-direction:column;align-items:flex-start}
+  .counters{width:100%}
+  .close-in{flex-direction:column;align-items:stretch}
+  .close-form .field{min-width:0;flex:1}
+  .sec{padding:var(--s5) 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV · conversion point 1 ═══════════════════════════════════════════ -->
+<header id="nav">
+  <div class="nav-in">
+    <a class="wordmark" href="#top" aria-label="Rivalize home">
+      <span class="mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"></circle>
+          <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="1.5"></circle>
+          <circle cx="9" cy="9" r="1.5" fill="currentColor"></circle>
+        </svg>
+      </span>
+      <span class="wm-text">Rivalize</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#product">Product</a>
+      <a href="#feed">The feed</a>
+      <a href="#builders">Builders</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://rivalize.ai/login">Sign in</a>
+    </nav>
+    <a class="btn sm" href="#close">Get free report</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ═══ HERO · the thesis is an instrument you can touch ═══════════════════ -->
+<section id="hero">
+  <div class="wrap hero-grid">
+
+    <div class="load">
+      <span class="eyebrow">// <b>the agentic competitive-intelligence platform</b></span>
+      <h1>Intelligence for you.<br><span class="amber">Ammunition</span> for your AI.</h1>
+      <p class="lede" style="margin-top:var(--s3)">
+        Deep, cited teardowns of every rival — pricing, product, ads, positioning — kept
+        current on a clear monitoring schedule.
+      </p>
+      <ul class="hero-proof">
+        <li>Source links and provenance included</li>
+        <li>Confidence and data gaps shown</li>
+        <li>40+ data points · 8 source categories</li>
+      </ul>
+      <p class="note" style="margin-top:var(--s4)">
+        <b>Point the console at a rival →</b> pricing, product, ads, hiring, in one pass.
+      </p>
+    </div>
+
+    <!-- THE SIGNATURE. The only bracketed element on the page. -->
+    <div class="console" role="region" aria-label="Competitor scan console">
+      <div class="con-bar">
+        <span class="dot live"></span><span class="dot"></span><span class="dot"></span>
+        <span>rivalize › scan</span>
+      </div>
+
+      <!-- conversion point 2 lives inside this console, after it resolves -->
+      <form class="scan-form" id="scan-form" data-endpoint="REPLACE_ME" novalidate>
+        <label class="u" for="scan-url" style="position:absolute;left:-9999px">Competitor URL</label>
+        <input class="field" id="scan-url" name="url" type="text"
+               placeholder="paste a competitor URL" autocomplete="off" spellcheck="false">
+        <button class="btn" type="submit" id="scan-go">Run scan</button>
+      </form>
+
+      <div class="try">
+        <span>try</span>
+        <button type="button" data-subject="linear.app">linear.app</button>
+        <button type="button" data-subject="klue.com">klue.com</button>
+        <button type="button" data-subject="crayon.co">crayon.co</button>
+        <button type="button" data-subject="kompyte.com">kompyte.com</button>
+      </div>
+
+      <div class="feed" id="scan-feed" aria-live="polite">
+        <div class="ln"><span class="t">idle</span> · awaiting a URL<span class="cursor"></span></div>
+      </div>
+
+      <div id="resolve"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ WHAT ONE FILE CONTAINS ════════════════════════════════════════════ -->
+<section class="sec" id="product">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>the product</b></span>
+      <h2>See the whole picture,<br>not a spreadsheet.</h2>
+      <p class="lede">
+        Every competitor becomes a living intelligence file — momentum, moves, and the
+        recommended counter, all in one place. Thirty sections, and every claim in them
+        carries a source and a date or it does not ship.
+      </p>
+    </div>
+
+    <div class="tabs rev">
+      <span class="chip">Summary</span><span class="chip">Compare</span>
+      <span class="chip">Profiles</span><span class="chip">Market</span>
+      <span class="chip">Pricing</span><span class="chip">Features</span>
+      <span class="chip">SWOT</span><span class="chip">Porter's</span>
+      <span class="chip">Momentum</span><span class="chip">Platform</span>
+      <span class="chip">Sources</span><span class="chip on">Act</span>
+    </div>
+
+    <div class="g3 rev">
+      <article class="card">
+        <span class="glyph" aria-hidden="true">◱</span>
+        <h3>Change detection</h3>
+        <p>Pricing, product, positioning, hiring and content, checked on a clear cadence.
+           You get the verified changes after each run, not a raw diff of a page.</p>
+      </article>
+      <article class="card">
+        <span class="glyph" aria-hidden="true">◈</span>
+        <h3>A thesis, not a feed</h3>
+        <p>Every change comes with a plain-language read: what it means, why it matters,
+           and the move to make.</p>
+      </article>
+      <article class="card">
+        <span class="glyph" aria-hidden="true">◎</span>
+        <h3>Momentum, scored</h3>
+        <p>Whether a rival is accelerating or stalling, scored against your own file so the
+           number means something next to yours.</p>
+      </article>
+    </div>
+
+    <p class="sig-list">
+      <span class="note"><b>momentum signals</b></span><br>
+      employees · funding · social followers · reviews · app store ·
+      open positions · content velocity · changelog · customer proof
+    </p>
+  </div>
+</section>
+
+<!-- ═══ THE FEED ══════════════════════════════════════════════════════════ -->
+<section class="sec" id="feed">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>the feed</b></span>
+      <h2>Check every<br>competitor move.</h2>
+      <p class="lede">
+        One feed of verified competitor changes, with a summary that turns raw moves into a
+        thesis you can act on.
+      </p>
+    </div>
+
+    <div class="moves rev">
+      <div class="move">
+        <div class="who">Klue<small>klue</small></div>
+        <div class="what">Pricing page changed — enterprise tier added</div>
+        <div class="when">today</div>
+      </div>
+      <div class="move">
+        <div class="who">Crayon<small>crayon</small></div>
+        <div class="what"><span class="v v-lose">⚑ at us</span> &nbsp;Launched AI battlecards</div>
+        <div class="when">Mon</div>
+      </div>
+      <div class="move">
+        <div class="who">Kompyte<small>kompyte</small></div>
+        <div class="what">Hiring 4 enterprise AEs (LinkedIn)</div>
+        <div class="when">last week</div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <span class="v v-move">◈ summary</span>
+      <p>
+        Two rivals moved on AI battlecards this week. The category is consolidating around
+        "AI-native CI." <b style="color:var(--ink);font-weight:500">Recommended move — lead with
+        synthesis depth in your next launch; that's the gap they can't close.</b>
+      </p>
+    </div>
+
+    <p class="note" style="margin-top:var(--s3)">
+      <b>example feed</b> · all competitors · one channel
+    </p>
+  </div>
+</section>
+
+<!-- ═══ HONEST PROOF · then conversion point 3 ════════════════════════════ -->
+<section class="sec" id="proof">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>honest proof</b></span>
+      <h2>Every claim cited.<br>Everything <span class="amber">verifiable.</span></h2>
+      <p class="lede">
+        No borrowed logos, no self-scored star ratings, no invented case studies. Just real
+        numbers you can check yourself — click any one and land on the surface that proves it.
+      </p>
+    </div>
+
+    <div class="proof rev">
+      <article class="card">
+        <p class="big num">2,247</p>
+        <h3>companies sourced</h3>
+        <p class="note" style="margin-top:8px">Live count · browse the universe</p>
+      </article>
+      <article class="card">
+        <p class="big num">30</p>
+        <h3>sections per report</h3>
+        <p class="note" style="margin-top:8px">Read every one · Figma vs Adobe XD &amp; Sketch</p>
+      </article>
+      <article class="card">
+        <p class="big num">0</p>
+        <h3>claims guessed</h3>
+        <p class="note" style="margin-top:8px">First-party signals only · see the sources</p>
+      </article>
+    </div>
+
+    <!-- conversion point 3 · after the strongest section -->
+    <div style="margin-top:var(--s5);display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap">
+      <a class="btn" href="#close">Get your free report</a>
+      <span class="note">1 free report · 1 competitor · verified email — no credit card</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RIVALIZE AI ═══════════════════════════════════════════════════════ -->
+<section class="sec" id="ai">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>rivalize ai</b></span>
+      <h2>Intelligence that acts,<br>not just watches.</h2>
+      <p class="lede">
+        It reads every competitor move, works where you already work, and turns what it finds
+        into something you can do.
+      </p>
+    </div>
+
+    <div class="g4 rev">
+      <article class="card">
+        <span class="glyph" aria-hidden="true">◈</span>
+        <h3>Summaries</h3>
+        <p>Every move distilled into a plain-language thesis.</p>
+      </article>
+      <article class="card">
+        <span class="glyph" aria-hidden="true">⌗</span>
+        <h3>Analysis in Slack</h3>
+        <p>Verified changes and the recommended response, in your channel, on the schedule you choose.</p>
+      </article>
+      <article class="card">
+        <span class="glyph" aria-hidden="true">✉</span>
+        <h3>Weekly briefings</h3>
+        <p>The whole competitive picture, summarised to your inbox every week.</p>
+      </article>
+      <article class="card">
+        <span class="glyph" aria-hidden="true">◎</span>
+        <h3>Watches your side</h3>
+        <p>Monitors your own posts and social next to your rivals', and says what to change.</p>
+      </article>
+    </div>
+
+    <p class="note" style="margin-top:var(--s3)">
+      <b>coming soon</b> · hand your intelligence to ManiAI and run the go-to-market from it.
+      ScaleForge integration to follow.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ FOR BUILDERS ══════════════════════════════════════════════════════ -->
+<section class="sec" id="builders">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>for builders</b></span>
+      <h2>Pipe competitive intelligence<br>into anything.</h2>
+      <p class="lede">
+        A clean REST API and an agent-ready endpoint on every report. Plug live competitor
+        intel straight into Claude, Cursor, and any agent, dashboard, or workflow.
+      </p>
+    </div>
+
+    <div class="tabs" style="margin-bottom:var(--s3)">
+      <span class="chip on">REST API</span>
+      <span class="chip on">Agent-ready reports</span>
+      <span class="chip on">Webhooks</span>
+      <span class="chip">MCP server — soon</span>
+    </div>
+
+    <div class="code">
+<span class="c"># hand any report to your agent — live today</span>
+$ curl rivalize.ai/api/reports/{id}/ai
+  <span class="r">← full teardown · agent-ready markdown · every claim cited</span>
+
+<span class="c"># or trigger one from your stack (API v1)</span>
+$ curl -X POST api.rivalize.ai/v1/reports \
+    -H <span class="p">"Authorization: Bearer $RIVALIZE_API_KEY"</span> \
+    -d '{"product_url":"you.com","competitors":["linear.app"]}'
+  <span class="r">← report id · poll /v1/reports/{id}</span>
+    </div>
+
+    <p class="note" style="margin-top:var(--s3)">
+      <b>copy for agent</b> · markdown · json · api url — on every report
+    </p>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══════════════════════════════════════════════════════════ -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">// <b>pricing</b></span>
+      <h2>Simple, subscription<br>pricing.</h2>
+      <p class="lede">
+        Month-to-month or annual — two months free on annual — with a 14-day money-back
+        guarantee. Priced by how many companies you track.
+      </p>
+    </div>
+
+    <div class="g3 rev">
+      <article class="tier">
+        <span class="eyebrow" style="margin-bottom:0">// starter</span>
+        <p class="amt">$19<s>/mo</s></p>
+        <p class="note">For solo builders</p>
+        <ul>
+          <li>3 tracked companies</li>
+          <li>Unlimited workspaces</li>
+          <li>Monday briefing</li>
+        </ul>
+        <a class="btn ghost" href="#close">Get started</a>
+      </article>
+
+      <article class="tier pick">
+        <span class="eyebrow" style="margin-bottom:0">// growth</span>
+        <p class="amt">$79<s>/mo</s></p>
+        <p class="note">For growing startups</p>
+        <ul>
+          <li>10 tracked companies</li>
+          <li>Daily news coverage</li>
+          <li>Recommended actions</li>
+        </ul>
+        <a class="btn" href="#close">Get started</a>
+      </article>
+
+      <article class="tier">
+        <span class="eyebrow" style="margin-bottom:0">// pro</span>
+        <p class="amt">$199<s>/mo</s></p>
+        <p class="note">For product and GTM teams</p>
+        <ul>
+          <li>25 tracked companies</li>
+          <li>All signal families</li>
+          <li>Battlecards + API</li>
+        </ul>
+        <a class="btn ghost" href="#close">Get started</a>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:var(--s6)">
+      <span class="eyebrow" style="color:var(--signal);margin-bottom:8px">// for client work and larger organizations</span>
+      <h2 style="font-size:26px">Agency and Enterprise</h2>
+    </div>
+
+    <div class="g2 rev" style="max-width:760px;margin:var(--s4) auto 0">
+      <article class="tier">
+        <span class="eyebrow" style="margin-bottom:0">// agency</span>
+        <p class="amt">$599<s>/mo</s></p>
+        <p class="note">For agencies and consultants</p>
+        <ul>
+          <li>A larger tracked-company allowance</li>
+          <li>Everything in Pro, plus</li>
+          <li>Built for client work across accounts</li>
+        </ul>
+        <a class="btn ghost" href="#close">Get started</a>
+      </article>
+
+      <article class="tier">
+        <span class="eyebrow" style="margin-bottom:0">// enterprise</span>
+        <p class="amt">Custom</p>
+        <p class="note">For tailored intelligence programs</p>
+        <ul>
+          <li>Scoped to your organization</li>
+          <li>Everything in Agency, plus</li>
+          <li>Annual or monthly terms</li>
+        </ul>
+        <a class="btn ghost" href="https://rivalize.ai/demo">Book a demo</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLOSE · conversion point 4 · full bleed ═══════════════════════════ -->
+<section id="close">
+  <div class="wrap close-in">
+    <div style="max-width:52ch">
+      <span class="eyebrow">// <b>start here</b></span>
+      <h2>Stop watching your competitors.<br>Start <span class="amber">out-executing</span> them.</h2>
+      <p class="lede" style="margin-top:var(--s3)">
+        Run one report on your own company and see what comes back. If it does not show you
+        something you did not already know, nothing is owed.
+      </p>
+    </div>
+
+    <div>
+      <form class="close-form" id="close-form" data-endpoint="REPLACE_ME" novalidate>
+        <label class="u" for="close-email" style="position:absolute;left:-9999px">Work email</label>
+        <input class="field" id="close-email" name="email" type="email"
+               placeholder="you@company.com" autocomplete="email">
+        <button class="btn" type="submit" id="close-go">Get your free report</button>
+      </form>
+      <p class="note formnote" id="close-note">
+        1 free report · 1 competitor · verified email — no credit card
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="wordmark" href="#top" aria-label="Rivalize home">
+          <span class="mark">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"></circle>
+              <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="1.5"></circle>
+              <circle cx="9" cy="9" r="1.5" fill="currentColor"></circle>
+            </svg>
+          </span>
+          <span class="wm-text">Rivalize</span>
+        </a>
+        <p style="margin-top:var(--s3);font-size:13px;max-width:34ch">
+          Never miss a competitor's move. Competitive intelligence, synthesized into a thesis
+          you can act on.
+        </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#ai">AI</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="https://rivalize.ai/docs">Dev docs</a></li>
+          <li><a href="https://rivalize.ai/docs/api">API reference</a></li>
+          <li><a href="https://rivalize.ai/changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="https://rivalize.ai/blog">Blog</a></li>
+          <li><a href="https://rivalize.ai/about">About us</a></li>
+          <li><a href="https://rivalize.ai/privacy">Privacy</a></li>
+          <li><a href="https://rivalize.ai/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span class="note">© 2026 Rivalize</span>
+      <span class="note">Made with love in Lima</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── nav shade on scroll ─────────────────────────────────────────────── */
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('stuck', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ── motion 2 · scroll cascade, children staggered ───────────────────── */
+  var revs = document.querySelectorAll('.rev');
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
+    Array.prototype.forEach.call(revs, function(r){ io.observe(r); });
+  } else {
+    Array.prototype.forEach.call(revs, function(r){ r.classList.add('in'); });
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     THE SCAN CONSOLE
+
+     Anything not in this table abstains, which is how the product behaves
+     below source threshold. Add a subject only if every value on it is real.
+     ══════════════════════════════════════════════════════════════════════ */
+  var KNOWN_SUBJECTS = {
+    'linear.app':{
+      kind:'dossier',
+      lines:[
+        ['ok','resolving linear.app'],
+        ['ok','pricing · 3 moves in 7d'],
+        ['ok','ad library · 12 creatives · 2 networks'],
+        ['ok','changelog · 5 ships this month'],
+        ['ok','careers · enterprise roles rising'],
+        ['warn','scoring momentum against your file']
+      ],
+      score:82, vs:64,
+      counters:[['Pricing moves','3 · 7d'],['New ad creative','12 · 2 net'],
+                ['Product ships','5 · mo'],['Hiring signal','↑ enterprise']],
+      verdict:'They\u2019re accelerating upmarket. <b>Defend mid-market with a stronger onboarding story before their enterprise push lands.</b>'
+    },
+    'klue.com':{
+      kind:'change',
+      lines:[['ok','resolving klue.com'],['ok','pricing page · diff found'],['warn','reading change against your position']],
+      when:'today',
+      change:'Pricing page changed — enterprise tier added',
+      verdict:'A new enterprise tier is a move up, not at you. <b>Watch whether the entry price follows it.</b>'
+    },
+    'crayon.co':{
+      kind:'change',
+      lines:[['ok','resolving crayon.co'],['ok','product surface · launch detected'],['warn','reading change against your position']],
+      when:'Mon', flag:true,
+      change:'Launched AI battlecards — direct at us',
+      verdict:'The category is consolidating around AI-native CI. <b>Lead with synthesis depth in your next launch.</b>'
+    },
+    'kompyte.com':{
+      kind:'change',
+      lines:[['ok','resolving kompyte.com'],['ok','careers · 4 new roles'],['warn','reading change against your position']],
+      when:'last week',
+      change:'Hiring 4 enterprise AEs (LinkedIn)',
+      verdict:'Hiring is the earliest signal there is. <b>Enterprise AEs mean the motion is moving upmarket before the product does.</b>'
+    }
+  };
+
+  var feed    = document.getElementById('scan-feed');
+  var resolve = document.getElementById('resolve');
+  var form    = document.getElementById('scan-form');
+  var input   = document.getElementById('scan-url');
+  var goBtn   = document.getElementById('scan-go');
+  var timers  = [];
+  var C       = 2 * Math.PI * 44;   /* gauge r=44 */
+  var VIS     = C * 0.75;           /* the console renders a 3/4 arc */
+
+  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
+
+  function normalise(raw){
+    return String(raw||'').trim().toLowerCase()
+      .replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,'');
+  }
+
+  function line(cls, text, stamp){
+    var mark = cls === 'ok' ? '[✓]' : cls === 'no' ? '[!]' : '[~]';
+    return '<div class="ln"><span class="t">'+stamp+'</span> <span class="'+cls+'">'+
+           mark+'</span> '+text+'</div>';
+  }
+
+  /* Gauge maths, same as the shipped report: the console draws a 3/4 arc, so
+     visible = C x 0.75 and offset = visible x (1 - score/100). The estimate
+     variant is dashed and grey — never a solid amber ring on a withheld value. */
+  function gauge(score, abstain, caption){
+    var off = (VIS * (1 - score/100)).toFixed(2);
+    return '<svg class="gauge" viewBox="0 0 112 112" role="img" aria-label="Momentum '+
+           (abstain ? 'below signal, withheld' : score+' out of 100')+'">'+
+           '<g transform="rotate(135 56 56)">'+
+           '<circle class="track" cx="56" cy="56" r="44" stroke-dasharray="'+VIS.toFixed(2)+' '+C.toFixed(2)+'"></circle>'+
+           '<circle class="val'+(abstain?' abstain':'')+'" cx="56" cy="56" r="44" '+
+           'stroke-dasharray="'+VIS.toFixed(2)+' '+C.toFixed(2)+'" stroke-dashoffset="'+off+'"></circle>'+
+           '</g>'+
+           '<text class="gauge-num" x="56" y="58" text-anchor="middle">'+(abstain?'?':score)+'</text>'+
+           '<text class="gauge-cap" x="56" y="72" text-anchor="middle">'+caption+'</text></svg>';
+  }
+
+  function ctaRow(label){
+    return '<div class="con-cta"><a class="btn sm" href="#close">Get your free report</a>'+
+           '<span class="note">'+label+'</span></div>';
+  }
+
+  function renderDossier(s){
+    resolve.innerHTML =
+      '<div class="resolve"><div class="gauge-row">'+
+      gauge(s.score, false, 'VS YOU · '+s.vs)+
+      '<div class="counters">'+ s.counters.map(function(c){
+        return '<div><span>'+c[0]+'</span><b>'+c[1]+'</b></div>'; }).join('') +
+      '</div></div>'+
+      '<p><span class="v v-move">◈ recommended move</span> '+s.verdict+'</p>'+
+      ctaRow('one of 30 sections in the full file')+'</div>';
+  }
+
+  function renderChange(s){
+    resolve.innerHTML =
+      '<div class="resolve">'+
+      '<p style="margin-top:0">'+(s.flag?'<span class="v v-lose">⚑ at us</span> ':'')+
+      '<span class="note"><b>'+s.when+'</b></span></p>'+
+      '<p style="font-size:14px;color:var(--ink);margin-top:8px">'+s.change+'</p>'+
+      '<p><span class="v v-move">◈ read</span> '+s.verdict+'</p>'+
+      ctaRow('one signal of eight source categories')+'</div>';
+  }
+
+  function renderAbstain(domain){
+    resolve.innerHTML =
+      '<div class="resolve"><div class="gauge-row">'+
+      gauge(0, true, 'BELOW SIGNAL')+
+      '<div><p style="margin-top:0"><span class="v v-abstain">? abstain</span></p>'+
+      '<p>Not enough public signal on <span class="u" style="color:var(--ink)">'+domain+
+      '</span> to score it here. <b>The verdict is withheld rather than guessed.</b> '+
+      'A full scan reads 40+ data points across 8 source categories and returns a '+
+      '30-section file with a source on every claim.</p></div></div>'+
+      ctaRow('run the full scan on '+domain)+'</div>';
+  }
+
+  function run(raw){
+    var domain = normalise(raw);
+    if (!domain){
+      feed.innerHTML = '<div class="ln"><span class="t">idle</span> <span class="no">[!]</span> '+
+                       'enter a domain, like linear.app<span class="cursor"></span></div>';
+      resolve.innerHTML = '';
+      input.focus();
+      return;
+    }
+
+    clearTimers();
+    resolve.innerHTML = '';
+    goBtn.disabled = true;
+    goBtn.textContent = 'Scanning';
+
+    var subject = KNOWN_SUBJECTS[domain];
+    var lines = subject ? subject.lines.slice() : [
+      ['ok','resolving '+domain],
+      ['warn','locating public surfaces'],
+      ['no','2 sources · threshold(3)'],
+      ['no','verdict withheld']
+    ];
+
+    var t0 = Date.now(), html = '', step = reduce ? 0 : 300;
+    feed.innerHTML = '';
+
+    lines.forEach(function(l, i){
+      timers.push(setTimeout(function(){
+        var stamp = String(((Date.now()-t0)/1000).toFixed(1)).padStart(4,'0')+'s';
+        html += line(l[0], l[1], stamp);
+        feed.innerHTML = html + (i === lines.length-1 ? '' :
+          '<div class="ln"><span class="cursor"></span></div>');
+      }, step * i));
+    });
+
+    timers.push(setTimeout(function(){
+      goBtn.disabled = false;
+      goBtn.textContent = 'Run scan';
+      if (!subject)                    renderAbstain(domain);
+      else if (subject.kind === 'dossier') renderDossier(subject);
+      else                             renderChange(subject);
+    }, step * lines.length + (reduce ? 0 : 260)));
+  }
+
+  form.addEventListener('submit', function(e){ e.preventDefault(); run(input.value); });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.try button'), function(b){
+    b.addEventListener('click', function(){
+      input.value = b.getAttribute('data-subject');
+      run(input.value);
+    });
+  });
+
+  /* ══════════════════════════════════════════════════════════════════════
+     FORM WIRING
+
+     Both forms validate, lock, and report here. Neither sends anything yet.
+     Replace the marked block with your request and set data-endpoint on the
+     form element. Keep the messages: they name what happened and what to do,
+     which is the whole job of an error string.
+     ══════════════════════════════════════════════════════════════════════ */
+  var cForm = document.getElementById('close-form');
+  var cMail = document.getElementById('close-email');
+  var cBtn  = document.getElementById('close-go');
+  var cNote = document.getElementById('close-note');
+
+  function setNote(text, kind){
+    cNote.textContent = text;
+    cNote.className = 'note formnote' + (kind ? ' ' + kind : '');
+  }
+
+  cForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = (cMail.value||'').trim();
+    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)){
+      setNote('That email address is missing something. Check it and try again.', 'err');
+      cMail.focus();
+      return;
+    }
+    cBtn.disabled = true;
+    setNote('Sending…');
+
+    /* ── REPLACE FROM HERE ──────────────────────────────────────────────
+       var endpoint = cForm.dataset.endpoint;
+       fetch(endpoint, {
+         method:'POST',
+         headers:{'Content-Type':'application/json'},
+         body: JSON.stringify({ email: email })
+       })
+       .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+       .then(function(){ cForm.reset(); setNote('Check your inbox — the report link is on its way.','ok'); })
+       .catch(function(){ setNote('That did not send. Try again, or email hello@rivalize.ai.','err'); })
+       .then(function(){ cBtn.disabled = false; });
+       ── TO HERE, and delete the stub below ───────────────────────────── */
+    /* Fallback while the endpoint is unset: hand the visitor to the real
+       signup rather than showing them a failure. Delete once wired. */
+    setTimeout(function(){
+      setNote('Taking you to rivalize.ai to confirm your email…', 'ok');
+      window.location.href = 'https://rivalize.ai/';
+    }, 500);
+  });
+})();
+</script>
+</body>
+</html>
