@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JamWise Competitive Analysis</title>
+<meta name="description" content="JamWise competitive analysis: competitors, pricing, the K-8 teacher market, privacy and accessibility, the evidence for songs, SWOT and what we'll do next.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JamWise Competitive Analysis">
+<meta property="og:description" content="Who we're up against, and what we'll do next. Figures as of October 10, 2026.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FCFBF9;            /* warm off-white */
+  --surface: #ffffff;
+  --surface-2: #F7F5FB;
+  --text: #1A1A2E;          /* ink */
+  --muted: #6B7280;         /* grey */
+  --border: #E5E7EB;
+  --accent: #7C3AED;        /* violet */
+  --accent-strong: #6D28D9;
+  --accent-soft: #F3EEFF;
+  --accent-line: #D8C8FC;
+  --yes-bg: #DDF5E8; --yes-fg: #12663F;
+  --part-bg: #FFF1CC; --part-fg: #7A5300;
+  --no-bg: #FDE3E6; --no-fg: #9B1C31;
+  --nf-bg: #EFEDF4; --nf-fg: #4D4763;
+  --s-bg: #E8F7EF; --w-bg: #FFF6DC; --o-bg: #F1EBFE; --t-bg: #FDEBEE;
+  --s-fg: #12663F; --w-fg: #7A5300; --o-fg: #5B21B6; --t-fg: #9B1C31;
+  --shadow: 0 1px 2px rgba(26,26,46,.04), 0 4px 16px rgba(26,26,46,.05);
+  --serif: "Fredoka", system-ui, sans-serif;
+  --sans: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "Nunito", system-ui, sans-serif;
+  --measure: 760px;
+  --wide: 980px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14141F;
+    --surface: #1C1C2B;
+    --surface-2: #242436;
+    --text: #F3EFFB;
+    --muted: #B4AACB;
+    --border: #33334A;
+    --accent: #9C6BF5;
+    --accent-strong: #C4A8FF;
+    --accent-soft: #2A1D4D;
+    --accent-line: #5B3FA0;
+    --yes-bg: #133526; --yes-fg: #8EE0B5;
+    --part-bg: #3A2E0E; --part-fg: #FFD873;
+    --no-bg: #3D1620; --no-fg: #F7A3B0;
+    --nf-bg: #2C2542; --nf-fg: #CBC3DE;
+    --s-bg: #15301F; --w-bg: #33290F; --o-bg: #2A1D4D; --t-bg: #36161E;
+    --s-fg: #8EE0B5; --w-fg: #FFD873; --o-fg: #C4A8FF; --t-fg: #F7A3B0;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.3);
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+a { color: var(--accent-strong); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.15; color: var(--text); font-weight: 700; letter-spacing: -.01em; }
+h1 { font-weight: 700; }
+h2 { font-size: clamp(1.45rem, 1.2rem + 1vw, 1.9rem); margin: 0 0 .9rem; scroll-margin-top: 24px; }
+h3 { font-size: 1.22rem; margin: 2rem 0 .6rem; scroll-margin-top: 24px; }
+p { margin: 0 0 1.05rem; }
+strong { font-weight: 650; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip-link {
+  position: absolute; left: 16px; top: -60px; z-index: 100;
+  background: var(--accent-strong); color: #fff; padding: .6rem 1rem; border-radius: 6px; font-weight: 600;
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+/* Header */
+.site-header {
+  background:
+    radial-gradient(900px 340px at 85% -10%, var(--accent-soft), transparent 70%),
+    var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+/* thin violet rule at the top */
+.site-header::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), #A78BFA);
+}
+.header-inner { max-width: calc(var(--wide) + 32px); margin: 0 auto; padding: 60px 16px 44px; }
+.eyebrow { font-family: var(--mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 800; margin: 0 0 .8rem; }
+.site-header h1 { font-size: clamp(2.3rem, 1.6rem + 3.4vw, 3.9rem); margin: 0 0 .6rem; letter-spacing: -1.5px; }
+.subtitle { font-family: var(--sans); font-size: clamp(1.08rem, 1rem + .5vw, 1.3rem); color: var(--muted); margin: 0 0 1.4rem; max-width: 44ch; font-weight: 500; }
+.byline { display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; font-size: .92rem; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+.byline li { margin: 0; }
+.byline strong { color: var(--text); font-weight: 600; }
+
+/* Layout */
+.layout { max-width: calc(var(--wide) + 32px); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 1240px) {
+  .layout { max-width: calc(var(--wide) + 260px + 48px + 32px); display: grid; grid-template-columns: 260px minmax(0, var(--wide)); gap: 48px; }
+}
+main { min-width: 0; padding-bottom: 40px; }
+main > section { padding-top: 48px; }
+main > section + section { border-top: 1px solid var(--border); margin-top: 8px; }
+.prose > p, .prose > h3, .prose > ul, .prose > ol, .prose > .note { max-width: var(--measure); }
+
+/* TOC */
+.toc { margin: 32px 0 0; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.toc { border-radius: 16px; }
+.toc h2 { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .6rem; font-weight: 800; }
+.toc a::before { font-family: var(--mono); }
+.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+.toc li { counter-increment: toc; margin: 0; }
+.toc a {
+  display: flex; gap: .6rem; padding: .32rem .5rem; margin: 0 -.5rem; border-radius: 6px;
+  color: var(--text); text-decoration: none; font-size: .93rem; line-height: 1.35;
+  border-left: 3px solid transparent;
+}
+.toc a::before { content: counter(toc, decimal-leading-zero); color: var(--muted); font-variant-numeric: tabular-nums; font-size: .8rem; padding-top: .1rem; min-width: 1.4rem; }
+.toc a:hover { background: var(--surface-2); }
+.toc a.is-active { background: var(--accent-soft); border-left-color: var(--accent); color: var(--accent-strong); font-weight: 600; }
+@media (min-width: 640px) and (max-width: 1239px) { .toc ol { columns: 2; column-gap: 28px; } .toc li { break-inside: avoid; } }
+@media (min-width: 1240px) {
+  .toc { position: sticky; top: 24px; align-self: start; margin-top: 48px; max-height: calc(100vh - 48px); overflow-y: auto; }
+}
+
+/* Executive summary */
+.exec {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 6px solid var(--accent);
+  border-radius: 18px;
+  padding: 28px 24px 24px;
+  box-shadow: var(--shadow);
+}
+.tile, .findings li, .note, .games li, .threats li, .table-wrap, .swot-cell { border-radius: 14px; }
+.rec { border-radius: 16px; }
+.tile .num { font-weight: 700; color: var(--accent); }
+.exec h2 { margin-top: 0; }
+.exec .lede { font-size: 1.08rem; max-width: var(--measure); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 1.4rem 0 1.6rem; padding: 0; list-style: none; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 16px 14px; margin: 0; }
+.tile .num { display: block; font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--accent-strong); line-height: 1.05; margin-bottom: .35rem; }
+.tile .lbl { display: block; font-size: .88rem; color: var(--muted); line-height: 1.4; }
+.findings { list-style: none; padding: 0; margin: 0 0 1.4rem; counter-reset: f; display: grid; gap: 10px; max-width: var(--measure); }
+.findings li { counter-increment: f; position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px 12px 52px; margin: 0; }
+.findings li::before {
+  content: counter(f); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: var(--surface); font-weight: 700; font-size: .85rem; display: grid; place-items: center;
+}
+.exec h3 { font-family: var(--mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 1.4rem 0 .7rem; font-weight: 800; }
+.exec p:last-child { margin-bottom: 0; }
+
+.note { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: .95rem; color: var(--muted); }
+.note strong { color: var(--text); }
+.callout { border-left: 4px solid var(--accent); background: var(--surface); padding: 12px 16px; border-radius: 0 10px 10px 0; max-width: var(--measure); margin: 0 0 1.05rem; }
+
+.games { list-style: none; padding: 0; margin: 1rem 0 1.2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-width: var(--measure); }
+.games li { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin: 0; font-size: .93rem; line-height: 1.45; }
+.games b { display: block; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: .2rem; }
+.games .music b::after { content: " \266B"; color: var(--accent); }
+.games-caption { font-size: .88rem; color: var(--muted); max-width: var(--measure); }
+
+/* Tables */
+.table-block { margin: 1.4rem 0 1.2rem; }
+.table-wrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border); border-radius: 12px; background: var(--surface);
+}
+@media (min-width: 1240px) { .table-wrap { overflow: visible; } }
+table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: .9rem; line-height: 1.45; }
+caption { caption-side: top; text-align: left; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; padding: 0 0 .6rem; color: var(--text); }
+th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+thead th {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--surface-2); font-weight: 650; font-size: .8rem; letter-spacing: .02em; color: var(--text);
+  border-bottom: 2px solid var(--accent-line);
+}
+thead th:first-child { border-top-left-radius: 11px; }
+thead th:last-child { border-top-right-radius: 11px; }
+tbody tr:nth-child(even) td, tbody tr:nth-child(even) th { background: var(--surface-2); }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+tbody th { font-weight: 600; }
+tr.highlight th, tr.highlight td { background: var(--accent-soft) !important; }
+tr.highlight th { box-shadow: inset 4px 0 0 var(--accent); }
+.wide table { min-width: 860px; }
+.mid table { min-width: 640px; }
+.table-sources { font-size: .84rem; color: var(--muted); margin-top: .7rem; max-width: var(--wide); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: .84rem; color: var(--muted); margin: 0 0 .8rem; padding: 0; list-style: none; }
+.legend li { margin: 0; display: flex; align-items: center; gap: 6px; }
+
+.badge { display: inline-block; font-family: var(--mono); font-size: .68rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; padding: 3px 8px; border-radius: 8px; white-space: nowrap; margin-right: 4px; }
+.b-yes { background: var(--yes-bg); color: var(--yes-fg); }
+.b-part { background: var(--part-bg); color: var(--part-fg); }
+.b-no { background: var(--no-bg); color: var(--no-fg); }
+.b-nf { background: var(--nf-bg); color: var(--nf-fg); }
+.cell-detail { display: block; margin-top: 3px; }
+.conf { font-size: .78rem; font-weight: 600; padding: 2px 8px; border-radius: 6px; white-space: nowrap; display: inline-block; }
+.conf-vendor { background: var(--yes-bg); color: var(--yes-fg); }
+.conf-reported { background: var(--part-bg); color: var(--part-fg); }
+.conf-other { background: var(--nf-bg); color: var(--nf-fg); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 1.2rem 0; }
+@media (min-width: 700px) { .swot { grid-template-columns: 1fr 1fr; } }
+.swot-cell { border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border); break-inside: avoid; }
+.swot-cell h3 { margin: 0 0 .6rem; font-size: 1.15rem; display: flex; align-items: center; gap: .55rem; }
+.swot-cell h3 span { font-family: var(--sans); font-size: .8rem; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; font-weight: 700; color: var(--surface); }
+.swot-cell ul { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+.swot-cell li { margin: 0 0 .4rem; }
+.swot-s { background: var(--s-bg); } .swot-s h3 { color: var(--s-fg); } .swot-s h3 span { background: var(--s-fg); }
+.swot-w { background: var(--w-bg); } .swot-w h3 { color: var(--w-fg); } .swot-w h3 span { background: var(--w-fg); }
+.swot-o { background: var(--o-bg); } .swot-o h3 { color: var(--o-fg); } .swot-o h3 span { background: var(--o-fg); }
+.swot-t { background: var(--t-bg); } .swot-t h3 { color: var(--t-fg); } .swot-t h3 span { background: var(--t-fg); }
+
+/* Threats */
+.threats { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 10px; max-width: var(--measure); counter-reset: t; }
+.threats li { counter-increment: t; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px 14px 56px; position: relative; margin: 0; break-inside: avoid; }
+.threats li::before { content: counter(t); position: absolute; left: 16px; top: 14px; font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.threats strong { display: block; font-family: var(--serif); font-size: 1.06rem; font-weight: 600; margin-bottom: .2rem; }
+
+/* Recommendations */
+.recs { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 14px; }
+.rec { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: grid; grid-template-columns: 52px 1fr; gap: 4px 16px; box-shadow: var(--shadow); break-inside: avoid; margin: 0; }
+.rec-num { grid-row: span 3; width: 52px; height: 52px; border-radius: 12px; background: var(--accent-soft); border: 1px solid var(--accent-line); display: grid; place-items: center; text-align: center; line-height: 1; }
+.rec-num small { display: block; font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; }
+.rec-num b { font-family: var(--serif); font-size: 1.5rem; color: var(--accent-strong); }
+.rec:first-child .rec-num { background: var(--accent); border-color: var(--accent); }
+.rec:first-child .rec-num b, .rec:first-child .rec-num small { color: var(--surface); }
+.rec p { margin: 0; }
+.rec .what { font-weight: 500; }
+.rec .why-label { font-family: var(--mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); font-weight: 800; margin-top: .5rem; }
+.rec .why { color: var(--muted); font-size: .95rem; }
+@media (max-width: 520px) {
+  .rec { grid-template-columns: 1fr; }
+  .rec-num { grid-row: auto; width: auto; height: auto; justify-content: start; display: flex; gap: .5rem; align-items: baseline; background: none; border: 0; padding: 0; }
+  .rec:first-child .rec-num { background: none; }
+  .rec:first-child .rec-num b { color: var(--accent-strong); }
+  .rec:first-child .rec-num small { color: var(--muted); }
+}
+
+/* Sources */
+.sources-list { font-size: .9rem; padding-left: 2.6rem; margin: 1rem 0 0; max-width: var(--wide); }
+.sources-list li { margin: 0 0 .45rem; padding-left: .2rem; }
+.sources-list li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
+.src-host { color: var(--muted); font-size: .82rem; }
+.src-host::before { content: "("; } .src-host::after { content: ")"; }
+@media (min-width: 900px) { .sources-list { columns: 2; column-gap: 40px; } .sources-list li { break-inside: avoid; } }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border); background: var(--surface); }
+.site-footer p { max-width: calc(var(--wide) + 32px); margin: 0 auto; padding: 24px 16px 32px; font-size: .88rem; color: var(--muted); }
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .exec { padding: 22px 16px 18px; border-left-width: 4px; }
+  .findings li { padding-left: 46px; }
+  .findings li::before { left: 11px; }
+  .header-inner { padding-top: 44px; }
+}
+
+/* Phones and tablets: tables become stacked cards, nothing scrolls sideways */
+@media (max-width: 940px) {
+  .table-wrap { overflow: visible; border: 0; background: none; border-radius: 0; }
+  .wide table, .mid table { min-width: 0; }
+  table, tbody, tr, th, td { display: block; width: 100%; }
+  caption { display: block; }
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  tbody tr { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 16px; margin: 0 0 12px; break-inside: avoid; }
+  tbody tr:nth-child(even) td, tbody tr:nth-child(even) th { background: none; }
+  tbody th { font-family: var(--serif); font-size: 1.08rem; border: 0; padding: 0 0 6px; }
+  tbody td { border: 0; border-top: 1px solid var(--border); padding: 8px 0; }
+  tbody td::before { content: attr(data-label); display: block; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tr.highlight { border-color: var(--accent-line); box-shadow: inset 4px 0 0 var(--accent); background: var(--accent-soft); }
+  tr.highlight th, tr.highlight td { background: none !important; box-shadow: none !important; }
+}
+/* Readable minimums for small labels */
+.badge { font-size: max(12px, .72rem); }
+.rec-num small { font-size: max(12px, .6rem); }
+.rec .why-label { font-size: max(12px, .7rem); }
+/* Very wide screens: keep the reading column comfortable */
+@media (min-width: 1800px) { body { font-size: 18px; } }
+
+/* Print */
+@media print {
+  :root {
+    --bg: #fff; --surface: #fff; --surface-2: #f2f2f2; --text: #000; --muted: #333; --border: #bbb;
+    --accent: #000; --accent-strong: #000; --accent-soft: #fff; --accent-line: #999;
+    --s-bg: #fff; --w-bg: #fff; --o-bg: #fff; --t-bg: #fff;
+    --s-fg: #000; --w-fg: #000; --o-fg: #000; --t-fg: #000;
+    --shadow: none;
+  }
+  body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
+  .toc, .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip-link { display: none !important; }
+  .layout { display: block; max-width: none; padding: 0; }
+  .site-header::before { display: none; }
+  .header-inner { padding: 0 0 12pt; }
+  main > section { padding-top: 16pt; }
+  a { color: #000; text-decoration: underline; }
+  .table-wrap { overflow: visible; border-color: #999; }
+  .wide table, .mid table { min-width: 0; }
+  table { font-size: 8.5pt; }
+  thead th { position: static; }
+  table, tr, .table-block, .tile, .findings li, .swot-cell, .threats li, .rec, .exec, .note, .callout, .games li { break-inside: avoid; page-break-inside: avoid; }
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+  .badge, .conf { border: 1px solid #666; background: #fff !important; color: #000 !important; }
+  .swot-cell h3 span, .findings li::before { background: #000 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rec-num, .rec:first-child .rec-num { background: #fff; border-color: #999; }
+  .rec:first-child .rec-num b, .rec:first-child .rec-num small { color: #000; }
+  .sources-list { columns: 1; }
+  .site-footer { background: #fff; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">JamWise</p>
+    <h1>JamWise Competitive Analysis</h1>
+    <p class="subtitle">Who we're up against, and what we'll do next.</p>
+    <ul class="byline">
+      <li><strong>Competitive analysis &middot; <time datetime="2026-10-10">October 10, 2026</time></strong></li>
+    </ul>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Contents</h2>
+    <ol>
+      <li><a href="#executive-summary">Executive summary</a></li>
+      <li><a href="#site-inconsistencies">Lining up our site</a></li>
+      <li><a href="#sources-and-scope">What we looked at</a></li>
+      <li><a href="#competitors">Three kinds of rivals</a></li>
+      <li><a href="#comparisons">Features and prices, side by side</a></li>
+      <li><a href="#market">The K-8 teacher market</a></li>
+      <li><a href="#compliance">Privacy and accessibility</a></li>
+      <li><a href="#evidence">The evidence for songs</a></li>
+      <li><a href="#swot">SWOT</a></li>
+      <li><a href="#differentiation">What makes us different</a></li>
+      <li><a href="#threats">Threats we're watching</a></li>
+      <li><a href="#recommendations">What we'll do next</a></li>
+      <li><a href="#conclusion">Where we go from here</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+  </nav>
+
+  <main id="main" tabindex="-1">
+
+    <section id="executive-summary" aria-labelledby="executive-summary-h" style="padding-top:32px">
+      <div class="exec">
+        <h2 id="executive-summary-h">Executive summary</h2>
+        <p class="lede">Here's the short version. We're entering a crowded K-8 market with a mix we didn't find in any competitor we reviewed: a ready-made library of standards-aligned songs across five subjects, practice games that use the song's own audio as the game (like Lyric Lockdown and Rhythm Recall), and real-time analytics for every student on standards-tagged content. A teacher gets the full library, four game modes and basic analytics on a plan that's free forever for classroom use. Each piece exists somewhere else. Flocabulary has songs, practice and dashboards, but it's built around hip-hop and sold mostly to schools and districts. Blooket, Gimkit and Kahoot have games and low teacher prices, but no songs. Suno can make a custom song in minutes for about what Premium costs. So our spot is real, but narrow. We win on the whole loop, on accuracy and on child safety, not on any one feature.</p>
+
+        <ul class="tiles" aria-label="Key figures">
+          <li class="tile"><span class="num">250+</span><span class="lbl">standards-aligned jams across 5 subjects in our library</span></li>
+          <li class="tile"><span class="num">5</span><span class="lbl">of our practice games use the jam's music as the game. Our homepage counts 10 games; other pages say 20+.</span></li>
+          <li class="tile"><span class="num">$7.99 / mo</span><span class="lbl">Premium on our Pricing page and in the Terms ($8 on the homepage card). Annual is $6.99/mo, billed annually ($83.88 a year). The common anchor is $59.88 a year (Gimkit, Baamboozle).</span></li>
+          <li class="tile"><span class="num">2.16M</span><span class="lbl">US K-8 teachers (BLS, 2025, excluding special education), with little or no change projected through 2035</span></li>
+        </ul>
+
+        <h3>Key strategic findings</h3>
+        <ol class="findings">
+          <li><strong>Custom songs are now a commodity.</strong> Suno's free plan gives 50 credits a day, which Suno says is enough for 10 songs, and Pro costs $8 a month billed yearly or $10 monthly. Our AI custom jams can't carry the paid plan on their own.</li>
+          <li><strong>Premium sits at the top of the teacher-plan band.</strong> At $7.99 a month ($95.88 a year paid monthly), we're about 60% above the $59.88 annual plans at Gimkit and Baamboozle. Our annual option, $6.99 a month billed annually ($83.88 a year, labelled "Save 12%"), is still about 40% above them. The open question: should annual move closer to that anchor?</li>
+          <li><strong>Districts keep or cut tools on cost, ease of use and teacher buy-in.</strong> Federal ESSER relief money has run out, and analysts expect vendor contracts to be among the first cuts. A low-cost school license backed by usage data is our most realistic first school sale.</li>
+          <li><strong>Compliance comes before the sale.</strong> Districts expect the amended COPPA rule, state student-privacy laws, signed data privacy agreements and accessibility rules (including captions for every song) to be covered before they sign.</li>
+          <li><strong>The research on songs is promising, but conditional.</strong> We don't publish any product-specific efficacy data yet, so an ESSA Tier IV logic model is the right first step.</li>
+        </ol>
+
+        <h3>What we'll do next, at a glance</h3>
+        <p>In order: finish the compliance and accessibility kit before district outreach. Line up our site's pages before launch. Test moving the annual price closer to the $59.88 anchor, while keeping the paid value in analytics, Google Classroom, offline downloads and school features. Call the product "retrieval practice set to music" and keep evidence claims honest. Post free sample songs on short-form video. Build a guard-railed custom jam feature that students under 13 can use safely. And offer a modest school license plus a pilot study that could lead to ESSA Tier III evidence. Where a figure is a company's own claim, or a price isn't publicly listed, we say so.</p>
+      </div>
+    </section>
+
+    <section id="site-inconsistencies" class="prose" aria-labelledby="site-inconsistencies-h">
+      <h2 id="site-inconsistencies-h">Our site should tell one story.</h2>
+      <p>A few pages on jamwise.com don't agree with each other yet, and a few claims need a source or a definition. Let's line these up before launch. Everywhere else in this analysis, we show both values when our pages differ.</p>
+
+      <div class="table-block">
+        <div class="table-wrap wide" role="region" aria-labelledby="cap-inconsistencies" tabindex="0">
+          <table>
+            <caption id="cap-inconsistencies">Points to line up across jamwise.com, checked October 10, 2026</caption>
+            <thead>
+              <tr>
+                <th scope="col">Topic</th>
+                <th scope="col">What our pages say</th>
+                <th scope="col">Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Topic">1. Number of games</th>
+                <td data-label="What our pages say">The homepage says "Practice 10 ways" (five use the jam's music), its Premium card says "All 10 game modes" and its link reads "See all 10 games". For Teachers, For Parents and Pricing say 20+ games, and the Pricing Premium card says "All 20+ game modes".</td>
+                <td data-label="Why it matters">The game count is a headline claim, and the same plan shows two different numbers on two pages. Buyers will notice.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">2. Premium price</th>
+                <td data-label="What our pages say">$8/mo on the homepage card. $7.99/mo on Pricing and in the Terms. Pricing's Annual option shows $6.99/mo, billed annually ($83.88).</td>
+                <td data-label="Why it matters">A small gap, but a card price that differs from the Terms can look careless at checkout.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">3. Billing</th>
+                <td data-label="What our pages say">Pricing has a Monthly and Annual toggle labelled "Save 12%", and Annual shows "$83.88 billed annually" (the math works out to 12.5% off $95.88). The FAQ says Premium "is month-to-month (or annual)". The Terms say Premium subscriptions "are billed monthly at $7.99/month".</td>
+                <td data-label="Why it matters">The Terms govern the subscription. Selling an annual plan under Terms that only describe monthly billing invites renewal and refund questions.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">4. Google Classroom</th>
+                <td data-label="What our pages say">For Teachers lists "Assign &amp; track with Google Classroom" in the free tier. Pricing lists Google Classroom sync as Premium only.</td>
+                <td data-label="Why it matters">Roster and grade sync is a likely reason to upgrade. A teacher who expects it free may feel the plan changed after sign-up.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">5. Free plan contents</th>
+                <td data-label="What our pages say">The homepage card lists "Basic game modes". Pricing and For Teachers both say 4 game modes and 3 custom jams a month. Only Pricing adds the limit of 3 game sessions a day.</td>
+                <td data-label="Why it matters">The daily session limit shapes how useful the free plan is in a classroom, so it belongs in every summary of the plan.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">6. Schools contact</th>
+                <td data-label="What our pages say">schools@jamwise.app on the homepage; schools@jamwise.com on Pricing. Our privacy, support and general contact addresses all use @jamwise.app.</td>
+                <td data-label="Why it matters">School inquiries are our highest-value leads. Messages to an unmonitored domain could be missed.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">7. Launch status</th>
+                <td data-label="What our pages say">The homepage asks visitors to join a waitlist ("we'll let you know when it's your turn"), but every "Join Waitlist" button links to /signup, our account-creation form. Sign up ("Create Free Account") and For Teachers ("Start Free", no credit card) invite visitors to make a free account now. Only Pricing mentions the 14-day Premium trial.</td>
+                <td data-label="Why it matters">Visitors can't tell whether they can use the product today, and someone who "joins the waitlist" actually creates an account.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">8. Testimonials and authorship</th>
+                <td data-label="What our pages say">For Teachers shows three named teacher testimonials (for example "Sarah M., 4th Grade Teacher, Austin TX") and the line "Built by teachers, for teachers". For Parents shows three named parent testimonials. We read the product as pre-release.</td>
+                <td data-label="Why it matters">The FTC's endorsement rules apply to reviews and testimonials, so each one should reflect a real user's experience and be verifiable. Keeping a record for each, or holding them until they can be verified, protects the brand.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">9. Parent-page statistics</th>
+                <td data-label="What our pages say">For Parents shows "74% of parents feel guilty about their kids' screen time", "0 educational music options for kids ages 6-14 (after Cocomelon, there's nothing)" and "3hrs average daily screen time", without sources. The same page gives the age range as 5 to 14.</td>
+                <td data-label="Why it matters">Unsourced figures invite questions from parents and reviewers. The "0 options" claim also doesn't fit the competitors in this analysis, such as Flocabulary, NUMBEROCK, HeidiSongs, GoNoodle and the free YouTube channels.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">10. Undefined features</th>
+                <td data-label="What our pages say">"Remix styles" appears as a row in the Pricing comparison table, and "Brain Beats quizzes" appears on For Teachers. Neither is explained anywhere else on the site.</td>
+                <td data-label="Why it matters">Buyers can't weigh a feature that isn't described, and a plan row without a definition can read as a placeholder.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">11. Library</th>
+                <td data-label="What our pages say">jamwise.com/library now sends signed-out visitors to the login page ("Welcome back"). So the homepage's "Browse full library" and "See all 10 games" links land on a sign-in wall, not a preview.</td>
+                <td data-label="Why it matters">Teachers who click to look around hit a login first. A public preview of a few jams would show them what they're getting.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">12. Offline downloads</th>
+                <td data-label="What our pages say">For Parents lists "Offline Downloads" next to "Start free". Pricing puts offline downloads in Premium only.</td>
+                <td data-label="Why it matters">A parent who expects downloads on the free plan may feel the deal changed after sign-up.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Topic">13. Analytics naming</th>
+                <td data-label="What our pages say">The homepage Premium card says "Detailed progress analytics". Pricing says "Advanced analytics &amp; reports".</td>
+                <td data-label="Why it matters">Same feature, two names. One label makes the plans easier to compare.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-sources">Sources: <a href="https://jamwise.com/" target="_blank" rel="noopener">jamwise.com</a>; <a href="https://jamwise.com/for-teachers" target="_blank" rel="noopener">jamwise.com/for-teachers</a>; <a href="https://jamwise.com/for-parents" target="_blank" rel="noopener">jamwise.com/for-parents</a>; <a href="https://jamwise.com/pricing" target="_blank" rel="noopener">jamwise.com/pricing</a>; <a href="https://jamwise.com/library" target="_blank" rel="noopener">jamwise.com/library</a>; <a href="https://jamwise.com/signup" target="_blank" rel="noopener">jamwise.com/signup</a>; <a href="https://jamwise.com/privacy" target="_blank" rel="noopener">jamwise.com/privacy</a>; <a href="https://jamwise.com/terms" target="_blank" rel="noopener">jamwise.com/terms</a>; all checked October 10, 2026.</p>
+      </div>
+    </section>
+
+    <section id="sources-and-scope" class="prose" aria-labelledby="sources-and-scope-h">
+      <h2 id="sources-and-scope-h">What we looked at.</h2>
+      <p>We used public sources available on October 10, 2026: vendor pricing and help pages, official releases, government data and statutes, school-board and state records, peer-reviewed research, and established news and trade press. When a figure is a company's own claim, we call it a company claim. When a price isn't published, we say "not publicly listed". Blooket and Wayground don't publish their prices on public pages. Gimkit, Quizlet (Plus), Boom Cards, Nearpod and Suno prices were confirmed on vendor pages on October 10, 2026, and Prodigy is free to teachers. Older data carries its year. When two sources conflict, we show both.</p>
+      <p>Our own facts come from the public pages of jamwise.com, checked October 10, 2026: the homepage, For Teachers, For Parents, Pricing, Library, Sign up, Privacy and Terms. The homepage opens with "Every topic has a song" and offers "250+ jams across 5 subjects" for K-8. It shows Math, Science, ELA, History and a "Kindness" tile, with jams tagged to CCSS, NGSS, C3 and CASEL. The site doesn't name the fifth subject. We read it as social-emotional learning, because of the CASEL tag. The site describes genres matched to the mood of the content, a set of practice games (10 on the homepage, 20+ on other pages; five use the jam's music as the game, by the homepage's count) and real-time progress analytics per student. Custom jams are made by AI: Pricing says "our AI generates a complete, curriculum-aligned song in minutes", and the Terms call JamWise "AI-powered".</p>
+      <p>The Free plan ($0, free forever, no credit card) includes, per Pricing, the full library of 250+ jams, assigning and tracking with classes, 3 custom jams a month, 4 game modes with 3 game sessions a day, basic analytics, projector mode, standards alignment tags and up to 35 students. Premium is $7.99 a month on Pricing and in the Terms ($8 on the homepage card), or $6.99 a month billed annually ($83.88 a year, labelled "Save 12%") on Pricing's Annual option. It adds unlimited custom jams, all 20+ game modes with unlimited sessions, remix styles, offline downloads, advanced analytics and reports, Google Classroom integration, priority support and unlimited students. Pricing also offers a 14-day free Premium trial with no credit card. Schools can request a license with volume pricing, centralized billing, rostering and admin dashboards, priced on request. There's a parent offering too (see the market section). Per our privacy policy, children use JamWise only through teacher-managed classrooms or parent-managed family accounts. The homepage invites visitors to join a waitlist, and the Library sits behind a sign-in. We read the product as pre-release, so this analysis doesn't assess it in use.</p>
+      <p>The homepage shows six of our games and says there are ten ways to practice, "including 5 that use the jam's actual music as a game mechanic".</p>
+      <ul class="games" aria-label="Named JamWise games">
+        <li class="music"><b>Lyric Lockdown</b>Music: real-time karaoke fill-in-the-blank. Miss a word and the music skips.</li>
+        <li class="music"><b>Rhythm Recall</b>Rhythm: "Guitar Hero meets vocab." Tap the rhythm of the lyric line.</li>
+        <li><b>Quiz Show</b>Assessment: a Jeopardy-style board with 5 question types and buzzer scoring.</li>
+        <li><b>Streak Sprint</b>Speed.</li>
+        <li><b>Gold Rush</b>Strategy: treasure chest rewards with AI opponents and steal mechanics.</li>
+        <li><b>Crossword Craze</b>Speed and skill.</li>
+      </ul>
+      <p class="games-caption">&#9835; marks games whose homepage descriptions use the song's music or rhythm as the mechanic.</p>
+    </section>
+
+    <section id="competitors" class="prose" aria-labelledby="competitors-h">
+      <h2 id="competitors-h">Three kinds of rivals. None does it all.</h2>
+      <p>We face three kinds of rivals, and each one pressures a different part of our offer. <strong>Educational music</strong>, where Flocabulary is the only scaled player with practice and dashboards. <strong>Game-based practice</strong>, a crowded field of free-to-start quiz tools. And <strong>AI song tools</strong>, which let any teacher turn a lesson into a song in minutes.</p>
+
+      <h3 id="flocabulary">Flocabulary is the big music rival, and it sells mostly to districts.</h3>
+      <p>Flocabulary has made educational hip-hop since 2004. Nearpod bought it in April 2019 (<a href="https://edsurge.com/news/2019-04-08-that-s-a-rap-nearpod-buys-educational-hip-hop-creator-flocabulary" target="_blank" rel="noopener">EdSurge</a>). In February 2021, Renaissance agreed to buy Nearpod, Flocabulary included (<a href="https://www.businesswire.com/news/home/20210223005830/en/Renaissance-and-Nearpod-Coming-Together-to-Empower-Teachers-and-Accelerate-Student-Growth" target="_blank" rel="noopener">Business Wire, company release</a>). EdSurge reported the price at about $650 million in cash; the companies didn't disclose terms (<a href="https://edsurge.com/news/2021-02-19-renaissance-learning-to-acquire-nearpod-in-blockbuster-650m-all-cash-deal" target="_blank" rel="noopener">EdSurge, 2021</a>). Each lesson runs through a video, Vocab Cards, a Vocab Game, Break it Down, Read &amp; Respond, a Quiz and Lyric Lab, where students write rhymes over a beat they choose (<a href="https://www.flocabulary.com/how-it-works/" target="_blank" rel="noopener">Flocabulary, How it works</a>; <a href="https://blog.flocabulary.com/?p=17870" target="_blank" rel="noopener">Flocabulary blog</a>). The Plus plan adds student accounts, assignments, dashboards, practice sets and LTI integration with Google Classroom, Clever and ClassLink (<a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">Flocabulary FAQ, May 2024</a>).</p>
+      <p>Flocabulary still offers a teacher "Lite" plan with a 30-day free trial, but <strong>its pricing page returned an error on October 10, 2026</strong>, and the Lite price is not publicly listed (<a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">Flocabulary FAQ</a>). School deals are better documented. Lincolnwood School District 74 in Illinois was quoted $3,120 for grades 3 to 5 and negotiated it to $2,800 for 2022-23 (<a href="https://meetings.boardbook.org/Documents/DownloadPDF/69cd0515-e2f9-4775-9083-24846e1f5c4b?org=1270" target="_blank" rel="noopener">board packet, August 2022</a>). Its 2023-24 renewal for the same grades was quoted at $3,360 (<a href="https://meetings.boardbook.org/Documents/DownloadPDF/2d7bbdfd-4fe4-4ffa-a536-73ff6051b68e?org=1270" target="_blank" rel="noopener">board packet, August 2023</a>). Utah Education Network's FY26 price list gives Flocabulary Plus at $2 per student a year, or $5 per student in a bundle with Nearpod EL and Nearpod 21st Century (<a href="https://www.uen.org/software/download/NearpodRequest.pdf" target="_blank" rel="noopener">UEN</a>). Reach figures vary. Flocabulary said in 2015 that over 35,000 schools used it (<a href="https://www.schoollibraryjournal.com/story/educational-video-with-a-twist-slj-reviews-flocabulary" target="_blank" rel="noopener">School Library Journal</a>), and its 2024 FAQ says teachers at 20,000 schools use its videos (<a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">Flocabulary FAQ</a>). Both are company claims, and they may measure different things.</p>
+      <p class="callout">Two things matter for us. Flocabulary's library is big: 1,300+ hip-hop videos and lesson activities (<a href="https://blog.flocabulary.com/how-videos-are-made/" target="_blank" rel="noopener">Flocabulary blog, July 2024</a>), sitting next to 200+ Nearpod Originals. It's also growing in Spanish, with Flocabulary Espa&ntilde;ol math lessons since March 2026 (<a href="https://blog.flocabulary.com/flocabulary-espanol-math-is-here/" target="_blank" rel="noopener">Flocabulary blog, March 2026</a>). And the individual teacher route still exists, so <strong>we shouldn't claim Flocabulary has no teacher plan</strong>.</p>
+
+      <h3 id="music-field">The rest of the music field is free, passive or narrow.</h3>
+      <p>Outside Flocabulary, music for learning splits three ways: free sponsor-funded platforms, small niche subscriptions and big free YouTube channels. GoNoodle made its paid teacher tier free for all educators from the 2021-22 school year, and it says sponsorships keep it free for teachers, families and schools (<a href="https://www.techlearning.com/how-to/what-is-gonoodle-and-how-does-it-work-best-tips-and-tricks-for-educators" target="_blank" rel="noopener">Tech &amp; Learning, 2022</a>; <a href="https://partnerships.gonoodle.com/faqs/" target="_blank" rel="noopener">GoNoodle partnerships FAQ</a>). It focuses on movement, brain breaks and mindfulness, with some curricular songs and short question sets. We found no standards tagging or per-student analytics. NUMBEROCK sells animated math songs with worksheets and auto-graded assessments for $4.95 a month, $29.88 a year or $149.95 for a "Lifetime" plan, covering roughly kindergarten to grade 6 math (<a href="https://numberock.com/sign-up-packages/" target="_blank" rel="noopener">NUMBEROCK</a>). HeidiSongs targets preschool to grade 2 and special-needs learners, with more than 1,500 videos (its page says both 1,500 and 1,600) and plans from $0.99 a month up to $9.99 a month for All Access (<a href="https://www.heidisongs.tv/" target="_blank" rel="noopener">HeidiSongs.tv</a>). Learning Upgrade is closest to us in kind: songs, games and progress reporting, now aimed at K-12 intervention and adult education such as ESL, GED and workforce programs (<a href="https://web.learningupgrade.com/" target="_blank" rel="noopener">Learning Upgrade</a>). It doesn't publish prices (quotes on request) and offers a 3-month free pilot (<a href="https://web.learningupgrade.com/quote/" target="_blank" rel="noopener">Learning Upgrade, quote page</a>). A 2014 review listed $30 per student, $7,500 per school and 20 free student licenses (<a href="https://www.techlearning.com/news/learning-upgrade" target="_blank" rel="noopener">Tech &amp; Learning, 2014</a>).</p>
+      <p>Free YouTube channels have the biggest audiences by far. On their official channel pages in October 2026, Jack Hartmann had about 5.66 million subscribers (<a href="https://www.youtube.com/@JackHartmann/about" target="_blank" rel="noopener">YouTube</a>), Scratch Garden about 2.3 million (<a href="https://www.youtube.com/@scratchgarden/about" target="_blank" rel="noopener">YouTube</a>), and KLT (formerly Kids Learning Tube) about 2.74 million subscribers and about 2.6 billion views (<a href="https://www.youtube.com/@klt/about" target="_blank" rel="noopener">YouTube</a>). We didn't find practice, standards tagging or analytics on any of them. They still matter. They shape what teachers expect to pay for a song: often nothing.</p>
+
+      <h3 id="game-platforms">Game platforms are cheap, familiar and quick to add AI.</h3>
+      <p>Teachers know this group well. Kahoot's plans page lists paid teacher tiers at $3, $7, $12 and $19 a month billed annually, or $9, $15, $25 and $34.99 billed monthly, with school and district plans by quote (<a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Kahoot plans</a>). The same page's FAQ says education plans bill annually only. A group led by Goldman Sachs Asset Management took Kahoot private for about $1.7 billion. The deal was announced in July 2023 (<a href="https://www.k12dive.com/news/kahoot-acquired-17-billion-deal/688424/" target="_blank" rel="noopener">K-12 Dive</a>) and closed with Kahoot's delisting on January 23, 2024 (<a href="https://kahoot.com/press/2024/01/23/kahoot-delisted-from-oslo-bors-following-successful-acquisition-led-by-goldman-sachs-asset-management/" target="_blank" rel="noopener">Kahoot release</a>). Kahoot also owns Clever, the rostering service many US schools use, which it bought in 2021 for up to $500 million (<a href="https://techcrunch.com/2021/05/06/kahoot-acquires-clever-the-us-based-edtech-portal-for-up-to-500m/" target="_blank" rel="noopener">TechCrunch</a>). Gimkit Pro costs $59.88 a year or $14.99 a month, and Gimkit's group plans cost $650 a year for a department (up to 20 teachers) and $1,000 a year for a school (<a href="https://help.gimkit.com/en/article/gimkit-pro-faq-14h6d62/" target="_blank" rel="noopener">Gimkit Help</a>). Blooket's Plus price is not publicly listed: it shows only inside the signed-in upgrade flow, and group plans are by quote (<a href="https://help.blooket.com/hc/en-us/articles/16182101813015" target="_blank" rel="noopener">Blooket Help, individual</a>; <a href="https://help.blooket.com/hc/en-us/articles/16182254394519" target="_blank" rel="noopener">Blooket Help, group</a>). Quizizz renamed itself Wayground on June 24, 2025, says it's used in 90% of U.S. schools (company claim) and now pitches curriculum alignment and a "Flexible AI Generation Hub" (<a href="https://finance.yahoo.com/news/quizizz-becomes-wayground-announces-ai-130000405.html" target="_blank" rel="noopener">Quizizz Inc. via PR Newswire</a>). Prodigy is free to teachers and earns money from parent memberships (<a href="https://www.prodigygame.com/main-en/teacher-platform" target="_blank" rel="noopener">Prodigy</a>). Legends of Learning offers more than 2,000 curriculum-aligned math, science and history games, mainly for K-8 (<a href="https://www.legendsoflearning.com/" target="_blank" rel="noopener">Legends of Learning</a>). Its free Basic Teacher plan is limited to 3 active assignments and limited gameplay. Student, class and standard-level reporting comes with Premium Classroom at $790 per teacher a year and School at $4,450 for 400 to 1,000 students (<a href="https://www.legendsoflearning.com/pricing/" target="_blank" rel="noopener">Legends of Learning pricing</a>). On analytics, it's the closest to us in this group.</p>
+      <p>AI question generation is now standard here. Kahoot includes it from its $3 Bronze tier (<a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Kahoot plans</a>). Gimkit launched an AI Question Generator in September 2025 (<a href="https://x.com/gimkit/status/1967986263526613318" target="_blank" rel="noopener">Gimkit on X</a>). Blooket has offered AI question sets through Khan Academy's Khanmigo since January 2025 (<a href="https://blog.khanacademy.org/khanmigo-and-blooket-ai-question-sets-for-fun-classroom-challenges" target="_blank" rel="noopener">Khan Academy Blog</a>; <a href="https://help.blooket.com/hc/en-us/articles/28660875749527-AI-Generated-Question-Sets-with-Khanmigo" target="_blank" rel="noopener">Blooket Help</a>). Music in these products is background only. Kahoot offers a set of built-in background tracks with volume control, and hosts can't upload their own audio (<a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Kahoot plans</a>). On Gimkit, audio questions need a paid membership (<a href="https://help.gimkit.com/en/article/create-a-kit-from-scratch-ig828l" target="_blank" rel="noopener">Gimkit Help</a>). Our quiz-board and competition games, like Quiz Show, Streak Sprint and Gold Rush, overlap with these tools. They're table stakes, not reasons to switch. The five games that use song audio, like Lyric Lockdown and Rhythm Recall, are the real difference.</p>
+
+      <h3 id="ai-song-tools">AI song tools made custom songs cheap.</h3>
+      <p>This group is the newest, and it moves fastest. Suno launched its v6 models on September 9, 2026, with a free v6-mini model for everyone, built with licensing partners Warner Music Group, BMG and Believe (<a href="https://www.musicbusinessworldwide.com/suno-v6-ai-music-models-launch-in-partnership-with-wmg-bmg-and-believe/" target="_blank" rel="noopener">Music Business Worldwide</a>). Suno's own pricing page lists a Free plan with 50 credits a day, which Suno says is "enough to make 10 songs per day", with no downloads and no commercial use. Pro is $8 a month billed yearly or $10 monthly, with 2,500 credits and 20 song downloads a month. Premier is $24 a month billed yearly or $30 monthly, with 10,000 credits and 60 downloads (<a href="https://suno.com/pricing" target="_blank" rel="noopener">Suno pricing</a>; <a href="https://help.suno.com/en/articles/2410049" target="_blank" rel="noopener">Suno Help</a>). Teachers already use Suno. Edutopia shows class-written songs on topics like triangle types (<a href="https://www.edutopia.org/video/ai-tool-demo-music-generation-with-suno" target="_blank" rel="noopener">Edutopia</a>), and Israel's Ministry of Education and Singapore's Centre for Chinese Language list Suno teaching practices and training (<a href="https://pop.education.gov.il/teaching-tools/teaching-practices/search-teaching-practices/suno/" target="_blank" rel="noopener">Israel Ministry of Education</a>; <a href="https://www.sccl.sg/en/training-programmes/opal2-0-courses/item/450-developing-chinese-language-teaching-resources-using-suno-ai-music-generator-pri" target="_blank" rel="noopener">SCCL</a>). Some teachers write lyrics in MagicSchool or Knowt, then turn them into songs in Suno (<a href="https://magicschool.ai/tools/colleague-song-generator" target="_blank" rel="noopener">MagicSchool</a>; <a href="https://knowt.com/free-ai-tools-for-teachers/ai-song-generator" target="_blank" rel="noopener">Knowt</a>).</p>
+      <p>These tools have clear limits for K-8. Suno's Terms bar users under 13 and allow ages 13 to 17 only with a parent's or guardian's prior consent (<a href="https://suno.com/legal/terms" target="_blank" rel="noopener">Suno Terms, effective September 3, 2026</a>). Music in Gemini launched with Lyria 3 (30-second tracks) for users 18 and older in February 2026 (<a href="https://blog.google/innovation-and-ai/products/gemini-app/lyria-3/" target="_blank" rel="noopener">Google</a>). Lyria 3 Pro, with tracks up to three minutes and still 18+, reached personal accounts and Education editions in April 2026 (<a href="https://workspaceupdates.googleblog.com/2026/04/expanding-access-to-longer-musical-tracks-in-the-Gemini-app.html" target="_blank" rel="noopener">Google Workspace Updates</a>). Lyria 3.5 followed in September 2026, and its announcement states no age rule (<a href="https://blog.google/innovation-and-ai/products/gemini-app/better-tracks-lyria-gemini/" target="_blank" rel="noopener">Google</a>). So most K-8 students can't use these tools directly. General music generators such as Suno and Gemini don't align output to standards, and teachers are advised to check AI lyrics for accuracy before sharing them (<a href="https://www.teachersfirst.org/single.cfm?id=20078" target="_blank" rel="noopener">TeachersFirst</a>). Legal risk remains, too. Universal and Sony sued Suno a second time on September 18, 2026, in federal court in Boston, calling v6 "the fruit of the same poisoned tree" (<a href="https://www.musicbusinessworldwide.com/universal-and-sony-sue-suno-for-a-second-time-claiming-platforms-v6-models-are-the-fruit-of-the-same-poisoned-tree-/" target="_blank" rel="noopener">Music Business Worldwide</a>). Udio turned off downloads on October 30, 2025, after settling with Universal, and Warner settled with Udio on November 19, 2025 (<a href="https://www.wsls.com/business/2025/11/02/ai-song-generator-udio-offers-brief-window-for-downloads-after-universal-settlement-upsets-users/" target="_blank" rel="noopener">AP via WSLS</a>; <a href="https://www.musicbusinessworldwide.com/warner-music-settles-udio-lawsuit-strikes-licensing-deal-with-ai-platform" target="_blank" rel="noopener">Music Business Worldwide</a>).</p>
+      <p>Among education tools, Knowt's AI Song Generator comes closest to us. It has an "Align to standards" field and says it can create "full songs, lyrics, and melodies" (<a href="https://knowt.com/free-ai-tools-for-teachers/ai-song-generator" target="_blank" rel="noopener">Knowt</a>). We found no sign that it puts sung audio inside games with per-student analytics, and we found no other education tool that does all of that. Our own custom jams are AI-generated. Pricing says "our AI generates a complete, curriculum-aligned song in minutes", and our Terms say AI-generated content is reviewed for accuracy and age-appropriateness, but "we cannot guarantee it is error-free". Our public pages don't name the model behind it. The likelier near-term threat is the two-tool stack teachers build themselves, or a company with district reach, such as MagicSchool or Nearpod, adding licensed audio generation.</p>
+
+      <h3 id="july-competitors">The seven rivals from our July analysis.</h3>
+      <p>These seven were the competitors named in an earlier analysis from July 2026. Here's what each one is, how it compares with us and where it stands now. We've kept only figures we can source today.</p>
+      <div class="table-block">
+        <div class="table-wrap wide" role="region" aria-labelledby="cap-july" tabindex="0">
+          <table>
+            <caption id="cap-july">The July 2026 competitor list, updated to October 2026</caption>
+            <thead>
+              <tr>
+                <th scope="col">Competitor</th>
+                <th scope="col">What it is</th>
+                <th scope="col">How it compares with JamWise</th>
+                <th scope="col">Where it stands now (October 2026)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Competitor">Flocabulary</th>
+                <td data-label="What it is">Educational hip-hop videos and lessons, K-12</td>
+                <td data-label="How it compares with JamWise">The closest match: songs plus practice. But it's a fixed, pre-recorded catalog, and we found no games played against the song.</td>
+                <td data-label="Where it stands now (October 2026)">Part of Renaissance through Nearpod, and sold mainly to schools. Its 2024 FAQ says teachers at 20,000 schools use its videos (company claim; <a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">Flocabulary FAQ</a>). The teacher Lite plan has a 30-day trial but no permanent free tier. Still hip-hop in format, now with Spanish-language lessons. Covered in detail above.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Kahoot!</th>
+                <td data-label="What it is">Live quiz game show</td>
+                <td data-label="How it compares with JamWise">Shows that teachers adopt engagement tools at scale. It tests recall; it doesn't teach through song.</td>
+                <td data-label="Where it stands now (October 2026)">Private since January 2024 (<a href="https://kahoot.com/press/2024/01/23/kahoot-delisted-from-oslo-bors-following-successful-acquisition-led-by-goldman-sachs-asset-management/" target="_blank" rel="noopener">Kahoot release</a>), and owns Clever. Kahoot says 10 million teachers hosted in the past 12 months (company claim; <a href="https://kahoot.com/company/" target="_blank" rel="noopener">Kahoot company page</a>). Free plan plus teacher plans from $36 a year, with AI creation from the lowest paid tier. Music is built-in background tracks (<a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Kahoot plans</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Quizizz (now Wayground)</th>
+                <td data-label="What it is">Self-paced quiz games</td>
+                <td data-label="How it compares with JamWise">Another sign of the interactive-tool habit. No song content.</td>
+                <td data-label="Where it stands now (October 2026)">Renamed Wayground on June 24, 2025. Says it was used in 90% of U.S. schools as of June 2025 (company claim; <a href="https://finance.yahoo.com/news/quizizz-becomes-wayground-announces-ai-130000405.html" target="_blank" rel="noopener">company release</a>). Individual pricing is not publicly listed.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Blooket</th>
+                <td data-label="What it is">Game-show review, popular in elementary and middle school</td>
+                <td data-label="How it compares with JamWise">Lives in the same classrooms as us, but it's a review game, not a retention tool.</td>
+                <td data-label="Where it stands now (October 2026)">Plus price not publicly listed. The free plan allows up to 60 players (<a href="https://help.blooket.com/hc/en-us/articles/17351034967959-Is-Blooket-Free" target="_blank" rel="noopener">Blooket Help</a>). AI question sets come through Khanmigo since January 2025. Blooket says "millions of educators" use it (company claim; <a href="https://www.blooket.com/" target="_blank" rel="noopener">blooket.com</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Gimkit</th>
+                <td data-label="What it is">Live quiz game with an in-game economy</td>
+                <td data-label="How it compares with JamWise">An engagement layer over recall practice. No song content.</td>
+                <td data-label="Where it stands now (October 2026)">Pro is $59.88 a year or $14.99 a month (<a href="https://help.gimkit.com/en/article/gimkit-pro-faq-14h6d62/" target="_blank" rel="noopener">Gimkit Help</a>). AI Question Generator since September 2025. Audio questions need a paid membership (<a href="https://help.gimkit.com/en/article/create-a-kit-from-scratch-ig828l" target="_blank" rel="noopener">Gimkit Help</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Boom Cards (Boom Learning)</th>
+                <td data-label="What it is">Self-grading digital task cards, PreK and up</td>
+                <td data-label="How it compares with JamWise">A practice and assessment marketplace, not song-based.</td>
+                <td data-label="Where it stands now (October 2026)">Boom says it has 500,000+ decks (company claim; <a href="https://www.boomlearning.com/boom-cards" target="_blank" rel="noopener">Boom Learning</a>). Free Limited plan (1 educator, 5 students, 5 self-made decks); Premium is $49.99 a year or $6.99 a month (<a href="https://www.boomlearning.com/pricing" target="_blank" rel="noopener">Boom pricing</a>). No song content found.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Competitor">Teachers Pay Teachers</th>
+                <td data-label="What it is">Marketplace for teacher-made classroom materials</td>
+                <td data-label="How it compares with JamWise">Proof that teachers pay for materials, and a possible channel for us.</td>
+                <td data-label="Where it stands now (October 2026)">TPT says it has 7M+ teacher-created lessons and 7M+ educators (company claims; <a href="https://www.teacherspayteachers.com/About-Us" target="_blank" rel="noopener">TPT About Us</a>). Sales are top-heavy: in a 2020 study in Teachers College Record, the top 1% of sellers accounted for 81% of sales (<a href="https://scholars.uky.edu/es/publications/where-does-all-the-money-go-free-and-paid-transactions-on-teacher/" target="_blank" rel="noopener">Koehler et al., 2020</a>). Best used as a funnel, like free song and worksheet bundles, not as a revenue line.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-sources">Sources are linked in each row. Company claims are labelled.</p>
+      </div>
+      <p>The July map still holds: quiz and game tools that test recall, one song library that builds it, and marketplaces of ready-made materials. The big change since July is that every major quiz platform now offers AI content generation. So we close the gap with music-based games, not with generated content alone.</p>
+    </section>
+
+    <section id="comparisons" class="prose" aria-labelledby="comparisons-h">
+      <h2 id="comparisons-h">Features and prices, side by side.</h2>
+      <p>Here's what each main competitor offers against our core pieces. "Not found" means we didn't find the feature. That doesn't prove it isn't there.</p>
+
+      <div class="table-block">
+        <ul class="legend" aria-label="Badge legend">
+          <li><span class="badge b-yes">Yes</span> offered</li>
+          <li><span class="badge b-part">Partial</span> limited or qualified</li>
+          <li><span class="badge b-no">No</span> not offered</li>
+          <li><span class="badge b-nf">Not found</span> we didn't find it</li>
+        </ul>
+        <div class="table-wrap wide" role="region" aria-labelledby="cap-features" tabindex="0">
+          <table>
+            <caption id="cap-features">Feature comparison: JamWise and its main competitors</caption>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Pre-made curriculum songs</th>
+                <th scope="col">Games using song audio</th>
+                <th scope="col">Standards-tagged analytics</th>
+                <th scope="col">Permanent free teacher tier</th>
+                <th scope="col">Subject coverage</th>
+                <th scope="col">Built-in AI generation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <th scope="row" data-label="Product"><strong>JamWise</strong> (pre-release, our reading)</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-yes">Yes</span><span class="cell-detail">250+ jams across 5 subjects, genres matched to the mood of the content</span></td>
+                <td data-label="Games using song audio"><span class="badge b-yes">Yes</span><span class="cell-detail">5 games use the music (10 games on the homepage, 20+ on other pages), like Lyric Lockdown and Rhythm Recall</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-yes">Yes</span><span class="cell-detail">Real-time analytics per student on standards-tagged jams; advanced analytics and reports in Premium</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span><span class="cell-detail">Free forever, up to 35 students</span></td>
+                <td data-label="Subject coverage">K-8 Math, Science, ELA, History and a Kindness topic (CASEL)</td>
+                <td data-label="Built-in AI generation"><span class="badge b-yes">Yes</span><span class="cell-detail">Custom jams by AI, 3 a month free, unlimited in Premium</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">Flocabulary</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-yes">Yes</span><span class="cell-detail">Hip-hop, 1,300+ videos</span></td>
+                <td data-label="Games using song audio"><span class="badge b-nf">Not found</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-yes">Yes</span><span class="cell-detail">In Plus (school tier)</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-no">No</span><span class="cell-detail">30-day trial</span></td>
+                <td data-label="Subject coverage">K-12, all subjects, plus Spanish</td>
+                <td data-label="Built-in AI generation"><span class="badge b-nf">Not found</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">GoNoodle</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-part">Partial</span><span class="cell-detail">Movement and sing-along videos</span></td>
+                <td data-label="Games using song audio"><span class="badge b-nf">Not found</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-nf">Not found</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span></td>
+                <td data-label="Subject coverage">Movement, mindfulness, some curricular</td>
+                <td data-label="Built-in AI generation"><span class="badge b-nf">Not found</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">NUMBEROCK</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-yes">Yes</span><span class="cell-detail">Math only</span></td>
+                <td data-label="Games using song audio"><span class="badge b-nf">Not found</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-part">Partial</span><span class="cell-detail">Auto-graded quizzes</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-no">No</span><span class="cell-detail">Trial only</span></td>
+                <td data-label="Subject coverage">Math, about K-6</td>
+                <td data-label="Built-in AI generation"><span class="badge b-nf">Not found</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">Learning Upgrade</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-yes">Yes</span><span class="cell-detail">Within a course</span></td>
+                <td data-label="Games using song audio"><span class="badge b-nf">Not found</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-part">Partial</span><span class="cell-detail">Progress reporting</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-part">Partial</span><span class="cell-detail">3-month free pilot</span></td>
+                <td data-label="Subject coverage">K-12 intervention and adult education</td>
+                <td data-label="Built-in AI generation"><span class="badge b-nf">Not found</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">YouTube channels</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-yes">Yes</span><span class="cell-detail">Free</span></td>
+                <td data-label="Games using song audio"><span class="badge b-no">No</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-no">No</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span><span class="cell-detail">Free</span></td>
+                <td data-label="Subject coverage">Mostly early grades</td>
+                <td data-label="Built-in AI generation"><span class="badge b-no">No</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">Kahoot, Blooket, Gimkit</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-no">No</span></td>
+                <td data-label="Games using song audio"><span class="badge b-no">No</span><span class="cell-detail">Background music only</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-part">Partial</span><span class="cell-detail">Standards features mostly at school tier</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span><span class="cell-detail">With caps</span></td>
+                <td data-label="Subject coverage">Teacher-made, any subject</td>
+                <td data-label="Built-in AI generation"><span class="badge b-yes">Yes</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">Legends of Learning</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-no">No</span></td>
+                <td data-label="Games using song audio"><span class="badge b-no">No</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-part">Partial</span><span class="cell-detail">Paid tiers</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span><span class="cell-detail">Limited</span></td>
+                <td data-label="Subject coverage">K-8 math, science, history</td>
+                <td data-label="Built-in AI generation"><span class="badge b-nf">Not found</span></td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Product">Suno</th>
+                <td data-label="Pre-made curriculum songs"><span class="badge b-no">No</span></td>
+                <td data-label="Games using song audio"><span class="badge b-no">No</span></td>
+                <td data-label="Standards-tagged analytics"><span class="badge b-no">No</span></td>
+                <td data-label="Permanent free teacher tier"><span class="badge b-yes">Yes</span><span class="cell-detail">50 credits a day (about 10 songs)</span></td>
+                <td data-label="Subject coverage">Any topic, no alignment</td>
+                <td data-label="Built-in AI generation"><span class="badge b-yes">Yes</span><span class="cell-detail">Full songs; under 13 barred, 13 to 17 need parental consent</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-sources">Sources: Flocabulary (<a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">FAQ</a>; <a href="https://www.flocabulary.com/how-it-works/" target="_blank" rel="noopener">How it works</a>; <a href="https://blog.flocabulary.com/how-videos-are-made/" target="_blank" rel="noopener">blog</a>); GoNoodle (<a href="https://www.techlearning.com/how-to/what-is-gonoodle-and-how-does-it-work-best-tips-and-tricks-for-educators" target="_blank" rel="noopener">Tech &amp; Learning</a>); NUMBEROCK (<a href="https://numberock.com/sign-up-packages/" target="_blank" rel="noopener">sign-up packages</a>); Learning Upgrade (<a href="https://web.learningupgrade.com/" target="_blank" rel="noopener">homepage</a>; <a href="https://web.learningupgrade.com/quote/" target="_blank" rel="noopener">quote page</a>); Kahoot (<a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">plans</a>); Legends of Learning (<a href="https://www.legendsoflearning.com/pricing/" target="_blank" rel="noopener">pricing</a>); Suno (<a href="https://suno.com/pricing" target="_blank" rel="noopener">pricing</a>; <a href="https://suno.com/legal/terms" target="_blank" rel="noopener">Terms</a>); JamWise (<a href="https://jamwise.com/" target="_blank" rel="noopener">homepage</a>; <a href="https://jamwise.com/for-teachers" target="_blank" rel="noopener">For Teachers</a>; <a href="https://jamwise.com/pricing" target="_blank" rel="noopener">Pricing</a>; checked October 10, 2026).</p>
+      </div>
+
+      <p>The pricing table shows individual teacher prices and observed school prices.</p>
+
+      <div class="table-block">
+        <div class="table-wrap wide" role="region" aria-labelledby="cap-pricing" tabindex="0">
+          <table>
+            <caption id="cap-pricing">Pricing comparison: individual teacher and school prices</caption>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Free option</th>
+                <th scope="col">Teacher price, annual billing</th>
+                <th scope="col">Teacher price, monthly billing</th>
+                <th scope="col">School or district</th>
+                <th scope="col">Confidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <th scope="row" data-label="Product"><strong>JamWise</strong></th>
+                <td data-label="Free option">$0, free forever: full library of 250+ jams, 4 game modes (3 sessions a day), 3 custom jams a month, basic analytics, up to 35 students</td>
+                <td data-label="Teacher price, annual billing">$6.99 a month billed annually ($83.88 a year; Pricing page, "Save 12%"); the Terms describe monthly billing only</td>
+                <td data-label="Teacher price, monthly billing">$7.99 a month on Pricing and in the Terms ($8 on the homepage card); 14-day free Premium trial, no credit card (Pricing page)</td>
+                <td data-label="School or district">School license by quote: volume pricing, centralized billing, rostering, admin dashboards</td>
+                <td data-label="Confidence"><span class="conf conf-other">jamwise.com, October 10, 2026</span></td>
+              </tr>
+              <tr><th scope="row" data-label="Product">Kahoot</th><td data-label="Free option">Yes, capped players (40 in the plan table, 10 in the FAQ)</td><td data-label="Teacher price, annual billing">$3 to $19 a month ($36 to $228 a year)</td><td data-label="Teacher price, monthly billing">$9 to $34.99</td><td data-label="School or district">Quote</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Blooket</th><td data-label="Free option">Yes, 60 players</td><td data-label="Teacher price, annual billing">Not publicly listed</td><td data-label="Teacher price, monthly billing">Not publicly listed</td><td data-label="School or district">Group plans by quote</td><td data-label="Confidence"><span class="conf conf-other">Vendor help page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Gimkit</th><td data-label="Free option">Yes, limited modes</td><td data-label="Teacher price, annual billing">$59.88 a year</td><td data-label="Teacher price, monthly billing">$14.99</td><td data-label="School or district">$650 a year for a department (up to 20 teachers), $1,000 a year for a school</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor help page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Baamboozle</th><td data-label="Free option">Yes</td><td data-label="Teacher price, annual billing">$59.88 a year</td><td data-label="Teacher price, monthly billing">$7.99</td><td data-label="School or district">Not found</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Deck.Toys</th><td data-label="Free option">Yes</td><td data-label="Teacher price, annual billing">$96 a year (Pro)</td><td data-label="Teacher price, monthly billing">$8</td><td data-label="School or district">Bundle Plan from 10 teachers, 20% to 60% off</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Quizlet Plus</th><td data-label="Free option">Free basic plan</td><td data-label="Teacher price, annual billing">$35.99 a year</td><td data-label="Teacher price, monthly billing">Not listed on the page</td><td data-label="School or district">Group pricing by quote</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Nearpod</th><td data-label="Free option">Free Silver</td><td data-label="Teacher price, annual billing">$159 a year (Gold); $397 a year (Platinum)</td><td data-label="Teacher price, monthly billing">Not found</td><td data-label="School or district">Quote</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Prodigy</th><td data-label="Free option">Free for teachers</td><td data-label="Teacher price, annual billing">Not applicable</td><td data-label="Teacher price, monthly billing">Not applicable</td><td data-label="School or district">Not found</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Flocabulary</th><td data-label="Free option">30-day trial</td><td data-label="Teacher price, annual billing">Lite: not publicly listed</td><td data-label="Teacher price, monthly billing">Not publicly listed</td><td data-label="School or district">$2,800 to $3,360 for grades 3 to 5 at one Illinois district (2022-24); $2 per student via Utah's UEN (FY26)</td><td data-label="Confidence"><span class="conf conf-other">Public records, 2022-26</span></td></tr>
+              <tr><th scope="row" data-label="Product">NUMBEROCK</th><td data-label="Free option">30-day trial (monthly plan)</td><td data-label="Teacher price, annual billing">$29.88 a year</td><td data-label="Teacher price, monthly billing">$4.95</td><td data-label="School or district">Not found</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">GoNoodle</th><td data-label="Free option">Free for educators</td><td data-label="Teacher price, annual billing">Not applicable</td><td data-label="Teacher price, monthly billing">Not applicable</td><td data-label="School or district">SuperNoodle, a K-5 well-being curriculum for schools and districts; price not published</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+              <tr><th scope="row" data-label="Product">Suno</th><td data-label="Free option">50 credits a day (about 10 songs), no downloads</td><td data-label="Teacher price, annual billing">$8 a month (Pro)</td><td data-label="Teacher price, monthly billing">$10</td><td data-label="School or district">No education plan found</td><td data-label="Confidence"><span class="conf conf-vendor">Vendor page</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-sources">Sources: <a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Kahoot plans</a>; <a href="https://help.blooket.com/hc/en-us/articles/16182101813015" target="_blank" rel="noopener">Blooket Help, individual</a>; <a href="https://help.blooket.com/hc/en-us/articles/16182254394519" target="_blank" rel="noopener">Blooket Help, group</a>; <a href="https://help.gimkit.com/en/article/gimkit-pro-faq-14h6d62/" target="_blank" rel="noopener">Gimkit Help</a>; <a href="https://www.baamboozle.com/pricing" target="_blank" rel="noopener">Baamboozle pricing</a>; <a href="https://deck.toys/pricing" target="_blank" rel="noopener">Deck.Toys pricing</a>; <a href="https://quizlet.com/upgrade" target="_blank" rel="noopener">Quizlet upgrade</a>; <a href="https://nearpod.com/pricing" target="_blank" rel="noopener">Nearpod pricing</a>; <a href="https://www.prodigygame.com/main-en/teacher-platform" target="_blank" rel="noopener">Prodigy</a>; <a href="https://meetings.boardbook.org/Documents/DownloadPDF/69cd0515-e2f9-4775-9083-24846e1f5c4b?org=1270" target="_blank" rel="noopener">Lincolnwood SD 74, 2022</a>; <a href="https://meetings.boardbook.org/Documents/DownloadPDF/2d7bbdfd-4fe4-4ffa-a536-73ff6051b68e?org=1270" target="_blank" rel="noopener">Lincolnwood SD 74, 2023</a>; <a href="https://www.uen.org/software/download/NearpodRequest.pdf" target="_blank" rel="noopener">UEN</a>; <a href="https://numberock.com/sign-up-packages/" target="_blank" rel="noopener">NUMBEROCK</a>; <a href="https://supernoodle.gonoodle.com/faqs" target="_blank" rel="noopener">SuperNoodle FAQ</a>; <a href="https://suno.com/pricing" target="_blank" rel="noopener">Suno pricing</a>; <a href="https://jamwise.com/pricing" target="_blank" rel="noopener">JamWise Pricing</a>.</p>
+      </div>
+
+      <p>Here's what the tables tell us. At $7.99 a month, or $95.88 a year paid monthly, <strong>Premium costs about 60% more than the common $59.88 annual anchor</strong> at Gimkit and Baamboozle. (Blooket doesn't publish its Plus price, so we leave it out of the anchor.) Our annual option, $6.99 a month billed annually ($83.88 a year, as shown on Pricing), narrows the gap to about 40%, but still sits above the anchor. Both are at or below Deck.Toys at $96 a year. Unlimited students on Premium compare well with Kahoot's player caps. And because Kahoot often holds standards features back for school tiers, <strong>giving individual teachers standards-aligned content and per-student analytics is a real contrast</strong>.</p>
+    </section>
+
+    <section id="market" class="prose" aria-labelledby="market-h">
+      <h2 id="market-h">2.16 million K-8 teachers. A steady market, tighter budgets.</h2>
+      <p>Our core audience is big and steady. The Bureau of Labor Statistics counts about <strong>1.53 million kindergarten and elementary teachers</strong> and about <strong>630,000 middle school teachers</strong> in 2025, excluding special education, with little or no change projected through 2035 (<a href="https://www.bls.gov/ooh/education-training-and-library/kindergarten-and-elementary-school-teachers.htm" target="_blank" rel="noopener">BLS, elementary</a>; <a href="https://www.bls.gov/ooh/education-training-and-library/middle-school-teachers.htm" target="_blank" rel="noopener">BLS, middle school</a>). Growth comes from reaching more of these teachers and earning more per account, not from a growing teacher base.</p>
+      <p>Published estimates of the US edtech and game-based learning markets vary widely, and none sizes the educational-music niche. So we work from the bottom up.</p>
+      <p class="callout"><strong>Illustration only, not a forecast:</strong> 2.16 million teachers, times 1% paying, times our annual price of $83.88 a year (Pricing page) comes to about $1.8 million a year. The point is the shape of the math. Individual teacher subscriptions alone build a modest business. School licenses matter for scale.</p>
+
+      <h3 id="teacher-spending">Teachers still pay out of pocket, but less often for digital content.</h3>
+      <p>Teachers keep spending their own money. AdoptAClassroom's survey of K-12 teachers found an average of $895 spent on school supplies in 2024-25 (<a href="https://www.adoptaclassroom.org/2025/06/09/2025-teacher-survey-spending-stats-classroom-needs/" target="_blank" rel="noopener">AdoptAClassroom</a>), and a DonorsChoose survey of its teacher users put the 2024-25 average at $655 (<a href="https://www.edweek.org/teaching-learning/as-prices-go-up-and-student-needs-rise-teachers-are-filling-in-the-gaps/2025/05" target="_blank" rel="noopener">Education Week</a>). Digital is a tougher sell. EdWeek Research Center found that the share of teachers who hadn't paid for any edtech rose from 21% in 2021 to 35% in 2025, and paying for online lessons fell from 47% to 33% (<a href="https://marketbrief.edweek.org/meeting-district-needs/teachers-are-still-paying-for-ed-tech-out-of-their-own-pockets-despite-booming-district-inventories/2025/09" target="_blank" rel="noopener">EdWeek Market Brief, September 2025</a>). The categories closest to ours held up better: <strong>30% of teachers paid for a learning game or app</strong>, and 34% of middle school teachers paid for digital practice. Individual demand is real, but it's a shrinking share. Free options like GoNoodle and Khan Academy Kids make "free for one teacher" the expectation (<a href="https://www.khanacademy.org/kids/pricing" target="_blank" rel="noopener">Khan Academy Kids</a>).</p>
+
+      <h3 id="district-buyers">District administrators decide, and vendor contracts face cuts.</h3>
+      <p>District administrators, especially curriculum staff, hold most of the buying power. In an EdWeek Research Center survey of district leaders (June to August 2024), 67% said district administrators other than the superintendent have major influence on curriculum purchasing, compared with 56% for teachers (<a href="https://www.edweek.org/leadership/some-districts-struggle-to-align-their-spending-with-instructional-needs/2025/02" target="_blank" rel="noopener">Education Week, February 2025</a>). Teachers carry more weight in small districts: 64% of leaders in districts with fewer than 200 employees named them as major influencers, against 39% in districts with more than 1,000 (<a href="https://marketbrief.edweek.org/meeting-district-needs/who-influences-school-district-purchasing-of-academic-resources/2024/11" target="_blank" rel="noopener">EdWeek Market Brief, November 2024</a>). When deciding whether to keep or cut a tool, educators rated <strong>cost (71%), ease of use (56%) and teacher buy-in (54%)</strong> as major factors (<a href="https://marketbrief.edweek.org/education-market/what-makes-schools-keep-or-cut-ed-tech-tools/2026/05" target="_blank" rel="noopener">EdWeek Market Brief, May 2026</a>).</p>
+      <p>Federal relief money is over. Districts had to obligate the last ESSER funds by September 30, 2024, and the last approved late-liquidation extensions ended on March 28, 2026 (<a href="https://www.congress.gov/crs-product/IF12978" target="_blank" rel="noopener">Congressional Research Service</a>). Analysts expect vendor contracts, often for technology, to be among the first cuts (<a href="https://www.govtech.com/education/k-12/experts-push-student-focused-budgeting-as-esser-winds-down" target="_blank" rel="noopener">GovTech</a>). Districts accessed an average of 2,982 distinct edtech tools in 2024-25 (<a href="https://www.instructure.com/press-release/new-learnplatform-instructure-report-shows-k-12-districts-are-more-selective-about" target="_blank" rel="noopener">Instructure</a>), so a new tool enters a crowded inventory under budget pressure. Gimkit's group plans, at $650 to $1,000 a year, suggest the realistic first step beyond single teachers is a department or school license, not a district contract.</p>
+
+      <h3 id="parent-market">The parent market is crowded with bundles and free options.</h3>
+      <p>A parent offering competes with free Khan Academy Kids, paid apps like ABCmouse at $14.99 a month after a 30-day free trial (<a href="https://www.abcmouse.com/" target="_blank" rel="noopener">ABCmouse</a>), and kids' music bundled into family streaming, like Spotify Premium Family at $21.99 a month (<a href="https://www.spotify.com/us/kids" target="_blank" rel="noopener">Spotify Kids</a>; <a href="https://www.spotify.com/us/premium/" target="_blank" rel="noopener">Spotify Premium</a>). Ad-free and privacy-safe are the baseline here. Our For Parents page (<a href="https://jamwise.com/for-parents" target="_blank" rel="noopener">jamwise.com/for-parents</a>) offers "Screen time you can feel good about": ad-free, COPPA-compliant educational music for ages 5 to 14, with age-appropriate playlists, child profiles, progress tracking, offline downloads and 20+ game modes. It says the content is "Aligned to real school standards (CCSS, NGSS)" and invites parents to "Start free. No credit card required. Cancel anytime." We don't publish a separate parent price. The page's claim of "0 educational music options" for this age group doesn't fit the free and paid options in this analysis (see the inconsistencies section). Our best edge at home is curriculum continuity: kids hear at home the songs their teacher uses (our framing). But California's SOPIPA bars using information gathered through a school product to target advertising to students or families (<a href="https://fpf.org/blog/fpf-guide-student-data-protections-sopipa-k-12-school-administrators-ed-tech-vendors/" target="_blank" rel="noopener">FPF</a>; <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&amp;sectionNum=22584" target="_blank" rel="noopener">Cal. Bus. &amp; Prof. Code &sect;22584</a>), so the school-to-home link needs careful design.</p>
+    </section>
+
+    <section id="compliance" class="prose" aria-labelledby="compliance-h">
+      <h2 id="compliance-h">Privacy and accessibility come first.</h2>
+      <p>For a K-8 product, privacy and accessibility are the entry ticket. The amended COPPA rule took effect on June 23, 2025, with compliance required by April 22, 2026 (<a href="https://www.federalregister.gov/documents/2025/04/22/2025-05904/childrens-online-privacy-protection-rule" target="_blank" rel="noopener">Federal Register</a>). It adds separate parental consent for sharing children's data with third parties, a written data-retention policy and a written information security program (<a href="https://www.loeb.com/en/insights/publications/2025/05/childrens-online-privacy-in-2025-the-amended-coppa-rule" target="_blank" rel="noopener">Loeb &amp; Loeb</a>; <a href="https://www.ftc.gov/news-events/news/press-releases/2025/01/ftc-finalizes-changes-childrens-privacy-rule-limiting-companies-ability-monetize-kids-data" target="_blank" rel="noopener">FTC</a>). The FTC chose not to write the school-authorization exception into the rule and will keep relying on its existing guidance (<a href="https://www.govinfo.gov/content/pkg/FR-2025-04-22/html/2025-05904.htm" target="_blank" rel="noopener">govinfo</a>). That guidance recommends that schools or districts, not individual teachers, decide whether a service's practices are appropriate (<a href="https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions" target="_blank" rel="noopener">FTC COPPA FAQ</a>). This matters for any teacher-led sign-up, including ours. Per our privacy policy, children use JamWise only through teacher-managed classrooms or parent-managed family accounts. Whether one teacher can authorize student accounts for a school is a gray area. That's our reading, and we'll check it with privacy counsel.</p>
+      <p>State laws add direct duties for vendors. California's SOPIPA bans targeted advertising, profiling and sale of student data (<a href="https://fpf.org/blog/fpf-guide-student-data-protections-sopipa-k-12-school-administrators-ed-tech-vendors/" target="_blank" rel="noopener">FPF</a>). New York Education Law 2-d requires a Parents' Bill of Rights and a vendor security plan in every contract, plus encryption in transit and at rest (<a href="https://www.bsk.com/news-events-videos/new-york-state-education-law-sect-2-d-where-are-we-now" target="_blank" rel="noopener">Bond Schoeneck &amp; King</a>; <a href="https://www.nysed.gov/data-privacy-security" target="_blank" rel="noopener">NYSED</a>). Illinois SOPPA requires a written agreement with every operator that receives student data, and districts must post those agreements (<a href="https://www.cps.edu/about/policies/student-online-personal-protection-act/vendors-and-contracts/" target="_blank" rel="noopener">CPS</a>; <a href="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3806&amp;ChapterID=17" target="_blank" rel="noopener">105 ILCS 85</a>). Many districts use the Student Data Privacy Consortium's agreements. SDPC reports 233,924 active data privacy agreements in its registry, with participating districts in 41 states (<a href="https://privacy.a4l.org/" target="_blank" rel="noopener">SDPC</a>). Common Sense's Privacy Seal, met by fewer than 10% of evaluated companies, is held by Kahoot, Prodigy and Wayground (formerly Quizizz), among others (<a href="https://www.commonsense.org/education/articles/introducing-the-common-sense-privacy-seal-a-new-standard-in-digital-privacy" target="_blank" rel="noopener">Common Sense</a>).</p>
+      <p>Our published policy is a good start. The privacy policy, updated February 20, 2026, includes a COPPA statement. It names Resend (email delivery for waitlist and account emails), Stripe (payments), Cloudflare (content delivery and asset storage) and PostHog (anonymous product analytics). It says we use no Google Analytics or ad tracking, commits to deletion within 30 days of account deletion and lists privacy@jamwise.app as the contact (<a href="https://jamwise.com/privacy" target="_blank" rel="noopener">JamWise privacy policy</a>). The Pricing FAQ adds that we're COPPA compliant by design, don't track children, show no ads and sell no data, and that every jam is reviewed for age-appropriateness (<a href="https://jamwise.com/pricing" target="_blank" rel="noopener">JamWise Pricing</a>). For Parents promises "no tracking" (<a href="https://jamwise.com/for-parents" target="_blank" rel="noopener">JamWise For Parents</a>). District reviewers will still want the written security program, retention schedule and signed agreements below to stand behind these statements. They may also ask how "no tracking" fits with PostHog analytics, so a one-line clarification will help.</p>
+      <p>Accessibility is just as pressing. The Justice Department's ADA Title II rule requires WCAG 2.1 AA for school district web content, including content that contractors provide (<a href="https://www.ada.gov/resources/2024-03-08-web-rule/" target="_blank" rel="noopener">ADA.gov</a>). An interim final rule published April 20, 2026 pushed the deadlines back a year, to April 26, 2027 for entities serving 50,000 people or more, and April 26, 2028 for smaller ones and special districts (<a href="https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web" target="_blank" rel="noopener">Federal Register</a>; <a href="https://www.techlearning.com/technology/accessability/the-title-ii-accessibility-deadline-is-soon-heres-what-you-need-to-know" target="_blank" rel="noopener">Tech &amp; Learning</a>). The 2027 date falls inside our likely first district sales window. For us, that means accurate captions or lyric transcripts for all 250+ songs, plus keyboard and screen-reader support in the games. Audio-based games like Lyric Lockdown and Rhythm Recall will need carefully designed alternatives.</p>
+      <p>Districts also expect rostering. Clever is free for schools, but app partners pay to roster through its Secure Sync service. Clever doesn't publish partner prices; fees are quoted on request (<a href="https://www.clever.com/pricing" target="_blank" rel="noopener">Clever pricing</a>).</p>
+      <div class="note">
+        <p style="margin:0 0 .5rem"><strong>Here's the minimum kit before a district purchase:</strong></p>
+        <ul style="margin:0;padding-left:1.2rem">
+          <li>a public privacy policy and school terms consistent with COPPA, FERPA and SOPIPA;</li>
+          <li>a written security program and retention schedule;</li>
+          <li>a signed national data privacy agreement with state exhibits;</li>
+          <li>encryption and breach procedures;</li>
+          <li>a Common Sense privacy evaluation;</li>
+          <li>an accessibility conformance report showing WCAG 2.1 AA;</li>
+          <li>and Clever and ClassLink rostering.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.05rem">A teacher-direct pitch that skips purchase orders and IT review suits the individual channel. It's also exactly what district privacy officers watch for, so the two channels need a clear handoff.</p>
+    </section>
+
+    <section id="evidence" class="prose" aria-labelledby="evidence-h">
+      <h2 id="evidence-h">Songs help recall. That's the honest claim.</h2>
+      <p>The research behind our approach is real, but conditional. Wallace (1994) found that adults recalled text better when it was sung to a simple melody repeated across verses than when it was spoken. When the melody changed from verse to verse, the benefit disappeared (<a href="https://doi.org/10.1037/0278-7393.20.6.1471" target="_blank" rel="noopener">Wallace, 1994</a>). In a small randomized study of 32 children aged 9 to 11, a sung-word group recalled about 20% more words than a spoken group after interference, and about 17% more after a 15-minute delay (<a href="https://doi.org/10.3389/feduc.2018.00031" target="_blank" rel="noopener">Knott &amp; Thaut, 2018</a>). Other studies cut the other way. Kilgour, Jakobson and Cuddy (2000) found that university students recalled sung lyrics better than spoken ones, but the sung advantage disappeared once the spoken version was slowed to match the song's presentation rate (<a href="https://doi.org/10.3758/BF03198404" target="_blank" rel="noopener">Kilgour et al., 2000</a>). Racette and Peretz (2007) found that singing or speaking the lyrics made no difference to recall, and university students recalled fewer words when singing than when speaking (<a href="https://doi.org/10.3758/BF03193445" target="_blank" rel="noopener">Racette &amp; Peretz, 2007</a>). A study of younger and older adults found no overall benefit of music for word learning: learners with lower working memory did worse with music, and those with higher working memory did somewhat better (<a href="https://doi.org/10.1017/langcog.2022.29" target="_blank" rel="noopener">Ong &amp; Chan, 2023</a>). We found no meta-analysis of sung versus spoken recall in children, no rigorous K-8 classroom trial of curriculum songs, and no studies testing whether matching genre to content adds value.</p>
+      <p>The stronger evidence is for retrieval practice. A systematic review of 50 classroom experiments (49 effect sizes, 5,374 students) found that retrieval practice improved learning compared with non-retrieval conditions such as restudy, and 57% of the effects were medium or large (<a href="https://doi.org/10.1007/s10648-021-09595-9" target="_blank" rel="noopener">Agarwal, Nunes &amp; Blunt, 2021</a>). Game-based learning shows modest average effects: about d = 0.29 for learning and 0.36 for retention, larger when games are combined with other instruction and used over several sessions (<a href="https://doi.org/10.1037/a0031311" target="_blank" rel="noopener">Wouters et al., 2013</a>), and g = 0.33 for digital games against non-game conditions in K-16 settings (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4748544" target="_blank" rel="noopener">Clark, Tanner-Smith &amp; Killingsworth, 2016</a>). A 2025 meta-analysis of 43 Kahoot studies reported an effect of 0.77 on achievement (<a href="https://doi.org/10.1111/jcal.13084" target="_blank" rel="noopener">&Ouml;zdemir, 2025</a>). A review of 93 Kahoot studies, co-authored by Kahoot co-founder Alf Inge Wang, concluded that Kahoot can improve learning, while some studies showed little or no effect (<a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank" rel="noopener">Wang &amp; Tahir, 2020</a>; <a href="https://www.ntnu.edu/employees/alfw" target="_blank" rel="noopener">NTNU</a>). Large effects from small, mostly short studies shouldn't be our benchmark. In our judgment, if JamWise works as intended, a realistic expectation is a small to moderate effect on aligned assessments and a smaller one on standardized tests.</p>
+      <p>Competitors already sell on evidence. Nearpod's ESSA page lists two Level II quasi-experimental studies and one Level III study (company claim; <a href="https://nearpod.com/essa" target="_blank" rel="noopener">Nearpod ESSA research</a>). Flocabulary commissioned a 2022-23 LearnPlatform study "designed to satisfy Level II requirements" (company claim). The full report is password-protected, so we haven't seen its findings (<a href="https://research.renaissance.com/Search/FacetAsync?FilterString=Product%3AFlocabulary" target="_blank" rel="noopener">Renaissance research</a>). ESSA Tier IV ("demonstrates a rationale") needs a rationale based on high-quality research or positive evaluation, usually set out as a logic model, plus ongoing efforts to study effects. It doesn't need a statistically significant result (<a href="https://www.law.cornell.edu/uscode/text/20/7801" target="_blank" rel="noopener">20 U.S.C. 7801(21)</a>; <a href="https://www.ed.gov/sites/ed/files/policy/elsec/leg/essa/guidanceuseseinvestment.pdf" target="_blank" rel="noopener">U.S. Department of Education guidance</a>; <a href="https://www.education.ky.gov/school/evidence/Documents/Empowered%20by%20Data%20Evaluating%20Intervention%20Impact.pdf" target="_blank" rel="noopener">Kentucky DOE</a>). Tier IV counts as "evidence-based" wherever the law uses the term, except for school-improvement activities funded under ESEA section 1003, which need Tiers I to III (<a href="https://www.law.cornell.edu/uscode/text/20/7801" target="_blank" rel="noopener">20 U.S.C. 7801(21)</a>; <a href="https://www.cde.ca.gov/re/es/evidence.asp" target="_blank" rel="noopener">California DOE</a>). Other vendors publish Tier IV logic models next to a planned Tier III study (company claim; <a href="https://www.derivita.com/derivita-essa-level-iv-report-lander" target="_blank" rel="noopener">Derivita</a>). Our analytics can supply usage data for a Tier III study with partner districts. To qualify, it has to be a well-designed correlational study with statistical controls for selection bias, showing a statistically significant positive effect on a relevant outcome. Until then, the honest line is that <strong>songs can help students remember facts and vocabulary</strong>, not that songs improve learning in general.</p>
+    </section>
+
+    <section id="swot" class="prose" aria-labelledby="swot-h">
+      <h2 id="swot-h">SWOT: a strong idea, with distribution still to win.</h2>
+      <div class="swot">
+        <div class="swot-cell swot-s">
+          <h3><span aria-hidden="true">S</span>Strengths</h3>
+          <ul>
+            <li>A mix we didn't find elsewhere: standards-aligned songs, audio-based games like Lyric Lockdown and Rhythm Recall, and per-student analytics in one product.</li>
+            <li>Five subjects, including a Kindness topic tagged to CASEL, with genres matched to the mood of the content.</li>
+            <li>Standards tags and basic analytics on a free-forever teacher plan, where rivals often save standards features for schools.</li>
+            <li>Unlimited students on Premium, and a 14-day free Premium trial with no credit card (on Pricing).</li>
+            <li>A song format built for repeat listening and short-form video.</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-w">
+          <h3><span aria-hidden="true">W</span>Weaknesses</h3>
+          <ul>
+            <li>Pre-release (our reading), with a waitlist on the homepage. Our site publishes no installed base, independent reviews or product-specific efficacy data.</li>
+            <li>Premium at $7.99 a month ($8 on the homepage card), or $6.99 a month billed annually ($83.88 a year), still sits above the $59.88 annual anchor.</li>
+            <li>250+ songs is small next to Flocabulary's 1,300+ video lessons and the free YouTube channels.</li>
+            <li>Most of the district compliance and accessibility kit is still ahead, and our COPPA, Google Classroom and rostering claims will need documents behind them.</li>
+            <li>Our pages disagree on game count, price, billing and plan contents (see the inconsistencies section).</li>
+            <li>We found no studies testing genre matching.</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-o">
+          <h3><span aria-hidden="true">O</span>Opportunities</h3>
+          <ul>
+            <li>Suno bars students under 13 and Gemini's music tools are 18+, which leaves safe student-facing song creation open.</li>
+            <li>The 2027 accessibility deadline rewards vendors who show up ready.</li>
+            <li>A Tier IV logic model is doable now.</li>
+            <li>Short songs suit TikTok and YouTube Shorts as free discovery.</li>
+            <li>Curriculum continuity can link classroom and home.</li>
+            <li>Songs for social-emotional topics and history look thinly served.</li>
+          </ul>
+        </div>
+        <div class="swot-cell swot-t">
+          <h3><span aria-hidden="true">T</span>Threats</h3>
+          <ul>
+            <li>Suno and similar tools make custom songs cheap.</li>
+            <li>MagicSchool or Nearpod could add licensed audio generation and reach districts fast.</li>
+            <li>Quiz platforms can copy music modes.</li>
+            <li>With ESSER money gone, vendor contracts are among the first cuts.</li>
+            <li>Free channels anchor teacher prices at zero.</li>
+            <li>Our custom jams are AI-generated and our pages don't name the model; third-party AI models carry copyright litigation risk.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="differentiation" class="prose" aria-labelledby="differentiation-h">
+      <h2 id="differentiation-h">What makes us different: the loop, accuracy and child safety.</h2>
+      <p>Our clearest difference isn't one feature. It's the loop. A short song introduces the content. A game like Lyric Lockdown or Rhythm Recall uses the same audio to make students recall it. Real-time analytics show how each student is doing on standards-tagged content. That matches what the research favors: repeated retrieval, combined with instruction, over several sessions. It also fills the gaps in the alternatives. Flocabulary's practice activities (Vocab Cards, Vocab Game, Read &amp; Respond, Quiz) are text-based, and Lyric Lab is rhyme writing over a beat, not a game played against the original song (<a href="https://www.flocabulary.com/how-it-works/" target="_blank" rel="noopener">Flocabulary, How it works</a>). Quiz platforms have games without content. AI song tools have content without accuracy checks, alignment or under-13 access.</p>
+      <p>Our second edge is trust. A curated library can promise accurate lyrics, age-appropriate language, a consistent format and clear licensing. General AI tools can't. That matters more as districts tighten privacy review and the Suno lawsuits continue. Our Pricing FAQ says every jam is reviewed for age-appropriateness, and our Terms say AI-generated content is reviewed for accuracy but can't be guaranteed error-free. So the trust edge depends on that review being visible, and applied equally to the library and to AI custom jams. Our third edge is access. Teachers start free, with no credit card, on a plan that includes the full standards-aligned library and basic analytics. Flocabulary limits that to a trial.</p>
+      <p class="callout">Part of this rests on what we didn't find. We didn't test competitor products while logged in, so we'll double-check the claim that no one else offers audio-based games before it goes into marketing.</p>
+    </section>
+
+    <section id="threats" class="prose" aria-labelledby="threats-h">
+      <h2 id="threats-h">Five threats we're watching.</h2>
+      <ol class="threats">
+        <li><strong>A big incumbent adds song generation</strong>The most serious one. MagicSchool already offers a song generator and has wide teacher reach (<a href="https://magicschool.ai/tools/colleague-song-generator" target="_blank" rel="noopener">MagicSchool</a>), and Nearpod owns Flocabulary and sells to districts. If either added licensed, child-safe audio, much of our gap would close fast.</li>
+        <li><strong>Free AI songs cut willingness to pay</strong>Suno's free plan makes about 10 songs a day, and Pro costs about what Premium does. Custom jams as a paid upsell face direct competition.</li>
+        <li><strong>Quiz platforms copy music modes</strong>Kahoot, Blooket and Gimkit have big audiences and could add karaoke or rhythm modes, the kind of play in Lyric Lockdown and Rhythm Recall, faster than we can build an audience.</li>
+        <li><strong>Budgets stay tight after ESSER</strong>Vendor contracts are among the first things districts cut.</li>
+        <li><strong>Inherited legal risk</strong>Our custom jams are AI-generated and our pages don't name the model. District buyers may ask which model we use and whether its training data was licensed. Suno's v6 now faces a second lawsuit (<a href="https://www.boston.com/news/local-news/2026/09/27/major-record-labels-sue-cambridge-based-ai-platform-again/" target="_blank" rel="noopener">Boston.com</a>).</li>
+      </ol>
+    </section>
+
+    <section id="recommendations" class="prose" aria-labelledby="recommendations-h">
+      <h2 id="recommendations-h">What we'll do next.</h2>
+      <p>Here's our plan, in order of urgency and how much each step unlocks.</p>
+      <ol class="recs">
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>1</b></div></div>
+          <p class="what"><span class="sr-only">Priority 1: </span>Finish the compliance and accessibility kit before district outreach: privacy policy and school terms, a written security program and retention schedule, a signed national data privacy agreement with state exhibits, a Common Sense privacy evaluation, an accessibility conformance report, and captions or lyric transcripts for every song. We'll confirm our teacher sign-up and parent consent flows with privacy counsel.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">Districts can't buy without these. The amended COPPA rule is already in force, and the 2027 accessibility deadline lands in our first sales window.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>2</b></div></div>
+          <p class="what"><span class="sr-only">Priority 2: </span>Line up our site before launch: one game count, one Premium price, Terms that cover the annual option, one home for Google Classroom, one schools email, a clear launch status (with a "Join Waitlist" button that does what it says), verifiable testimonials, sourced statistics, one name for analytics, offline downloads in one plan, a public library preview, and short definitions for "Remix styles" and "Brain Beats".</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">These are quick fixes. Districts, parents and teachers read several pages side by side before they trust a product.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>3</b></div></div>
+          <p class="what"><span class="sr-only">Priority 3: </span>Test moving the annual Premium price closer to the $59.88 anchor. Today it's $6.99 a month billed annually ($83.88 a year). Keep the paid value in advanced analytics and reports, Google Classroom, offline downloads and school features, not in custom jams.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">Teachers compare us with $59.88 annual plans at Gimkit and Baamboozle. Our annual option sits about 40% above them, and custom songs are free elsewhere. A lower price trades revenue per teacher for easier sign-ups, so we'll test it, not assume it.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>4</b></div></div>
+          <p class="what"><span class="sr-only">Priority 4: </span>Call it retrieval practice set to music. Use careful language like "songs can help students remember facts and vocabulary", and publish an ESSA Tier IV logic model with a planned study.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">The evidence supports recall and retrieval practice, not broad learning claims, and competitors already sell on ESSA tiers.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>5</b></div></div>
+          <p class="what"><span class="sr-only">Priority 5: </span>Post free sample songs on YouTube Shorts and TikTok, list in the Clever Library, and offer free song-plus-worksheet bundles on Teachers Pay Teachers as a funnel.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">Distribution is our biggest risk, free channels set teacher expectations, and short songs fit short-form video (<a href="https://www.clever.com/partner-library" target="_blank" rel="noopener">Clever</a>).</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>6</b></div></div>
+          <p class="what"><span class="sr-only">Priority 6: </span>Keep AI custom jams on the same accuracy and safety review as the library, pick and name a model with a clean licensing story, and position the feature as guard-railed song creation that students under 13 can use safely.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">General tools shut out younger students and carry litigation risk, which leaves us a protected niche. Our Terms already say AI content is reviewed but can't be guaranteed error-free. A visible review step turns that disclaimer into a strength.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>7</b></div></div>
+          <p class="what"><span class="sr-only">Priority 7: </span>Give the school license (volume pricing, centralized billing, rostering, admin dashboards) a simple published starting price near Gimkit's group plans. Recruit two or three partner districts for a usage-and-outcomes pilot designed to meet ESSA Tier III: a correlational study with statistical controls for selection bias.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">The first realistic school sale is a modest license, and districts keep or cut tools mainly on cost, ease of use and teacher buy-in.</p>
+        </li>
+        <li class="rec">
+          <div class="rec-num" aria-hidden="true"><div><small>Priority</small><b>8</b></div></div>
+          <p class="what"><span class="sr-only">Priority 8: </span>Treat quiz-board and competition games like Quiz Show, Streak Sprint and Gold Rush as expected features, and put new game development into audio-based modes like Lyric Lockdown and Rhythm Recall. Keep an eye on MagicSchool, Nearpod and the big quiz platforms for any move into song generation or music modes.</p>
+          <p class="why-label">Why it matters</p>
+          <p class="why">Audio-based games are our clearest difference, and the easiest to lose.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="conclusion" class="prose" aria-labelledby="conclusion-h">
+      <h2 id="conclusion-h">Where we go from here.</h2>
+      <p>We don't need to out-catalog Flocabulary, out-price Gimkit or out-generate Suno. We need to be the one place a K-8 teacher gets accurate, aligned songs, games that put those songs to work, and clear data on what students learned, without a district contract. That spot holds only while our loop stays ahead of better-funded rivals, so speed to classrooms and trust with districts matter more than new features. The first step is easy: make every page of jamwise.com tell the same story on price, games and plan contents.</p>
+      <p>As AI makes songs cheap, our lasting value shifts from the songs to the trust around them: accuracy, child safety, licensing, accessibility and evidence. We'll build that early, and we'll say plainly what the research does and doesn't show.</p>
+    </section>
+
+    <section id="sources" aria-labelledby="sources-h">
+      <h2 id="sources-h">Sources</h2>
+      <p style="max-width:var(--measure)">All sources were accessed on or before October 10, 2026. Links open in a new tab. Sources are listed in order of first citation, with our own pages at the end. Company claims are labelled in the text.</p>
+      <ol class="sources-list">
+        <li><a href="https://edsurge.com/news/2019-04-08-that-s-a-rap-nearpod-buys-educational-hip-hop-creator-flocabulary" target="_blank" rel="noopener">That's a Rap: Nearpod Buys Educational Hip-Hop Creator Flocabulary</a>. EdSurge, April 8, 2019. <span class="src-host">edsurge.com</span></li>
+        <li><a href="https://www.businesswire.com/news/home/20210223005830/en/Renaissance-and-Nearpod-Coming-Together-to-Empower-Teachers-and-Accelerate-Student-Growth" target="_blank" rel="noopener">Renaissance and Nearpod Coming Together to Empower Teachers and Accelerate Student Growth</a>. Renaissance via Business Wire (company release), February 23, 2021. <span class="src-host">businesswire.com</span></li>
+        <li><a href="https://edsurge.com/news/2021-02-19-renaissance-learning-to-acquire-nearpod-in-blockbuster-650m-all-cash-deal" target="_blank" rel="noopener">Renaissance Learning to Acquire Nearpod in Blockbuster $650M All-Cash Deal</a>. EdSurge, February 19, 2021. <span class="src-host">edsurge.com</span></li>
+        <li><a href="https://www.flocabulary.com/how-it-works/" target="_blank" rel="noopener">How it works</a>. Flocabulary (company page), viewed October 10, 2026. <span class="src-host">flocabulary.com</span></li>
+        <li><a href="https://blog.flocabulary.com/?p=17870" target="_blank" rel="noopener">Student Voice Activities: 3 Ways To Use Lyric Lab</a>. Flocabulary blog (company). <span class="src-host">blog.flocabulary.com</span></li>
+        <li><a href="https://blog.flocabulary.com/flocab-answers-your-questions/" target="_blank" rel="noopener">Flocab Answers Your Questions (FAQ)</a>. Flocabulary blog (company), May 28, 2024. <span class="src-host">blog.flocabulary.com</span></li>
+        <li><a href="https://meetings.boardbook.org/Documents/DownloadPDF/69cd0515-e2f9-4775-9083-24846e1f5c4b?org=1270" target="_blank" rel="noopener">Board meeting packet: Flocabulary quote, grades 3 to 5, 2022-23</a>. Lincolnwood School District 74, Illinois (BoardBook public record), August 2022. <span class="src-host">meetings.boardbook.org</span></li>
+        <li><a href="https://meetings.boardbook.org/Documents/DownloadPDF/2d7bbdfd-4fe4-4ffa-a536-73ff6051b68e?org=1270" target="_blank" rel="noopener">Board meeting packet: Flocabulary renewal, grades 3 to 5, 2023-24</a>. Lincolnwood School District 74, Illinois (BoardBook public record), August 2023. <span class="src-host">meetings.boardbook.org</span></li>
+        <li><a href="https://www.uen.org/software/download/NearpodRequest.pdf" target="_blank" rel="noopener">Nearpod for Utah K-12 Schools and Districts, Participation Agreement FY26</a>. Utah Education Network, 2025. <span class="src-host">uen.org</span></li>
+        <li><a href="https://www.schoollibraryjournal.com/story/educational-video-with-a-twist-slj-reviews-flocabulary" target="_blank" rel="noopener">Educational Video with a Twist: SLJ Reviews Flocabulary</a>. School Library Journal, November 13, 2015. <span class="src-host">schoollibraryjournal.com</span></li>
+        <li><a href="https://blog.flocabulary.com/how-videos-are-made/" target="_blank" rel="noopener">How Flocabulary videos are made</a>. Flocabulary blog (company), July 15, 2024. <span class="src-host">blog.flocabulary.com</span></li>
+        <li><a href="https://blog.flocabulary.com/flocabulary-espanol-math-is-here/" target="_blank" rel="noopener">Flocabulary Espa&ntilde;ol Math Is Here</a>. Flocabulary blog (company), March 16, 2026. <span class="src-host">blog.flocabulary.com</span></li>
+        <li><a href="https://www.techlearning.com/how-to/what-is-gonoodle-and-how-does-it-work-best-tips-and-tricks-for-educators" target="_blank" rel="noopener">What is GoNoodle and How Does it Work?</a> Tech &amp; Learning, September 20, 2022. <span class="src-host">techlearning.com</span></li>
+        <li><a href="https://partnerships.gonoodle.com/faqs/" target="_blank" rel="noopener">Partnerships FAQs</a>. GoNoodle (company page), viewed October 10, 2026. <span class="src-host">partnerships.gonoodle.com</span></li>
+        <li><a href="https://numberock.com/sign-up-packages/" target="_blank" rel="noopener">Sign-up packages</a>. NUMBEROCK (company page), viewed October 10, 2026. <span class="src-host">numberock.com</span></li>
+        <li><a href="https://www.heidisongs.tv/" target="_blank" rel="noopener">HeidiSongs.tv</a>. HeidiSongs (company page), viewed October 10, 2026. <span class="src-host">heidisongs.tv</span></li>
+        <li><a href="https://web.learningupgrade.com/" target="_blank" rel="noopener">Learning Upgrade</a>. Learning Upgrade (company page), viewed October 10, 2026. <span class="src-host">web.learningupgrade.com</span></li>
+        <li><a href="https://web.learningupgrade.com/quote/" target="_blank" rel="noopener">Request a quote</a>. Learning Upgrade (company page), viewed October 10, 2026. <span class="src-host">web.learningupgrade.com</span></li>
+        <li><a href="https://www.techlearning.com/news/learning-upgrade" target="_blank" rel="noopener">Learning Upgrade (review)</a>. Tech &amp; Learning, July 30, 2014. <span class="src-host">techlearning.com</span></li>
+        <li><a href="https://www.youtube.com/@JackHartmann/about" target="_blank" rel="noopener">Jack Hartmann Kids Music Channel, About</a>. YouTube (official channel page), viewed October 10, 2026. <span class="src-host">youtube.com</span></li>
+        <li><a href="https://www.youtube.com/@scratchgarden/about" target="_blank" rel="noopener">Scratch Garden, About</a>. YouTube (official channel page), viewed October 10, 2026. <span class="src-host">youtube.com</span></li>
+        <li><a href="https://www.youtube.com/@klt/about" target="_blank" rel="noopener">KLT (formerly Kids Learning Tube), About</a>. YouTube (official channel page), viewed October 10, 2026. <span class="src-host">youtube.com</span></li>
+        <li><a href="https://kahoot.com/schools/plans/" target="_blank" rel="noopener">Plans for teachers</a>. Kahoot! (company page), viewed October 10, 2026. <span class="src-host">kahoot.com</span></li>
+        <li><a href="https://www.k12dive.com/news/kahoot-acquired-17-billion-deal/688424/" target="_blank" rel="noopener">Report on the $1.7 billion Kahoot take-private deal</a>. K-12 Dive, July 19, 2023. <span class="src-host">k12dive.com</span></li>
+        <li><a href="https://kahoot.com/press/2024/01/23/kahoot-delisted-from-oslo-bors-following-successful-acquisition-led-by-goldman-sachs-asset-management/" target="_blank" rel="noopener">Kahoot! delisted from Oslo B&oslash;rs following successful acquisition led by Goldman Sachs Asset Management</a>. Kahoot! press release, January 23, 2024. <span class="src-host">kahoot.com</span></li>
+        <li><a href="https://techcrunch.com/2021/05/06/kahoot-acquires-clever-the-us-based-edtech-portal-for-up-to-500m/" target="_blank" rel="noopener">Kahoot acquires Clever, the US-based edtech portal, for up to $500M</a>. TechCrunch, May 6, 2021. <span class="src-host">techcrunch.com</span></li>
+        <li><a href="https://help.gimkit.com/en/article/gimkit-pro-faq-14h6d62/" target="_blank" rel="noopener">Gimkit Pro FAQ</a>. Gimkit Help (company), updated May 20, 2026. <span class="src-host">help.gimkit.com</span></li>
+        <li><a href="https://help.blooket.com/hc/en-us/articles/16182101813015" target="_blank" rel="noopener">How to Upgrade to Blooket Plus (Individual)</a>. Blooket Help (company). <span class="src-host">help.blooket.com</span></li>
+        <li><a href="https://help.blooket.com/hc/en-us/articles/16182254394519" target="_blank" rel="noopener">How to Upgrade to Blooket Plus (Group Plan)</a>. Blooket Help (company). <span class="src-host">help.blooket.com</span></li>
+        <li><a href="https://finance.yahoo.com/news/quizizz-becomes-wayground-announces-ai-130000405.html" target="_blank" rel="noopener">Quizizz becomes Wayground (release)</a>. Quizizz Inc. via PR Newswire (company release), June 24, 2025. <span class="src-host">finance.yahoo.com</span></li>
+        <li><a href="https://www.prodigygame.com/main-en/teacher-platform" target="_blank" rel="noopener">Teacher platform</a>. Prodigy (company page), viewed October 10, 2026. <span class="src-host">prodigygame.com</span></li>
+        <li><a href="https://www.legendsoflearning.com/" target="_blank" rel="noopener">Legends of Learning</a>. Legends of Learning (company page), viewed October 10, 2026. <span class="src-host">legendsoflearning.com</span></li>
+        <li><a href="https://www.legendsoflearning.com/pricing/" target="_blank" rel="noopener">Pricing</a>. Legends of Learning (company page), viewed October 10, 2026. <span class="src-host">legendsoflearning.com</span></li>
+        <li><a href="https://x.com/gimkit/status/1967986263526613318" target="_blank" rel="noopener">AI Question Generator announcement</a>. Gimkit (official account on X), September 17, 2025. <span class="src-host">x.com</span></li>
+        <li><a href="https://blog.khanacademy.org/khanmigo-and-blooket-ai-question-sets-for-fun-classroom-challenges" target="_blank" rel="noopener">Khanmigo and Blooket: AI Question Sets for Fun Classroom Challenges</a>. Khan Academy Blog, January 21, 2025. <span class="src-host">blog.khanacademy.org</span></li>
+        <li><a href="https://help.blooket.com/hc/en-us/articles/28660875749527-AI-Generated-Question-Sets-with-Khanmigo" target="_blank" rel="noopener">AI-Generated Question Sets with Khanmigo</a>. Blooket Help (company). <span class="src-host">help.blooket.com</span></li>
+        <li><a href="https://help.gimkit.com/en/article/create-a-kit-from-scratch-ig828l" target="_blank" rel="noopener">Create a kit from scratch</a>. Gimkit Help (company). <span class="src-host">help.gimkit.com</span></li>
+        <li><a href="https://www.musicbusinessworldwide.com/suno-v6-ai-music-models-launch-in-partnership-with-wmg-bmg-and-believe/" target="_blank" rel="noopener">Suno v6 AI music models launch in partnership with WMG, BMG and Believe</a>. Music Business Worldwide, September 9, 2026. <span class="src-host">musicbusinessworldwide.com</span></li>
+        <li><a href="https://suno.com/pricing" target="_blank" rel="noopener">Pricing</a>. Suno (company page), viewed October 10, 2026. <span class="src-host">suno.com</span></li>
+        <li><a href="https://help.suno.com/en/articles/2410049" target="_blank" rel="noopener">What type of plan do I have?</a> Suno Help (company). <span class="src-host">help.suno.com</span></li>
+        <li><a href="https://www.edutopia.org/video/ai-tool-demo-music-generation-with-suno" target="_blank" rel="noopener">AI Tool Demo: Music Generation With Suno</a>. Edutopia (George Lucas Educational Foundation). <span class="src-host">edutopia.org</span></li>
+        <li><a href="https://pop.education.gov.il/teaching-tools/teaching-practices/search-teaching-practices/suno/" target="_blank" rel="noopener">Suno (teaching practice)</a>. Israel Ministry of Education. <span class="src-host">pop.education.gov.il</span></li>
+        <li><a href="https://www.sccl.sg/en/training-programmes/opal2-0-courses/item/450-developing-chinese-language-teaching-resources-using-suno-ai-music-generator-pri" target="_blank" rel="noopener">Developing Chinese Language Teaching Resources Using Suno AI Music Generator</a>. Singapore Centre for Chinese Language. <span class="src-host">sccl.sg</span></li>
+        <li><a href="https://magicschool.ai/tools/colleague-song-generator" target="_blank" rel="noopener">Colleague Song Generator</a>. MagicSchool (company page). <span class="src-host">magicschool.ai</span></li>
+        <li><a href="https://knowt.com/free-ai-tools-for-teachers/ai-song-generator" target="_blank" rel="noopener">AI Song Generator</a>. Knowt (company page), viewed October 10, 2026. <span class="src-host">knowt.com</span></li>
+        <li><a href="https://suno.com/legal/terms" target="_blank" rel="noopener">Terms of Service (revised August 10, 2026; effective September 3, 2026)</a>. Suno. <span class="src-host">suno.com</span></li>
+        <li><a href="https://blog.google/innovation-and-ai/products/gemini-app/lyria-3/" target="_blank" rel="noopener">A new way to express yourself: Gemini can now create music</a>. Google (The Keyword), February 18, 2026. <span class="src-host">blog.google</span></li>
+        <li><a href="https://workspaceupdates.googleblog.com/2026/04/expanding-access-to-longer-musical-tracks-in-the-Gemini-app.html" target="_blank" rel="noopener">Expanding access to longer musical tracks in the Gemini app</a>. Google Workspace Updates, April 9, 2026. <span class="src-host">workspaceupdates.googleblog.com</span></li>
+        <li><a href="https://blog.google/innovation-and-ai/products/gemini-app/better-tracks-lyria-gemini/" target="_blank" rel="noopener">Lyria 3.5 in the Gemini app (announcement)</a>. Google (The Keyword), September 4, 2026. <span class="src-host">blog.google</span></li>
+        <li><a href="https://www.teachersfirst.org/single.cfm?id=20078" target="_blank" rel="noopener">Suno (resource review)</a>. TeachersFirst. <span class="src-host">teachersfirst.org</span></li>
+        <li><a href="https://www.musicbusinessworldwide.com/universal-and-sony-sue-suno-for-a-second-time-claiming-platforms-v6-models-are-the-fruit-of-the-same-poisoned-tree-/" target="_blank" rel="noopener">Universal and Sony sue Suno for a second time</a>. Music Business Worldwide, September 18, 2026. <span class="src-host">musicbusinessworldwide.com</span></li>
+        <li><a href="https://www.wsls.com/business/2025/11/02/ai-song-generator-udio-offers-brief-window-for-downloads-after-universal-settlement-upsets-users/" target="_blank" rel="noopener">AI song generator Udio offers brief window for downloads after Universal settlement upsets users</a>. Associated Press via WSLS, November 2, 2025. <span class="src-host">wsls.com</span></li>
+        <li><a href="https://www.musicbusinessworldwide.com/warner-music-settles-udio-lawsuit-strikes-licensing-deal-with-ai-platform" target="_blank" rel="noopener">Warner Music settles Udio lawsuit, strikes licensing deal with AI platform</a>. Music Business Worldwide, November 2025. <span class="src-host">musicbusinessworldwide.com</span></li>
+        <li><a href="https://kahoot.com/company/" target="_blank" rel="noopener">Company</a>. Kahoot! (company page), viewed October 10, 2026. <span class="src-host">kahoot.com</span></li>
+        <li><a href="https://help.blooket.com/hc/en-us/articles/17351034967959-Is-Blooket-Free" target="_blank" rel="noopener">Is Blooket Free?</a> Blooket Help (company). <span class="src-host">help.blooket.com</span></li>
+        <li><a href="https://www.blooket.com/" target="_blank" rel="noopener">Blooket</a>. Blooket (company page), viewed October 10, 2026. <span class="src-host">blooket.com</span></li>
+        <li><a href="https://www.boomlearning.com/boom-cards" target="_blank" rel="noopener">What's so great about Boom Cards?</a> Boom Learning (company page), viewed October 10, 2026. <span class="src-host">boomlearning.com</span></li>
+        <li><a href="https://www.boomlearning.com/pricing" target="_blank" rel="noopener">Pricing</a>. Boom Learning (company page), viewed October 10, 2026. <span class="src-host">boomlearning.com</span></li>
+        <li><a href="https://www.teacherspayteachers.com/About-Us" target="_blank" rel="noopener">About Us</a>. Teachers Pay Teachers (IXL Learning), viewed October 10, 2026. <span class="src-host">teacherspayteachers.com</span></li>
+        <li><a href="https://scholars.uky.edu/es/publications/where-does-all-the-money-go-free-and-paid-transactions-on-teacher/" target="_blank" rel="noopener">Koehler, Shelton, Carpenter and Greenhalgh, "Where does all the money go? Free and paid transactions on TeachersPayTeachers"</a>. Teachers College Record, 2020 (record at University of Kentucky Scholars). <span class="src-host">scholars.uky.edu</span></li>
+        <li><a href="https://www.baamboozle.com/pricing" target="_blank" rel="noopener">Pricing</a>. Baamboozle (company page), viewed October 10, 2026. <span class="src-host">baamboozle.com</span></li>
+        <li><a href="https://deck.toys/pricing" target="_blank" rel="noopener">Pricing</a>. Deck.Toys (company page), viewed October 10, 2026. <span class="src-host">deck.toys</span></li>
+        <li><a href="https://quizlet.com/upgrade" target="_blank" rel="noopener">Upgrade your account</a>. Quizlet (company page), viewed October 10, 2026. <span class="src-host">quizlet.com</span></li>
+        <li><a href="https://nearpod.com/pricing" target="_blank" rel="noopener">Pricing</a>. Nearpod (company page), viewed October 10, 2026. <span class="src-host">nearpod.com</span></li>
+        <li><a href="https://supernoodle.gonoodle.com/faqs" target="_blank" rel="noopener">SuperNoodle FAQs</a>. GoNoodle (company page). <span class="src-host">supernoodle.gonoodle.com</span></li>
+        <li><a href="https://www.bls.gov/ooh/education-training-and-library/kindergarten-and-elementary-school-teachers.htm" target="_blank" rel="noopener">Occupational Outlook Handbook: Kindergarten and Elementary School Teachers</a>. U.S. Bureau of Labor Statistics, 2025-35 projections. <span class="src-host">bls.gov</span></li>
+        <li><a href="https://www.bls.gov/ooh/education-training-and-library/middle-school-teachers.htm" target="_blank" rel="noopener">Occupational Outlook Handbook: Middle School Teachers</a>. U.S. Bureau of Labor Statistics, 2025-35 projections. <span class="src-host">bls.gov</span></li>
+        <li><a href="https://www.adoptaclassroom.org/2025/06/09/2025-teacher-survey-spending-stats-classroom-needs/" target="_blank" rel="noopener">2025 Teacher Spending Survey</a>. AdoptAClassroom.org, June 9, 2025. <span class="src-host">adoptaclassroom.org</span></li>
+        <li><a href="https://www.edweek.org/teaching-learning/as-prices-go-up-and-student-needs-rise-teachers-are-filling-in-the-gaps/2025/05" target="_blank" rel="noopener">As Prices Go Up and Student Needs Rise, Teachers Are Filling in the Gaps</a>. Education Week, May 2025. <span class="src-host">edweek.org</span></li>
+        <li><a href="https://marketbrief.edweek.org/meeting-district-needs/teachers-are-still-paying-for-ed-tech-out-of-their-own-pockets-despite-booming-district-inventories/2025/09" target="_blank" rel="noopener">Teachers Are Still Paying For Ed Tech Out of Their Own Pockets, Despite Booming District Inventories</a>. EdWeek Market Brief, September 16, 2025. <span class="src-host">marketbrief.edweek.org</span></li>
+        <li><a href="https://www.khanacademy.org/kids/pricing" target="_blank" rel="noopener">Khan Academy Kids Pricing</a>. Khan Academy. <span class="src-host">khanacademy.org</span></li>
+        <li><a href="https://www.edweek.org/leadership/some-districts-struggle-to-align-their-spending-with-instructional-needs/2025/02" target="_blank" rel="noopener">Some Districts Struggle to Align Their Spending With Instructional Needs</a>. Education Week, February 6, 2025. <span class="src-host">edweek.org</span></li>
+        <li><a href="https://marketbrief.edweek.org/meeting-district-needs/who-influences-school-district-purchasing-of-academic-resources/2024/11" target="_blank" rel="noopener">Who Influences School District Purchasing of Academic Resources?</a> EdWeek Market Brief, November 26, 2024. <span class="src-host">marketbrief.edweek.org</span></li>
+        <li><a href="https://marketbrief.edweek.org/education-market/what-makes-schools-keep-or-cut-ed-tech-tools/2026/05" target="_blank" rel="noopener">What Makes Schools Keep, or Cut, Ed-Tech Tools?</a> EdWeek Market Brief, May 15, 2026. <span class="src-host">marketbrief.edweek.org</span></li>
+        <li><a href="https://www.congress.gov/crs-product/IF12978" target="_blank" rel="noopener">Late Liquidation Period for Elementary and Secondary Education Funds Provided During COVID-19 Pandemic (IF12978)</a>. Congressional Research Service, updated July 3, 2025. <span class="src-host">congress.gov</span></li>
+        <li><a href="https://www.govtech.com/education/k-12/experts-push-student-focused-budgeting-as-esser-winds-down" target="_blank" rel="noopener">Experts Push Student-Focused Budgeting as ESSER Winds Down</a>. GovTech, 2024. <span class="src-host">govtech.com</span></li>
+        <li><a href="https://www.instructure.com/press-release/new-learnplatform-instructure-report-shows-k-12-districts-are-more-selective-about" target="_blank" rel="noopener">New LearnPlatform by Instructure report shows K-12 districts are more selective about edtech tools</a>. Instructure press release, June 30, 2025. <span class="src-host">instructure.com</span></li>
+        <li><a href="https://www.abcmouse.com/" target="_blank" rel="noopener">ABCmouse</a>. Age of Learning (company page), viewed October 10, 2026. <span class="src-host">abcmouse.com</span></li>
+        <li><a href="https://www.spotify.com/us/kids" target="_blank" rel="noopener">Spotify Kids</a>. Spotify (company page), viewed October 10, 2026. <span class="src-host">spotify.com</span></li>
+        <li><a href="https://www.spotify.com/us/premium/" target="_blank" rel="noopener">Spotify Premium plans</a>. Spotify (company page), viewed October 10, 2026. <span class="src-host">spotify.com</span></li>
+        <li><a href="https://fpf.org/blog/fpf-guide-student-data-protections-sopipa-k-12-school-administrators-ed-tech-vendors/" target="_blank" rel="noopener">FPF Guide: Student Data Protections under SOPIPA</a>. Future of Privacy Forum. <span class="src-host">fpf.org</span></li>
+        <li><a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&amp;sectionNum=22584" target="_blank" rel="noopener">California Business and Professions Code &sect;22584 (SOPIPA)</a>. California Legislative Information. <span class="src-host">leginfo.legislature.ca.gov</span></li>
+        <li><a href="https://www.federalregister.gov/documents/2025/04/22/2025-05904/childrens-online-privacy-protection-rule" target="_blank" rel="noopener">Children's Online Privacy Protection Rule (final rule)</a>. Federal Register, April 22, 2025. <span class="src-host">federalregister.gov</span></li>
+        <li><a href="https://www.loeb.com/en/insights/publications/2025/05/childrens-online-privacy-in-2025-the-amended-coppa-rule" target="_blank" rel="noopener">Children's Online Privacy in 2025: The Amended COPPA Rule</a>. Loeb &amp; Loeb LLP, May 2025. <span class="src-host">loeb.com</span></li>
+        <li><a href="https://www.ftc.gov/news-events/news/press-releases/2025/01/ftc-finalizes-changes-childrens-privacy-rule-limiting-companies-ability-monetize-kids-data" target="_blank" rel="noopener">FTC Finalizes Changes to Children's Privacy Rule Limiting Companies' Ability to Monetize Kids' Data</a>. Federal Trade Commission press release, January 16, 2025. <span class="src-host">ftc.gov</span></li>
+        <li><a href="https://www.govinfo.gov/content/pkg/FR-2025-04-22/html/2025-05904.htm" target="_blank" rel="noopener">Children's Online Privacy Protection Rule, FR Doc. 2025-05904</a>. govinfo (U.S. Government Publishing Office), April 22, 2025. <span class="src-host">govinfo.gov</span></li>
+        <li><a href="https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions" target="_blank" rel="noopener">Complying with COPPA: Frequently Asked Questions</a>. Federal Trade Commission. <span class="src-host">ftc.gov</span></li>
+        <li><a href="https://www.bsk.com/news-events-videos/new-york-state-education-law-sect-2-d-where-are-we-now" target="_blank" rel="noopener">New York State Education Law Sect. 2-d: Where Are We Now?</a> Bond, Schoeneck &amp; King. <span class="src-host">bsk.com</span></li>
+        <li><a href="https://www.nysed.gov/data-privacy-security" target="_blank" rel="noopener">Data Privacy and Security</a>. New York State Education Department. <span class="src-host">nysed.gov</span></li>
+        <li><a href="https://www.cps.edu/about/policies/student-online-personal-protection-act/vendors-and-contracts/" target="_blank" rel="noopener">Student Online Personal Protection Act: Vendors and Contracts</a>. Chicago Public Schools. <span class="src-host">cps.edu</span></li>
+        <li><a href="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3806&amp;ChapterID=17" target="_blank" rel="noopener">Student Online Personal Protection Act, 105 ILCS 85</a>. Illinois General Assembly. <span class="src-host">ilga.gov</span></li>
+        <li><a href="https://privacy.a4l.org/" target="_blank" rel="noopener">Student Data Privacy Consortium registry</a>. Access 4 Learning Community, viewed October 10, 2026. <span class="src-host">privacy.a4l.org</span></li>
+        <li><a href="https://www.commonsense.org/education/articles/introducing-the-common-sense-privacy-seal-a-new-standard-in-digital-privacy" target="_blank" rel="noopener">Introducing the Common Sense Privacy Seal</a>. Common Sense Education, April 3, 2025. <span class="src-host">commonsense.org</span></li>
+        <li><a href="https://www.ada.gov/resources/2024-03-08-web-rule/" target="_blank" rel="noopener">Fact Sheet: New Rule on the Accessibility of Web Content and Mobile Apps</a>. ADA.gov, U.S. Department of Justice. <span class="src-host">ada.gov</span></li>
+        <li><a href="https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web" target="_blank" rel="noopener">Extension of Compliance Dates for Nondiscrimination on the Basis of Disability; Accessibility of Web Information and Services (interim final rule)</a>. Federal Register, April 20, 2026. <span class="src-host">federalregister.gov</span></li>
+        <li><a href="https://www.techlearning.com/technology/accessability/the-title-ii-accessibility-deadline-is-soon-heres-what-you-need-to-know" target="_blank" rel="noopener">The Title II Accessibility Deadline Is Soon: Here's What You Need to Know</a>. Tech &amp; Learning, 2026. <span class="src-host">techlearning.com</span></li>
+        <li><a href="https://www.clever.com/pricing" target="_blank" rel="noopener">Pricing</a>. Clever (company page), viewed October 10, 2026. <span class="src-host">clever.com</span></li>
+        <li><a href="https://doi.org/10.1037/0278-7393.20.6.1471" target="_blank" rel="noopener">Wallace, "Memory for music: Effect of melody on recall of text"</a>. Journal of Experimental Psychology: Learning, Memory, and Cognition, 20(6), 1994. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.3389/feduc.2018.00031" target="_blank" rel="noopener">Knott and Thaut, "Musical mnemonics enhance verbal memory in typically developing children"</a>. Frontiers in Education, 3, 2018. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.3758/BF03198404" target="_blank" rel="noopener">Kilgour, Jakobson and Cuddy, "Music training and rate of presentation as mediators of text and song recall"</a>. Memory &amp; Cognition, 28(5), 2000. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.3758/BF03193445" target="_blank" rel="noopener">Racette and Peretz, "Learning lyrics: To sing or not to sing?"</a>. Memory &amp; Cognition, 35(2), 2007. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.1017/langcog.2022.29" target="_blank" rel="noopener">Ong and Chan, "Working memory modulates the effect of music on word learning"</a>. Language and Cognition, 15(1), 2023 (online November 2022). <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.1007/s10648-021-09595-9" target="_blank" rel="noopener">Agarwal, Nunes and Blunt, "Retrieval practice consistently benefits student learning: A systematic review of applied research in schools and classrooms"</a>. Educational Psychology Review, 33(4), 2021. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.1037/a0031311" target="_blank" rel="noopener">Wouters, van Nimwegen, van Oostendorp and van der Spek, "A meta-analysis of the cognitive and motivational effects of serious games"</a>. Journal of Educational Psychology, 105(2), 2013. <span class="src-host">doi.org</span></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4748544" target="_blank" rel="noopener">Clark, Tanner-Smith and Killingsworth, "Digital games, design, and learning: A systematic review and meta-analysis"</a>. Review of Educational Research, 86(1), 2016 (PubMed Central). <span class="src-host">pmc.ncbi.nlm.nih.gov</span></li>
+        <li><a href="https://doi.org/10.1111/jcal.13084" target="_blank" rel="noopener">&Ouml;zdemir, "Kahoot! Game-based digital learning platform: A comprehensive meta-analysis"</a>. Journal of Computer Assisted Learning, 41(1), e13084, 2025. <span class="src-host">doi.org</span></li>
+        <li><a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank" rel="noopener">Wang and Tahir, "The effect of using Kahoot! for learning: A literature review"</a>. Computers &amp; Education, 149, 103818, 2020. <span class="src-host">doi.org</span></li>
+        <li><a href="https://www.ntnu.edu/employees/alfw" target="_blank" rel="noopener">Alf Inge Wang, staff page</a>. Norwegian University of Science and Technology (NTNU). <span class="src-host">ntnu.edu</span></li>
+        <li><a href="https://nearpod.com/essa" target="_blank" rel="noopener">ESSA research</a>. Nearpod (company page, company claims), viewed October 10, 2026. <span class="src-host">nearpod.com</span></li>
+        <li><a href="https://research.renaissance.com/Search/FacetAsync?FilterString=Product%3AFlocabulary" target="_blank" rel="noopener">Research library: Flocabulary</a>. Renaissance (company page, company claims), viewed October 10, 2026. <span class="src-host">research.renaissance.com</span></li>
+        <li><a href="https://www.law.cornell.edu/uscode/text/20/7801" target="_blank" rel="noopener">20 U.S. Code &sect;7801, Definitions (ESEA &sect;8101(21), "evidence-based")</a>. Legal Information Institute, Cornell Law School. <span class="src-host">law.cornell.edu</span></li>
+        <li><a href="https://www.ed.gov/sites/ed/files/policy/elsec/leg/essa/guidanceuseseinvestment.pdf" target="_blank" rel="noopener">Non-Regulatory Guidance: Using Evidence to Strengthen Education Investments</a>. U.S. Department of Education, revised September 28, 2023. <span class="src-host">ed.gov</span></li>
+        <li><a href="https://www.education.ky.gov/school/evidence/Documents/Empowered%20by%20Data%20Evaluating%20Intervention%20Impact.pdf" target="_blank" rel="noopener">Empowered by Data: Evaluating Intervention Impact</a>. Kentucky Department of Education. <span class="src-host">education.ky.gov</span></li>
+        <li><a href="https://www.cde.ca.gov/re/es/evidence.asp" target="_blank" rel="noopener">Evidence-Based Interventions Under the ESSA</a>. California Department of Education. <span class="src-host">cde.ca.gov</span></li>
+        <li><a href="https://www.derivita.com/derivita-essa-level-iv-report-lander" target="_blank" rel="noopener">ESSA Level IV report</a>. Derivita (company page, company claim). <span class="src-host">derivita.com</span></li>
+        <li><a href="https://www.boston.com/news/local-news/2026/09/27/major-record-labels-sue-cambridge-based-ai-platform-again/" target="_blank" rel="noopener">Major record labels sue Cambridge-based AI platform again</a>. Boston.com, September 27, 2026. <span class="src-host">boston.com</span></li>
+        <li><a href="https://www.clever.com/partner-library" target="_blank" rel="noopener">Clever Library for partners</a>. Clever (company page). <span class="src-host">clever.com</span></li>
+        <li><a href="https://jamwise.com/" target="_blank" rel="noopener">Homepage</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/for-teachers" target="_blank" rel="noopener">For Teachers</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/for-parents" target="_blank" rel="noopener">For Parents</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/pricing" target="_blank" rel="noopener">Pricing (Monthly and Annual options, FAQ)</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/library" target="_blank" rel="noopener">Library (redirects signed-out visitors to the login page)</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/signup" target="_blank" rel="noopener">Sign up</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/privacy" target="_blank" rel="noopener">Privacy Policy, updated February 20, 2026</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+        <li><a href="https://jamwise.com/terms" target="_blank" rel="noopener">Terms of Service</a>. JamWise, checked October 10, 2026. <span class="src-host">jamwise.com</span></li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p>Figures reflect public sources as of October 10, 2026.</p>
+</footer>
+
+<script>
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var links = document.querySelectorAll('.toc a[href^="#"]');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var sections = Array.prototype.filter.call(document.querySelectorAll('main > section[id]'), function (s) { return map[s.id]; });
+  var visible = {};
+  function update() {
+    var current = null;
+    for (var i = 0; i < sections.length; i++) { if (visible[sections[i].id]) { current = sections[i].id; break; } }
+    if (!current) return;
+    links.forEach(function (a) { a.classList.remove('is-active'); a.removeAttribute('aria-current'); });
+    map[current].classList.add('is-active');
+    map[current].setAttribute('aria-current', 'location');
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+    update();
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
