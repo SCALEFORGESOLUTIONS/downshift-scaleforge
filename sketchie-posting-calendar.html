@@ -29,6 +29,11 @@ h1{font-family:var(--marker);font-size:clamp(32px,5vw,54px);line-height:1.1;marg
 .lede{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:60ch;margin:0 0 24px;text-wrap:pretty}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--graphite);margin:0 0 16px}
 .note{font-family:var(--annotation);font-size:21px;color:var(--violet-deep);padding-bottom:3px;margin:0}
+.caveat{display:flex;gap:12px;align-items:flex-start;background:var(--violet-tint);
+  border:1px solid rgba(108,92,231,.25);border-radius:14px;padding:13px 16px;margin:14px 0 0}
+.caveat b{font-weight:600}
+.caveat p{margin:0;font-size:14.5px;color:var(--ink);max-width:72ch;text-wrap:pretty}
+.caveat .mark{font-family:var(--marker);font-size:19px;line-height:1;color:var(--violet-deep);flex:none;padding-top:2px}
 
 .ramp{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 10px}
 @media(min-width:720px){.ramp{grid-template-columns:repeat(4,1fr)}}
@@ -113,6 +118,15 @@ footer.foot{margin-top:46px;padding-top:20px;border-top:1px solid var(--line);fo
     <div><b>5</b><span>Week 4 &middot; per account</span></div>
   </div>
   <p class="note">The ramp is the point: the accounts have been dormant, so week 1 stays small.</p>
+
+  <div class="caveat">
+    <span class="mark">!</span>
+    <p><b>These weekly numbers are a starting point, not a rule.</b> 3 then 5, 5, 5 is a
+    suggestion for the break-in. Post fewer if a week gets busy or the videos are not ready,
+    or more if the early ones land well and you have the assets. Nothing downstream breaks:
+    the plan is a list consumed in order, so a lighter week just pushes the rest along. The
+    only hard limits are the daily caps, 1 Instagram post and 2 X posts per day.</p>
+  </div>
 
   <div class="bar">
     <button type="button" id="reset">Clear all ticks</button>
