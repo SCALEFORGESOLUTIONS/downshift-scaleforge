@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Sketchie break-in posting calendar: four weeks, 36 posts, times in Manila.">
+<title>Sketchie Posting Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e1e28;--paper:#fff;--warm:#fbf8f3;--warm2:#f4efe7;--graphite:#8a8f98;
+  --muted:#5b5b68;--line:#e6e1d8;--dot:#e4e0d8;
+  --violet:#6c5ce7;--violet-deep:#5a4bd1;--violet-tint:#f3f0ff;
+  --misc:#ff6b5b;--lesson:#339af0;--move:#ffc933;--product:#e8538f;--leaf:#40c057;
+  --marker:"Shantell Sans","Comic Sans MS",cursive;
+  --ui:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --annotation:"Caveat","Comic Sans MS",cursive;
+  --gutter:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--warm);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,56px) var(--gutter) 80px}
+
+h1{font-family:var(--marker);font-size:clamp(32px,5vw,54px);line-height:1.1;margin:0 0 14px;max-width:20ch;text-wrap:balance}
+.lede{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:60ch;margin:0 0 24px;text-wrap:pretty}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--graphite);margin:0 0 16px}
+.note{font-family:var(--annotation);font-size:21px;color:var(--violet-deep);padding-bottom:3px;margin:0}
+
+.ramp{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 10px}
+@media(min-width:720px){.ramp{grid-template-columns:repeat(4,1fr)}}
+.ramp div{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.ramp b{display:block;font-family:var(--marker);font-size:26px;line-height:1.1}
+.ramp span{font-size:12.5px;color:var(--graphite)}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:26px 0 8px}
+.bar button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+.bar button:hover{border-color:var(--violet)}
+.bar .prog{font-size:13px;color:var(--graphite);font-variant-numeric:tabular-nums}
+
+.week{margin-top:34px}
+.wk-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end;
+  border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:4px}
+.wk-n{font-family:var(--marker);font-size:30px;margin:0;line-height:1.1}
+.wk-span{margin:0;font-size:13px;color:var(--graphite)}
+.wk-count{margin:0;font-size:13px;color:var(--muted);text-align:right}
+.wk-count b{font-size:19px;color:var(--ink)}
+.wk-count span{display:block;font-size:12px;color:var(--graphite)}
+
+.day{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--line);padding:12px 0}
+@media(min-width:780px){.day{grid-template-columns:132px 1fr;gap:16px;align-items:start}}
+.day-label{margin:0 0 8px;font-weight:600;font-size:14px;padding-top:14px}
+@media(min-width:780px){.day-label{margin:0}}
+.day-posts{display:grid;gap:8px}
+
+.post{display:grid;grid-template-columns:auto auto 1fr;gap:10px 12px;align-items:start;
+  background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c);
+  border-radius:12px;padding:12px 14px}
+@media(min-width:900px){.post{grid-template-columns:auto 74px 136px 1fr auto;align-items:center}}
+.post.misc{--c:var(--misc)}.post.lesson{--c:var(--lesson)}.post.move{--c:var(--move)}.post.product{--c:var(--product)}
+
+.tick{display:flex;align-items:center;cursor:pointer}
+.tick input{position:absolute;opacity:0;width:0;height:0}
+.tick span{width:20px;height:20px;border:2px solid var(--line);border-radius:6px;display:block;position:relative;transition:.15s}
+.tick input:checked+span{background:var(--leaf);border-color:var(--leaf)}
+.tick input:checked+span::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.tick input:focus-visible+span{outline:2px solid var(--violet-deep);outline-offset:2px}
+
+.when b{display:block;font-size:17px;font-variant-numeric:tabular-nums;line-height:1.2}
+.when span{font-size:11px;color:var(--graphite);font-variant-numeric:tabular-nums}
+.who{display:flex;flex-direction:column;gap:3px}
+.plat{font-size:11px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;width:max-content}
+.plat.instagram{background:rgba(232,83,143,.13);color:#b32d68}
+.plat.x{background:rgba(30,30,40,.08);color:#1e1e28}
+.handle{font-size:11px;color:var(--graphite)}
+.what{min-width:0}
+.role{margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+.hook{margin:0 0 3px;font-size:15px;font-weight:500;text-wrap:pretty}
+.asset{margin:0;font-size:11px;color:var(--graphite)}
+.asset code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;background:var(--warm2);padding:1px 5px;border-radius:4px}
+.copy{font:inherit;font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--warm);color:var(--ink);
+  border-radius:999px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:.15s}
+.copy:hover{border-color:var(--violet);color:var(--violet-deep)}
+.copy.done{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.post.is-done{opacity:.5}
+
+footer.foot{margin-top:46px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--graphite)}
+
+@media print{
+  body{background:#fff}
+  .bar,.copy{display:none !important}
+  .week{break-inside:avoid}
+  .post{break-inside:avoid;border-color:#ccc}
+  .wrap{padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Sketchie &middot; break-in month &middot; from Monday 2026-11-23</p>
+  <h1>Four weeks, posted by hand.</h1>
+  <p class="lede">36 posts across two accounts, walked up from 3 a week to 5. Times shown are
+  <b>Manila</b>, with New York underneath, because the sheet schedules in ET but you post from here.
+  Tick each one off as it goes out.</p>
+
+  <div class="ramp">
+    <div><b>3</b><span>Week 1 &middot; per account</span></div>
+    <div><b>5</b><span>Week 2 &middot; per account</span></div>
+    <div><b>5</b><span>Week 3 &middot; per account</span></div>
+    <div><b>5</b><span>Week 4 &middot; per account</span></div>
+  </div>
+  <p class="note">The ramp is the point: the accounts have been dormant, so week 1 stays small.</p>
+
+  <div class="bar">
+    <button type="button" id="reset">Clear all ticks</button>
+    <span class="prog" id="prog"></span>
+  </div>
+
+<section class="week">
+  <header class="wk-head">
+    <div><p class="wk-n">Week 1</p><p class="wk-span">2026-11-23 to 2026-11-29</p></div>
+    <p class="wk-count"><b>3</b> per account<span>3 Instagram &middot; 3 X</span></p>
+  </header>
+  <div class="day">
+    <p class="day-label">Tue 24 Nov</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-11-23-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-23-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-LS1-1</p>
+          <p class="hook">A tree weighs tonnes. Where did all of it come from?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v001-where-a-plant-gets-the-mater</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-23-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Wed 25 Nov</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-11-25-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-25-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-LS1-1</p>
+          <p class="hook">A tree weighs tonnes. Where did all of it come from?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v001-where-a-plant-gets-the-mater</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-25-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Thu 26 Nov</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-11-25-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-25-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.NF.A.2</p>
+          <p class="hook">Where does three quarters live on a number line?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v002-fractions-on-a-number-line</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-25-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Fri 27 Nov</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-11-27-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-27-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.NF.A.2</p>
+          <p class="hook">Where does three quarters live on a number line?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v002-fractions-on-a-number-line</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-27-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sat 28 Nov</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-11-27-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-27-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3.NF.A.3d</p>
+          <p class="hook">Eight is bigger than four. So is one eighth bigger than one quarter?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v003-a-bigger-denominator-means-a</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-27-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sun 29 Nov</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-11-29-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-29-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3.NF.A.3d</p>
+          <p class="hook">Eight is bigger than four. So is one eighth bigger than one quarter?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v003-a-bigger-denominator-means-a</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-29-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="week">
+  <header class="wk-head">
+    <div><p class="wk-n">Week 2</p><p class="wk-span">2026-11-30 to 2026-12-06</p></div>
+    <p class="wk-count"><b>5</b> per account<span>5 Instagram &middot; 5 X</span></p>
+  </header>
+  <div class="day">
+    <p class="day-label">Tue 1 Dec</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-11-30-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-11-30-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3-PS2-1</p>
+          <p class="hook">Two teams pull a rope and nothing moves. Is there no force?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v004-balanced-and-unbalanced-forc</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-11-30-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Wed 2 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-01-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-01-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 4.NF.A.1</p>
+          <p class="hook">Why one half and three sixths are the same point</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v005-equivalent-fractions</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-01-IG">Copy caption</button>
+      </article>
+      <article class="post misc" data-id="SK-2026-12-02-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-02-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3-PS2-1</p>
+          <p class="hook">Two teams pull a rope and nothing moves. Is there no force?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v004-balanced-and-unbalanced-forc</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-02-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Thu 3 Dec</p>
+    <div class="day-posts">
+      <article class="post move" data-id="SK-2026-12-02-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-02-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 3.MD.C.7</p>
+          <p class="hook">The area formula looks random until you draw the rows</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v006-area-as-rows-and-columns</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-02-IG">Copy caption</button>
+      </article>
+      <article class="post lesson" data-id="SK-2026-12-03-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-03-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 4.NF.A.1</p>
+          <p class="hook">Why one half and three sixths are the same point</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v005-equivalent-fractions</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-03-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Fri 4 Dec</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-12-03-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-03-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5.NF.B.5</p>
+          <p class="hook">Does multiplying always make a number bigger?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v007-multiplying-does-not-always-</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-03-IG">Copy caption</button>
+      </article>
+      <article class="post move" data-id="SK-2026-12-04-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-04-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 3.MD.C.7</p>
+          <p class="hook">The area formula looks random until you draw the rows</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v006-area-as-rows-and-columns</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-04-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sat 5 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-04-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-04-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.NBT.A.1</p>
+          <p class="hook">Which hundred is 472 closest to?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v008-rounding-to-the-nearest-hund</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-04-IG">Copy caption</button>
+      </article>
+      <article class="post misc" data-id="SK-2026-12-05-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-05-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5.NF.B.5</p>
+          <p class="hook">Does multiplying always make a number bigger?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v007-multiplying-does-not-always-</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-05-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sun 6 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-06-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-06-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.NBT.A.1</p>
+          <p class="hook">Which hundred is 472 closest to?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v008-rounding-to-the-nearest-hund</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-06-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="week">
+  <header class="wk-head">
+    <div><p class="wk-n">Week 3</p><p class="wk-span">2026-12-07 to 2026-12-13</p></div>
+    <p class="wk-count"><b>5</b> per account<span>5 Instagram &middot; 5 X</span></p>
+  </header>
+  <div class="day">
+    <p class="day-label">Tue 8 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-07-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-07-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 5.NBT.A.3</p>
+          <p class="hook">Is 0.7 smaller than 0.25? Place value says no</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v009-comparing-decimals</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-07-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Wed 9 Dec</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-12-08-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-08-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-PS1-1</p>
+          <p class="hook">Sugar vanishes into water. Is it gone?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v010-matter-is-made-of-pieces-too</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-08-IG">Copy caption</button>
+      </article>
+      <article class="post lesson" data-id="SK-2026-12-09-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-09-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 5.NBT.A.3</p>
+          <p class="hook">Is 0.7 smaller than 0.25? Place value says no</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v009-comparing-decimals</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-09-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Thu 10 Dec</p>
+    <div class="day-posts">
+      <article class="post move" data-id="SK-2026-12-09-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-09-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 4.NBT.B.5</p>
+          <p class="hook">Carrying stops looking like magic once you split the 48</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v011-multiplying-a-two-digit-numb</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-09-IG">Copy caption</button>
+      </article>
+      <article class="post misc" data-id="SK-2026-12-10-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-10-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-PS1-1</p>
+          <p class="hook">Sugar vanishes into water. Is it gone?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v010-matter-is-made-of-pieces-too</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-10-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Fri 11 Dec</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-12-10-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-10-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-PS2-1</p>
+          <p class="hook">If Earth is a ball, why does nobody fall off the bottom?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v012-why-nobody-falls-off-the-oth</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-10-IG">Copy caption</button>
+      </article>
+      <article class="post move" data-id="SK-2026-12-11-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-11-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 4.NBT.B.5</p>
+          <p class="hook">Carrying stops looking like magic once you split the 48</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v011-multiplying-a-two-digit-numb</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-11-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sat 12 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-11-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-11-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 4.NF.B.3a</p>
+          <p class="hook">Why the bottom number stays the same when you add</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v013-adding-fractions-with-the-sa</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-11-IG">Copy caption</button>
+      </article>
+      <article class="post misc" data-id="SK-2026-12-12-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-12-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 5-PS2-1</p>
+          <p class="hook">If Earth is a ball, why does nobody fall off the bottom?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v012-why-nobody-falls-off-the-oth</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-12-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sun 13 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-13-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-13-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 4.NF.B.3a</p>
+          <p class="hook">Why the bottom number stays the same when you add</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v013-adding-fractions-with-the-sa</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-13-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="week">
+  <header class="wk-head">
+    <div><p class="wk-n">Week 4</p><p class="wk-span">2026-12-14 to 2026-12-20</p></div>
+    <p class="wk-count"><b>5</b> per account<span>5 Instagram &middot; 5 X</span></p>
+  </header>
+  <div class="day">
+    <p class="day-label">Tue 15 Dec</p>
+    <div class="day-posts">
+      <article class="post misc" data-id="SK-2026-12-14-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-14-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3-LS1-1</p>
+          <p class="hook">A caterpillar and a butterfly are one animal. How?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v014-life-cycles</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-14-IG">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Wed 16 Dec</p>
+    <div class="day-posts">
+      <article class="post lesson" data-id="SK-2026-12-15-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-15-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.OA.A.1</p>
+          <p class="hook">What does 4 times 3 actually mean?</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v015-multiplication-as-equal-grou</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-15-IG">Copy caption</button>
+      </article>
+      <article class="post misc" data-id="SK-2026-12-16-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-16-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Misconception &middot; 3-LS1-1</p>
+          <p class="hook">A caterpillar and a butterfly are one animal. How?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v014-life-cycles</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-16-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Thu 17 Dec</p>
+    <div class="day-posts">
+      <article class="post move" data-id="SK-2026-12-16-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-16-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 3.MD.A.1</p>
+          <p class="hook">A clock face is just counting by fives, if you label it first</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v016-telling-time-to-the-minute</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-16-IG">Copy caption</button>
+      </article>
+      <article class="post lesson" data-id="SK-2026-12-17-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-17-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Lesson &middot; 3.OA.A.1</p>
+          <p class="hook">What does 4 times 3 actually mean?</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v015-multiplication-as-equal-grou</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-17-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Fri 18 Dec</p>
+    <div class="day-posts">
+      <article class="post product" data-id="SK-2026-12-17-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-17-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Product</p>
+          <p class="hook">A blank board is the hardest part of planning</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v017-from-a-blank-board-to-a-fini</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-17-IG">Copy caption</button>
+      </article>
+      <article class="post move" data-id="SK-2026-12-18-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-18-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 3.MD.A.1</p>
+          <p class="hook">A clock face is just counting by fives, if you label it first</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v016-telling-time-to-the-minute</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-18-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sat 19 Dec</p>
+    <div class="day-posts">
+      <article class="post move" data-id="SK-2026-12-18-IG">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-18-IG"><span></span></label>
+        <div class="when"><b>08:00</b><span>19:00 ET</span></div>
+        <div class="who"><span class="plat instagram">Instagram</span><span class="handle">@sketchie.ai</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 4.MD.A.3</p>
+          <p class="hook">Both shapes measure 24 around. One holds three times as much</p>
+          <p class="asset">9:16 &middot; <code>REPLACE_9x16_v018-perimeter-and-area-are-diffe</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-18-IG">Copy caption</button>
+      </article>
+      <article class="post product" data-id="SK-2026-12-19-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-19-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Product</p>
+          <p class="hook">A blank board is the hardest part of planning</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v017-from-a-blank-board-to-a-fini</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-19-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+  <div class="day">
+    <p class="day-label">Sun 20 Dec</p>
+    <div class="day-posts">
+      <article class="post move" data-id="SK-2026-12-20-X">
+        <label class="tick"><input type="checkbox" data-post="SK-2026-12-20-X"><span></span></label>
+        <div class="when"><b>21:00</b><span>08:00 ET</span></div>
+        <div class="who"><span class="plat x">X</span><span class="handle">@sketchieai2026</span></div>
+        <div class="what">
+          <p class="role">Move &middot; 4.MD.A.3</p>
+          <p class="hook">Both shapes measure 24 around. One holds three times as much</p>
+          <p class="asset">16:9 &middot; <code>REPLACE_16x9_v018-perimeter-and-area-are-diffe</code></p>
+        </div>
+        <button class="copy" type="button" data-copy="SK-2026-12-20-X">Copy caption</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <footer class="foot">
+    Sketchie posting calendar &middot; generated 2026-11-16 &middot; Prepared by Rikuo Koizumi, assisted by Claude.AI<br>
+    Ticks are stored in this browser only. Video files are not generated yet, so each post shows its placeholder name.
+  </footer>
+</div>
+
+<script type="application/json" id="captions">{"SK-2026-11-23-IG":"A tree weighs tonnes. Where did all of it come from?\n\nMost classes guess the soil. Weigh the soil before and after and barely anything is missing. The material arrives as air and water.\n\nAsk the class first, then draw it.\n\nFree whiteboard lessons, link in bio.\n\n#ngss #elementaryscience #fifthgrade #scienceteacher #teachersofinstagram","SK-2026-11-25-X":"A tree weighs tonnes. Where did all of it come from?\n\nMost classes say the soil. Weigh the soil before and after: barely anything is gone. It arrives as air and water.\n\nWhiteboard version: {link}","SK-2026-11-25-IG":"Where does three quarters live on a number line?\n\nA fraction is not a piece of pie here. It is a place. Split the space from 0 to 1 into four equal jumps, then land on the third one. That point is three quarters.\n\nDrawn on a whiteboard, one jump at a time.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #thirdgrade #fractions #mathteacher #teachersofinstagram","SK-2026-11-27-X":"Where does three quarters live on a number line?\n\nNot a piece of pie. A place. Four equal jumps from 0 to 1, land on the third.\n\nWhiteboard version: {link}","SK-2026-11-27-IG":"Eight is bigger than four. So is one eighth bigger than one quarter?\n\nThe number says yes and the bar says no. Draw two identical bars, cut one into four and the other into eight, and the eighth is visibly the smaller piece. More pieces means smaller pieces.\n\nCut the bars while they watch.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #thirdgrade #fractions #mathteacher #teachersofinstagram","SK-2026-11-29-X":"Eight is bigger than four. So is one eighth bigger than one quarter?\n\nThe number says yes, the bar says no. Two identical bars, one cut into four, one into eight. More pieces means smaller pieces.\n\nWhiteboard version: {link}","SK-2026-11-30-IG":"Two teams pull a rope and nothing moves. Is there no force?\n\nThere is plenty. The pulls are equal and opposite, so they cancel. Nothing moving is not the same as nothing happening, which is the part that takes a drawing to land.\n\nAsk before you explain.\n\nFree whiteboard lessons, link in bio.\n\n#ngss #elementaryscience #thirdgrade #forces #scienceteacher","SK-2026-12-01-IG":"Why one half and three sixths are the same point.\n\nDraw one number line. Mark halves above it and sixths below it. The marks for one half and three sixths land on top of each other. Same place, two names.\n\nNo cross-multiplying needed to see it.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #fourthgrade #fractions #mathteacher #teachersofinstagram","SK-2026-12-02-X":"Two teams pull a rope and nothing moves. Is there no force?\n\nThere is plenty. Equal and opposite, so they cancel. Nothing moving is not nothing happening.\n\nWhiteboard version: {link}","SK-2026-12-02-IG":"The area formula looks random until you draw the rows.\n\nArea stops being a mystery once a rectangle is four rows of six squares. The multiplication is something the class can see and count, so the formula arrives as a shortcut rather than a rule to memorise.\n\nFree whiteboard lessons, link in bio.\n\n#teachingtips #elementarymath #thirdgrade #area #mathteacher","SK-2026-12-03-X":"Why one half and three sixths are the same point.\n\nOne number line. Halves above, sixths below. The two marks land on top of each other. Same place, two names.\n\nWhiteboard version: {link}","SK-2026-12-03-IG":"Does multiplying always make a number bigger?\n\nMost classes say yes, because multiplication arrived as repeated addition. Multiply a bar by 2 and it doubles. Multiply the same bar by one half and it shrinks. The second factor is what decides.\n\nStretch the bar before you write the rule.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #fifthgrade #fractions #mathteacher #teachersofinstagram","SK-2026-12-04-X":"The area formula looks random until you draw the rows.\n\nA rectangle is four rows of six squares. Once the class can count it, the formula is a shortcut, not a rule to memorise.\n\nWhiteboard version: {link}","SK-2026-12-04-IG":"Which hundred is 472 closest to?\n\nRounding is a question about distance, not a rule about digits. Draw the line from 400 to 500, mark the middle at 450, and put 472 on it. It sits past the middle, so it goes to 500.\n\nThe line does the explaining.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #thirdgrade #rounding #mathteacher #teachersofinstagram","SK-2026-12-05-X":"Does multiplying always make a number bigger?\n\nMost classes say yes. Multiply a bar by 2 and it doubles. By one half and it shrinks. The second factor decides.\n\nWhiteboard version: {link}","SK-2026-12-06-X":"Which hundred is 472 closest to?\n\nRounding is about distance, not digits. Draw 400 to 500, mark the middle at 450, put 472 on it. Past the middle, so it goes to 500.\n\nWhiteboard version: {link}","SK-2026-12-07-IG":"Is 0.7 smaller than 0.25? Place value says no.\n\nThe longer string looks bigger, which is the trap. Line up the decimal points, compare tenths first, and 0.7 wins before the hundredths matter at all.\n\nOne column at a time on the board.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #fifthgrade #decimals #mathteacher #teachersofinstagram","SK-2026-12-08-IG":"Sugar vanishes into water. Is it gone?\n\nTaste says no, and the scale agrees: the glass weighs exactly what it did before. Something you cannot see is still there, which is the whole idea behind pieces too small to see.\n\nWeigh it, then draw it.\n\nFree whiteboard lessons, link in bio.\n\n#ngss #elementaryscience #fifthgrade #matter #scienceteacher","SK-2026-12-09-X":"Is 0.7 smaller than 0.25? Place value says no.\n\nThe longer string looks bigger. That is the trap. Line up the points, compare tenths first, and 0.7 wins.\n\nWhiteboard version: {link}","SK-2026-12-09-IG":"Carrying stops looking like magic once you split the 48.\n\n7 times 48 is 7 times 40 plus 7 times 8. Draw it as two rectangles side by side and the carrying in the standard algorithm has somewhere to come from, because the class has already seen the parts.\n\nFree whiteboard lessons, link in bio.\n\n#teachingtips #elementarymath #fourthgrade #multiplication #mathteacher","SK-2026-12-10-X":"Sugar vanishes into water. Is it gone?\n\nTaste says no and the scale agrees: the glass weighs what it did before. Something you cannot see is still there.\n\nWhiteboard version: {link}","SK-2026-12-10-IG":"If Earth is a ball, why does nobody fall off the bottom?\n\nBecause down is not one direction. Down means toward the centre, so everyone on the surface is pulled to the same point. Draw the arrows around a globe and there is no bottom to fall off.\n\nAsk first, then draw the arrows.\n\nFree whiteboard lessons, link in bio.\n\n#ngss #elementaryscience #fifthgrade #gravity #scienceteacher","SK-2026-12-11-X":"Carrying stops looking like magic once you split the 48.\n\n7 x 48 is 7 x 40 plus 7 x 8. Two rectangles side by side, and the carrying has somewhere to come from.\n\nWhiteboard version: {link}","SK-2026-12-11-IG":"Why the bottom number stays the same when you add.\n\nTwo eighths plus three eighths is five eighths, and the eighth never changes. The denominator names the size of the piece, and adding pieces does not resize them. Drawn on one bar it stops being a rule.\n\nCount the pieces, do not change them.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #fourthgrade #fractions #mathteacher #teachersofinstagram","SK-2026-12-12-X":"If Earth is a ball, why does nobody fall off the bottom?\n\nDown is not one direction. Down means toward the centre, so everyone is pulled to the same point. There is no bottom to fall off.\n\nWhiteboard version: {link}","SK-2026-12-13-X":"Why the bottom number stays the same when you add.\n\nTwo eighths plus three eighths is five eighths. The denominator names the piece size, and adding pieces does not resize them.\n\nWhiteboard version: {link}","SK-2026-12-14-IG":"A caterpillar and a butterfly are one animal. How?\n\nSame creature, two shapes, and the class almost always treats them as two. Drawing the stages in a ring instead of a line is what makes the pattern repeat rather than end.\n\nAsk first, then draw the ring.\n\nFree whiteboard lessons, link in bio.\n\n#ngss #elementaryscience #thirdgrade #lifecycles #scienceteacher","SK-2026-12-15-IG":"What does 4 times 3 actually mean?\n\nFour groups of three. Draw four circles, put three dots in each, and the answer is something to count rather than recall. The times table comes later, once the picture is already there.\n\nGroups first, facts second.\n\nFree whiteboard lessons, link in bio.\n\n#elementarymath #thirdgrade #multiplication #mathteacher #teachersofinstagram","SK-2026-12-16-X":"A caterpillar and a butterfly are one animal. How?\n\nSame creature, two shapes. Draw the stages in a ring instead of a line and the pattern repeats rather than ends.\n\nWhiteboard version: {link}","SK-2026-12-16-IG":"A clock face is just counting by fives, if you label it first.\n\nWrite 5, 10, 15 around the face while the class watches, then add the hands. Counting by fives is already the skill they have, so the clock becomes a number line bent into a circle.\n\nFree whiteboard lessons, link in bio.\n\n#teachingtips #elementarymath #thirdgrade #tellingtime #mathteacher","SK-2026-12-17-X":"What does 4 x 3 actually mean?\n\nFour groups of three. Draw four circles, three dots in each, and the answer is something to count rather than recall.\n\nWhiteboard version: {link}","SK-2026-12-17-IG":"A blank board is the hardest part of planning.\n\nStarting from a drawn explanation is a different job from starting from nothing. You are reacting to something concrete, and reacting is faster than inventing.\n\nThat is what Sketchie does.\n\nFree whiteboard lessons, link in bio.\n\n#edtech #teachertools #lessonplanning #elementaryteacher","SK-2026-12-18-X":"A clock face is just counting by fives, if you label it first.\n\nWrite 5, 10, 15 around the face, then add the hands. The clock becomes a number line bent into a circle.\n\nWhiteboard version: {link}","SK-2026-12-18-IG":"Both shapes measure 24 around. One holds three times as much.\n\nA 1 by 11 rectangle and a 6 by 6 square have the same perimeter, and the square holds three times the area. Put them side by side and the difference between the fence and the field explains itself.\n\nFree whiteboard lessons, link in bio.\n\n#teachingtips #elementarymath #fourthgrade #geometry #mathteacher","SK-2026-12-19-X":"A blank board is the hardest part of planning.\n\nStarting from a drawn explanation is a different job from starting from nothing. Reacting beats inventing.\n\nThat is Sketchie: {link}","SK-2026-12-20-X":"Both shapes measure 24 around. One holds three times as much.\n\n1 by 11 and 6 by 6, same perimeter. The square holds three times the area. The fence is not the field.\n\nWhiteboard version: {link}"}</script>
+<script>
+(function(){
+  var CAPS = {};
+  try { CAPS = JSON.parse(document.getElementById('captions').textContent); } catch (e) {}
+  var KEY = 'sketchie-calendar-2026-11-23';
+
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } }
+  function save(s){ try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+
+  var state = load();
+  var boxes = [].slice.call(document.querySelectorAll('input[data-post]'));
+
+  function paint(){
+    var done = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-post')];
+      b.checked = on;
+      b.closest('.post').classList.toggle('is-done', on);
+      if (on) done++;
+    });
+    document.getElementById('prog').textContent = done + ' of ' + boxes.length + ' posted';
+  }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-post')] = b.checked;
+      save(state); paint();
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    state = {}; save(state); paint();
+  });
+
+  function copy(text, btn){
+    function ok(){
+      var was = btn.textContent;
+      btn.textContent = 'Copied'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = was; btn.classList.remove('done'); }, 1400);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(ok, function(){ fallback(text, ok); });
+    } else { fallback(text, ok); }
+  }
+  function fallback(text, ok){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); ok(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  [].slice.call(document.querySelectorAll('button[data-copy]')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = CAPS[btn.getAttribute('data-copy')];
+      if (typeof t === 'string') copy(t, btn);
+    });
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>
