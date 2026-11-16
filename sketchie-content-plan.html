@@ -180,6 +180,16 @@ ul.ticks li::before{
 ul.ticks li b{color:var(--ink);font-weight:600}
 ul.ticks.x li::before{background:var(--role-misconception)}
 
+/* ramp tiles */
+.ramp{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:620px){.ramp{grid-template-columns:repeat(4,1fr)}}
+.ramp div{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--violet);
+  border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+.ramp b{display:block;font-family:var(--marker);font-size:clamp(30px,4vw,42px);line-height:1.05}
+.ramp span{font-size:12.5px;color:var(--graphite)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;
+  background:var(--warm2);padding:1px 6px;border-radius:5px}
+
 /* mix bars */
 .mix{display:grid;gap:12px}
 .mix-row{display:grid;grid-template-columns:132px 1fr auto;gap:13px;align-items:center}
@@ -326,7 +336,7 @@ ul.ticks.x li::before{background:var(--role-misconception)}
 <section class="slide">
   <p class="eyebrow">Sketchie &middot; social plan &middot; 16 November 2026</p>
   <h1>Draw the thing kids are actually confused about.</h1>
-  <p class="sub">Three videos a week, six posts, no fixed dates. The plan is a list that gets stamped with dates on demand, so it never goes stale.</p>
+  <p class="sub">A four-week break-in month, posted by hand: three videos the first week, then five. The plan is a list, not a calendar, so dates get stamped on when you ask and nothing goes stale.</p>
   <div class="grid g3">
     <div class="card"><h3>One position</h3><p>Not a topic. We show the moment a wrong idea breaks.</p></div>
     <div class="card"><h3>Three roles</h3><p>Each judged on a different number, so a flat week on one is not a flat week.</p></div>
@@ -390,47 +400,44 @@ ul.ticks.x li::before{background:var(--role-misconception)}
 <section class="slide">
   <div class="split">
     <div>
+      <p class="eyebrow">The break-in month</p>
+      <h2>Start small, because the accounts are cold</h2>
+      <p class="sub">Posts per account per week. Both accounts have been dormant since 10 November, so these are their first posts ever.</p>
+      <div class="ramp">
+        <div><b>3</b><span>Week 1</span></div>
+        <div><b>5</b><span>Week 2</span></div>
+        <div><b>5</b><span>Week 3</span></div>
+        <div><b>5</b><span>Week 4</span></div>
+      </div>
+      <p class="lede" style="margin-top:20px;font-size:16.5px"><b>The engine will not do this for us.</b> Its caps ramp on account age from <code>created_on</code>, so by the first post both accounts are already 13 days old and full volume is permitted. The ramp has to live in the calendar.</p>
+    </div>
+    <div>
       <p class="eyebrow">The mix</p>
-      <h2>A ratio held steady, in a varied order</h2>
-      <p class="sub">Twelve videos is four weeks at three a week, which is the smallest block the ratio means anything over.</p>
+      <h2 style="font-size:clamp(25px,3vw,34px)">18 videos, 36 posts</h2>
+      <p class="sub" style="font-size:16px;margin-bottom:18px">One generation serves both accounts. Instagram gets the reel, X gets the wide cut 37 hours later, which clears the engine's spacing rule.</p>
       <div class="mix">
         <div class="mix-row">
           <span class="mix-label" style="color:var(--role-misconception)">Misconception</span>
           <span class="mix-track"><span class="mix-fill" style="--c:var(--role-misconception);--w:100%"></span></span>
-          <span class="mix-n">5 / 12</span>
+          <span class="mix-n">7 / 18</span>
         </div>
         <div class="mix-row">
           <span class="mix-label" style="color:var(--role-lesson)">Lesson</span>
-          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-lesson);--w:80%"></span></span>
-          <span class="mix-n">4 / 12</span>
+          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-lesson);--w:86%"></span></span>
+          <span class="mix-n">6 / 18</span>
         </div>
         <div class="mix-row">
           <span class="mix-label" style="color:#8a6400">Move</span>
-          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-move);--w:40%"></span></span>
-          <span class="mix-n">2 / 12</span>
+          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-move);--w:57%"></span></span>
+          <span class="mix-n">4 / 18</span>
         </div>
         <div class="mix-row">
           <span class="mix-label" style="color:var(--role-product)">Product</span>
-          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-product);--w:20%"></span></span>
-          <span class="mix-n">1 / 12</span>
+          <span class="mix-track"><span class="mix-fill" style="--c:var(--role-product);--w:14%"></span></span>
+          <span class="mix-n">1 / 18</span>
         </div>
       </div>
-    </div>
-    <div>
-      <p class="eyebrow">The week</p>
-      <h2 style="font-size:clamp(25px,3vw,34px)">Three in, six out</h2>
-      <p class="sub" style="font-size:16px;margin-bottom:18px">One generation serves both. Instagram gets the reel, X gets the wide cut 37 hours later, which clears the engine's own spacing rule.</p>
-      <div class="scroller">
-        <table class="tbl">
-          <thead><tr><th>Video</th><th>Instagram</th><th>X, 37h later</th></tr></thead>
-          <tbody>
-            <tr><td><b>A</b></td><td class="num">Mon 19:00 ET</td><td class="num">Wed 08:00 ET</td></tr>
-            <tr><td><b>B</b></td><td class="num">Wed 19:00 ET</td><td class="num">Fri 08:00 ET</td></tr>
-            <tr><td><b>C</b></td><td class="num">Fri 19:00 ET</td><td class="num">Sun 08:00 ET</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="note" style="margin-top:18px">Three a week is the lean end. Hold it a month, then judge it on our own numbers.</p>
+      <p class="note" style="margin-top:18px">The one product post lands in week 4, after sixteen posts of real teaching.</p>
     </div>
   </div>
 </section>
@@ -467,7 +474,7 @@ ul.ticks.x li::before{background:var(--role-misconception)}
       </tbody>
     </table>
   </div>
-  <p class="lede" style="margin-top:20px"><b>Net:</b> 12 videos ready, exactly one four-week block. Four rows held back.</p>
+  <p class="lede" style="margin-top:20px"><b>Net:</b> 13 of the 16 kept, 3 feature tours held, and <b>5 new videos written</b> to fill the ramp. That is 18 videos and 36 posts across the break-in month.</p>
 </section>
 
 <!-- 6 ............................................................. -->
@@ -488,7 +495,7 @@ ul.ticks.x li::before{background:var(--role-misconception)}
       <span class="yn"><span>Yes</span><span>No</span></span>
     </div>
     <div class="dec-row">
-      <p><b>4.</b> Hold three a week for a full month before changing cadence?</p>
+      <p><b>4.</b> After the break-in month, hold five a week before changing cadence?</p>
       <span class="yn"><span>Yes</span><span>No</span></span>
     </div>
     <div class="dec-row blocked">
@@ -497,9 +504,9 @@ ul.ticks.x li::before{background:var(--role-misconception)}
     </div>
   </div>
   <div class="strip">
-    <div><b>The Plan tab</b> The operating calendar. Already built, one column to add.</div>
-    <div><b>This deck</b> The plan for people. New, and the only new thing.</div>
-    <div><b>Nothing else</b> No dated grid, no second spreadsheet, no new tool.</div>
+    <div><b>The Plan tab</b> The master list. 21 videos, status driven, the thing the engine will read later.</div>
+    <div><b>The posting calendar</b> The dated page you actually work from, Manila times, copy buttons, tick as you go.</div>
+    <div><b>This deck</b> The reasoning. Read once, then ignore.</div>
   </div>
   <p class="foot">Sketchie content plan &middot; 16 November 2026 &middot; Prepared by Rikuo Koizumi, assisted by Claude.AI</p>
 </section>
